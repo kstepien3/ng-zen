@@ -1,0 +1,18 @@
+$border: var(--zen-input-border, 1px solid #cbcbcb);
+$border-radius: var(--zen-input-border-radius, 8px);
+$padding: var(--zen-input-padding, 0.5rem 1rem);
+$outline: var(--zen-outline, 1px solid #999);
+
+input {
+  border: $border;
+  border-radius: $border-radius;
+  padding: $padding;
+
+  &:disabled {
+    color: #cbcbcb;
+  }
+
+  &:focus-visible {
+    outline: $outline;
+  }
+}

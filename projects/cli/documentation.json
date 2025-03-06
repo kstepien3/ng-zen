@@ -111,6 +111,116 @@
       "styleUrlsData": "",
       "stylesData": "",
       "extends": []
+    },
+    {
+      "name": "ZenInputComponent",
+      "id": "component-ZenInputComponent-83ca1fe557593862f6ba84df153cca3e7cfc7d7d48d522bc990d72c609d58a45e3fa94eb947bbe41df074d98c82717a8b656b655181ffc302a036dee8eaeb14b",
+      "file": "projects/cli/src/schematics/components/files/input/input.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [
+        {
+          "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ZenInputComponent), multi: true,\n}",
+          "type": "component"
+        }
+      ],
+      "selector": "zen-input",
+      "styleUrls": ["./input.component.scss"],
+      "styles": [],
+      "template": "<input [disabled]=\"disabled()\" [value]=\"value()\" (blur)=\"onTouched()\" (input)=\"onInputChange($event)\" />\n",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [
+        {
+          "name": "disabled",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Determines if the input is disabled.</p>\n",
+          "line": 42,
+          "rawdescription": "\n\nDetermines if the input is disabled.\n",
+          "modifierKind": [148],
+          "required": false
+        }
+      ],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "disabled",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Determines if the input is disabled.</p>\n",
+          "line": 42,
+          "rawdescription": "\n\nDetermines if the input is disabled.\n",
+          "modifierKind": [148],
+          "required": false
+        },
+        {
+          "name": "value",
+          "defaultValue": "model('')",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Changes to this value will trigger validation and updates in the form.</p>\n",
+          "line": 38,
+          "rawdescription": "\n\nChanges to this value will trigger validation and updates in the form.\n",
+          "modifierKind": [148],
+          "jsdoctags": [
+            {
+              "pos": 1077,
+              "end": 1212,
+              "kind": 327,
+              "id": 0,
+              "flags": 16842752,
+              "modifierFlagsCache": 0,
+              "transformFlags": 0,
+              "tagName": {
+                "pos": 1078,
+                "end": 1089,
+                "kind": 80,
+                "id": 0,
+                "flags": 16842752,
+                "transformFlags": 0,
+                "escapedText": "description"
+              },
+              "comment": "<p>Holds the current input value as a string.\nChanges to this value will trigger validation and updates in the form.</p>\n"
+            }
+          ]
+        }
+      ],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [],
+      "description": "<p>ZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-input value=&quot;string&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/Kordrad/ng-zen\">GitHub</a></p>\n",
+      "rawdescription": "\n\nZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<zen-input value=\"string\" />\n```\n\nSee [GitHub](https://github.com/Kordrad/ng-zen)\n",
+      "type": "component",
+      "sourceCode": "import { Component, forwardRef, model } from '@angular/core';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenInputComponent is a reusable text input component designed to provide\n * a consistent and customizable input style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-input value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  selector: 'zen-input',\n  standalone: true,\n  template: `\n    <input [disabled]=\"disabled()\" [value]=\"value()\" (blur)=\"onTouched()\" (input)=\"onInputChange($event)\" />\n  `,\n  styleUrls: ['./input.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenInputComponent),\n      multi: true,\n    },\n  ],\n})\nexport class ZenInputComponent implements ControlValueAccessor {\n  /**\n   * @description Holds the current input value as a string.\n   * Changes to this value will trigger validation and updates in the form.\n   */\n  readonly value = model('');\n  /**\n   * Determines if the input is disabled.\n   */\n  readonly disabled = model(false);\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** @ignore */\n  onInputChange(event: Event): void {\n    const newValue = (event.target as HTMLInputElement).value;\n    this.value.set(newValue);\n    this.onChange(newValue);\n  }\n}\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": "",
+          "styleUrl": "./input.component.scss"
+        }
+      ],
+      "stylesData": "",
+      "extends": [],
+      "implements": ["ControlValueAccessor"]
     }
   ],
   "modules": [],
@@ -135,6 +245,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n        <button zen-btn>Test</button>\n    `,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `<zen-input [disabled]=\"${args.disabled}\" [value]=\"'${args.value}'\"/>`,\n  }),\n}"
       },
       {
         "name": "Image",
@@ -165,6 +285,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem;\">\n        <zen-avatar>MI</zen-avatar>\n        <zen-avatar>IB</zen-avatar>\n        <zen-avatar>WP</zen-avatar>\n        <zen-avatar>AI</zen-avatar>\n      </div> `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <label>\n        <span>Input Label</span>\n        <zen-input [disabled]=\"${args.disabled}\" [value]=\"'${args.value}'\"/>\n      </label>\n  `,\n  }),\n}"
       }
     ],
     "functions": [],
@@ -186,6 +316,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ZenButtonComponent>",
         "file": "projects/cli/src/schematics/components/files/button/button.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ZenInputComponent>",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -238,6 +379,28 @@
           "defaultValue": "{\n  render: () => ({\n    template: `\n        <button zen-btn>Test</button>\n    `,\n  }),\n}"
         }
       ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `<zen-input [disabled]=\"${args.disabled}\" [value]=\"'${args.value}'\"/>`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <label>\n        <span>Input Label</span>\n        <zen-input [disabled]=\"${args.disabled}\" [value]=\"'${args.value}'\"/>\n      </label>\n  `,\n  }),\n}"
+        }
+      ],
       "projects/cli/.storybook/preview.ts": [
         {
           "name": "preview",
@@ -279,12 +442,25 @@
           "description": "",
           "kind": 183
         }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenInputComponent>",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
       ]
     }
   },
   "routes": [],
   "coverage": {
-    "count": 22,
+    "count": 23,
     "status": "low",
     "files": [
       {
@@ -367,6 +543,45 @@
       },
       {
         "filePath": "projects/cli/src/schematics/components/files/button/button.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/input/input.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "ZenInputComponent",
+        "coveragePercent": 100,
+        "coverageCount": "4/4",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithLabel",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
