@@ -1,4 +1,4 @@
-import { Component, forwardRef, model } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -19,7 +19,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'zen-input',
   standalone: true,
   template: `
-    <input [disabled]="disabled()" [value]="value()" (blur)="onTouched()" (input)="onInputChange($event)" />
+    <input
+      [attr.id]="id()"
+      [attr.placeholder]="placeholder()"
+      [attr.required]="required()"
+      [disabled]="disabled()"
+      [value]="value()"
+      (blur)="onTouched()"
+      (input)="onInputChange($event)"
+    />
   `,
   styleUrls: ['./input.component.scss'],
   providers: [
@@ -29,17 +37,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenInputComponent implements ControlValueAccessor {
-  /**
-   * @description Holds the current input value as a string.
-   * Changes to this value will trigger validation and updates in the form.
-   */
+  /** Holds the current input value. */
   readonly value = model('');
-  /**
-   * Determines if the input is disabled.
-   */
+  /** Determines if the input is disabled. */
   readonly disabled = model(false);
+  /** Determines if the input is required.*/
+  readonly required = input(false, { transform: booleanAttribute });
+  /** Sets the HTML id attribute for the input element.*/
+  readonly id = input<string>();
+  /** Provides a hint or example text that will be displayed */
+  readonly placeholder = input<string>();
 
   /** @ignore */
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputComponent } from './input.component';
+import { ZenInputComponent } from './input.component';
 
 describe('InputComponent', () => {
-  let component: InputComponent;
-  let fixture: ComponentFixture<InputComponent>;
+  let component: ZenInputComponent;
+  let fixture: ComponentFixture<ZenInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputComponent],
+      imports: [ZenInputComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputComponent);
+    fixture = TestBed.createComponent(ZenInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
