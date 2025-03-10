@@ -24,12 +24,6 @@ You can generate code using the ng-zen CLI.
 ng generate @ng-zen/cli:component
 ```
 
-#### Directives
-
-```bash
-ng generate @ng-zen/cli:directive
-```
-
 ## License
 
 This project is licensed under the BSD 2-Clause License. For more details, refer to the LICENSE file in the repository.
