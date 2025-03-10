@@ -47,7 +47,7 @@
     "@storybook/addon-docs": "^8.5.5",
     "@storybook/addon-essentials": "^8.5.5",
     "@storybook/addon-interactions": "^8.5.3",
-    "@storybook/addon-onboarding": "^8.5.3",
+    "@storybook/addon-onboarding": "^8.5.5",
     "@storybook/angular": "^8.5.3",
     "@storybook/blocks": "^8.5.3",
     "@storybook/test": "^8.5.5",
