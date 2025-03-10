@@ -1,0 +1,28 @@
+$border: var(--zen-input-border, 1px solid #cbcbcb);
+$border-radius: var(--zen-input-border-radius, 8px);
+$padding: var(--zen-input-padding, 0.5rem 1rem);
+$outline: var(--zen-outline, 1px solid #999);
+$border-invalid: var(--zen-error, #dc2626);
+
+input {
+  border: $border;
+  border-radius: $border-radius;
+  padding: $padding;
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline: $outline;
+    box-shadow: 0 1px 4px #9999993f inset;
+  }
+
+  &:user-invalid {
+    border-color: $border-invalid;
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+}

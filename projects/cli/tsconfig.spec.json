@@ -2,7 +2,8 @@
 {
   "extends": "./tsconfig.schematics.json",
   "compilerOptions": {
-    "types": ["jest"]
+    "lib": ["ES2022", "DOM"],
+    "types": ["jest", "node", "jsdom"]
   },
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "include": ["./src/**/*.spec.ts", "./src/**/*.d.ts"]
 }
