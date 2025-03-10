@@ -82,8 +82,8 @@ importers:
         specifier: ^8.5.5
         version: 8.5.5(@types/react@18.3.18)(storybook@8.5.5(prettier@3.5.0))
       '@storybook/addon-interactions':
-        specifier: ^8.5.3
-        version: 8.5.3(storybook@8.5.5(prettier@3.5.0))
+        specifier: ^8.5.5
+        version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
       '@storybook/addon-onboarding':
         specifier: ^8.5.5
         version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
@@ -2168,10 +2168,10 @@ packages:
     peerDependencies:
       storybook: ^8.5.5
 
-  '@storybook/addon-interactions@8.5.3':
-    resolution: {integrity: sha512-nQuP65iFGgqfVp/O8NxNDUwLTWmQBW4bofUFaT4wzYn7Jk9zobOZYtgQvdqBZtNzBDYmLrfrCutEBj5jVPRyuQ==}
+  '@storybook/addon-interactions@8.5.5':
+    resolution: {integrity: sha512-/wu1GjuDMIT3FbASgIhlLk2jmQSqAYap0FwTNwnLRazKolvdpoGlSHDpDe8x7mABXzNIkbwrRi0A7R0K7nawnA==}
     peerDependencies:
-      storybook: ^8.5.3
+      storybook: ^8.5.5
 
   '@storybook/addon-measure@8.5.5':
     resolution: {integrity: sha512-iw819jNkQE/e8C5f/AnSFT39BGYvtxUIFQb8E1eS8Hjc3IZvMLcSDNHrxCuCgdPq4XZXvjekIimH6saxtKmaJg==}
@@ -2293,11 +2293,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
 
-  '@storybook/instrumenter@8.5.3':
-    resolution: {integrity: sha512-pxaTbGeju8MkwouIiaWX5DMWtpRruxqig8W3nZPOvzoSCCbQY+sLMQoyXxFlpGxLBjcvXivkL7AMVBKps5sFEQ==}
-    peerDependencies:
-      storybook: ^8.5.3
-
   '@storybook/instrumenter@8.5.5':
     resolution: {integrity: sha512-t4PlhgMTAFt/vSoqaydtATlcKJTEypxGnwlzx4lg5snrzmhYrtDUXTD/t25rrC0EjbEf412mlSS9BYRaogBAbg==}
     peerDependencies:
@@ -2319,11 +2314,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       storybook: ^8.5.5
-
-  '@storybook/test@8.5.3':
-    resolution: {integrity: sha512-2smoDbtU6Qh4yk0uD18qGfW6ll7lZBzKlF58Ha1CgWR4o+jpeeTQcfDLH9gG6sNrpojF7AVzMh/aN9BDHD+Chg==}
-    peerDependencies:
-      storybook: ^8.5.3
 
   '@storybook/test@8.5.5':
     resolution: {integrity: sha512-8hVvT+TopKmh9iKZdTHmMz4kelz+gKwjCquw59ynoZBZ4saJdEdqmIaoPaFPAJukuGAP7qQKO6AnYFsufNw4gw==}
@@ -10497,11 +10487,11 @@ snapshots:
       '@storybook/global': 5.0.0
       storybook: 8.5.5(prettier@3.5.0)
 
-  '@storybook/addon-interactions@8.5.3(storybook@8.5.5(prettier@3.5.0))':
+  '@storybook/addon-interactions@8.5.5(storybook@8.5.5(prettier@3.5.0))':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/instrumenter': 8.5.3(storybook@8.5.5(prettier@3.5.0))
-      '@storybook/test': 8.5.3(storybook@8.5.5(prettier@3.5.0))
+      '@storybook/instrumenter': 8.5.5(storybook@8.5.5(prettier@3.5.0))
+      '@storybook/test': 8.5.5(storybook@8.5.5(prettier@3.5.0))
       polished: 4.3.1
       storybook: 8.5.5(prettier@3.5.0)
       ts-dedent: 2.2.0
@@ -10680,12 +10670,6 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@storybook/instrumenter@8.5.3(storybook@8.5.5(prettier@3.5.0))':
-    dependencies:
-      '@storybook/global': 5.0.0
-      '@vitest/utils': 2.1.9
-      storybook: 8.5.5(prettier@3.5.0)
-
   '@storybook/instrumenter@8.5.5(storybook@8.5.5(prettier@3.5.0))':
     dependencies:
       '@storybook/global': 5.0.0
@@ -10704,18 +10688,6 @@ snapshots:
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      storybook: 8.5.5(prettier@3.5.0)
-
-  '@storybook/test@8.5.3(storybook@8.5.5(prettier@3.5.0))':
-    dependencies:
-      '@storybook/csf': 0.1.12
-      '@storybook/global': 5.0.0
-      '@storybook/instrumenter': 8.5.3(storybook@8.5.5(prettier@3.5.0))
-      '@testing-library/dom': 10.4.0
-      '@testing-library/jest-dom': 6.5.0
-      '@testing-library/user-event': 14.5.2(@testing-library/dom@10.4.0)
-      '@vitest/expect': 2.0.5
-      '@vitest/spy': 2.0.5
       storybook: 8.5.5(prettier@3.5.0)
 
   '@storybook/test@8.5.5(storybook@8.5.5(prettier@3.5.0))':
@@ -15146,7 +15118,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.9
 
   possible-typed-array-names@1.1.0: {}
 
