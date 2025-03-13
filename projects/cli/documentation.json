@@ -113,8 +113,183 @@
       "extends": []
     },
     {
+      "name": "ZenCheckboxComponent",
+      "id": "component-ZenCheckboxComponent-7b3466e27eaa973c5e98c242c19bef50c6266d5a8cafcf281f6c12f8b0fff04b1215c56017d6fddd585c225cfc5f7bf8d1f1567aa4fde567f1ece5f3a2232871",
+      "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.component.ts",
+      "changeDetection": "ChangeDetectionStrategy.OnPush",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [
+        {
+          "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ZenCheckboxComponent), multi: true,\n}",
+          "type": "component"
+        }
+      ],
+      "selector": "zen-checkbox",
+      "styleUrls": ["./checkbox.component.scss"],
+      "styles": [],
+      "template": "<input\n  [attr.id]=\"id()\"\n  [disabled]=\"disabled()\"\n  [value]=\"value()\"\n  (blur)=\"onTouched()\"\n  (change)=\"onInputChange($event)\"\n  type=\"checkbox\"\n/>\n",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [
+        {
+          "name": "disabled",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Determines if the checkbox is disabled.</p>\n",
+          "line": 46,
+          "rawdescription": "\nDetermines if the checkbox is disabled.",
+          "modifierKind": [148],
+          "required": false
+        },
+        {
+          "name": "id",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Sets the HTML id attribute for the checkbox element.</p>\n",
+          "line": 50,
+          "rawdescription": "\nSets the HTML id attribute for the checkbox element.",
+          "modifierKind": [148],
+          "required": false
+        },
+        {
+          "name": "value",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Holds the current checkbox value.</p>\n",
+          "line": 44,
+          "rawdescription": "\nHolds the current checkbox value.",
+          "modifierKind": [148],
+          "required": false
+        }
+      ],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "disabled",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Determines if the checkbox is disabled.</p>\n",
+          "line": 46,
+          "rawdescription": "\nDetermines if the checkbox is disabled.",
+          "modifierKind": [148],
+          "required": false
+        },
+        {
+          "name": "id",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Sets the HTML id attribute for the checkbox element.</p>\n",
+          "line": 50,
+          "rawdescription": "\nSets the HTML id attribute for the checkbox element.",
+          "modifierKind": [148],
+          "required": false
+        },
+        {
+          "name": "required",
+          "defaultValue": "input(false, { transform: booleanAttribute })",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Determines if the input is required.</p>\n",
+          "line": 48,
+          "rawdescription": "\nDetermines if the input is required.",
+          "modifierKind": [148]
+        },
+        {
+          "name": "value",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "<p>Holds the current checkbox value.</p>\n",
+          "line": 44,
+          "rawdescription": "\nHolds the current checkbox value.",
+          "modifierKind": [148],
+          "required": false
+        }
+      ],
+      "methodsClass": [
+        {
+          "name": "onInputChange",
+          "args": [
+            {
+              "name": "event",
+              "type": "Event",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 80,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nHandles checkbox change event",
+          "description": "<p>Handles checkbox change event</p>\n",
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "Event",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [],
+      "description": "<p>ZenCheckboxComponent is a reusable checkbox component designed to provide\na consistent and customizable checkbox style across the application.\nIt supports Angular forms integration and provides two-way data binding\nfor boolean values.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-checkbox checked=&quot;boolean&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/Kordrad/ng-zen\">GitHub</a></p>\n",
+      "rawdescription": "\n\nZenCheckboxComponent is a reusable checkbox component designed to provide\na consistent and customizable checkbox style across the application.\nIt supports Angular forms integration and provides two-way data binding\nfor boolean values.\n\n```html\n<zen-checkbox checked=\"boolean\" />\n```\n\nSee [GitHub](https://github.com/Kordrad/ng-zen)\n",
+      "type": "component",
+      "sourceCode": "import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\nimport { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\n\n/**\n * ZenCheckboxComponent is a reusable checkbox component designed to provide\n * a consistent and customizable checkbox style across the application.\n * It supports Angular forms integration and provides two-way data binding\n * for boolean values.\n *\n * @example\n * <zen-checkbox checked=\"boolean\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  selector: 'zen-checkbox',\n  standalone: true,\n  template: `\n    <input\n      [attr.id]=\"id()\"\n      [disabled]=\"disabled()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (change)=\"onInputChange($event)\"\n      type=\"checkbox\"\n    />\n  `,\n  styleUrls: ['./checkbox.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenCheckboxComponent),\n      multi: true,\n    },\n  ],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenCheckboxComponent implements ControlValueAccessor {\n  /** Holds the current checkbox value. */\n  readonly value = model(false);\n  /** Determines if the checkbox is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the checkbox element. */\n  readonly id = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: boolean) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: boolean): void {\n    this.value.set(value);\n  }\n\n  /** @ignore */\n  registerOnChange(fn: (value: boolean) => void): void {\n    this.onChange = fn;\n  }\n\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles checkbox change event */\n  onInputChange(event: Event): void {\n    if (this.disabled()) return;\n\n    const newValue = (event.target as HTMLInputElement).checked;\n    this.value.set(newValue);\n    this.onChange(newValue);\n  }\n}\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": "$size: var(--zen-checkbox-size, 20px);\n$border-width: var(--zen-checkbox-border-width, 2px);\n$border-color: var(--zen-checkbox-border-color, #cbcbcb);\n$border-radius: var(--zen-input-border-radius, 8px);\n$checked-color: var(--zen-checkbox-checked-color, #1d1d1d);\n$disabled-opacity: var(--zen-checkbox-disabled-opacity, 0.6);\n$focus-ring-color: var(--zen-checkbox-focus-ring-color, #999);\n\ninput {\n  width: $size;\n  height: $size;\n  border-width: $border-width;\n  border-style: solid;\n  border-color: $border-color;\n  border-radius: $border-radius;\n  cursor: pointer;\n  appearance: none;\n  transition: all 0.2s ease;\n\n  &:checked {\n    background-color: $checked-color;\n    border-color: $checked-color;\n  }\n\n  &:disabled {\n    opacity: $disabled-opacity;\n    cursor: not-allowed;\n  }\n\n  &:focus {\n    outline: none;\n    box-shadow: 0 0 0 2px rgba($focus-ring-color, 0.3);\n  }\n}\n",
+          "styleUrl": "./checkbox.component.scss"
+        }
+      ],
+      "stylesData": "",
+      "extends": [],
+      "implements": ["ControlValueAccessor"]
+    },
+    {
       "name": "ZenInputComponent",
-      "id": "component-ZenInputComponent-a26e01d99933d2463a44ab4ec8168a48a8a1c438ab3eabd5aae7d39fea04af56a35fb73dfdbf0a790b1d8e2eb2f6014f2a79d559957d79f03781c535ab674ed8",
+      "id": "component-ZenInputComponent-049a3337788e569a06b23ee49a48f82059aa07004f810a9e11036932f7e5495ab3519b4c6531c1efa66561cec9ab96989d3e06d97a7cef86aa0e9469f9c71237",
       "file": "projects/cli/src/schematics/components/files/input/input.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -245,7 +420,38 @@
           "modifierKind": [148]
         }
       ],
-      "methodsClass": [],
+      "methodsClass": [
+        {
+          "name": "onInputChange",
+          "args": [
+            {
+              "name": "event",
+              "type": "Event",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 80,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nHandles input change event",
+          "description": "<p>Handles input change event</p>\n",
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "Event",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
       "deprecated": false,
       "deprecationMessage": "",
       "hostBindings": [],
@@ -255,11 +461,11 @@
       "description": "<p>ZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-input value=&quot;string&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/Kordrad/ng-zen\">GitHub</a></p>\n",
       "rawdescription": "\n\nZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<zen-input value=\"string\" />\n```\n\nSee [GitHub](https://github.com/Kordrad/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenInputComponent is a reusable text input component designed to provide\n * a consistent and customizable input style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-input value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  selector: 'zen-input',\n  standalone: true,\n  template: `\n    <input\n      [attr.id]=\"id()\"\n      [attr.placeholder]=\"placeholder()\"\n      [attr.required]=\"required()\"\n      [disabled]=\"disabled()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (input)=\"onInputChange($event)\"\n    />\n  `,\n  styleUrls: ['./input.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenInputComponent),\n      multi: true,\n    },\n  ],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenInputComponent implements ControlValueAccessor {\n  /** Holds the current input value. */\n  readonly value = model('');\n  /** Determines if the input is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the input element.*/\n  readonly id = input<string>();\n  /** Provides a hint or example text that will be displayed */\n  readonly placeholder = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** @ignore */\n  onInputChange(event: Event): void {\n    const newValue = (event.target as HTMLInputElement).value;\n    this.value.set(newValue);\n    this.onChange(newValue);\n  }\n}\n",
+      "sourceCode": "import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenInputComponent is a reusable text input component designed to provide\n * a consistent and customizable input style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-input value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  selector: 'zen-input',\n  standalone: true,\n  template: `\n    <input\n      [attr.id]=\"id()\"\n      [attr.placeholder]=\"placeholder()\"\n      [attr.required]=\"required()\"\n      [disabled]=\"disabled()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (input)=\"onInputChange($event)\"\n    />\n  `,\n  styleUrls: ['./input.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenInputComponent),\n      multi: true,\n    },\n  ],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenInputComponent implements ControlValueAccessor {\n  /** Holds the current input value. */\n  readonly value = model('');\n  /** Determines if the input is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the input element.*/\n  readonly id = input<string>();\n  /** Provides a hint or example text that will be displayed */\n  readonly placeholder = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles input change event */\n  onInputChange(event: Event): void {\n    const newValue = (event.target as HTMLInputElement).value;\n    this.value.set(newValue);\n    this.onChange(newValue);\n  }\n}\n",
       "assetsDirs": [],
       "styleUrlsData": [
         {
-          "data": "$border: var(--zen-input-border, 1px solid #cbcbcb);\n$border-radius: var(--zen-input-border-radius, 8px);\n$padding: var(--zen-input-padding, 0.5rem 1rem);\n$outline: var(--zen-outline, 1px solid #999);\n\n$border--invalid: var(--zen-error, #dc2626);\n\ninput {\n  border: $border;\n  border-radius: $border-radius;\n  padding: $padding;\n\n  &:disabled {\n    opacity: 0.6;\n  }\n\n  &:focus-visible {\n    outline: $outline;\n    box-shadow: 0 1px 4px rgba(153, 153, 153, 0.25) inset;\n  }\n\n  &:user-invalid {\n    border-color: $border--invalid;\n  }\n\n  &::placeholder {\n    color: #999;\n  }\n}\n",
+          "data": "$border: var(--zen-input-border, 1px solid #cbcbcb);\n$border-radius: var(--zen-input-border-radius, 8px);\n$padding: var(--zen-input-padding, 0.5rem 1rem);\n$outline: var(--zen-outline, 1px solid #999);\n$border-invalid: var(--zen-error, #dc2626);\n\ninput {\n  border: $border;\n  border-radius: $border-radius;\n  padding: $padding;\n\n  &:disabled {\n    opacity: 0.6;\n  }\n\n  &:focus-visible {\n    outline: $outline;\n    box-shadow: 0 1px 4px #9999993f inset;\n  }\n\n  &:user-invalid {\n    border-color: $border-invalid;\n  }\n\n  &::placeholder {\n    color: #999;\n  }\n}\n",
           "styleUrl": "./input.component.scss"
         }
       ],
@@ -271,6 +477,26 @@
   "modules": [],
   "miscellaneous": {
     "variables": [
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        [placeholder]=\"${args.placeholder}\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+      },
       {
         "name": "Default",
         "ctype": "miscellaneous",
@@ -290,16 +516,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n        <zen-avatar src=\"https://github.com/Kordrad.png\" alt=\"Author\" style=\"--zen-avatar-size: 64px\"/>\n    `,\n  }),\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        [placeholder]=\"${args.placeholder}\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
       },
       {
         "name": "Image",
@@ -335,6 +551,16 @@
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-checkbox id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -344,6 +570,28 @@
     ],
     "functions": [],
     "typealiases": [
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ZenCheckboxComponent>",
+        "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ZenInputComponent>",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
       {
         "name": "Story",
         "ctype": "miscellaneous",
@@ -365,21 +613,54 @@
         "deprecationMessage": "",
         "description": "",
         "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<ZenInputComponent>",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
       }
     ],
     "enumerations": [],
     "groupedVariables": {
+      "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-checkbox id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        [placeholder]=\"${args.placeholder}\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+        }
+      ],
       "projects/cli/src/schematics/components/files/button/button.stories.ts": [
         {
           "name": "Default",
@@ -424,28 +705,6 @@
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem;\">\n        <zen-avatar>MI</zen-avatar>\n        <zen-avatar>IB</zen-avatar>\n        <zen-avatar>WP</zen-avatar>\n        <zen-avatar>AI</zen-avatar>\n      </div> `,\n  }),\n}"
         }
       ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        [placeholder]=\"${args.placeholder}\"\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-        },
-        {
-          "name": "WithLabel",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-        }
-      ],
       "projects/cli/.storybook/preview.ts": [
         {
           "name": "preview",
@@ -462,6 +721,32 @@
     "groupedFunctions": {},
     "groupedEnumerations": {},
     "groupedTypeAliases": {
+      "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenCheckboxComponent>",
+          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenInputComponent>",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "projects/cli/src/schematics/components/files/button/button.stories.ts": [
         {
           "name": "Story",
@@ -482,19 +767,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ZenAvatarComponent>",
           "file": "projects/cli/src/schematics/components/files/avatar/avatar.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ZenInputComponent>",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -597,12 +869,51 @@
         "status": "low"
       },
       {
+        "filePath": "projects/cli/src/schematics/components/files/checkbox/checkbox.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "ZenCheckboxComponent",
+        "coveragePercent": 100,
+        "coverageCount": "9/9",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithLabel",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
         "filePath": "projects/cli/src/schematics/components/files/input/input.component.ts",
         "type": "component",
         "linktype": "component",
         "name": "ZenInputComponent",
         "coveragePercent": 100,
-        "coverageCount": "9/9",
+        "coverageCount": "10/10",
         "status": "very-good"
       },
       {
