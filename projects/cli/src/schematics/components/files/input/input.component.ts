@@ -76,7 +76,7 @@ export class ZenInputComponent implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  /** @ignore */
+  /** Handles input change event */
   onInputChange(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value.set(newValue);
