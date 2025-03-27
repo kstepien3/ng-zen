@@ -1,34 +1,69 @@
-$size: var(--zen-checkbox-size, 20px);
-$border-width: var(--zen-checkbox-border-width, 2px);
-$border-color: var(--zen-checkbox-border-color, #cbcbcb);
-$border-radius: var(--zen-checkboxt-border-radius, 6px);
-$checked-color: var(--zen-checkbox-checked-color, #1d1d1d);
+// Component Variables
+$size: var(--zen-checkbox-size, 16px);
+$border-radius: var(--zen-checkbox-border-radius, 6px);
+$focus-shadow: var(--zen-checkbox-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);
+
+// Color Palette
+$appearance: var(--zen-checkbox-appearance, hsl(0% 0% 10%));
 $disabled-opacity: var(--zen-checkbox-disabled-opacity, 0.6);
-$focus-ring-color: var(--zen-checkbox-focus-ring-color, #999);
+$border: var(--zen-checkbox-border, 1px solid hsl(0% 0% 80%));
+$error: var(--zen-error, hsl(0% 70% 50%));
+$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));
+
+// Animations
+$transition-duration: var(--zen-transition-duration, 0.2s);
 
 input {
-  width: $size;
-  height: $size;
-  border-width: $border-width;
-  border-style: solid;
-  border-color: $border-color;
-  border-radius: $border-radius;
+  position: absolute;
   cursor: pointer;
-  appearance: none;
-  transition: all 0.2s ease;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
 
-  &:checked {
-    background-color: $checked-color;
-    border-color: $checked-color;
-  }
+:host {
+  background-color: white;
+  cursor: pointer;
+  border: $border;
+  border-radius: $border-radius;
+  height: $size;
+  width: $size;
+  position: relative;
+  transition:
+    background-color ease,
+    border-color ease;
+  transition-duration: $transition-duration;
+  user-select: none;
+  justify-content: center;
+  display: grid;
+  place-items: center;
+  font-size: small;
+}
 
-  &:disabled {
-    opacity: $disabled-opacity;
+:host:has(input:checked) {
+  color: white;
+  background-color: $appearance;
+  border-color: $appearance;
+}
+
+:host:has(input[type='checkbox']:disabled) {
+  &,
+  input {
     cursor: not-allowed;
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba($focus-ring-color, 0.3);
-  }
+  opacity: $disabled-opacity;
+}
+
+:host:has(input:focus-visible) {
+  outline: $outline;
+  box-shadow: $focus-shadow;
+}
+
+:host:has(input:user-invalid) {
+  border-color: $error;
 }

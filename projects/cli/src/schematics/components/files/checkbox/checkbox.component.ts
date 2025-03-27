@@ -1,4 +1,4 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
 
 /**
@@ -8,28 +8,37 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input
  * for boolean values.
  *
  * @example
- * <zen-checkbox checked="boolean" />
+ * <zen-checkbox value="false" />
  *
  * @implements {ControlValueAccessor}
  *
  * @author Konrad Stępień
- * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
- * @see [GitHub](https://github.com/Kordrad/ng-zen)
+ * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
   selector: 'zen-checkbox',
   standalone: true,
   template: `
     <input
+      [attr.aria-disabled]="disabled()"
       [attr.id]="id()"
       [disabled]="disabled()"
-      [value]="value()"
-      (blur)="onTouched()"
-      (change)="onInputChange($event)"
+      [ngModel]="value()"
+      (ngModelChange)="onInputChange($event)"
+      #inputElement
       type="checkbox"
     />
+    @if (inputElement.indeterminate) {
+      ─
+    } @else if (inputElement.checked) {
+      ✓
+    }
+    <!-- @else { ✕ } -->
   `,
   styleUrls: ['./checkbox.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -37,7 +46,9 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(blur)': 'onTouched()',
+  },
 })
 export class ZenCheckboxComponent implements ControlValueAccessor {
   /** Holds the current checkbox value. */
@@ -77,11 +88,10 @@ export class ZenCheckboxComponent implements ControlValueAccessor {
   }
 
   /** Handles checkbox change event */
-  onInputChange(event: Event): void {
+  onInputChange(value: boolean): void {
     if (this.disabled()) return;
 
-    const newValue = (event.target as HTMLInputElement).checked;
-    this.value.set(newValue);
-    this.onChange(newValue);
+    this.value.set(value);
+    this.onChange(value);
   }
 }

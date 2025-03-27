@@ -27,7 +27,8 @@ export const Default: Story = {
     template: `
       <zen-checkbox
         [disabled]="${args.disabled}"
-        [value]="'${args.value}'"
+        [value]="${args.value}"
+        ${args.id ? 'id="' + args.id + '"' : ''}
         ${args.required ? 'required' : ''}
       />`,
   }),
