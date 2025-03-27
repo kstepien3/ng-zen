@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * ZenInputComponent is a reusable text input component designed to provide
@@ -12,8 +12,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @implements {ControlValueAccessor}
  *
  * @author Konrad Stępień
- * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
- * @see [GitHub](https://github.com/Kordrad/ng-zen)
+ * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
   selector: 'zen-input',
@@ -24,12 +24,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       [attr.placeholder]="placeholder()"
       [attr.required]="required()"
       [disabled]="disabled()"
+      [ngModel]="value()"
       [value]="value()"
       (blur)="onTouched()"
-      (input)="onInputChange($event)"
+      (ngModelChange)="onInputChange($event)"
     />
   `,
   styleUrls: ['./input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -37,7 +39,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormsModule],
 })
 export class ZenInputComponent implements ControlValueAccessor {
   /** Holds the current input value. */
@@ -77,9 +79,10 @@ export class ZenInputComponent implements ControlValueAccessor {
   }
 
   /** Handles input change event */
-  onInputChange(event: Event): void {
-    const newValue = (event.target as HTMLInputElement).value;
-    this.value.set(newValue);
-    this.onChange(newValue);
+  onInputChange(value: string): void {
+    if (this.disabled()) return;
+
+    this.value.set(value);
+    this.onChange(value);
   }
 }
