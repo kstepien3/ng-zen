@@ -1,6 +1,6 @@
 {
   "name": "@ng-zen/cli",
-  "version": "19.0.0-alpha.3",
+  "version": "19.0.0-alpha.4",
   "description": "A blank schematics",
   "license": "BSD-2-Clause",
   "private": false,
