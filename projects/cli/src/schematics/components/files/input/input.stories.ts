@@ -10,12 +10,14 @@ export default {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
+    id: { control: 'text' },
   },
   args: {
     value: '',
     placeholder: '',
     disabled: false,
     required: false,
+    id: '',
   },
 } satisfies Meta<ZenInputComponent>;
 
@@ -28,7 +30,8 @@ export const Default: Story = {
       <zen-input
         [disabled]="${args.disabled}"
         [value]="'${args.value}'"
-        [placeholder]="${args.placeholder}"
+        ${args.id ? 'id="' + args.id + '"' : ''}
+        ${args.placeholder ? 'placeholder="' + args.placeholder + '"' : ''}
         ${args.required ? 'required' : ''}
       />`,
   }),

@@ -1,8 +1,13 @@
-$border: var(--zen-input-border, 1px solid #cbcbcb);
+// Component Variables
+$border: var(--zen-input-border, 1px solid hsl(0% 0% 80%));
 $border-radius: var(--zen-input-border-radius, 8px);
 $padding: var(--zen-input-padding, 0.5rem 1rem);
-$outline: var(--zen-outline, 1px solid #999);
-$border-invalid: var(--zen-error, #dc2626);
+$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);
+$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
+
+// Color Palette
+$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));
+$error: var(--zen-error, hsl(0% 70% 50%));
 
 input {
   border: $border;
@@ -15,14 +20,14 @@ input {
 
   &:focus-visible {
     outline: $outline;
-    box-shadow: 0 1px 4px #9999993f inset;
+    box-shadow: $focus-shadow;
   }
 
   &:user-invalid {
-    border-color: $border-invalid;
+    border-color: $error;
   }
 
   &::placeholder {
-    color: #999;
+    color: $placeholder-color;
   }
 }
