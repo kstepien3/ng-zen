@@ -1,0 +1,69 @@
+// Component Variables
+$size: var(--zen-checkbox-size, 16px);
+$border-radius: var(--zen-checkbox-border-radius, 6px);
+$focus-shadow: var(--zen-checkbox-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);
+
+// Color Palette
+$appearance: var(--zen-checkbox-appearance, hsl(0% 0% 10%));
+$disabled-opacity: var(--zen-checkbox-disabled-opacity, 0.6);
+$border: var(--zen-checkbox-border, 1px solid hsl(0% 0% 80%));
+$error: var(--zen-error, hsl(0% 70% 50%));
+$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));
+
+// Animations
+$transition-duration: var(--zen-transition-duration, 0.2s);
+
+input {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+:host {
+  background-color: white;
+  cursor: pointer;
+  border: $border;
+  border-radius: $border-radius;
+  height: $size;
+  width: $size;
+  position: relative;
+  transition:
+    background-color ease,
+    border-color ease;
+  transition-duration: $transition-duration;
+  user-select: none;
+  justify-content: center;
+  display: grid;
+  place-items: center;
+  font-size: small;
+}
+
+:host:has(input:checked) {
+  color: white;
+  background-color: $appearance;
+  border-color: $appearance;
+}
+
+:host:has(input[type='checkbox']:disabled) {
+  &,
+  input {
+    cursor: not-allowed;
+  }
+
+  opacity: $disabled-opacity;
+}
+
+:host:has(input:focus-visible) {
+  outline: $outline;
+  box-shadow: $focus-shadow;
+}
+
+:host:has(input:user-invalid) {
+  border-color: $error;
+}

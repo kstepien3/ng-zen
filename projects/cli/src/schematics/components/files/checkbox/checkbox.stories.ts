@@ -1,37 +1,34 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { ZenInputComponent } from './input.component';
+import { ZenCheckboxComponent } from './checkbox.component';
 
 export default {
-  title: 'Components/Input',
-  component: ZenInputComponent,
+  title: 'Components/Checkbox',
+  component: ZenCheckboxComponent,
   tags: ['autodocs'],
   argTypes: {
-    value: { control: 'text' },
-    placeholder: { control: 'text' },
+    value: { control: 'boolean' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
     id: { control: 'text' },
   },
   args: {
-    value: '',
-    placeholder: '',
+    value: false,
     disabled: false,
     required: false,
     id: '',
   },
-} satisfies Meta<ZenInputComponent>;
+} satisfies Meta<ZenCheckboxComponent>;
 
-type Story = StoryObj<ZenInputComponent>;
+type Story = StoryObj<ZenCheckboxComponent>;
 
 export const Default: Story = {
   render: args => ({
     props: { ...args },
     template: `
-      <zen-input
+      <zen-checkbox
         [disabled]="${args.disabled}"
-        [value]="'${args.value}'"
+        [value]="${args.value}"
         ${args.id ? 'id="' + args.id + '"' : ''}
-        ${args.placeholder ? 'placeholder="' + args.placeholder + '"' : ''}
         ${args.required ? 'required' : ''}
       />`,
   }),
@@ -40,9 +37,9 @@ export const Default: Story = {
 export const WithLabel: Story = {
   render: () => ({
     template: `
-      <div style="display: flex; flex-direction: column">
+      <div style="display: flex; align-items: center; gap: 0.25rem">
+        <zen-checkbox id="label-example"/>
         <label for="label-example"> With label </label>
-        <zen-input id="label-example"/>
       </div>
   `,
   }),

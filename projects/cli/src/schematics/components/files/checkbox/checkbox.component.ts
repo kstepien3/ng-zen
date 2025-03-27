@@ -1,13 +1,14 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
 
 /**
- * ZenInputComponent is a reusable text input component designed to provide
- * a consistent and customizable input style across the application.
- * It supports Angular forms integration and provides two-way data binding.
+ * ZenCheckboxComponent is a reusable checkbox component designed to provide
+ * a consistent and customizable checkbox style across the application.
+ * It supports Angular forms integration and provides two-way data binding
+ * for boolean values.
  *
  * @example
- * <zen-input value="string" />
+ * <zen-checkbox value="false" />
  *
  * @implements {ControlValueAccessor}
  *
@@ -16,58 +17,66 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
-  selector: 'zen-input',
+  selector: 'zen-checkbox',
   standalone: true,
   template: `
     <input
+      [attr.aria-disabled]="disabled()"
       [attr.id]="id()"
-      [attr.placeholder]="placeholder()"
-      [attr.required]="required()"
       [disabled]="disabled()"
       [ngModel]="value()"
-      [value]="value()"
-      (blur)="onTouched()"
       (ngModelChange)="onInputChange($event)"
+      #inputElement
+      type="checkbox"
     />
+    @if (inputElement.indeterminate) {
+      ─
+    } @else if (inputElement.checked) {
+      ✓
+    }
+    <!-- @else { ✕ } -->
   `,
-  styleUrls: ['./input.component.scss'],
+  styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ZenInputComponent),
+      useExisting: forwardRef(() => ZenCheckboxComponent),
       multi: true,
     },
   ],
-  imports: [FormsModule],
+  host: {
+    '(blur)': 'onTouched()',
+  },
 })
-export class ZenInputComponent implements ControlValueAccessor {
-  /** Holds the current input value. */
-  readonly value = model('');
-  /** Determines if the input is disabled. */
+export class ZenCheckboxComponent implements ControlValueAccessor {
+  /** Holds the current checkbox value. */
+  readonly value = model(false);
+  /** Determines if the checkbox is disabled. */
   readonly disabled = model(false);
   /** Determines if the input is required.*/
   readonly required = input(false, { transform: booleanAttribute });
-  /** Sets the HTML id attribute for the input element.*/
+  /** Sets the HTML id attribute for the checkbox element. */
   readonly id = input<string>();
-  /** Provides a hint or example text that will be displayed */
-  readonly placeholder = input<string>();
 
   /** @ignore */
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: string) => void = () => {};
+  onChange: (value: boolean) => void = () => {};
   /** @ignore */
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => void = () => {};
 
   /** @ignore */
-  writeValue(value: string): void {
+  writeValue(value: boolean): void {
     this.value.set(value);
   }
+
   /** @ignore */
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: boolean) => void): void {
     this.onChange = fn;
   }
+
   /** @ignore */
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
@@ -78,8 +87,8 @@ export class ZenInputComponent implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  /** Handles input change event */
-  onInputChange(value: string): void {
+  /** Handles checkbox change event */
+  onInputChange(value: boolean): void {
     if (this.disabled()) return;
 
     this.value.set(value);
