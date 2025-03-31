@@ -1,39 +1,46 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { ZenTextareaComponent } from './textarea.component';
 
+interface StoryParams {
+  value: string;
+  placeholder: string;
+  required: boolean;
+  autoresize: boolean;
+  disabled: boolean;
+}
+
 export default {
   title: 'Components/Textarea',
   component: ZenTextareaComponent,
   tags: ['autodocs'],
-  argTypes: {
-    value: { control: 'text' },
-    placeholder: { control: 'text' },
-    disabled: { control: 'boolean' },
-    required: { control: 'boolean' },
-    id: { control: 'text' },
-  },
   args: {
     value: '',
-    placeholder: '',
-    disabled: false,
+    autoresize: false,
+    placeholder: 'ZenTextareaComponent',
     required: false,
-    id: '',
+    disabled: false,
   },
-} satisfies Meta<ZenTextareaComponent>;
+  argTypes: {
+    value: { control: 'text' },
+    autoresize: { control: 'boolean' },
+    placeholder: { control: 'text' },
+    required: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+  },
+} satisfies Meta<ZenTextareaComponent & StoryParams>;
 
-type Story = StoryObj<ZenTextareaComponent>;
+type Story = StoryObj<ZenTextareaComponent & StoryParams>;
 
 export const Default: Story = {
   render: args => ({
-    props: { ...args },
     template: `
-      <zen-textarea
-        [disabled]="${args.disabled}"
-        [value]="'${args.value}'"
-        ${args.id ? 'id="' + args.id + '"' : ''}
-        ${args.placeholder ? 'placeholder="' + args.placeholder + '"' : ''}
-        ${args.required ? 'required' : ''}
-      />`,
+      <textarea
+      zen-textarea
+      placeholder="${args.placeholder}"
+      ${args.required ? 'required' : ''}
+      ${args.autoresize ? 'autoresize' : ''}
+      ${args.disabled ? 'disabled' : ''}
+      >${args.value}</textarea>`,
   }),
 };
 
@@ -42,7 +49,7 @@ export const WithLabel: Story = {
     template: `
       <div style="display: flex; flex-direction: column">
         <label for="label-example"> With label </label>
-        <zen-textarea id="label-example"/>
+        <textarea zen-textarea id="label-example"></textarea>
       </div>
   `,
   }),
@@ -52,10 +59,7 @@ export const Autoresize: Story = {
   render: args => ({
     props: { ...args },
     template: `
-      <zen-textarea
-       autoresize
-       style="width: 300px"
-       value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat suscipit pretium. Etiam egestas ex mauris, at efficitur eros consectetur a. Pellentesque porttitor, lectus vel malesuada efficitur, mi neque euismod dolor, ac efficitur nibh nisi quis risus. Nulla viverra feugiat ex vitae ultrices. Nunc et molestie nulla. Suspendisse dignissim magna nec bibendum volutpat. Phasellus nisi ex, viverra at velit ut, accumsan fringilla libero. Suspendisse potenti. Nunc eu erat a augue egestas pretium in non eros. Suspendisse eget tempus quam. Nulla et sem mollis, tempor eros sed, faucibus arcu. Mauris sit amet ligula aliquam, cursus lorem vitae, lobortis est. Duis non urna sagittis, pretium turpis vel, aliquet sem. Maecenas molestie enim ipsum, sit amet bibendum eros scelerisque sit amet. Mauris aliquet mattis lectus et eleifend."
-      />`,
+<textarea zen-textarea autoresize style="max-width: 300px">Start typing...</textarea>
+`,
   }),
 };

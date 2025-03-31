@@ -1,6 +1,72 @@
 {
   "pipes": [],
-  "interfaces": [],
+  "interfaces": [
+    {
+      "name": "StoryParams",
+      "id": "interface-StoryParams-6e0ac10fe1869fe015fc215d0ef054eef3ebab09112d3442f5d65860df11fb439942e3ac2addf53611786d480b415db67524a6a4c1a4c58ec99356c7219a86c8",
+      "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "interface",
+      "sourceCode": "import { Meta, StoryObj } from '@storybook/angular';\nimport { ZenTextareaComponent } from './textarea.component';\n\ninterface StoryParams {\n  value: string;\n  placeholder: string;\n  required: boolean;\n  autoresize: boolean;\n  disabled: boolean;\n}\n\nexport default {\n  title: 'Components/Textarea',\n  component: ZenTextareaComponent,\n  tags: ['autodocs'],\n  args: {\n    value: '',\n    autoresize: false,\n    placeholder: 'ZenTextareaComponent',\n    required: false,\n    disabled: false,\n  },\n  argTypes: {\n    value: { control: 'text' },\n    autoresize: { control: 'boolean' },\n    placeholder: { control: 'text' },\n    required: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n  },\n} satisfies Meta<ZenTextareaComponent & StoryParams>;\n\ntype Story = StoryObj<ZenTextareaComponent & StoryParams>;\n\nexport const Default: Story = {\n  render: args => ({\n    template: `\n      <textarea\n      zen-textarea\n      placeholder=\"${args.placeholder}\"\n      ${args.required ? 'required' : ''}\n      ${args.autoresize ? 'autoresize' : ''}\n      ${args.disabled ? 'disabled' : ''}\n      >${args.value}</textarea>`,\n  }),\n};\n\nexport const WithLabel: Story = {\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <textarea zen-textarea id=\"label-example\"></textarea>\n      </div>\n  `,\n  }),\n};\n\nexport const Autoresize: Story = {\n  render: args => ({\n    props: { ...args },\n    template: `\n<textarea zen-textarea autoresize style=\"max-width: 300px\">Start typing...</textarea>\n`,\n  }),\n};\n",
+      "properties": [
+        {
+          "name": "autoresize",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "boolean",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 8
+        },
+        {
+          "name": "disabled",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "boolean",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 9
+        },
+        {
+          "name": "placeholder",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 6
+        },
+        {
+          "name": "required",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "boolean",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 7
+        },
+        {
+          "name": "value",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 5
+        }
+      ],
+      "indexSignatures": [],
+      "kind": 171,
+      "methods": [],
+      "extends": []
+    }
+  ],
   "injectables": [],
   "guards": [],
   "interceptors": [],
@@ -486,194 +552,44 @@
     },
     {
       "name": "ZenTextareaComponent",
-      "id": "component-ZenTextareaComponent-37bdfe37ba0f72023ccef1c2f2e6bb2f44331172d3f664fc77f165121c3e45a7f40b288bc327b275a868714bbb1a5d315cc541e42e33ed86e045b6625065b007",
+      "id": "component-ZenTextareaComponent-0e9640cc7e21da5de9988caa633048201a67297e48fbced24fcf8f11d09b6e955901f6959abd133c5c966ebe962b4bc208bae2b7a822b7aa300cb88b57633ad2",
       "file": "projects/cli/src/schematics/components/files/textarea/textarea.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
       "entryComponents": [],
       "inputs": [],
       "outputs": [],
-      "providers": [
-        {
-          "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ZenTextareaComponent), multi: true,\n}",
-          "type": "component"
-        }
-      ],
-      "selector": "zen-textarea, zen-textarea[autoresize]",
+      "providers": [],
+      "selector": "textarea[zen-textarea], textarea[zen-textarea][autoresize]",
       "styleUrls": ["./textarea.component.scss"],
       "styles": [],
-      "template": "<textarea\n  [attr.id]=\"id()\"\n  [attr.placeholder]=\"placeholder()\"\n  [attr.required]=\"required()\"\n  [disabled]=\"disabled()\"\n  [ngModel]=\"value()\"\n  [value]=\"value()\"\n  (blur)=\"onTouched()\"\n  (ngModelChange)=\"onInputChange($event)\"\n></textarea>\n",
+      "template": "<ng-content />\n",
       "templateUrl": [],
       "viewProviders": [],
       "hostDirectives": [],
-      "inputsClass": [
-        {
-          "name": "disabled",
-          "defaultValue": "false",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Determines if the input is disabled.</p>\n",
-          "line": 50,
-          "rawdescription": "\nDetermines if the input is disabled.",
-          "modifierKind": [148],
-          "required": false
-        },
-        {
-          "name": "id",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Sets the HTML id attribute for the input element.</p>\n",
-          "line": 54,
-          "rawdescription": "\nSets the HTML id attribute for the input element.",
-          "modifierKind": [148],
-          "required": false
-        },
-        {
-          "name": "placeholder",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Provides a hint or example text that will be displayed</p>\n",
-          "line": 56,
-          "rawdescription": "\nProvides a hint or example text that will be displayed",
-          "modifierKind": [148],
-          "required": false
-        }
-      ],
+      "inputsClass": [],
       "outputsClass": [],
-      "propertiesClass": [
-        {
-          "name": "disabled",
-          "defaultValue": "false",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Determines if the input is disabled.</p>\n",
-          "line": 50,
-          "rawdescription": "\nDetermines if the input is disabled.",
-          "modifierKind": [148],
-          "required": false
-        },
-        {
-          "name": "id",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Sets the HTML id attribute for the input element.</p>\n",
-          "line": 54,
-          "rawdescription": "\nSets the HTML id attribute for the input element.",
-          "modifierKind": [148],
-          "required": false
-        },
-        {
-          "name": "placeholder",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Provides a hint or example text that will be displayed</p>\n",
-          "line": 56,
-          "rawdescription": "\nProvides a hint or example text that will be displayed",
-          "modifierKind": [148],
-          "required": false
-        },
-        {
-          "name": "required",
-          "defaultValue": "input(false, { transform: booleanAttribute })",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Determines if the input is required.</p>\n",
-          "line": 52,
-          "rawdescription": "\nDetermines if the input is required.",
-          "modifierKind": [148]
-        },
-        {
-          "name": "value",
-          "defaultValue": "model('')",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "indexKey": "",
-          "optional": false,
-          "description": "<p>Holds the current input value.</p>\n",
-          "line": 48,
-          "rawdescription": "\nHolds the current input value.",
-          "modifierKind": [148]
-        }
-      ],
-      "methodsClass": [
-        {
-          "name": "onInputChange",
-          "args": [
-            {
-              "name": "value",
-              "type": "string",
-              "deprecated": false,
-              "deprecationMessage": ""
-            }
-          ],
-          "optional": false,
-          "returnType": "void",
-          "typeParameters": [],
-          "line": 84,
-          "deprecated": false,
-          "deprecationMessage": "",
-          "rawdescription": "\nHandles input change event",
-          "description": "<p>Handles input change event</p>\n",
-          "jsdoctags": [
-            {
-              "name": "value",
-              "type": "string",
-              "deprecated": false,
-              "deprecationMessage": "",
-              "tagName": {
-                "text": "param"
-              }
-            }
-          ]
-        }
-      ],
+      "propertiesClass": [],
+      "methodsClass": [],
       "deprecated": false,
       "deprecationMessage": "",
       "hostBindings": [],
       "hostListeners": [],
       "standalone": true,
-      "imports": [
-        {
-          "name": "FormsModule",
-          "type": "module"
-        }
-      ],
-      "description": "<p>ZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-textarea value=&quot;string&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
-      "rawdescription": "\n\nZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<zen-textarea value=\"string\" />\n```\n\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n\n",
+      "imports": [],
+      "description": "<p>ZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;textarea zen-textarea&gt;&lt;/textarea&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
+      "rawdescription": "\n\nZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<textarea zen-textarea></textarea>\n```\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\nimport { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenTextareaComponent is a reusable textarea component designed to provide\n * a consistent and customizable textarea style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-textarea value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n *\n * @TODO Content projectile. Textarea doesn't support `<ng-content/>` it needs workaround.\n */\n@Component({\n  selector: 'zen-textarea, zen-textarea[autoresize]',\n  standalone: true,\n  template: `\n    <textarea\n      [attr.id]=\"id()\"\n      [attr.placeholder]=\"placeholder()\"\n      [attr.required]=\"required()\"\n      [disabled]=\"disabled()\"\n      [ngModel]=\"value()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (ngModelChange)=\"onInputChange($event)\"\n    ></textarea>\n  `,\n  styleUrls: ['./textarea.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenTextareaComponent),\n      multi: true,\n    },\n  ],\n  imports: [FormsModule],\n})\nexport class ZenTextareaComponent implements ControlValueAccessor {\n  /** Holds the current input value. */\n  readonly value = model('');\n  /** Determines if the input is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the input element.*/\n  readonly id = input<string>();\n  /** Provides a hint or example text that will be displayed */\n  readonly placeholder = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles input change event */\n  onInputChange(value: string): void {\n    if (this.disabled()) return;\n\n    this.value.set(value);\n    this.onChange(value);\n  }\n}\n",
+      "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n/**\n * ZenTextareaComponent is a reusable textarea component designed to provide\n * a consistent and customizable textarea style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <textarea zen-textarea></textarea>\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'textarea[zen-textarea], textarea[zen-textarea][autoresize]',\n  standalone: true,\n  template: `\n    <ng-content />\n  `,\n  styleUrls: ['./textarea.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenTextareaComponent {}\n",
       "assetsDirs": [],
       "styleUrlsData": [
         {
-          "data": "// Component Variables\n$border: var(--zen-input-border, 1px solid hsl(0% 0% 80%));\n$border-radius: var(--zen-input-border-radius, 8px);\n$padding: var(--zen-input-padding, 0.5rem 1rem);\n$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);\n$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));\n\n// Color Palette\n$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));\n$error: var(--zen-error, hsl(0% 70% 50%));\n\n:host {\n  display: block;\n}\n\ntextarea {\n  border: $border;\n  border-radius: $border-radius;\n  padding: $padding;\n  height: 100%;\n  width: 100%;\n\n  &:disabled {\n    opacity: 0.6;\n  }\n\n  &:focus-visible {\n    outline: $outline;\n    box-shadow: $focus-shadow;\n  }\n\n  &:user-invalid {\n    border-color: $error;\n  }\n\n  &::placeholder {\n    color: $placeholder-color;\n  }\n}\n\n:host[autoresize] textarea {\n  field-sizing: content\n}\n",
+          "data": "// Component Variables\n$border: var(--zen-input-border, 1px solid hsl(0% 0% 80%));\n$border-radius: var(--zen-input-border-radius, 8px);\n$padding: var(--zen-input-padding, 0.5rem 1rem);\n$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);\n$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));\n\n// Color Palette\n$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));\n$error: var(--zen-error, hsl(0% 70% 50%));\n\n:host {\n  border: $border;\n  border-radius: $border-radius;\n  padding: $padding;\n\n  &[autoresize] {\n    field-sizing: content;\n    resize: none;\n  }\n\n  &:disabled {\n    opacity: 0.6;\n  }\n\n  &:focus-visible {\n    outline: $outline;\n    box-shadow: $focus-shadow;\n  }\n\n  &:user-invalid {\n    border-color: $error;\n  }\n\n  &::placeholder {\n    color: $placeholder-color;\n  }\n}\n",
           "styleUrl": "./textarea.component.scss"
         }
       ],
       "stylesData": "",
-      "extends": [],
-      "implements": ["ControlValueAccessor"]
+      "extends": []
     }
   ],
   "modules": [],
@@ -687,7 +603,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-textarea\n       autoresize\n       style=\"width: 300px\"\n      >\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat suscipit pretium. Etiam egestas ex mauris, at efficitur eros consectetur a. Pellentesque porttitor, lectus vel malesuada efficitur, mi neque euismod dolor, ac efficitur nibh nisi quis risus. Nulla viverra feugiat ex vitae ultrices. Nunc et molestie nulla. Suspendisse dignissim magna nec bibendum volutpat. Phasellus nisi ex, viverra at velit ut, accumsan fringilla libero. Suspendisse potenti. Nunc eu erat a augue egestas pretium in non eros. Suspendisse eget tempus quam. Nulla et sem mollis, tempor eros sed, faucibus arcu. Mauris sit amet ligula aliquam, cursus lorem vitae, lobortis est. Duis non urna sagittis, pretium turpis vel, aliquet sem. Maecenas molestie enim ipsum, sit amet bibendum eros scelerisque sit amet. Mauris aliquet mattis lectus et eleifend.\n      </zen-textarea>`,\n  }),\n}"
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n<textarea zen-textarea autoresize style=\"max-width: 300px\">Start typing...</textarea>\n`,\n  }),\n}"
       },
       {
         "name": "Default",
@@ -713,6 +629,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -727,17 +653,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-textarea\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        "defaultValue": "{\n  render: args => ({\n    template: `\n      <textarea\n      zen-textarea\n      placeholder=\"${args.placeholder}\"\n      ${args.required ? 'required' : ''}\n      ${args.autoresize ? 'autoresize' : ''}\n      ${args.disabled ? 'disabled' : ''}\n      >${args.value}</textarea>`,\n  }),\n}"
       },
       {
         "name": "Image",
@@ -773,6 +689,16 @@
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -787,17 +713,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-textarea id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-      },
-      {
-        "name": "WithLabel",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <textarea zen-textarea id=\"label-example\"></textarea>\n      </div>\n  `,\n  }),\n}"
       }
     ],
     "functions": [],
@@ -828,6 +744,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<ZenInputComponent>",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ZenCheckboxComponent>",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
@@ -839,19 +766,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ZenTextareaComponent>",
+        "rawtype": "StoryObj<>",
         "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<ZenInputComponent>",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -869,7 +785,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-textarea\n       autoresize\n       style=\"width: 300px\"\n      >\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat suscipit pretium. Etiam egestas ex mauris, at efficitur eros consectetur a. Pellentesque porttitor, lectus vel malesuada efficitur, mi neque euismod dolor, ac efficitur nibh nisi quis risus. Nulla viverra feugiat ex vitae ultrices. Nunc et molestie nulla. Suspendisse dignissim magna nec bibendum volutpat. Phasellus nisi ex, viverra at velit ut, accumsan fringilla libero. Suspendisse potenti. Nunc eu erat a augue egestas pretium in non eros. Suspendisse eget tempus quam. Nulla et sem mollis, tempor eros sed, faucibus arcu. Mauris sit amet ligula aliquam, cursus lorem vitae, lobortis est. Duis non urna sagittis, pretium turpis vel, aliquet sem. Maecenas molestie enim ipsum, sit amet bibendum eros scelerisque sit amet. Mauris aliquet mattis lectus et eleifend.\n      </zen-textarea>`,\n  }),\n}"
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n<textarea zen-textarea autoresize style=\"max-width: 300px\">Start typing...</textarea>\n`,\n  }),\n}"
         },
         {
           "name": "Default",
@@ -879,7 +795,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-textarea\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+          "defaultValue": "{\n  render: args => ({\n    template: `\n      <textarea\n      zen-textarea\n      placeholder=\"${args.placeholder}\"\n      ${args.required ? 'required' : ''}\n      ${args.autoresize ? 'autoresize' : ''}\n      ${args.disabled ? 'disabled' : ''}\n      >${args.value}</textarea>`,\n  }),\n}"
         },
         {
           "name": "WithLabel",
@@ -889,7 +805,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-textarea id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <textarea zen-textarea id=\"label-example\"></textarea>\n      </div>\n  `,\n  }),\n}"
         }
       ],
       "projects/cli/src/schematics/components/files/avatar/avatar.stories.ts": [
@@ -936,28 +852,6 @@
           "defaultValue": "{\n  render: () => ({\n    template: `\n        <button zen-btn>Test</button>\n    `,\n  }),\n}"
         }
       ],
-      "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"${args.value}\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-        },
-        {
-          "name": "WithLabel",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
-        }
-      ],
       "projects/cli/src/schematics/components/files/input/input.stories.ts": [
         {
           "name": "Default",
@@ -978,6 +872,28 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
+        }
+      ],
+      "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"${args.value}\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
         }
       ],
       "projects/cli/.storybook/preview.ts": [
@@ -1022,6 +938,19 @@
           "kind": 183
         }
       ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenInputComponent>",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
         {
           "name": "Story",
@@ -1040,21 +969,8 @@
           "name": "Story",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "StoryObj<ZenTextareaComponent>",
+          "rawtype": "StoryObj<>",
           "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ZenInputComponent>",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -1065,7 +981,7 @@
   },
   "routes": [],
   "coverage": {
-    "count": 22,
+    "count": 21,
     "status": "low",
     "files": [
       {
@@ -1240,8 +1156,17 @@
         "linktype": "component",
         "name": "ZenTextareaComponent",
         "coveragePercent": 100,
-        "coverageCount": "10/10",
+        "coverageCount": "1/1",
         "status": "very-good"
+      },
+      {
+        "filePath": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+        "type": "interface",
+        "linktype": "interface",
+        "name": "StoryParams",
+        "coveragePercent": 0,
+        "coverageCount": "0/6",
+        "status": "low"
       },
       {
         "filePath": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
