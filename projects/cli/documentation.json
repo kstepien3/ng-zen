@@ -75,7 +75,7 @@
   "components": [
     {
       "name": "ZenAvatarComponent",
-      "id": "component-ZenAvatarComponent-f26ce91f1c95a5d853a968cb31902e9de930468ade56fce34140588cca4b3e82289af896feddd6915ea48dc5d1d09d6ac58c881cc01019cdefa365a1c72f8295",
+      "id": "component-ZenAvatarComponent-5798fbb46808ad01c44b04d1d523c049df8f5079a43e19c74844b19292cff3d6fa5dafbbfaa0b145cba26e911a5c8d6e4fb90241a8d513f619dde89eb7daeece",
       "file": "projects/cli/src/schematics/components/files/avatar/avatar.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -131,10 +131,10 @@
           "name": "NgOptimizedImage"
         }
       ],
-      "description": "<p>A component to display an avatar image.\nIf a valid image source URL is provided, it will render an image element.\nOtherwise, it will display projected content.</p>\n<p>This component utilizes Angular&#39;s optimized image directives for enhanced performance.</p>\n<h3>Usage</h3>\n<p>To use the component, you can provide an image source or project content:</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;!-- If an image source is provided, it will display the image --&gt;\n&lt;zen-avatar [src]=&quot;&#39;/path/to/image.jpg&#39;&quot; /&gt;\n\n&lt;!-- If no image source is provided, it will display the projected content --&gt;\n&lt;zen-avatar&gt; A &lt;/zen-avatar&gt;</code></pre></div><h3>CSS Custom Properties</h3>\n<p>You can customize the avatar using CSS custom properties:</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-css\">zen-avatar {\n --zen-avatar-size: 16px;\n --zen-avatar-bg-color: black;\n --zen-avatar-color: white;\n --zen-avatar-font-size: small;\n}</code></pre></div><b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-avatar src=&quot;https://picsum.photos/32&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/Kordrad/ng-zen\">GitHub</a></p>\n",
-      "rawdescription": "\n\nA component to display an avatar image.\nIf a valid image source URL is provided, it will render an image element.\nOtherwise, it will display projected content.\n\nThis component utilizes Angular's optimized image directives for enhanced performance.\n\n### Usage\n\nTo use the component, you can provide an image source or project content:\n\n```html\n<!-- If an image source is provided, it will display the image -->\n<zen-avatar [src]=\"'/path/to/image.jpg'\" />\n\n<!-- If no image source is provided, it will display the projected content -->\n<zen-avatar> A </zen-avatar>\n```\n\n### CSS Custom Properties\n\nYou can customize the avatar using CSS custom properties:\n\n```css\nzen-avatar {\n --zen-avatar-size: 16px;\n --zen-avatar-bg-color: black;\n --zen-avatar-color: white;\n --zen-avatar-font-size: small;\n}\n```\n\n```html\n<zen-avatar src=\"https://picsum.photos/32\" />\n```\nSee [GitHub](https://github.com/Kordrad/ng-zen)\n",
+      "description": "<p>A component to display an avatar image.\nIf a valid image source URL is provided, it will render an image element.\nOtherwise, it will display projected content.</p>\n<p>This component utilizes Angular&#39;s optimized image directives for enhanced performance.</p>\n<h3>Usage</h3>\n<p>To use the component, you can provide an image source or project content:</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;!-- If an image source is provided, it will display the image --&gt;\n&lt;zen-avatar [src]=&quot;&#39;/path/to/image.jpg&#39;&quot; /&gt;\n\n&lt;!-- If no image source is provided, it will display the projected content --&gt;\n&lt;zen-avatar&gt; A &lt;/zen-avatar&gt;</code></pre></div><h3>CSS Custom Properties</h3>\n<p>You can customize the avatar using CSS custom properties:</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-css\">:root {\n --zen-avatar-size: 16px;\n --zen-avatar-bg-color: black;\n --zen-avatar-color: white;\n --zen-avatar-font-size: small;\n}</code></pre></div><b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-avatar src=&quot;https://picsum.photos/32&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
+      "rawdescription": "\n\nA component to display an avatar image.\nIf a valid image source URL is provided, it will render an image element.\nOtherwise, it will display projected content.\n\nThis component utilizes Angular's optimized image directives for enhanced performance.\n\n### Usage\n\nTo use the component, you can provide an image source or project content:\n\n```html\n<!-- If an image source is provided, it will display the image -->\n<zen-avatar [src]=\"'/path/to/image.jpg'\" />\n\n<!-- If no image source is provided, it will display the projected content -->\n<zen-avatar> A </zen-avatar>\n```\n\n### CSS Custom Properties\n\nYou can customize the avatar using CSS custom properties:\n\n```css\n:root {\n --zen-avatar-size: 16px;\n --zen-avatar-bg-color: black;\n --zen-avatar-color: white;\n --zen-avatar-font-size: small;\n}\n```\n\n```html\n<zen-avatar src=\"https://picsum.photos/32\" />\n```\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { NgOptimizedImage } from '@angular/common';\nimport { ChangeDetectionStrategy, Component, input } from '@angular/core';\n\n/**\n * A component to display an avatar image.\n * If a valid image source URL is provided, it will render an image element.\n * Otherwise, it will display projected content.\n *\n * This component utilizes Angular's optimized image directives for enhanced performance.\n *\n * ### Usage\n *\n * To use the component, you can provide an image source or project content:\n *\n * ```html\n * <!-- If an image source is provided, it will display the image -->\n * <zen-avatar [src]=\"'/path/to/image.jpg'\" />\n *\n * <!-- If no image source is provided, it will display the projected content -->\n * <zen-avatar> A </zen-avatar>\n * ```\n *\n * ### CSS Custom Properties\n *\n * You can customize the avatar using CSS custom properties:\n *\n * ```css\n * zen-avatar {\n *  --zen-avatar-size: 16px;\n *  --zen-avatar-bg-color: black;\n *  --zen-avatar-color: white;\n *  --zen-avatar-font-size: small;\n * }\n * ```\n *\n * @example\n * <zen-avatar src=\"https://picsum.photos/32\" />\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  selector: 'zen-avatar',\n  imports: [NgOptimizedImage],\n  template: `\n    @if (src()) {\n      <img [alt]=\"alt()\" [ngSrc]=\"src()\" fill onerror=\"console.log('test')\" />\n    } @else {\n      <ng-content />\n    }\n  `,\n  styleUrl: './avatar.component.scss',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenAvatarComponent {\n  /**\n   * Name of the source image. Image name will be processed by the image loader,\n   * and the final URL will be applied as the src property of the image.\n   */\n  readonly src = input<string>('');\n  /**\n   * Sets or retrieves a text alternative to the graphic.\n   */\n  readonly alt = input<string>('');\n}\n",
+      "sourceCode": "import { NgOptimizedImage } from '@angular/common';\nimport { ChangeDetectionStrategy, Component, input } from '@angular/core';\n\n/**\n * A component to display an avatar image.\n * If a valid image source URL is provided, it will render an image element.\n * Otherwise, it will display projected content.\n *\n * This component utilizes Angular's optimized image directives for enhanced performance.\n *\n * ### Usage\n *\n * To use the component, you can provide an image source or project content:\n *\n * ```html\n * <!-- If an image source is provided, it will display the image -->\n * <zen-avatar [src]=\"'/path/to/image.jpg'\" />\n *\n * <!-- If no image source is provided, it will display the projected content -->\n * <zen-avatar> A </zen-avatar>\n * ```\n *\n * ### CSS Custom Properties\n *\n * You can customize the avatar using CSS custom properties:\n *\n * ```css\n * :root {\n *  --zen-avatar-size: 16px;\n *  --zen-avatar-bg-color: black;\n *  --zen-avatar-color: white;\n *  --zen-avatar-font-size: small;\n * }\n * ```\n *\n * @example\n * <zen-avatar src=\"https://picsum.photos/32\" />\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  selector: 'zen-avatar',\n  imports: [NgOptimizedImage],\n  template: `\n    @if (src()) {\n      <img [alt]=\"alt()\" [ngSrc]=\"src()\" fill onerror=\"console.log('test')\" />\n    } @else {\n      <ng-content />\n    }\n  `,\n  styleUrl: './avatar.component.scss',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenAvatarComponent {\n  /**\n   * Name of the source image. Image name will be processed by the image loader,\n   * and the final URL will be applied as the src property of the image.\n   */\n  readonly src = input<string>('');\n  /**\n   * Sets or retrieves a text alternative to the graphic.\n   */\n  readonly alt = input<string>('');\n}\n",
       "styleUrl": "./avatar.component.scss",
       "assetsDirs": [],
       "styleUrlsData": "",
@@ -143,7 +143,7 @@
     },
     {
       "name": "ZenButtonComponent",
-      "id": "component-ZenButtonComponent-3cf692f2e38f4805b6b777a8b90ee71a48d68b8c50ea63a0c8490edc11009f4233f459017923bf930081aa50981a9f4b21b8280fe8dc95e4db2cb604a9c0073e",
+      "id": "component-ZenButtonComponent-abb3bf0ac9fe74cb0b5a67f4aea4b958dbc8bf0462bd4840052d24b45145a62efe6ff9585bd5eb032f7212ff76dfe353251d2ffd22429ecbe4bdd8313b59469d",
       "file": "projects/cli/src/schematics/components/files/button/button.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -168,10 +168,10 @@
       "hostListeners": [],
       "standalone": false,
       "imports": [],
-      "description": "<p>ZenButtonComponent is a reusable button component designed to provide\na consistent and customizable button style across the application.\nIt can be used with both <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> HTML elements by applying\nthe <code>zen-button</code> attribute.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;button zen-btn&gt; ... &lt;/button&gt;</code></pre></div><p>See <a href=\"https://github.com/Kordrad/ng-zen\">GitHub</a></p>\n",
-      "rawdescription": "\n\nZenButtonComponent is a reusable button component designed to provide\na consistent and customizable button style across the application.\nIt can be used with both `<button>` and `<a>` HTML elements by applying\nthe `zen-button` attribute.\n\n```html\n<button zen-btn> ... </button>\n```\nSee [GitHub](https://github.com/Kordrad/ng-zen)\n",
+      "description": "<p>ZenButtonComponent is a reusable button component designed to provide\na consistent and customizable button style across the application.\nIt can be used with both <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> HTML elements by applying\nthe <code>zen-button</code> attribute.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;button zen-btn&gt; ... &lt;/button&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
+      "rawdescription": "\n\nZenButtonComponent is a reusable button component designed to provide\na consistent and customizable button style across the application.\nIt can be used with both `<button>` and `<a>` HTML elements by applying\nthe `zen-button` attribute.\n\n```html\n<button zen-btn> ... </button>\n```\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n/**\n * ZenButtonComponent is a reusable button component designed to provide\n * a consistent and customizable button style across the application.\n * It can be used with both `<button>` and `<a>` HTML elements by applying\n * the `zen-button` attribute.\n *\n * @example\n * <button zen-btn> ... </button>\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/Kordrad/ng-zen)\n */\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'button[zen-button], button[zen-btn], a[zen-button], a[zen-btn]',\n  template: `\n    <ng-content />\n  `,\n  styleUrl: './button.component.scss',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenButtonComponent {}\n",
+      "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n/**\n * ZenButtonComponent is a reusable button component designed to provide\n * a consistent and customizable button style across the application.\n * It can be used with both `<button>` and `<a>` HTML elements by applying\n * the `zen-button` attribute.\n *\n * @example\n * <button zen-btn> ... </button>\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'button[zen-button], button[zen-btn], a[zen-button], a[zen-btn]',\n  template: `\n    <ng-content />\n  `,\n  styleUrl: './button.component.scss',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenButtonComponent {}\n",
       "styleUrl": "./button.component.scss",
       "assetsDirs": [],
       "styleUrlsData": "",
@@ -180,7 +180,7 @@
     },
     {
       "name": "ZenCheckboxComponent",
-      "id": "component-ZenCheckboxComponent-1019dffbec1fa39fa746c702d18ad67f7d715079d3124e3bfb7fba83a909329ab5bd0adbdadcf24e38eb56c5aa2bde822f52710ae6049d175cb6131c9821415a",
+      "id": "component-ZenCheckboxComponent-934e03236061ddd89d2ad9f95240eb1075520fbd6a6f13acbd6a28a8bf24c3de7a0b73b9cc3839647c3987a744299f3b7f011c3b997a62754c716e09d5852dea",
       "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -347,7 +347,7 @@
       "description": "<p>ZenCheckboxComponent is a reusable checkbox component designed to provide\na consistent and customizable checkbox style across the application.\nIt supports Angular forms integration and provides two-way data binding\nfor boolean values.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-checkbox value=&quot;false&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
       "rawdescription": "\n\nZenCheckboxComponent is a reusable checkbox component designed to provide\na consistent and customizable checkbox style across the application.\nIt supports Angular forms integration and provides two-way data binding\nfor boolean values.\n\n```html\n<zen-checkbox value=\"false\" />\n```\n\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';\nimport { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\n\n/**\n * ZenCheckboxComponent is a reusable checkbox component designed to provide\n * a consistent and customizable checkbox style across the application.\n * It supports Angular forms integration and provides two-way data binding\n * for boolean values.\n *\n * @example\n * <zen-checkbox value=\"false\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  selector: 'zen-checkbox',\n  standalone: true,\n  template: `\n    <input\n      [attr.aria-disabled]=\"disabled()\"\n      [attr.id]=\"id()\"\n      [disabled]=\"disabled()\"\n      [ngModel]=\"value()\"\n      (ngModelChange)=\"onInputChange($event)\"\n      #inputElement\n      type=\"checkbox\"\n    />\n    @if (inputElement.indeterminate) {\n      ─\n    } @else if (inputElement.checked) {\n      ✓\n    }\n    <!-- @else { ✕ } -->\n  `,\n  styleUrls: ['./checkbox.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [FormsModule],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenCheckboxComponent),\n      multi: true,\n    },\n  ],\n  host: {\n    '(blur)': 'onTouched()',\n  },\n})\nexport class ZenCheckboxComponent implements ControlValueAccessor {\n  /** Holds the current checkbox value. */\n  readonly value = model(false);\n  /** Determines if the checkbox is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the checkbox element. */\n  readonly id = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: boolean) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: boolean): void {\n    this.value.set(value);\n  }\n\n  /** @ignore */\n  registerOnChange(fn: (value: boolean) => void): void {\n    this.onChange = fn;\n  }\n\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles checkbox change event */\n  onInputChange(value: boolean): void {\n    if (this.disabled()) return;\n\n    this.value.set(value);\n    this.onChange(value);\n  }\n}\n",
+      "sourceCode": "import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';\nimport { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\n\n/**\n * ZenCheckboxComponent is a reusable checkbox component designed to provide\n * a consistent and customizable checkbox style across the application.\n * It supports Angular forms integration and provides two-way data binding\n * for boolean values.\n *\n * @example\n * <zen-checkbox value=\"false\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  selector: 'zen-checkbox',\n  standalone: true,\n  template: `\n    <input\n      [attr.aria-disabled]=\"disabled()\"\n      [attr.id]=\"id()\"\n      [disabled]=\"disabled()\"\n      [ngModel]=\"value()\"\n      (ngModelChange)=\"onInputChange($event)\"\n      #inputElement\n      type=\"checkbox\"\n    />\n    @if (inputElement.indeterminate) {\n      ─\n    } @else if (inputElement.checked) {\n      ✓\n    }\n    <!-- @else { ✕ } -->\n  `,\n  styleUrls: ['./checkbox.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [FormsModule],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenCheckboxComponent),\n      multi: true,\n    },\n  ],\n  host: {\n    '(blur)': 'onTouched()',\n  },\n})\nexport class ZenCheckboxComponent implements ControlValueAccessor {\n  /** Holds the current checkbox value. */\n  readonly value = model(false);\n  /** Determines if the checkbox is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the checkbox element. */\n  readonly id = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: boolean) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: boolean): void {\n    this.value.set(value);\n  }\n\n  /** @ignore */\n  registerOnChange(fn: (value: boolean) => void): void {\n    this.onChange = fn;\n  }\n\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles checkbox change event */\n  onInputChange(value: boolean): void {\n    if (this.disabled()) return;\n\n    this.value.set(value);\n    this.onChange(value);\n  }\n}\n",
       "assetsDirs": [],
       "styleUrlsData": [
         {
@@ -361,7 +361,7 @@
     },
     {
       "name": "ZenInputComponent",
-      "id": "component-ZenInputComponent-9b765aa23d7972b7ef65a5898a6bbbb54e48a5a8ad47a5c1cd24cc7038c218d645182bfe9e404b67f73753a2bb27925569e6d330e7859bc6416c2ac3bcb2347e",
+      "id": "component-ZenInputComponent-ad4c5c85af1d6fef2886cd574a53c56b86c4a55238bb6b5eaee3e4e1134391516019080295b5fd8f32c019e0de9cfe5a946761ba955eed619304dd0671c7f0e2",
       "file": "projects/cli/src/schematics/components/files/input/input.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -538,7 +538,7 @@
       "description": "<p>ZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;zen-input value=&quot;string&quot; /&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
       "rawdescription": "\n\nZenInputComponent is a reusable text input component designed to provide\na consistent and customizable input style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<zen-input value=\"string\" />\n```\n\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\nimport { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenInputComponent is a reusable text input component designed to provide\n * a consistent and customizable input style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-input value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  selector: 'zen-input',\n  standalone: true,\n  template: `\n    <input\n      [attr.id]=\"id()\"\n      [attr.placeholder]=\"placeholder()\"\n      [attr.required]=\"required()\"\n      [disabled]=\"disabled()\"\n      [ngModel]=\"value()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (ngModelChange)=\"onInputChange($event)\"\n    />\n  `,\n  styleUrls: ['./input.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenInputComponent),\n      multi: true,\n    },\n  ],\n  imports: [FormsModule],\n})\nexport class ZenInputComponent implements ControlValueAccessor {\n  /** Holds the current input value. */\n  readonly value = model('');\n  /** Determines if the input is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the input element.*/\n  readonly id = input<string>();\n  /** Provides a hint or example text that will be displayed */\n  readonly placeholder = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles input change event */\n  onInputChange(value: string): void {\n    if (this.disabled()) return;\n\n    this.value.set(value);\n    this.onChange(value);\n  }\n}\n",
+      "sourceCode": "import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';\nimport { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n/**\n * ZenInputComponent is a reusable text input component designed to provide\n * a consistent and customizable input style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <zen-input value=\"string\" />\n *\n * @implements {ControlValueAccessor}\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  selector: 'zen-input',\n  standalone: true,\n  template: `\n    <input\n      [attr.id]=\"id()\"\n      [attr.placeholder]=\"placeholder()\"\n      [attr.required]=\"required()\"\n      [disabled]=\"disabled()\"\n      [ngModel]=\"value()\"\n      [value]=\"value()\"\n      (blur)=\"onTouched()\"\n      (ngModelChange)=\"onInputChange($event)\"\n    />\n  `,\n  styleUrls: ['./input.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => ZenInputComponent),\n      multi: true,\n    },\n  ],\n  imports: [FormsModule],\n})\nexport class ZenInputComponent implements ControlValueAccessor {\n  /** Holds the current input value. */\n  readonly value = model('');\n  /** Determines if the input is disabled. */\n  readonly disabled = model(false);\n  /** Determines if the input is required.*/\n  readonly required = input(false, { transform: booleanAttribute });\n  /** Sets the HTML id attribute for the input element.*/\n  readonly id = input<string>();\n  /** Provides a hint or example text that will be displayed */\n  readonly placeholder = input<string>();\n\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onChange: (value: string) => void = () => {};\n  /** @ignore */\n  // eslint-disable-next-line @typescript-eslint/no-empty-function\n  onTouched: () => void = () => {};\n\n  /** @ignore */\n  writeValue(value: string): void {\n    this.value.set(value);\n  }\n  /** @ignore */\n  registerOnChange(fn: (value: string) => void): void {\n    this.onChange = fn;\n  }\n  /** @ignore */\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  /** @ignore */\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  /** Handles input change event */\n  onInputChange(value: string): void {\n    if (this.disabled()) return;\n\n    this.value.set(value);\n    this.onChange(value);\n  }\n}\n",
       "assetsDirs": [],
       "styleUrlsData": [
         {
@@ -552,7 +552,7 @@
     },
     {
       "name": "ZenTextareaComponent",
-      "id": "component-ZenTextareaComponent-0e9640cc7e21da5de9988caa633048201a67297e48fbced24fcf8f11d09b6e955901f6959abd133c5c966ebe962b4bc208bae2b7a822b7aa300cb88b57633ad2",
+      "id": "component-ZenTextareaComponent-7a4bf3fe43f1c2e04fff3392f75b28f0ba09b250cec21b1ca7f1e28df1666c584867131f5272eddca88d3b4873351e48e1fb7b135d83d28df222636e9192d968",
       "file": "projects/cli/src/schematics/components/files/textarea/textarea.component.ts",
       "changeDetection": "ChangeDetectionStrategy.OnPush",
       "encapsulation": [],
@@ -580,7 +580,7 @@
       "description": "<p>ZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;textarea zen-textarea&gt;&lt;/textarea&gt;</code></pre></div><p>See <a href=\"https://github.com/kstepien3/ng-zen\">GitHub</a></p>\n",
       "rawdescription": "\n\nZenTextareaComponent is a reusable textarea component designed to provide\na consistent and customizable textarea style across the application.\nIt supports Angular forms integration and provides two-way data binding.\n\n```html\n<textarea zen-textarea></textarea>\n```\nSee [GitHub](https://github.com/kstepien3/ng-zen)\n",
       "type": "component",
-      "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n/**\n * ZenTextareaComponent is a reusable textarea component designed to provide\n * a consistent and customizable textarea style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <textarea zen-textarea></textarea>\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'textarea[zen-textarea], textarea[zen-textarea][autoresize]',\n  standalone: true,\n  template: `\n    <ng-content />\n  `,\n  styleUrls: ['./textarea.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenTextareaComponent {}\n",
+      "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n/**\n * ZenTextareaComponent is a reusable textarea component designed to provide\n * a consistent and customizable textarea style across the application.\n * It supports Angular forms integration and provides two-way data binding.\n *\n * @example\n * <textarea zen-textarea></textarea>\n *\n * @author Konrad Stępień\n * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}\n * @see [GitHub](https://github.com/kstepien3/ng-zen)\n */\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'textarea[zen-textarea], textarea[zen-textarea][autoresize]',\n  standalone: true,\n  template: `\n    <ng-content />\n  `,\n  styleUrls: ['./textarea.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ZenTextareaComponent {}\n",
       "assetsDirs": [],
       "styleUrlsData": [
         {
@@ -613,7 +613,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n        <zen-avatar src=\"https://github.com/Kordrad.png\" alt=\"Author\" style=\"--zen-avatar-size: 64px\"/>\n    `,\n  }),\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n        <zen-avatar src=\"https://github.com/kstepien3.png\" alt=\"Author\" style=\"--zen-avatar-size: 64px\"/>\n    `,\n  }),\n}"
       },
       {
         "name": "Default",
@@ -629,21 +629,21 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"${args.value}\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
       },
       {
         "name": "Default",
@@ -689,21 +689,21 @@
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-      },
-      {
-        "name": "WithLabel",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
       },
       {
         "name": "WithLabel",
@@ -744,8 +744,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ZenInputComponent>",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "rawtype": "StoryObj<ZenCheckboxComponent>",
+        "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -755,8 +755,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ZenCheckboxComponent>",
-        "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "rawtype": "StoryObj<ZenInputComponent>",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -817,7 +817,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n        <zen-avatar src=\"https://github.com/Kordrad.png\" alt=\"Author\" style=\"--zen-avatar-size: 64px\"/>\n    `,\n  }),\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n        <zen-avatar src=\"https://github.com/kstepien3.png\" alt=\"Author\" style=\"--zen-avatar-size: 64px\"/>\n    `,\n  }),\n}"
         },
         {
           "name": "Image",
@@ -852,28 +852,6 @@
           "defaultValue": "{\n  render: () => ({\n    template: `\n        <button zen-btn>Test</button>\n    `,\n  }),\n}"
         }
       ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-        },
-        {
-          "name": "WithLabel",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-        }
-      ],
       "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
         {
           "name": "Default",
@@ -894,6 +872,28 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
         }
       ],
       "projects/cli/.storybook/preview.ts": [
@@ -938,19 +938,6 @@
           "kind": 183
         }
       ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ZenInputComponent>",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
         {
           "name": "Story",
@@ -958,6 +945,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ZenCheckboxComponent>",
           "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenInputComponent>",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

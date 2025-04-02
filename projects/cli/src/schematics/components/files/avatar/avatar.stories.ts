@@ -20,7 +20,7 @@ export const Image: Story = {
 export const Default: Story = {
   render: () => ({
     template: `
-        <zen-avatar src="https://github.com/Kordrad.png" alt="Author" style="--zen-avatar-size: 64px"/>
+        <zen-avatar src="https://github.com/kstepien3.png" alt="Author" style="--zen-avatar-size: 64px"/>
     `,
   }),
 };
