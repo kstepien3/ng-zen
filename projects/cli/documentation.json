@@ -629,16 +629,6 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -654,6 +644,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-checkbox\n        [disabled]=\"${args.disabled}\"\n        [value]=\"${args.value}\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
       },
       {
         "name": "Image",
@@ -689,16 +689,6 @@
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-      },
-      {
-        "name": "WithLabel",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -714,6 +704,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
       }
     ],
     "functions": [],
@@ -744,17 +744,6 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ZenInputComponent>",
-        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
         "rawtype": "StoryObj<>",
         "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
         "deprecated": false,
@@ -768,6 +757,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ZenCheckboxComponent>",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ZenInputComponent>",
+        "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -852,28 +852,6 @@
           "defaultValue": "{\n  render: () => ({\n    template: `\n        <button zen-btn>Test</button>\n    `,\n  }),\n}"
         }
       ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-        },
-        {
-          "name": "WithLabel",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-        }
-      ],
       "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
         {
           "name": "Default",
@@ -894,6 +872,28 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; align-items: center; gap: 0.25rem\">\n        <zen-checkbox id=\"label-example\"/>\n        <label for=\"label-example\"> With label </label>\n      </div>\n  `,\n  }),\n}"
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
         }
       ],
       "projects/cli/.storybook/preview.ts": [
@@ -938,19 +938,6 @@
           "kind": 183
         }
       ],
-      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ZenInputComponent>",
-          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts": [
         {
           "name": "Story",
@@ -971,6 +958,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ZenCheckboxComponent>",
           "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "projects/cli/src/schematics/components/files/input/input.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ZenInputComponent>",
+          "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

@@ -1,4 +1,4 @@
-name: deploy
+name: Deploy sStorybook to github pages
 
 on:
   push:
@@ -30,4 +30,4 @@ jobs:
         with:
           install_command: pnpm install --frozen-lockfile
           build_command: pnpm run storybook:build
-          path: storybook-static
+          path: dist/storybook

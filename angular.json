@@ -57,7 +57,7 @@
             "browserTarget": "cli:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/cli"],
-            "outputDir": "storybook-static"
+            "outputDir": "dist/storybook"
           }
         }
       }

@@ -2,9 +2,13 @@
 
 Angular library that helps you build better applications faster 🚀 Built with modern best practices and full customization in mind 💡
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=main)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=master)](https://github.com/kstepien3/ng-zen)
 [![License](https://img.shields.io/badge/License-BSD--2--Clause-f5c076)](https://github.com/kstepien3/ng-zen/blob/master/LICENSE)
-![Version](https://img.shields.io/npm/v/@ng-zen/cli)
+[![Version](https://img.shields.io/npm/v/@ng-zen/cli)](https://www.npmjs.com/package/@ng-zen/cli)
+
+[![](https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white)](https://github.com/kstepien3/ng-zen)
+[![](https://img.shields.io/badge/-NPM-CB3837?style=flat&logo=npm&logoColor=white)](https://github.com/kstepien3/ng-zen)
+[![](https://img.shields.io/badge/-Storybook-FF4785?style=flat&logo=storybook&logoColor=white)](https://www.npmjs.com/package/@ng-zen/cli)
 
 ## Table of Contents
 
