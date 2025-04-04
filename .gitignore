@@ -40,4 +40,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Storybook
 *storybook.log
+

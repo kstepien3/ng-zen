@@ -629,6 +629,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: args => ({\n    template: `\n      <textarea\n      zen-textarea\n      placeholder=\"${args.placeholder}\"\n      ${args.required ? 'required' : ''}\n      ${args.autoresize ? 'autoresize' : ''}\n      ${args.disabled ? 'disabled' : ''}\n      >${args.value}</textarea>`,\n  }),\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -644,16 +654,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: args => ({\n    props: { ...args },\n    template: `\n      <zen-input\n        [disabled]=\"${args.disabled}\"\n        [value]=\"'${args.value}'\"\n        ${args.id ? 'id=\"' + args.id + '\"' : ''}\n        ${args.placeholder ? 'placeholder=\"' + args.placeholder + '\"' : ''}\n        ${args.required ? 'required' : ''}\n      />`,\n  }),\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: args => ({\n    template: `\n      <textarea\n      zen-textarea\n      placeholder=\"${args.placeholder}\"\n      ${args.required ? 'required' : ''}\n      ${args.autoresize ? 'autoresize' : ''}\n      ${args.disabled ? 'disabled' : ''}\n      >${args.value}</textarea>`,\n  }),\n}"
       },
       {
         "name": "Image",
@@ -689,6 +689,16 @@
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <textarea zen-textarea id=\"label-example\"></textarea>\n      </div>\n  `,\n  }),\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -704,16 +714,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <zen-input id=\"label-example\"/>\n      </div>\n  `,\n  }),\n}"
-      },
-      {
-        "name": "WithLabel",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column\">\n        <label for=\"label-example\"> With label </label>\n        <textarea zen-textarea id=\"label-example\"></textarea>\n      </div>\n  `,\n  }),\n}"
       }
     ],
     "functions": [],
@@ -744,6 +744,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<>",
+        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ZenCheckboxComponent>",
         "file": "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts",
         "deprecated": false,
@@ -757,17 +768,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ZenInputComponent>",
         "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<>",
-        "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -938,6 +938,19 @@
           "kind": 183
         }
       ],
+      "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<>",
+          "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "projects/cli/src/schematics/components/files/checkbox/checkbox.stories.ts": [
         {
           "name": "Story",
@@ -958,19 +971,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ZenInputComponent>",
           "file": "projects/cli/src/schematics/components/files/input/input.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<>",
-          "file": "projects/cli/src/schematics/components/files/textarea/textarea.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
