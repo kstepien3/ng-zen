@@ -25,7 +25,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  * You can customize the avatar using CSS custom properties:
  *
  * ```css
- * zen-avatar {
+ * :root {
  *  --zen-avatar-size: 16px;
  *  --zen-avatar-bg-color: black;
  *  --zen-avatar-color: white;
@@ -37,8 +37,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  * <zen-avatar src="https://picsum.photos/32" />
  *
  * @author Konrad Stępień
- * @license {@link https://github.com/Kordrad/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
- * @see [GitHub](https://github.com/Kordrad/ng-zen)
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
   selector: 'zen-avatar',

@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  * <textarea zen-textarea></textarea>
  *
  * @author Konrad Stępień
- * @license {@link https://github.com/kstepien3/ng-zen?tab=BSD-2-Clause-1-ov-file|BSD-2-Clause}
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
