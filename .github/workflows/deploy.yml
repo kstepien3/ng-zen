@@ -1,0 +1,27 @@
+name: deploy
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 22
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - id: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          build_command: pnpm run storybook:build
+          path: storybook-static
