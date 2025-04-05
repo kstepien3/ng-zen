@@ -4,13 +4,16 @@
     "commitMessage": "chore(release): v${version}"
   },
   "github": {
-    "release": true
+    "release": true,
+    "releaseName": "v${version}"
   },
   "npm": {
     "publish": true
   },
+  "hooks": {
+    "before:init": "git pull && pnpm run lint && pnpm run test"
+  },
   "plugins": {
-    "release-it-pnpm": {},
     "@release-it/conventional-changelog": {
       "infile": "CHANGELOG.md",
       "preset": {
@@ -29,11 +32,36 @@
             "section": "⚡️ Performance Improvements"
           },
           {
+            "type": "build",
+            "section": "🏗️ Build Changes"
+          },
+          {
+            "type": "ci",
+            "section": "🔄 Continuous Integration"
+          },
+          {
             "type": "refactor",
-            "section": "🧱 Code Refactor"
+            "section": "🛠️ Code Refactor"
+          },
+          {
+            "type": "test",
+            "section": "✅ Tests"
+          },
+          {
+            "type": "chore",
+            "section": "🧹 Chore"
+          },
+          {
+            "type": "docs",
+            "section": "📚 Documentation"
+          },
+          {
+            "type": "style",
+            "section": "🎨 Style"
           }
         ]
       }
-    }
+    },
+    "release-it-pnpm": {}
   }
 }
