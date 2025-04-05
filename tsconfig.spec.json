@@ -1,8 +1,9 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.schematics.json",
   "compilerOptions": {
-    "types": ["jest"]
+    "lib": ["ES2022", "DOM"],
+    "types": ["jest", "node", "jsdom"]
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": ["./src/**/*.spec.ts", "./src/**/*.d.ts"]
 }

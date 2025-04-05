@@ -15,15 +15,15 @@
   "projects": {
     "cli": {
       "projectType": "library",
-      "root": "projects/cli",
-      "sourceRoot": "projects/cli/schematics",
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "zen",
       "architect": {
         "build": {
-          "builder": "./projects/cli:build",
+          "builder": "./projects/schematic-builder:build",
           "options": {
-            "files": ["projects/cli/src/**", "projects/cli/README.md", "projects/cli/package.json", "LICENSE"],
-            "tsConfig": "projects/cli/tsconfig.schematics.json"
+            "files": ["src/**", "README.md", "package.json", "LICENSE"],
+            "tsConfig": "tsconfig.schematics.json"
           }
         },
         "test": {
@@ -36,27 +36,27 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/cli/**/*.ts", "projects/cli/**/*.html"],
-            "eslintConfig": "projects/cli/eslint.config.js"
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
+            "eslintConfig": "eslint.config.js"
           }
         },
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
-            "configDir": "projects/cli/.storybook",
+            "configDir": ".storybook",
             "browserTarget": "cli:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "projects/cli"],
+            "compodocArgs": ["-e", "json", "-d", "./documentation/"],
             "port": 6006
           }
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
-            "configDir": "projects/cli/.storybook",
+            "configDir": ".storybook",
             "browserTarget": "cli:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "projects/cli"],
+            "compodocArgs": ["-e", "json", "-d", "./documentation/"],
             "outputDir": "dist/storybook"
           }
         }

@@ -1,9 +1,9 @@
 {
-  "name": "ng-zen",
-  "version": "0.0.0",
+  "name": "@ng-zen/cli",
+  "version": "19.0.0-alpha.5",
+  "description": "A CLI tool for generating customizable, modern Angular UI components using schematics.",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -11,16 +11,53 @@
     "prepare": "husky",
     "storybook": "ng run cli:storybook",
     "storybook:build": "ng run cli:build-storybook",
-    "storybook:doc": "compodoc -e json -d projects/cli -p projects/cli/.storybook/tsconfig.json -t",
+    "storybook:doc": "compodoc -e json -p .storybook/tsconfig.json -t",
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/"
   },
+  "license": "BSD-2-Clause",
+  "private": false,
+  "repository": {
+    "url": "https://github.com/kstepien3/ng-zen"
+  },
+  "bugs": {
+    "url": "https://github.com/kstepien3/ng-zen/issues"
+  },
+  "author": {
+    "name": "Konrad Stępień",
+    "email": "kord.stp@gmail.com",
+    "url": "https://www.linkedin.com/in/KonradStepien/"
+  },
+  "homepage": "https://kstepien3.github.io/ng-zen/",
+  "keywords": [
+    "angular",
+    "schematics",
+    "ui-components",
+    "angular-cli",
+    "storybook",
+    "customizable-components",
+    "avatar",
+    "button",
+    "checkbox",
+    "input",
+    "textarea"
+  ],
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "schematics": "./schematics/collection.json",
   "packageManager": "pnpm@10.0.0",
-  "private": true,
+  "peerDependencies": {
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0"
+  },
   "dependencies": {
     "@angular-devkit/core": "^19.1.7",
     "@angular-devkit/schematics": "^19.1.7",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
     "@angular/animations": "^19.1.5",
     "@angular/common": "^19.1.5",
     "@angular/compiler": "^19.1.5",
@@ -30,9 +67,6 @@
     "@angular/platform-browser-dynamic": "^19.1.5",
     "@angular/router": "^19.1.5",
     "rxjs": "~7.8.1",
-    "tslib": "^2.8.1"
-  },
-  "devDependencies": {
     "@angular-builders/jest": "^19.0.0",
     "@angular-devkit/architect": "^0.1902.6",
     "@angular-devkit/build-angular": "^19.1.5",
