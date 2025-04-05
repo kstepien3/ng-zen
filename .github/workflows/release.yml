@@ -1,6 +1,16 @@
 name: Release & Publish to NPM
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'Create a pre-release?'
+        required: true
+        type: boolean
+      dry:
+          description: 'Run in dry mode?'
+          required: true
+          type: boolean
 
 env:
   NODE_VERSION: 22
@@ -28,7 +38,15 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Run release
-        run: pnpm run release --dry-run
+        run: |
+          flags=""
+          if [ "${{ github.event.inputs.prerelease }}" = "true" ]; then
+            flags+=" --preRelease"
+          fi
+          if [ "${{ github.event.inputs.dry }}" = "true" ]; then
+            flags+=" --dry-run"
+          fi
+          pnpm run release${flags} --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
