@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
-    "outDir": "../../dist/@ng-zen/cli/",
+    "outDir": "./dist/@ng-zen/cli/",
     "declarationMap": false,
     "baseUrl": "tsconfig",
     "lib": ["es2018"],
@@ -14,7 +14,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "src/",
+    "rootDir": "src",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -25,6 +25,6 @@
   "angularCompilerOptions": {
     "compilationMode": "partial"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/schematics/*/files/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["./src/schematics/*/files/**/*"]
 }

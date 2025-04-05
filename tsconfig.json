@@ -18,8 +18,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "ng-zen/components/*": ["./projects/cli/src/schematics/components/files/*"],
-      "ng-zen/directives/*": ["./projects/cli/src/schematics/directives/files/*"]
+      "ng-zen/components/*": ["./src/schematics/components/files/*"],
+      "ng-zen/directives/*": ["./src/schematics/directives/files/*"]
     }
   },
   "angularCompilerOptions": {
