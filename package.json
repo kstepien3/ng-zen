@@ -14,7 +14,8 @@
     "storybook:doc": "compodoc -e json -p .storybook/tsconfig.json -t",
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
-    "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/"
+    "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
+    "release": "release-it"
   },
   "license": "BSD-2-Clause",
   "private": false,
@@ -78,6 +79,7 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@compodoc/compodoc": "^1.1.26",
     "@eslint/js": "^9.22.0",
+    "@release-it/conventional-changelog": "^10.0.0",
     "@storybook/addon-docs": "^8.5.5",
     "@storybook/addon-essentials": "^8.5.5",
     "@storybook/addon-interactions": "^8.5.5",
@@ -106,6 +108,8 @@
     "nano-staged": "^0.8.0",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
+    "release-it": "^18.1.2",
+    "release-it-pnpm": "^4.6.4",
     "storybook": "^8.5.5",
     "stylelint": "^16.17.0",
     "stylelint-config-standard-scss": "^14.0.0",
