@@ -93,6 +93,7 @@
     "@storybook/test": "^8.5.5",
     "@types/jest": "29.5.14",
     "angular-eslint": "19.0.2",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "copyfiles": "^2.4.1",
     "cpy": "^11.1.0",
     "eslint": "^9.20.0",
