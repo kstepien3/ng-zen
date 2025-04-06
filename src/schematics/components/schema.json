@@ -10,7 +10,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["avatar", "button", "checkbox", "input", "textarea"]
+        "enum": ["avatar", "button", "checkbox", "input", "switch", "textarea"]
       },
       "multiselect": true,
       "x-prompt": "Which component should be generated?"
