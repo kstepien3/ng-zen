@@ -1,0 +1,62 @@
+$outline: var(--zen-outline, 2px solid hsl(0% 0% 60%));
+$transition-duration: 0.15s;
+$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
+$size: 16px;
+$margin: 2px;
+$width: 30px;
+$right-end: $width - $size - $margin * 2;
+
+:host {
+  cursor: pointer;
+  background: hsl(0% 0% 80%);
+  border-radius: 9999px;
+  width: $width;
+  height: $size + $margin * 2;
+  position: relative;
+  display: block;
+  transition:
+    background-color ease,
+    border-color ease;
+  transition-duration: $transition-duration;
+  vertical-align: middle;
+  user-select: none;
+
+  .switch-handle {
+    display: grid;
+    position: absolute;
+    height: $size;
+    width: $size;
+    background-color: white;
+    border-radius: 9999px;
+    font-size: 12px;
+    justify-content: center;
+    place-items: center;
+    color: $placeholder-color;
+    margin: 2px;
+    animation-fill-mode: revert;
+    transition: width ease;
+    transition-duration: $transition-duration;
+  }
+
+  &:active .switch-handle {
+    width: $size + 2px;
+  }
+
+  &:focus {
+    outline: $outline;
+  }
+
+  &[data-checked='true'] {
+    background-color: hsl(0% 0% 10%);
+
+    .switch-handle {
+      color: hsl(0% 0% 10%);
+      right: 0;
+    }
+  }
+
+  &[data-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}
