@@ -1,16 +1,11 @@
-name: Release & Publish to NPM
+name: Release
 
 on:
+  push:
+    branches:
+      - master
+      - next
   workflow_dispatch:
-    inputs:
-      prerelease:
-        description: 'Create a pre-release?'
-        required: true
-        type: boolean
-      dry:
-          description: 'Run in dry mode?'
-          required: true
-          type: boolean
 
 env:
   NODE_VERSION: 22
@@ -18,35 +13,51 @@ env:
 
 jobs:
   release:
+    name: Build, Test and Release
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Install the dependencies
+      - name: Get pnpm cache directory
+        id: pnpm-cache-dir
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - name: Generate cache key
+        id: cache-key
+        shell: bash
+        run: |
+          echo "key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-${{ hashFiles('**/pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
+          echo "restore_key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-" >> $GITHUB_OUTPUT
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache-dir.outputs.STORE_PATH }}
+          key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: ${{ steps.cache-key.outputs.restore_key }}
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Initialize Git user
-        run: |
-            git config --global user.email "kord.stp@gmail.com"
-            git config --global user.name "Release Workflow"
-      - name: Initialise the NPM config
-        run: npm config set //registry.npmjs.org:_authToken $NPM_TOKEN
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Run release
-        run: |
-          flags=""
-          if [ "${{ github.event.inputs.prerelease }}" = "true" ]; then
-            flags+=" --preRelease"
-          fi
-          if [ "${{ github.event.inputs.dry }}" = "true" ]; then
-            flags+=" --dry-run"
-          fi
-          pnpm run release${flags} --ci
+      - name: Run linter
+        run: pnpm run lint
+      - name: Run tests
+        run: pnpm run test
+      - name: Build project
+        run: pnpm run build
+      - name: Run semantic-release
+        run: pnpx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

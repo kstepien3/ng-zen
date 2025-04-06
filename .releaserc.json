@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json.schemastore.org/semantic-release",
+  "branches": [
+    "master",
+    {
+      "name": "next",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "🚀 New Features", "hidden": false },
+            { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
+            { "type": "perf", "section": "⚡️ Performance Improvements", "hidden": false },
+            { "type": "build", "section": "🏗️ Build Changes", "hidden": false },
+            { "type": "ci", "section": "🔄 Continuous Integration", "hidden": false },
+            { "type": "refactor", "section": "🛠️ Code Refactor", "hidden": false },
+            { "type": "test", "section": "✅ Tests", "hidden": false },
+            { "type": "chore", "section": "🧹 Chore", "hidden": true },
+            { "type": "docs", "section": "📚 Documentation", "hidden": false },
+            { "type": "style", "section": "🎨 Style", "hidden": true }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "🚀 New Features" },
+            { "type": "fix", "section": "🐛 Bug Fixes" },
+            { "type": "perf", "section": "⚡️ Performance Improvements" },
+            { "type": "build", "section": "🏗️ Build Changes" },
+            { "type": "ci", "section": "🔄 Continuous Integration" },
+            { "type": "refactor", "section": "🛠️ Code Refactor" },
+            { "type": "test", "section": "✅ Tests" },
+            { "type": "chore", "section": "🧹 Chore" },
+            { "type": "docs", "section": "📚 Documentation" },
+            { "type": "style", "section": "🎨 Style" }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}
