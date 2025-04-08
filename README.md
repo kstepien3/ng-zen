@@ -7,8 +7,8 @@ Angular library that helps you build better applications faster 🚀 Built with 
 [![Version](https://img.shields.io/npm/v/@ng-zen/cli)](https://www.npmjs.com/package/@ng-zen/cli)
 
 [![](https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white)](https://github.com/kstepien3/ng-zen)
-[![](https://img.shields.io/badge/-NPM-CB3837?style=flat&logo=npm&logoColor=white)](https://github.com/kstepien3/ng-zen)
-[![](https://img.shields.io/badge/-Storybook-FF4785?style=flat&logo=storybook&logoColor=white)](https://www.npmjs.com/package/@ng-zen/cli)
+[![](https://img.shields.io/badge/-NPM-CB3837?style=flat&logo=npm&logoColor=white)](https://www.npmjs.com/package/@ng-zen/cli)
+[![](https://img.shields.io/badge/-Storybook-FF4785?style=flat&logo=storybook&logoColor=white)](https://kstepien3.github.io/ng-zen)
 
 ## Table of Contents
 
