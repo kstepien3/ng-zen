@@ -22,7 +22,7 @@
         "build": {
           "builder": "./projects/schematic-builder:build",
           "options": {
-            "files": ["src/**", "README.md", "package.json", "LICENSE"],
+            "files": ["src/**", "README.md", "package.json", "LICENSE", "CHANGELOG.md"],
             "tsConfig": "tsconfig.schematics.json"
           }
         },

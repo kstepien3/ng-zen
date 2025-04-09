@@ -1,27 +1,54 @@
 # Contributing to @ng-zen/cli
 
-Thank you for considering contributing to **@ng-zen/cli**! This project is maintained by Konrad Stępień and is open to contributions from the community.
+Thank you for your interest in contributing! This document outlines the essential steps and requirements for submitting contributions.
 
-## How to Contribute
+**For detailed information on project setup, the full branching strategy, specific tool usage (Storybook, Verdaccio), and the reasoning behind our workflows, please refer to the [DEVELOPMENT.md](DEVELOPMENT.md) file.**
 
-1. **Fork the Repository**: Create a fork of the [ng-zen repository](https://github.com/Kordrad/ng-zen) on GitHub.
-2. **Create a Feature Branch**: Create a new branch for your feature or bug fix. Use a descriptive name for the branch, such as `feature/new-component` or `fix/documentation`.
-3. **Make Your Changes**: Implement your feature or fix. Ensure that your code adheres to the project's coding standards and best practices.
-4. **Write Tests**: If applicable, add unit tests or integration tests to cover your changes.
-5. **Submit a Pull Request**: Push your changes to your fork and submit a pull request to the main repository. Include a detailed description of your changes.
+## Key Requirements for Contributors
 
-## Contribution Guidelines
+1.  **Conventional Commits (Mandatory):** All commit messages **must** adhere to the Conventional Commits specification (https://www.conventionalcommits.org/). This is critical for automated releases. Invalid messages will block commits. See [Commit Messages](DEVELOPMENT.md#commit-messages-crucial) for details on commit types and their impact.
+2.  **Target Branch:** Pull Requests **must target the `develop` branch.** PRs targeting `master` or `next` directly will generally be closed unless specifically requested for hotfixes.
+3.  **Automated Checks:**
 
-- **Code Quality**: Ensure that your code is well-formatted, readable, and follows Angular best practices.
-- **Documentation**: Update documentation if necessary. Use JSDoc for code comments and ensure that Storybook examples are updated.
-- **Testing**: Include tests for new functionality or bug fixes.
-- **Commit Messages**: Use meaningful commit messages that follow the conventional commit format.
+- Code formatting and basic lint fixes are applied automatically on commit via `husky` and `nano-staged`.
+- Full CI checks (linting, testing, building) run automatically on Pull Requests via GitHub Actions (`ci.yml`). **Your PR must pass all CI checks to be eligible for merging.**
+
+## Contribution Steps
+
+1.  **Fork & Clone:** Fork the [ng-zen repository](https://github.com/kstepien3/ng-zen) and clone your fork locally. _(See [Prerequisites & Setup](DEVELOPMENT.md#prerequisites--setup) if needed)_.
+2.  **Sync `develop`:** Ensure your local `develop` branch is up-to-date:
+    ```bash
+    git switch develop
+    git pull origin develop
+    ```
+3.  **Create Branch:** Create your working branch **from `develop`**:
+    ```bash
+    # Use format: <type>/<short-description>
+    git switch -c feat/add-hover-effect develop
+    ```
+4.  **Develop:** Implement your code changes. Remember to add or update relevant unit tests (`*.spec.ts`) and documentation/Storybook stories (`*.stories.ts`, etc.) as necessary. _(See [Working with Storybook](DEVELOPMENT.md#working-with-storybook) section for more details)_.
+5.  **Commit:** Commit your work using **Conventional Commit** messages.
+    ```bash
+    git add .
+    git commit -m "feat(button): add configurable hover effect"
+    ```
+6.  **Verify Locally:** Before pushing, ensure all local checks pass:
+    ```bash
+    pnpm run lint
+    pnpm run test
+    ```
+    _(See [Running Tests and Linting](DEVELOPMENT.md#running-tests-and-linting) for details on these commands)_.
+7.  **Push:** Push your branch to your fork: `git push origin feat/add-hover-effect`
+8.  **Create Pull Request:** Open a Pull Request on GitHub from **your branch** to the **`kstepien3/ng-zen:develop`** branch. Provide a clear title and description.
+
+## After Your PR is Submitted
+
+- Wait for the automated CI checks to complete. Address any failures.
+- Respond to code review comments and feedback from maintainers.
+- Once approved and CI passes, a maintainer will merge your PR into `develop`. Your changes will then be included in future pre-releases (from `next`) and stable releases (from `master`).
 
 ## Communication
 
-- **Issues**: If you encounter any issues or have questions, feel free to open an issue on GitHub.
-- **Pull Request Reviews**: Be prepared to address feedback from maintainers during the review process.
+- Use [GitHub Issues](https://github.com/kstepien3/ng-zen/issues) for bug reports, feature proposals, or questions _before_ starting significant work.
 
-## Acknowledgments
-
-Your contributions are invaluable to the growth and success of **@ng-zen/cli**. Thank you for your time and effort!
+Thank you for contributing to **@ng-zen/cli**
