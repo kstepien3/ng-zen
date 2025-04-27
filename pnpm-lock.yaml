@@ -32,7 +32,7 @@ importers:
         version: 19.2.5(@angular/common@19.2.5(@angular/core@19.2.5(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.5(rxjs@7.8.2)(zone.js@0.15.0))
       '@angular/cli':
         specifier: ^19.1.7
-        version: 19.2.6(@types/node@22.14.0)(chokidar@4.0.3)
+        version: 19.2.9(@types/node@22.14.0)(chokidar@4.0.3)
       '@angular/common':
         specifier: ^19.1.5
         version: 19.2.5(@angular/core@19.2.5(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2)
@@ -107,7 +107,7 @@ importers:
         version: 8.6.12(storybook@8.6.12(prettier@3.5.3))
       '@storybook/angular':
         specifier: ^8.5.3
-        version: 8.6.12(b3465e7837b91bff16607d01cbf87d84)
+        version: 8.6.12(c2951e0b7c97d10bc019e5289834738a)
       '@storybook/blocks':
         specifier: ^8.5.3
         version: 8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))
@@ -322,6 +322,10 @@ packages:
     resolution: {integrity: sha512-YTAxNnT++5eflx19OUHmOWu597/TbTel+QARiZCv1xQw99+X8DCKKOUXtqBRd53CAHlREDI33Rn/JLY3NYgMLQ==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
+  '@angular-devkit/schematics@19.2.9':
+    resolution: {integrity: sha512-B8FQ4hFsP4Ffh895F9GVvyhgDoZztWnAyYKiM1pyvLSQikzaUZqi9NZnD12HgMALmwm2z36zTzoSNsYFBTHgaw==}
+    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+
   '@angular-eslint/builder@19.3.0':
     resolution: {integrity: sha512-j9xNrzZJq29ONSG6EaeQHve0Squkm6u6Dm8fZgWP7crTFOrtLXn7Wxgxuyl9eddpbWY1Ov1gjFuwBVnxIdyAqg==}
     peerDependencies:
@@ -405,8 +409,8 @@ packages:
       tailwindcss:
         optional: true
 
-  '@angular/cli@19.2.6':
-    resolution: {integrity: sha512-eZhFOSsDUHKaciwcWdU5C54ViAvPPdZJf42So93G2vZWDtEq6Uk47huocn1FY9cMhDvURfYLNrrLMpUDtUSsSA==}
+  '@angular/cli@19.2.9':
+    resolution: {integrity: sha512-m3yaqrtodzO+tDspAqD6h7Ft8HzP4xbTmqPoSHaAN6Wupf/m/q94AMBmuEk74URS3q7v6PhayOuNOzBY2q4bIw==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     hasBin: true
 
@@ -1672,8 +1676,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@inquirer/rawlist@4.0.12':
-    resolution: {integrity: sha512-wNPJZy8Oc7RyGISPxp9/MpTOqX8lr0r+lCCWm7hQra+MDtYRgINv1hxw7R+vKP71Bu/3LszabxOodfV/uTfsaA==}
+  '@inquirer/rawlist@4.1.0':
+    resolution: {integrity: sha512-6ob45Oh9pXmfprKqUiEeMz/tjtVTFQTgDDz1xAMKMrIvyrYjAmRbQZjMJfsictlL4phgjLhdLu27IkHNnNjB7g==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -1690,8 +1694,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@inquirer/select@4.1.1':
-    resolution: {integrity: sha512-IUXzzTKVdiVNMA+2yUvPxWsSgOG4kfX93jOM4Zb5FgujeInotv5SPIJVeXQ+fO4xu7tW8VowFhdG5JRmmCyQ1Q==}
+  '@inquirer/select@4.2.0':
+    resolution: {integrity: sha512-KkXQ4aSySWimpV4V/TUJWdB3tdfENZUU765GjOIZ0uPwdbGIG6jrxD4dDf1w68uP+DVtfNhr1A92B+0mbTZ8FA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -2063,8 +2067,8 @@ packages:
     resolution: {integrity: sha512-/bNJhjc+o6qL+Dwz/bqfTQClkEO5nTQ1ZEcdCkAQjhkZMHIh22LPG7fNh1enJP1NKWDqYiiABnjFCY7E0zHYtQ==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  '@npmcli/redact@3.1.1':
-    resolution: {integrity: sha512-3Hc2KGIkrvJWJqTbvueXzBeZlmvoOxc2jyX00yzr3+sNFquJg0N8hH4SAPLPVrkWIRQICVpVgjrss971awXVnA==}
+  '@npmcli/redact@3.2.0':
+    resolution: {integrity: sha512-NyJXHoZwJE0iUsCDTclXf1bWHJTsshtnp5xUN6F2vY+OLJv6d2cNc4Do6fKNkmPToB0GzoffxRh405ibTwG+Og==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   '@npmcli/run-script@9.1.0':
@@ -2319,8 +2323,8 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@schematics/angular@19.2.6':
-    resolution: {integrity: sha512-fmbF9ONmEZqxHocCwOSWG2mHp4a22d1uW+DZUBUgZSBUFIrnFw42deOxDq8mkZOZ1Tc73UpLN2GKI7iJeUqS2A==}
+  '@schematics/angular@19.2.9':
+    resolution: {integrity: sha512-V5c8qycipodwbDX3lY0sbQaG2OKkO2HdjxL0K70TzcpEwnD4uVMs73PRaLtREASzpnSo6CKewQCsgPSgyzJCKw==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
   '@sec-ant/readable-stream@0.4.1':
@@ -2378,20 +2382,20 @@ packages:
     resolution: {integrity: sha512-nYxaSb/MtlSI+JWcwTHQxyNmWeWrUXJJ/G4liLrGG7+tS4vAz6LF3xRXqLH6wPIVUoZQel2Fs4ddLx4NCpiIYg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  '@sigstore/protobuf-specs@0.4.0':
-    resolution: {integrity: sha512-o09cLSIq9EKyRXwryWDOJagkml9XgQCoCSRjHOnHLnvsivaW7Qznzz6yjfV7PHJHhIvyp8OH7OX8w0Dc5bQK7A==}
+  '@sigstore/protobuf-specs@0.4.1':
+    resolution: {integrity: sha512-7MJXQhIm7dWF9zo7rRtMYh8d2gSnc3+JddeQOTIg6gUN7FjcuckZ9EwGq+ReeQtbbl3Tbf5YqRrWxA1DMfIn+w==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   '@sigstore/sign@3.1.0':
     resolution: {integrity: sha512-knzjmaOHOov1Ur7N/z4B1oPqZ0QX5geUfhrVaqVlu+hl0EAoL4o+l0MSULINcD5GCWe3Z0+YJO8ues6vFlW0Yw==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  '@sigstore/tuf@3.1.0':
-    resolution: {integrity: sha512-suVMQEA+sKdOz5hwP9qNcEjX6B45R+hFFr4LAWzbRc5O+U2IInwvay/bpG5a4s+qR35P/JK/PiKiRGjfuLy1IA==}
+  '@sigstore/tuf@3.1.1':
+    resolution: {integrity: sha512-eFFvlcBIoGwVkkwmTi/vEQFSva3xs5Ot3WmBcjgjVdiaoelBLQaQ/ZBfhlG0MnG0cmTYScPpk7eDdGDWUcFUmg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  '@sigstore/verify@2.1.0':
-    resolution: {integrity: sha512-kAAM06ca4CzhvjIZdONAL9+MLppW3K48wOFy1TbuaWFW/OMfl8JuTgW0Bm02JB1WJGT/ET2eqav0KTEKmxqkIA==}
+  '@sigstore/verify@2.1.1':
+    resolution: {integrity: sha512-hVJD77oT67aowHxwT4+M6PGOp+E2LtLdTK3+FC0lBO9T7sYwItDMXZ7Z07IDCvR1M717a4axbIWckrW67KMP/w==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   '@sinclair/typebox@0.27.8':
@@ -2970,8 +2974,8 @@ packages:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     deprecated: Use your platform's native atob() and btoa() methods instead
 
-  abbrev@3.0.0:
-    resolution: {integrity: sha512-+/kfrslGQ7TNV2ecmQwMJj/B65g5KVq1/L3SGVZ3tCYGqlzFuFCGBZJtMP99wH3NpEUyAjn0zPdPUg0D+DwrOA==}
+  abbrev@3.0.1:
+    resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   accepts@1.3.8:
@@ -4440,6 +4444,14 @@ packages:
       picomatch:
         optional: true
 
+  fdir@6.4.4:
+    resolution: {integrity: sha512-1NZP+GK4GfuAv3PqKvxQRDMjdSRZjnkq7KfhlNrCNNlZ0ygQFpebfrnfnq/W7fpUnAv9aGWmY1zKx7FYL3gwhg==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   figures@2.0.0:
     resolution: {integrity: sha512-Oa2M9atig69ZkfwiApY8F2Yy+tzMbazyvqv21R0NsSC8floSOC09BbT1ITWAdoMGQvJ/aZnR1KMwdx9tvHnTNA==}
     engines: {node: '>=4'}
@@ -4805,6 +4817,10 @@ packages:
 
   hosted-git-info@8.0.2:
     resolution: {integrity: sha512-sYKnA7eGln5ov8T8gnYlkSOxFJvywzEx9BueN6xo/GKO8PGiI6uK6xx+DIGe45T3bdVjLAQDQW1aicT8z8JwQg==}
+    engines: {node: ^18.17.0 || >=20.5.0}
+
+  hosted-git-info@8.1.0:
+    resolution: {integrity: sha512-Rw/B2DNQaPBICNXEm8balFz9a6WpZrkCGpcWFpy7nCj+NyhSdqXipmfvtmWt9xGfp0wZnBxB+iVpLmQMYt47Tw==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   hpack.js@2.1.6:
@@ -7553,6 +7569,10 @@ packages:
     resolution: {integrity: sha512-qkf4trmKSIiMTs/E63cxH+ojC2unam7rJ0WrauAzpT3ECNTxGRMlaXxVbfxMUC/w0LaYk6jQ4y/nGR9uBO3tww==}
     engines: {node: '>=12.0.0'}
 
+  tinyglobby@0.2.13:
+    resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==}
+    engines: {node: '>=12.0.0'}
+
   tinyrainbow@1.2.0:
     resolution: {integrity: sha512-weEDEq7Z5eTHPDh4xjX789+fHfF+P8boiFB+0vbWzpbnbsEr/GRaohi/uMKxg8RZMXnl1ItAi/IUHWMsjDV7kQ==}
     engines: {node: '>=14.0.0'}
@@ -8389,6 +8409,16 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
+  '@angular-devkit/schematics@19.2.9(chokidar@4.0.3)':
+    dependencies:
+      '@angular-devkit/core': 19.2.9(chokidar@4.0.3)
+      jsonc-parser: 3.3.1
+      magic-string: 0.30.17
+      ora: 5.4.1
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - chokidar
+
   '@angular-eslint/builder@19.3.0(chokidar@4.0.3)(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
       '@angular-devkit/architect': 0.1902.9(chokidar@4.0.3)
@@ -8503,14 +8533,14 @@ snapshots:
       - tsx
       - yaml
 
-  '@angular/cli@19.2.6(@types/node@22.14.0)(chokidar@4.0.3)':
+  '@angular/cli@19.2.9(@types/node@22.14.0)(chokidar@4.0.3)':
     dependencies:
-      '@angular-devkit/architect': 0.1902.6(chokidar@4.0.3)
-      '@angular-devkit/core': 19.2.6(chokidar@4.0.3)
-      '@angular-devkit/schematics': 19.2.6(chokidar@4.0.3)
+      '@angular-devkit/architect': 0.1902.9(chokidar@4.0.3)
+      '@angular-devkit/core': 19.2.9(chokidar@4.0.3)
+      '@angular-devkit/schematics': 19.2.9(chokidar@4.0.3)
       '@inquirer/prompts': 7.3.2(@types/node@22.14.0)
       '@listr2/prompt-adapter-inquirer': 2.0.18(@inquirer/prompts@7.3.2(@types/node@22.14.0))
-      '@schematics/angular': 19.2.6(chokidar@4.0.3)
+      '@schematics/angular': 19.2.9(chokidar@4.0.3)
       '@yarnpkg/lockfile': 1.1.0
       ini: 5.0.0
       jsonc-parser: 3.3.1
@@ -10418,13 +10448,13 @@ snapshots:
       '@inquirer/input': 4.1.9(@types/node@22.14.0)
       '@inquirer/number': 3.0.12(@types/node@22.14.0)
       '@inquirer/password': 4.0.12(@types/node@22.14.0)
-      '@inquirer/rawlist': 4.0.12(@types/node@22.14.0)
+      '@inquirer/rawlist': 4.1.0(@types/node@22.14.0)
       '@inquirer/search': 3.0.12(@types/node@22.14.0)
-      '@inquirer/select': 4.1.1(@types/node@22.14.0)
+      '@inquirer/select': 4.2.0(@types/node@22.14.0)
     optionalDependencies:
       '@types/node': 22.14.0
 
-  '@inquirer/rawlist@4.0.12(@types/node@22.14.0)':
+  '@inquirer/rawlist@4.1.0(@types/node@22.14.0)':
     dependencies:
       '@inquirer/core': 10.1.10(@types/node@22.14.0)
       '@inquirer/type': 3.0.6(@types/node@22.14.0)
@@ -10441,7 +10471,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.14.0
 
-  '@inquirer/select@4.1.1(@types/node@22.14.0)':
+  '@inquirer/select@4.2.0(@types/node@22.14.0)':
     dependencies:
       '@inquirer/core': 10.1.10(@types/node@22.14.0)
       '@inquirer/figures': 1.0.11
@@ -10862,7 +10892,7 @@ snapshots:
     dependencies:
       '@npmcli/git': 6.0.3
       glob: 10.4.5
-      hosted-git-info: 8.0.2
+      hosted-git-info: 8.1.0
       json-parse-even-better-errors: 4.0.0
       proc-log: 5.0.0
       semver: 7.7.1
@@ -10872,7 +10902,7 @@ snapshots:
     dependencies:
       which: 5.0.0
 
-  '@npmcli/redact@3.1.1': {}
+  '@npmcli/redact@3.2.0': {}
 
   '@npmcli/run-script@9.1.0':
     dependencies:
@@ -11081,10 +11111,10 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@schematics/angular@19.2.6(chokidar@4.0.3)':
+  '@schematics/angular@19.2.9(chokidar@4.0.3)':
     dependencies:
-      '@angular-devkit/core': 19.2.6(chokidar@4.0.3)
-      '@angular-devkit/schematics': 19.2.6(chokidar@4.0.3)
+      '@angular-devkit/core': 19.2.9(chokidar@4.0.3)
+      '@angular-devkit/schematics': 19.2.9(chokidar@4.0.3)
       jsonc-parser: 3.3.1
     transitivePeerDependencies:
       - chokidar
@@ -11188,35 +11218,35 @@ snapshots:
 
   '@sigstore/bundle@3.1.0':
     dependencies:
-      '@sigstore/protobuf-specs': 0.4.0
+      '@sigstore/protobuf-specs': 0.4.1
 
   '@sigstore/core@2.0.0': {}
 
-  '@sigstore/protobuf-specs@0.4.0': {}
+  '@sigstore/protobuf-specs@0.4.1': {}
 
   '@sigstore/sign@3.1.0':
     dependencies:
       '@sigstore/bundle': 3.1.0
       '@sigstore/core': 2.0.0
-      '@sigstore/protobuf-specs': 0.4.0
+      '@sigstore/protobuf-specs': 0.4.1
       make-fetch-happen: 14.0.3
       proc-log: 5.0.0
       promise-retry: 2.0.1
     transitivePeerDependencies:
       - supports-color
 
-  '@sigstore/tuf@3.1.0':
+  '@sigstore/tuf@3.1.1':
     dependencies:
-      '@sigstore/protobuf-specs': 0.4.0
+      '@sigstore/protobuf-specs': 0.4.1
       tuf-js: 3.0.1
     transitivePeerDependencies:
       - supports-color
 
-  '@sigstore/verify@2.1.0':
+  '@sigstore/verify@2.1.1':
     dependencies:
       '@sigstore/bundle': 3.1.0
       '@sigstore/core': 2.0.0
-      '@sigstore/protobuf-specs': 0.4.0
+      '@sigstore/protobuf-specs': 0.4.1
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -11333,7 +11363,7 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.6.12(prettier@3.5.3)
 
-  '@storybook/angular@8.6.12(b3465e7837b91bff16607d01cbf87d84)':
+  '@storybook/angular@8.6.12(c2951e0b7c97d10bc019e5289834738a)':
     dependencies:
       '@angular-devkit/architect': 0.1902.9(chokidar@4.0.3)
       '@angular-devkit/build-angular': 19.2.6(@angular/compiler-cli@19.2.5(@angular/compiler@19.2.5)(typescript@5.8.3))(@angular/compiler@19.2.5)(@types/node@22.14.0)(chokidar@4.0.3)(html-webpack-plugin@5.6.3(webpack@5.98.0(esbuild@0.25.2)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@22.14.0)(ts-node@10.9.2(@types/node@22.14.0)(typescript@5.8.3)))(jiti@2.4.2)(typescript@5.8.3)(vite@6.2.4(@types/node@22.14.0)(jiti@2.4.2)(less@4.2.2)(sass@1.85.0)(terser@5.39.0))
@@ -11369,7 +11399,7 @@ snapshots:
       webpack: 5.98.0(esbuild@0.25.2)
     optionalDependencies:
       '@angular/animations': 19.2.5(@angular/common@19.2.5(@angular/core@19.2.5(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.5(rxjs@7.8.2)(zone.js@0.15.0))
-      '@angular/cli': 19.2.6(@types/node@22.14.0)(chokidar@4.0.3)
+      '@angular/cli': 19.2.9(@types/node@22.14.0)(chokidar@4.0.3)
       zone.js: 0.15.0
     transitivePeerDependencies:
       - '@rspack/core'
@@ -11988,7 +12018,7 @@ snapshots:
 
   abab@2.0.6: {}
 
-  abbrev@3.0.0: {}
+  abbrev@3.0.1: {}
 
   accepts@1.3.8:
     dependencies:
@@ -13727,6 +13757,10 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
+  fdir@6.4.4(picomatch@4.0.2):
+    optionalDependencies:
+      picomatch: 4.0.2
+
   figures@2.0.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -14125,6 +14159,10 @@ snapshots:
       lru-cache: 10.4.3
 
   hosted-git-info@8.0.2:
+    dependencies:
+      lru-cache: 10.4.3
+
+  hosted-git-info@8.1.0:
     dependencies:
       lru-cache: 10.4.3
 
@@ -15617,7 +15655,7 @@ snapshots:
       proc-log: 5.0.0
       semver: 7.7.1
       tar: 7.4.3
-      tinyglobby: 0.2.12
+      tinyglobby: 0.2.13
       which: 5.0.0
     transitivePeerDependencies:
       - supports-color
@@ -15633,7 +15671,7 @@ snapshots:
 
   nopt@8.1.0:
     dependencies:
-      abbrev: 3.0.0
+      abbrev: 3.0.1
 
   normalize-package-data@6.0.2:
     dependencies:
@@ -15659,7 +15697,7 @@ snapshots:
 
   npm-package-arg@12.0.2:
     dependencies:
-      hosted-git-info: 8.0.2
+      hosted-git-info: 8.1.0
       proc-log: 5.0.0
       semver: 7.7.1
       validate-npm-package-name: 6.0.0
@@ -15677,7 +15715,7 @@ snapshots:
 
   npm-registry-fetch@18.0.2:
     dependencies:
-      '@npmcli/redact': 3.1.1
+      '@npmcli/redact': 3.2.0
       jsonparse: 1.3.1
       make-fetch-happen: 14.0.3
       minipass: 7.1.2
@@ -16737,10 +16775,10 @@ snapshots:
     dependencies:
       '@sigstore/bundle': 3.1.0
       '@sigstore/core': 2.0.0
-      '@sigstore/protobuf-specs': 0.4.0
+      '@sigstore/protobuf-specs': 0.4.1
       '@sigstore/sign': 3.1.0
-      '@sigstore/tuf': 3.1.0
-      '@sigstore/verify': 2.1.0
+      '@sigstore/tuf': 3.1.1
+      '@sigstore/verify': 2.1.1
     transitivePeerDependencies:
       - supports-color
 
@@ -17217,6 +17255,11 @@ snapshots:
   tinyglobby@0.2.12:
     dependencies:
       fdir: 6.4.3(picomatch@4.0.2)
+      picomatch: 4.0.2
+
+  tinyglobby@0.2.13:
+    dependencies:
+      fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
 
   tinyrainbow@1.2.0: {}
