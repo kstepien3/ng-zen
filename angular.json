@@ -20,9 +20,9 @@
       "prefix": "zen",
       "architect": {
         "build": {
-          "builder": "./projects/schematic-builder:build",
+          "builder": "ngx-schematic-builder:build",
           "options": {
-            "files": ["src/**", "README.md", "package.json", "LICENSE", "CHANGELOG.md"],
+            "files": ["src/**", "package.json", "README.md", "LICENSE", "CHANGELOG.md"],
             "tsConfig": "tsconfig.schematics.json"
           }
         },

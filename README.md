@@ -11,7 +11,7 @@
 
 Generate modern, customizable Angular UI components and elements directly into your project 🚀
 
-Built with best practices and developer experience in mind 💡
+Built with the best practices and developer experience in mind 💡
 
 ## Table of Contents
 
@@ -27,7 +27,8 @@ Built with best practices and developer experience in mind 💡
 10. [Contributing](#contributing)
 11. [License](#license)
 12. [Author](#author)
-13. [FAQ](#faq)
+13. [See also](#see-also)
+14. [FAQ](#faq)
 
 ## Features
 
@@ -147,6 +148,10 @@ Maintained by Konrad Stępień.
 - GitHub: [@kstepien3](https://github.com/kstepien3)
 - LinkedIn: [Konrad Stępień](https://www.linkedin.com/in/konradstepien/) 👥
 - Email: [kord.stp@gmail.com](mailto:kord.stp@gmail.com?subject=%5BNG-ZEN%5D%20Query) 📨
+
+## See also
+
+- [ngx-schematic-builder](https://github.com/kstepien3/ngx-schematic-builder) - A custom Angular builder for compiling and bundling Angular schematics.
 
 ## FAQ
 
