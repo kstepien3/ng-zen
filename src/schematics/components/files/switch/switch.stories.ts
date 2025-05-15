@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
+
 import { ZenSwitchComponent } from './switch.component';
 
 export default {

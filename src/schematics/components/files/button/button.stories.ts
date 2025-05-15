@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import { ZenButtonComponent } from './button.component';
 
 export default {

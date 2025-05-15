@@ -1,5 +1,6 @@
 import { normalize, strings } from '@angular-devkit/core';
 import { apply, applyTemplates, chain, filter, mergeWith, move, Rule, url } from '@angular-devkit/schematics';
+
 import { GeneratorSchemaBase } from '../types';
 import { SchematicsFolder } from '../types/schematics-folder.type';
 
