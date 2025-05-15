@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
+
 import { ZenInputComponent } from './input.component';
 
 export default {

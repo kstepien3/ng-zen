@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
+
 import { ZenCheckboxComponent } from './checkbox.component';
 
 export default {
