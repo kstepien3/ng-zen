@@ -1,3 +1,3 @@
-export interface NgZenGeneratorSchema {
-  path: string;
-}
+import { GeneratorSchemaBase } from '../../types';
+
+export type NgZenGeneratorSchema = GeneratorSchemaBase;
