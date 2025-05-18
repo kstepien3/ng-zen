@@ -175,8 +175,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0
       ngx-schematic-builder:
-        specifier: ^0.1.1
-        version: 0.1.1(chokidar@4.0.3)
+        specifier: ^0.2.0
+        version: 0.2.0(@angular-devkit/core@19.2.6(chokidar@4.0.3))(@angular-devkit/schematics@19.2.6(chokidar@4.0.3))(@angular/cli@19.2.6(@types/node@22.14.0)(chokidar@4.0.3))(chokidar@4.0.3)(typescript@5.8.3)
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -6094,8 +6094,13 @@ packages:
   nerf-dart@1.0.0:
     resolution: {integrity: sha512-EZSPZB70jiVsivaBLYDCyntd5eH8NTSMOn3rB+HxwdmKThGELLdYv8qVIMWvZEFy9w8ZZpW9h9OB32l1rGtj7g==}
 
-  ngx-schematic-builder@0.1.1:
-    resolution: {integrity: sha512-9EvtceHGzl7ONAmtkqB/+YevWItdgpcsnADbfKVhOjiFavgZ11rBjgeOxUGPN2O1ia9H9o6PtIX12x9lK5vILg==}
+  ngx-schematic-builder@0.2.0:
+    resolution: {integrity: sha512-gpq1JHjnhFDj5tC+gu+HPlJNk1wGxJ8aanXEEGakxGfP/gIo/j7v/SwL6+thxYVbCSgpMbeC6rqS9EgzxUvkoA==}
+    peerDependencies:
+      '@angular-devkit/core': '*'
+      '@angular-devkit/schematics': '*'
+      '@angular/cli': '*'
+      typescript: '*'
 
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
@@ -8432,8 +8437,8 @@ snapshots:
 
   '@angular-eslint/builder@19.3.0(chokidar@4.0.3)(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
-      '@angular-devkit/architect': 0.1902.9(chokidar@4.0.3)
-      '@angular-devkit/core': 19.2.6(chokidar@4.0.3)
+      '@angular-devkit/architect': 0.1902.11(chokidar@4.0.3)
+      '@angular-devkit/core': 19.2.11(chokidar@4.0.3)
       eslint: 9.24.0(jiti@2.4.2)
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -8462,7 +8467,7 @@ snapshots:
 
   '@angular-eslint/schematics@19.3.0(@typescript-eslint/types@8.29.0)(@typescript-eslint/utils@8.29.0(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3))(chokidar@4.0.3)(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
-      '@angular-devkit/core': 19.2.6(chokidar@4.0.3)
+      '@angular-devkit/core': 19.2.11(chokidar@4.0.3)
       '@angular-devkit/schematics': 19.2.6(chokidar@4.0.3)
       '@angular-eslint/eslint-plugin': 19.3.0(@typescript-eslint/utils@8.29.0(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
       '@angular-eslint/eslint-plugin-template': 19.3.0(@typescript-eslint/types@8.29.0)(@typescript-eslint/utils@8.29.0(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
@@ -15636,13 +15641,16 @@ snapshots:
 
   nerf-dart@1.0.0: {}
 
-  ngx-schematic-builder@0.1.1(chokidar@4.0.3):
+  ngx-schematic-builder@0.2.0(@angular-devkit/core@19.2.6(chokidar@4.0.3))(@angular-devkit/schematics@19.2.6(chokidar@4.0.3))(@angular/cli@19.2.6(@types/node@22.14.0)(chokidar@4.0.3))(chokidar@4.0.3)(typescript@5.8.3):
     dependencies:
       '@angular-devkit/architect': 0.1902.11(chokidar@4.0.3)
-      '@angular-devkit/core': 19.2.11(chokidar@4.0.3)
+      '@angular-devkit/core': 19.2.6(chokidar@4.0.3)
+      '@angular-devkit/schematics': 19.2.6(chokidar@4.0.3)
+      '@angular/cli': 19.2.6(@types/node@22.14.0)(chokidar@4.0.3)
       cpy: 11.1.0
       execa: 9.5.3
       fs-extra: 11.3.0
+      typescript: 5.8.3
     transitivePeerDependencies:
       - chokidar
 
