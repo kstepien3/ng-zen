@@ -1,4 +1,4 @@
-$outline: var(--zen-outline, 2px solid hsl(0% 0% 60%));
+$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
 $transition-duration: 0.15s;
 $placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
 $size: var(--zen-switch-size, 16px);
@@ -43,7 +43,7 @@ $height: calc(#{$size} + #{$margin} * 2);
     width: calc(#{$size} + 2px);
   }
 
-  &:focus {
+  &:focus-visible {
     outline: $outline;
   }
 

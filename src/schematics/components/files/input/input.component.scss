@@ -6,7 +6,7 @@ $focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) ins
 $placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
 
 // Color Palette
-$outline: var(--zen-outline, 1px solid hsl(0% 0% 60%));
+$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
 $error: var(--zen-error, hsl(0% 70% 50%));
 
 input {
