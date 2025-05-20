@@ -2,9 +2,9 @@ $bg-color-hover: #333;
 $bg-color: #000;
 $color: #fff;
 $padding: 8px 24px;
-$shadow-hover: 0 0 0 3px rgb(0 123 255 / 50%);
 $shadow: 0 2px 4px rgb(0 0 0 / 10%);
 $transition-duration: 0.4s;
+$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
 
 :host {
   display: inline-block;
@@ -15,12 +15,13 @@ $transition-duration: 0.4s;
   border: none;
   padding: $padding;
   border-radius: 99999px;
-  transition: all $transition-duration ease;
+  transition-property: background-color, opacity;
+  transition-duration: $transition-duration;
+  transition-timing-function: ease;
   background-color: $bg-color;
   color: $color;
   box-shadow: $shadow;
   text-decoration: none;
-  outline: none;
   overflow: hidden;
   position: relative;
 }
@@ -31,8 +32,8 @@ $transition-duration: 0.4s;
 }
 
 /* Focus state */
-:host:focus {
-  box-shadow: $shadow-hover;
+:host:focus-visible {
+  outline: $outline;
 }
 
 /* Disabled state */
