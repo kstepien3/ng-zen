@@ -1,0 +1,52 @@
+$appearance: var(--zen-divider-appearance, hsl(0% 0% 10%));
+$type: var(--zen-divider-type, solid);
+$align-offset: var(--zen-divider-align-offset, 25%);
+$gap: var(--zen-divider-gap, 0.25rem);
+$thickness: var(--zen-divider-thickness, 1px);
+
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: $gap;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0;
+    border-color: $appearance;
+    border-style: $type;
+    border-width: #{$thickness} 0 0;
+  }
+
+  &:not(.has-content)::after {
+    content: none;
+  }
+
+  &.zen-align-start::before,
+  &.zen-align-end::after {
+    width: $align-offset;
+  }
+}
+
+:host[vertical]:not([vertical='false']) {
+  flex-direction: column;
+  width: unset;
+  height: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: unset;
+    height: 100%;
+    border-width: 0 #{$thickness} 0 0;
+  }
+
+  &.zen-align-start::before,
+  &.zen-align-end::after {
+    height: $align-offset;
+  }
+}
