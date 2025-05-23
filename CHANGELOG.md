@@ -1,3 +1,17 @@
+## 19.2.0-next.1 (2025-05-23)
+
+* chore(dependencies): update dependencies (#187) ([7028a9e](https://github.com/kstepien3/ng-zen/commit/7028a9e)), closes [#187](https://github.com/kstepien3/ng-zen/issues/187)
+* chore(dependencies): update ngx-schematic-builder to v0.2.0 (#183) ([5ea0cea](https://github.com/kstepien3/ng-zen/commit/5ea0cea)), closes [#183](https://github.com/kstepien3/ng-zen/issues/183)
+* chore(workflow): update deploy workflow for tag-based triggering (#166) ([0fea522](https://github.com/kstepien3/ng-zen/commit/0fea522)), closes [#166](https://github.com/kstepien3/ng-zen/issues/166) [#165](https://github.com/kstepien3/ng-zen/issues/165)
+* chore(workflows): disable persist-credentials in release workflow (#188) ([b784e47](https://github.com/kstepien3/ng-zen/commit/b784e47)), closes [#188](https://github.com/kstepien3/ng-zen/issues/188)
+* feat(divider): add zen-divider component (#186) ([c021773](https://github.com/kstepien3/ng-zen/commit/c021773)), closes [#186](https://github.com/kstepien3/ng-zen/issues/186)
+* style(components): update outline styles (#184) ([5737a15](https://github.com/kstepien3/ng-zen/commit/5737a15)), closes [#184](https://github.com/kstepien3/ng-zen/issues/184)
+* fix(schematics/ng-add): run other schematics after installation (#177) ([5cb1be4](https://github.com/kstepien3/ng-zen/commit/5cb1be4)), closes [#177](https://github.com/kstepien3/ng-zen/issues/177)
+* ci(eslint): fix plugins and configure linting rules (#176) ([5e93a09](https://github.com/kstepien3/ng-zen/commit/5e93a09)), closes [#176](https://github.com/kstepien3/ng-zen/issues/176)
+* build(deps-dev): bump typescript from 5.7.3 to 5.8.3 (#154) ([3ebe49f](https://github.com/kstepien3/ng-zen/commit/3ebe49f)), closes [#154](https://github.com/kstepien3/ng-zen/issues/154)
+* build(ngx-schematic-builder): migrate the custom builder (#175) ([c7d19eb](https://github.com/kstepien3/ng-zen/commit/c7d19eb)), closes [#175](https://github.com/kstepien3/ng-zen/issues/175)
+* Merge remote-tracking branch 'origin/next' into develop ([f581d01](https://github.com/kstepien3/ng-zen/commit/f581d01))
+
 ## [19.1.0](https://github.com/kstepien3/ng-zen/compare/v19.0.0...v19.1.0) (2025-04-27)
 
 ### 🚀 New Features
