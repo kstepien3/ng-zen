@@ -1,9 +1,7 @@
 # @ng-zen/cli
 
-[![Build Status (master)](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=master&label=build-master)](https://github.com/kstepien3/ng-zen/actions/workflows/ci.yml)
-[![Build Status (next)](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=next&label=build-next)](https://github.com/kstepien3/ng-zen/actions/workflows/ci.yml)
-[![NPM Version (latest)](https://img.shields.io/npm/v/@ng-zen/cli/latest?label=npm%40latest)](https://www.npmjs.com/package/@ng-zen/cli)
-[![NPM Version (next)](https://img.shields.io/npm/v/@ng-zen/cli/next?label=npm%40next)](https://www.npmjs.com/package/@ng-zen/cli)
+[![Build Status ](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=master&label=build)](https://github.com/kstepien3/ng-zen/actions/workflows/ci.yml)
+[![NPM Version ](https://img.shields.io/npm/v/@ng-zen/cli/latest?label=npm%40latest)](https://www.npmjs.com/package/@ng-zen/cli)
 [![License](https://img.shields.io/github/license/kstepien3/ng-zen)](https://github.com/kstepien3/ng-zen/blob/master/LICENSE)
 
 [![](https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white)](https://github.com/kstepien3/ng-zen)
