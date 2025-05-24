@@ -25,8 +25,8 @@
             { "type": "feat", "section": "🚀 New Features", "hidden": false },
             { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
             { "type": "perf", "section": "⚡️ Performance Improvements", "hidden": false },
-            { "type": "build", "section": "🏗️ Build Changes", "hidden": false },
-            { "type": "ci", "section": "🔄 Continuous Integration", "hidden": false },
+            { "type": "build", "section": "🏗️ Build Changes", "hidden": true },
+            { "type": "ci", "section": "🔄 Continuous Integration", "hidden": true },
             { "type": "refactor", "section": "🛠️ Code Refactor", "hidden": false },
             { "type": "test", "section": "✅ Tests", "hidden": false },
             { "type": "chore", "section": "🧹 Chore", "hidden": true },
@@ -36,7 +36,22 @@
         }
       }
     ],
-    ["@semantic-release/release-notes-generator", { "extends": "preset-from-commit-analyzer" }],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "🚀 New Features" },
+            { "type": "fix", "section": "🐛 Bug Fixes" },
+            { "type": "perf", "section": "⚡️ Performance Improvements" },
+            { "type": "refactor", "section": "🛠️ Code Refactor" },
+            { "type": "test", "section": "✅ Tests" },
+            { "type": "docs", "section": "📚 Documentation" }
+          ]
+        }
+      }
+    ],
     ["@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" }],
     [
       "@semantic-release/npm",
