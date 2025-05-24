@@ -1,9 +1,9 @@
-$bg-color-hover: #333;
-$bg-color: #000;
-$color: #fff;
-$padding: 8px 24px;
-$shadow: 0 2px 4px rgb(0 0 0 / 10%);
-$transition-duration: 0.4s;
+$bg-color-hover: var(--zen-button-bg-color-hover, hsl(0deg 0% 20%));
+$bg-color: var(--zen-button-bg-color, hsl(0deg 0% 0%));
+$color: var(--zen-button-color, hsl(0deg 0% 100%));
+$padding: var(--zen-button-padding, 0.5rem 1rem);
+$shadow: var(--zen-button-shadow, 0 2px 4px hsl(0deg 0% 0% / 10%));
+$transition-duration: var(--zen-transition-duration, 0.4s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
 
 :host {
