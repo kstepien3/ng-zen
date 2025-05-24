@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'button[zen-button], button[zen-btn], a[zen-button], a[zen-btn]',
+  selector: ':is(button, a):is([zen-button], [zen-btn])',
   template: `
     <ng-content />
   `,
