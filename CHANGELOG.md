@@ -1,3 +1,10 @@
+# [19.2.0-next.3](https://github.com/kstepien3/ng-zen/compare/v19.2.0-next.2...v19.2.0-next.3) (2025-05-24)
+
+
+### Features
+
+* **button:** update selector to support is() pseudo-class ([#195](https://github.com/kstepien3/ng-zen/issues/195)) ([e85135e](https://github.com/kstepien3/ng-zen/commit/e85135ef45c7a38b5597624254c7b0adae6e4db4))
+
 ## [19.2.0-next.2](https://github.com/kstepien3/ng-zen/compare/v19.2.0-next.1...v19.2.0-next.2) (2025-05-24)
 
 ### 🚀 New Features
