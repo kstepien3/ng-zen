@@ -12,6 +12,14 @@
       "@semantic-release/commit-analyzer",
       {
         "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "perf", "release": "patch" },
+          { "type": "docs", "scope": "README", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "scope": "no-release", "release": false }
+        ],
         "presetConfig": {
           "types": [
             { "type": "feat", "section": "🚀 New Features", "hidden": false },
@@ -28,32 +36,16 @@
         }
       }
     ],
+    ["@semantic-release/release-notes-generator", { "extends": "preset-from-commit-analyzer" }],
+    ["@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" }],
     [
-      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
       {
-        "preset": "conventionalcommits",
-        "presetConfig": {
-          "types": [
-            { "type": "feat", "section": "🚀 New Features" },
-            { "type": "fix", "section": "🐛 Bug Fixes" },
-            { "type": "perf", "section": "⚡️ Performance Improvements" },
-            { "type": "build", "section": "🏗️ Build Changes" },
-            { "type": "ci", "section": "🔄 Continuous Integration" },
-            { "type": "refactor", "section": "🛠️ Code Refactor" },
-            { "type": "test", "section": "✅ Tests" },
-            { "type": "chore", "section": "🧹 Chore" },
-            { "type": "docs", "section": "📚 Documentation" },
-            { "type": "style", "section": "🎨 Style" }
-          ]
-        }
+        "npmPublish": false,
+        "pkgRoot": "."
       }
     ],
-    [
-      "@semantic-release/changelog",
-      {
-        "changelogFile": "CHANGELOG.md"
-      }
-    ],
+    ["@semantic-release/exec", { "prepareCmd": "pnpm run build" }],
     ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/" }],
     [
       "@semantic-release/git",
