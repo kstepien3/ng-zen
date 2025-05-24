@@ -10,6 +10,7 @@ on:
 env:
   NODE_VERSION: 22
   PNPM_VERSION: 10.0.0
+  RETENTION_DAYS: 7
 
 jobs:
   release:
@@ -64,3 +65,10 @@ jobs:
           HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Upload artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-build
+          path: release-build/
+          retention-days: ${{ env.RETENTION_DAYS }}
