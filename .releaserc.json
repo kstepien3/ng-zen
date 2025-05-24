@@ -58,7 +58,7 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml", "dist/@ng-zen/cli/**"],
+        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml"],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],

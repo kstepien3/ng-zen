@@ -1,1 +1,0 @@
-{"version":3,"file":"ng-zen-generator.js","sourceRoot":"","sources":["../../../../../src/schematics/ng-add/ng-zen-generator.ts"],"names":[],"mappings":"","sourcesContent":["import { GeneratorSchemaBase } from '../../types';\n\nexport type NgZenGeneratorSchema = GeneratorSchemaBase;\n"]}
