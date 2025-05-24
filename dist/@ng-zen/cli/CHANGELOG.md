@@ -1,14 +1,3 @@
-## [19.2.0-next.2](https://github.com/kstepien3/ng-zen/compare/v19.2.0-next.1...v19.2.0-next.2) (2025-05-24)
-
-### 🚀 New Features
-
-* **button:** add css variables for styling ([#191](https://github.com/kstepien3/ng-zen/issues/191)) ([7278585](https://github.com/kstepien3/ng-zen/commit/7278585c642a01468c2ef85dc39f3e767287ccf7))
-
-### 🧹 Chore
-
-* **build:** update output directory and release configuration ([#190](https://github.com/kstepien3/ng-zen/issues/190)) ([bae868c](https://github.com/kstepien3/ng-zen/commit/bae868cf00481a685fc02ee73a34ab4b787e9e67))
-* **dependencies:** restore conventional-changelog-conventionalcommits ([#189](https://github.com/kstepien3/ng-zen/issues/189)) ([5afabcb](https://github.com/kstepien3/ng-zen/commit/5afabcb1050da49404ed89a83fee57af1872b729))
-
 ## 19.2.0-next.1 (2025-05-23)
 
 * chore(dependencies): update dependencies (#187) ([7028a9e](https://github.com/kstepien3/ng-zen/commit/7028a9e)), closes [#187](https://github.com/kstepien3/ng-zen/issues/187)

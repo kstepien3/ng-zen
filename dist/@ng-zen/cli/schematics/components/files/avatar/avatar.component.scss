@@ -1,0 +1,23 @@
+$size: var(--zen-avatar-size, 32px);
+$bg-color: var(--zen-avatar-bg-color, #d3d3d3);
+$color: var(--zen-avatar-color, #0f172a);
+$font-size: var(--zen-avatar-font-size, small);
+
+:host {
+  display: flex;
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+
+  // Content styles
+  background-color: $bg-color;
+  color: $color;
+  font-size: $font-size;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+}

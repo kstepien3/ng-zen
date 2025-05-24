@@ -1,0 +1,1 @@
+{"version":3,"file":"generator-schema-base.interface.js","sourceRoot":"","sources":["../../../../src/types/generator-schema-base.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface GeneratorSchemaBase {\n  path: string;\n  stories: boolean;\n}\n"]}

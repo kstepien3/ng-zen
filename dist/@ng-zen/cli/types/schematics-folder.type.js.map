@@ -1,0 +1,1 @@
+{"version":3,"file":"schematics-folder.type.js","sourceRoot":"","sources":["../../../../src/types/schematics-folder.type.ts"],"names":[],"mappings":"","sourcesContent":["import { ComponentType } from '../schematics/components/components-generator';\n\nexport type SchematicsFolder = ComponentType;\n"]}

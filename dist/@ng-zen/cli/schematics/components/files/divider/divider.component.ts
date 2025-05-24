@@ -1,0 +1,58 @@
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core';
+
+/**
+ * ZenDividerComponent is a reusable divider component that provides a simple way to
+ * separate content sections visually. It supports both horizontal (default) and vertical
+ * orientations and can contain optional content.
+ *
+ * The divider automatically detects if it contains content and applies appropriate styling.
+ * Content alignment can be controlled via the `align` input property.
+ *
+ * @example
+ * ```html
+ * <zen-divider/>
+ * <zen-divider>With content</zen-divider>
+ * ```
+ *
+ * ### CSS Custom Properties
+ * You can customize the component using CSS custom properties:
+ *
+ * ```css
+ * :root {
+ *  --zen-divider-appearance: red;
+ *  --zen-divider-type: dotted;
+ *  --zen-divider-align-offset: 10%;
+ * }
+ * ```
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
+ */
+@Component({
+  selector: `zen-divider, zen-divider[vertical],`,
+  template: '<ng-content/>',
+  styleUrl: './divider.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.has-content]': 'hasContent()',
+    '[class]': '"zen-align-"+align()',
+  },
+})
+export class ZenDividerComponent {
+  /**
+   * Controls the alignment of content within the divider.
+   * @default 'center'
+   */
+  readonly align = input<'start' | 'end' | 'center'>('center');
+
+  /**
+   * Computed property that determines if the divider contains any content.
+   * Used to apply appropriate styling when content is present.
+   */
+  readonly hasContent = computed(() => {
+    return this.elementRef.nativeElement.childNodes.length > 0;
+  });
+
+  private readonly elementRef = inject(ElementRef);
+}

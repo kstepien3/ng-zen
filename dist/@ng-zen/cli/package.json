@@ -1,0 +1,46 @@
+{
+  "name": "@ng-zen/cli",
+  "version": "19.2.0-next.2",
+  "description": "A CLI tool for generating customizable, modern Angular UI components using schematics.",
+  "license": "BSD-2-Clause",
+  "private": false,
+  "repository": {
+    "url": "https://github.com/kstepien3/ng-zen"
+  },
+  "bugs": {
+    "url": "https://github.com/kstepien3/ng-zen/issues"
+  },
+  "author": {
+    "name": "Konrad Stępień",
+    "email": "kord.stp@gmail.com",
+    "url": "https://www.linkedin.com/in/KonradStepien/"
+  },
+  "homepage": "https://kstepien3.github.io/ng-zen/",
+  "keywords": [
+    "angular",
+    "schematics",
+    "ui-components",
+    "angular-cli",
+    "storybook",
+    "customizable-components",
+    "avatar",
+    "button",
+    "checkbox",
+    "input",
+    "textarea"
+  ],
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "schematics": "./schematics/collection.json",
+  "packageManager": "pnpm@10.0.0",
+  "peerDependencies": {
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0"
+  },
+  "dependencies": {
+    "@angular-devkit/core": "^19.2.13",
+    "@angular-devkit/schematics": "^19.2.13",
+    "tslib": "^2.8.1"
+  }
+}

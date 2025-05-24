@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add library to the project.",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    },
+    "component": {
+      "description": "This schematic generates ui components",
+      "factory": "./components/index#componentGenerator",
+      "schema": "./components/schema.json",
+      "aliases": ["c"]
+    }
+  }
+}
