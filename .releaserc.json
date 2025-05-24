@@ -54,11 +54,11 @@
         "changelogFile": "CHANGELOG.md"
       }
     ],
-    "@semantic-release/npm",
+    ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/" }],
     [
       "@semantic-release/git",
       {
-        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml"],
+        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml", "dist/@ng-zen/cli/**"],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
