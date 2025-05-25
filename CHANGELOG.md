@@ -1,3 +1,20 @@
+## [19.2.0](https://github.com/kstepien3/ng-zen/compare/v19.1.0...v19.2.0) (2025-05-25)
+
+### 🚀 New Features
+
+* **button:** add css variables for styling ([#191](https://github.com/kstepien3/ng-zen/issues/191)) ([7278585](https://github.com/kstepien3/ng-zen/commit/7278585c642a01468c2ef85dc39f3e767287ccf7))
+* **button:** update selector to support is() pseudo-class ([#195](https://github.com/kstepien3/ng-zen/issues/195)) ([e85135e](https://github.com/kstepien3/ng-zen/commit/e85135ef45c7a38b5597624254c7b0adae6e4db4))
+* **divider:** add zen-divider component ([#186](https://github.com/kstepien3/ng-zen/issues/186)) ([c021773](https://github.com/kstepien3/ng-zen/commit/c0217732a99efd1a68d23ed5e44d8da9e5344fdb))
+
+### 🐛 Bug Fixes
+
+* **schematics/ng-add:** run other schematics after installation ([#177](https://github.com/kstepien3/ng-zen/issues/177)) ([5cb1be4](https://github.com/kstepien3/ng-zen/commit/5cb1be4ce4cbeb7e5341baf937db135c16caad18))
+
+### 📚 Documentation
+
+* **readme:** remove the "next" build npm badges ([#194](https://github.com/kstepien3/ng-zen/issues/194)) ([48740d3](https://github.com/kstepien3/ng-zen/commit/48740d3c9ff3f3619e6f56baba8b933ba31498b3))
+* **releaserc:** update release note generator config ([#196](https://github.com/kstepien3/ng-zen/issues/196)) ([ca37df3](https://github.com/kstepien3/ng-zen/commit/ca37df375bf566476ec16c4cf10121f0d59c5c70))
+
 # [19.2.0-next.3](https://github.com/kstepien3/ng-zen/compare/v19.2.0-next.2...v19.2.0-next.3) (2025-05-24)
 
 
