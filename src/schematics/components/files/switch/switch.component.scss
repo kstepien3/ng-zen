@@ -1,6 +1,6 @@
-$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
+$outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $transition-duration: 0.15s;
-$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
+$placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
 $size: var(--zen-switch-size, 16px);
 $margin: var(--zen-switch-margin, 2px);
 $width: var(--zen-switch-width, 30px);
@@ -9,7 +9,7 @@ $height: calc(#{$size} + #{$margin} * 2);
 
 :host {
   cursor: pointer;
-  background: hsl(0% 0% 80%);
+  background: hsl(0deg 0% 80%);
   border-radius: 9999px;
   width: $width;
   height: $height;
@@ -48,10 +48,10 @@ $height: calc(#{$size} + #{$margin} * 2);
   }
 
   &[data-checked='true'] {
-    background-color: hsl(0% 0% 10%);
+    background-color: hsl(0deg 0% 10%);
 
     .switch-handle {
-      color: hsl(0% 0% 10%);
+      color: hsl(0deg 0% 10%);
       right: 0;
     }
   }
