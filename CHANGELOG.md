@@ -1,3 +1,9 @@
+## [19.3.0-next.1](https://github.com/kstepien3/ng-zen/compare/v19.2.0...v19.3.0-next.1) (2025-06-10)
+
+### 🚀 New Features
+
+* **skeleton:** add component ([#205](https://github.com/kstepien3/ng-zen/issues/205)) ([fa21c9a](https://github.com/kstepien3/ng-zen/commit/fa21c9a440ce918d521c12cd9e9eec17cade60cd))
+
 ## [19.2.0](https://github.com/kstepien3/ng-zen/compare/v19.1.0...v19.2.0) (2025-05-25)
 
 ### 🚀 New Features
