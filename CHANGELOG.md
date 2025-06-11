@@ -1,3 +1,15 @@
+## [19.3.0-next.2](https://github.com/kstepien3/ng-zen/compare/v19.3.0-next.1...v19.3.0-next.2) (2025-06-11)
+
+### 🐛 Bug Fixes
+
+* **storybook/components:** format and documentation ([#211](https://github.com/kstepien3/ng-zen/issues/211)) ([a0fb6f5](https://github.com/kstepien3/ng-zen/commit/a0fb6f576e1c47509ba2aed4cd4314dace894366))
+* **styles:** improve format of hls colors ([#207](https://github.com/kstepien3/ng-zen/issues/207)) ([354d698](https://github.com/kstepien3/ng-zen/commit/354d6989507ba86397268012f6a53002c2e02297))
+
+### 📚 Documentation
+
+* **DEVELOPMENT:** add release information ([#209](https://github.com/kstepien3/ng-zen/issues/209)) ([f9aad1b](https://github.com/kstepien3/ng-zen/commit/f9aad1b8be3d7d633c41ad9cff4bf3c6b93ad0f4))
+* resolve a problem with missing documentation ([#208](https://github.com/kstepien3/ng-zen/issues/208)) ([85e7969](https://github.com/kstepien3/ng-zen/commit/85e7969c23b6b7bd2039e9cfdc336dc8da6edcc1))
+
 ## [19.3.0-next.1](https://github.com/kstepien3/ng-zen/compare/v19.2.0...v19.3.0-next.1) (2025-06-10)
 
 ### 🚀 New Features
