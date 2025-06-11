@@ -1,13 +1,13 @@
 // Component Variables
-$border: var(--zen-input-border, 1px solid hsl(0% 0% 80%));
+$border: var(--zen-input-border, 1px solid hsl(0deg 0% 80%));
 $border-radius: var(--zen-input-border-radius, 8px);
 $padding: var(--zen-input-padding, 0.5rem 1rem);
-$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsla(0% 0% 60% / 20%) inset);
-$placeholder-color: var(--zen-input-placeholder-color, hsl(0% 0% 60%));
+$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
+$placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
 
 // Color Palette
-$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
-$error: var(--zen-error, hsl(0% 70% 50%));
+$outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
+$error: var(--zen-error, hsl(0deg 70% 50%));
 
 input {
   border: $border;

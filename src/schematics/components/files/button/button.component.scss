@@ -4,7 +4,7 @@ $color: var(--zen-button-color, hsl(0deg 0% 100%));
 $padding: var(--zen-button-padding, 0.5rem 1rem);
 $shadow: var(--zen-button-shadow, 0 2px 4px hsl(0deg 0% 0% / 10%));
 $transition-duration: var(--zen-transition-duration, 0.4s);
-$outline: var(--zen-outline, 2px solid hsl(200deg 100 50 / 50%));
+$outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
   display: inline-block;

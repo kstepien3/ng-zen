@@ -8,9 +8,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  *
  * This component utilizes Angular's optimized image directives for enhanced performance.
  *
- * ### Usage
- *
- * To use the component, you can provide an image source or project content:
+ * @example
  *
  * ```html
  * <!-- If an image source is provided, it will display the image -->
@@ -22,19 +20,16 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  *
  * ### CSS Custom Properties
  *
- * You can customize the avatar using CSS custom properties:
+ * You can customize the component using CSS custom properties:
  *
  * ```css
  * :root {
- *  --zen-avatar-size: 16px;
- *  --zen-avatar-bg-color: black;
- *  --zen-avatar-color: white;
+ *  --zen-avatar-size: 2rem;
+ *  --zen-avatar-bg-color: hsl(0deg 0% 80%);
+ *  --zen-avatar-color: hsl(0deg 0% 20%);
  *  --zen-avatar-font-size: small;
  * }
  * ```
- *
- * @example
- * <zen-avatar src="https://picsum.photos/32" />
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
