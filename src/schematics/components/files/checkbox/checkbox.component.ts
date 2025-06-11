@@ -10,6 +10,21 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
  * @example
  * <zen-checkbox value="false" />
  *
+ * ### CSS Custom Properties
+ *
+ * You can customize the component using CSS custom properties:
+ *
+ * ```css
+ * :root {
+ *  --zen-checkbox-size: 16px;
+ *  --zen-checkbox-border-radius: 6px;
+ *  --zen-checkbox-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
+ *  --zen-checkbox-appearance: hsl(0deg 0% 10%);
+ *  --zen-checkbox-disabled-opacity: 0.6;
+ *  --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);
+ * }
+ * ```
+ *
  * @implements {ControlValueAccessor}
  *
  * @author Konrad Stępień

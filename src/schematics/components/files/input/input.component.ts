@@ -9,6 +9,19 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
  * @example
  * <zen-input value="string" />
  *
+ * ### CSS Custom Properties
+ * You can customize the component using CSS custom properties:
+ *
+ * ```css
+ * :root {
+ *  --zen-input-border: 1px solid hsl(0deg 0% 80%);
+ *  --zen-input-border-radius: 8px;
+ *  --zen-input-padding: 0.5rem 1rem;
+ *  --zen-input-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
+ *  --zen-input-placeholder-color: hsl(0deg 0% 60%);
+ * }
+ * ```
+ *
  * @implements {ControlValueAccessor}
  *
  * @author Konrad Stępień
