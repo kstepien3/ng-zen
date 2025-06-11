@@ -19,7 +19,7 @@ This guide details setting up a local development environment for **@ng-zen/cli*
 - [Prerequisites & Setup](#prerequisites--setup)
 - [Branching Strategy & Workflow](#branching-strategy--workflow)
 - [Commit Messages (Crucial!)](#commit-messages-crucial)
-- [Branch Synchronization (Maintainer Task)](#branch-synchronization-maintainer-task)
+- [Release Process (Maintainer Task)](#release-process-maintainer-task)
 - [Working with Storybook](#working-with-storybook)
 - [Running Tests and Linting](#running-tests-and-linting)
 - [Building the Library](#building-the-library)
@@ -58,14 +58,62 @@ Strict adherence to the **Conventional Commits** specification (https://www.conv
 
 _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itself)._
 
-## Branch Synchronization (Maintainer Task)
+## Release Process (Maintainer Task)
 
-Maintain consistency across `master`, `next`, and `develop` by merging release commits and hotfixes. **Performed by maintainers.**
+### Overview
+
+This project uses Pull Requests (PRs) for controlled release management through branch progression:  
+`develop` → `next` (pre-release) → `master` (stable release)
+
+### Release Steps
+
+1. **Create Pre-release PR (`develop` → `next`)**
+
+- **Create PR**: [develop → next](https://github.com/kstepien3/ng-zen/compare/next...develop)
+- **Title**: `release: merge develop into next`
+- **Merge Strategy**: Regular merge commit (preserves commit history)
+- **Automation**:
+  - Triggers automated pre-release via `semantic-release`
+  - Publishes to NPM under `next` dist-tag
+
+2. **Create Stable Release PR (`next` → `master`)**
+
+- **Create PR**: [next → master](https://github.com/kstepien3/ng-zen/compare/master...next)
+- **Title**: `release: promote next to stable`
+- **Merge Strategy**: Regular merge commit
+- **Automation**:
+  - Triggers automated stable release via `semantic-release`
+  - Publishes to NPM under `latest` dist-tag
+
+### Critical Requirements
+
+- ✅ **Merge Commits Only**  
+  Required to preserve conventional commit history that `semantic-release` analyzes
+- ✅ **Valid Conventional Commits**  
+  All commits must follow Angular Conventional Commit standards
+- ✅ **CI Passes**  
+  All automated checks must complete successfully before merging
+
+### Post-Merge Automation
+
+`semantic-release` automatically handles:
+
+1. Version determination from commit history
+2. CHANGELOG generation/updates
+3. NPM package publishing
+4. GitHub release creation
+5. Git tagging
+
+### Hotfix Procedure
+
+Create PR directly to master and then follow Branch Synchronization
+
+### Branch Synchronization
 
 **General Update Step:** Fetch latest remote state:
 
 ```bash
-git fetch origin --prune
+git fetch origin --prune --tags
 ```
 
 ### 1. Sync `next` with `master` (After Stable Release or Hotfix)
