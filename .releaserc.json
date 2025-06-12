@@ -30,7 +30,7 @@
             { "type": "refactor", "section": "🛠️ Code Refactor", "hidden": false },
             { "type": "test", "section": "✅ Tests", "hidden": false },
             { "type": "chore", "section": "🧹 Chore", "hidden": true },
-            { "type": "docs", "section": "📚 Documentation", "hidden": false },
+            { "type": "docs", "section": "📚 Documentation", "hidden": true },
             { "type": "style", "section": "🎨 Style", "hidden": true }
           ]
         }
@@ -46,8 +46,7 @@
             { "type": "fix", "section": "🐛 Bug Fixes" },
             { "type": "perf", "section": "⚡️ Performance Improvements" },
             { "type": "refactor", "section": "🛠️ Code Refactor" },
-            { "type": "test", "section": "✅ Tests" },
-            { "type": "docs", "section": "📚 Documentation" }
+            { "type": "test", "section": "✅ Tests" }
           ]
         }
       }
