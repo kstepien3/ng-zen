@@ -19,9 +19,11 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input
  *
  * ```css
  * :root {
- *  --zen-divider-appearance: red;
- *  --zen-divider-type: dotted;
- *  --zen-divider-align-offset: 10%;
+ *  --zen-divider-appearance: hsl(0deg 0% 10%);
+ *  --zen-divider-type: solid;
+ *  --zen-divider-align-offset: 25%;
+ *  --zen-divider-gap: 0.25rem;
+ *  --zen-divider-thickness: 1px;
  * }
  * ```
  *

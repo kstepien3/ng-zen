@@ -1,6 +1,6 @@
-$size: var(--zen-avatar-size, 32px);
-$bg-color: var(--zen-avatar-bg-color, #d3d3d3);
-$color: var(--zen-avatar-color, #0f172a);
+$size: var(--zen-avatar-size, 2rem);
+$bg-color: var(--zen-avatar-bg-color, hsl(0deg 0% 80%));
+$color: var(--zen-avatar-color, hsl(0deg 0% 20%));
 $font-size: var(--zen-avatar-font-size, small);
 
 :host {

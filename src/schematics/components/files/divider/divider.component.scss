@@ -1,4 +1,4 @@
-$appearance: var(--zen-divider-appearance, hsl(0% 0% 10%));
+$appearance: var(--zen-divider-appearance, hsl(0deg 0% 60%));
 $type: var(--zen-divider-type, solid);
 $align-offset: var(--zen-divider-align-offset, 25%);
 $gap: var(--zen-divider-gap, 0.25rem);
@@ -9,6 +9,7 @@ $thickness: var(--zen-divider-thickness, 1px);
   display: flex;
   align-items: center;
   gap: $gap;
+  color: $appearance;
 
   &::before,
   &::after {
@@ -21,8 +22,12 @@ $thickness: var(--zen-divider-thickness, 1px);
     border-width: #{$thickness} 0 0;
   }
 
-  &:not(.has-content)::after {
-    content: none;
+  &:not(.has-content) {
+    gap: 0;
+
+    &::after {
+      content: none;
+    }
   }
 
   &.zen-align-start::before,

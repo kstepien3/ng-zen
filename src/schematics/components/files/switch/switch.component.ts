@@ -1,6 +1,36 @@
 import { ChangeDetectionStrategy, Component, forwardRef, model } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/**
+ * ZenInputComponent is a reusable text input component designed to provide
+ * a consistent and customizable input style across the application.
+ * It supports Angular forms integration and provides two-way data binding.
+ *
+ * @example
+ *
+ * ```html
+ * <zen-switch [disabled]="false" [value]="true" />
+ *```
+ *
+ * ### CSS Custom Properties
+ * You can customize the component using CSS custom properties:
+ *
+ * ```css
+ * :root {
+ *  --zen-input-border: 1px solid hsl(0deg 0% 80%);
+ *  --zen-input-border-radius: 8px;
+ *  --zen-input-padding: 0.5rem 1rem;
+ *  --zen-input-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
+ *  --zen-input-placeholder-color: hsl(0deg 0% 60%);
+ * }
+ * ```
+ *
+ * @implements {ControlValueAccessor}
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
+ */
 @Component({
   selector: 'zen-switch',
   template: `
