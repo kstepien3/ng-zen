@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": "./",
     "outDir": "./dist/@ng-zen/cli/",
     "strict": true,
     "noImplicitOverride": true,
