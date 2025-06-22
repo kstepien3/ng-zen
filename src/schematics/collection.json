@@ -11,6 +11,11 @@
       "factory": "./components/index#componentGenerator",
       "schema": "./components/schema.json",
       "aliases": ["c"]
+    },
+    "dependency-manager": {
+      "description": "Manage dependencies for selected elements",
+      "factory": "./dependency-manager/index#dependencyManager",
+      "schema": "./dependency-manager/schema.json"
     }
   }
 }
