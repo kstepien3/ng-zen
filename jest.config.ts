@@ -6,6 +6,7 @@
 import type { Config } from 'jest';
 
 export default {
+  rootDir: './',
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
@@ -17,4 +18,6 @@ export default {
   },
   preset: 'jest-preset-angular',
   testEnvironment: 'jsdom',
+  moduleDirectories: ['node_modules', '<rootDir>'],
+  testPathIgnorePatterns: ['<rootDir>/dist/'],
 } satisfies Config;
