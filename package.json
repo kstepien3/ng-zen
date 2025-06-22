@@ -57,7 +57,6 @@
   "dependencies": {
     "@angular-devkit/core": "^19.2.13",
     "@angular-devkit/schematics": "^19.2.13",
-    "inquirer": "^12.6.3",
     "tslib": "^2.8.1"
   },
   "devDependencies": {

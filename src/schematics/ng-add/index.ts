@@ -7,6 +7,6 @@ export function ngAdd(options: NgZenGeneratorSchema): Rule {
     _context.logger.info('Adding library to the project');
 
     // Run other schematics from ng-add
-    return chain([schematic('component', options), schematic('dependency-manager', {})]);
+    return chain([schematic('component', options)]);
   };
 }
