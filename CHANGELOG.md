@@ -1,3 +1,10 @@
+## [19.4.0-next.1](https://github.com/kstepien3/ng-zen/compare/v19.3.0...v19.4.0-next.1) (2025-06-22)
+
+### 🚀 New Features
+
+* **dependency-manager:** add prompt for necessary dependencies ([#221](https://github.com/kstepien3/ng-zen/issues/221)) ([4fd4984](https://github.com/kstepien3/ng-zen/commit/4fd4984cfc52f96b5f915bbc4550185125792c50))
+* **icon:** add component ([#215](https://github.com/kstepien3/ng-zen/issues/215)) ([61d93ad](https://github.com/kstepien3/ng-zen/commit/61d93ad67022f465e77e71c4dcf465aaf5ab0648))
+
 ## [19.3.0](https://github.com/kstepien3/ng-zen/compare/v19.2.0...v19.3.0) (2025-06-12)
 
 ### 🚀 New Features

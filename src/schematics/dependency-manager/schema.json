@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "NgZenDependencyManager",
+  "title": "NgZen Dependency Manager",
+  "properties": {
+    "installation": {
+      "type": "boolean",
+      "x-prompt": "Some elements require additional packages. Would you like to install them?",
+      "description": "Determines whether the required additional npm packages for the selected elements should be installed automatically."
+    }
+  }
+}
