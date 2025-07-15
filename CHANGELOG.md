@@ -1,3 +1,13 @@
+## [20.0.0-next.1](https://github.com/kstepien3/ng-zen/compare/v19.4.0...v20.0.0-next.1) (2025-07-15)
+
+### ⚠ BREAKING CHANGES
+
+* **angular:** upgrade to v20 (#241)
+
+### 🏗️ Build Changes
+
+* **angular:** upgrade to v20 ([#241](https://github.com/kstepien3/ng-zen/issues/241)) ([a97126c](https://github.com/kstepien3/ng-zen/commit/a97126cbe780cb6fca9fe6c7944aa70cb86b5273))
+
 ## [19.4.0](https://github.com/kstepien3/ng-zen/compare/v19.3.0...v19.4.0) (2025-07-05)
 
 ### 🚀 New Features
