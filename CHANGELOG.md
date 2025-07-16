@@ -1,3 +1,9 @@
+## [20.0.0-next.2](https://github.com/kstepien3/ng-zen/compare/v20.0.0-next.1...v20.0.0-next.2) (2025-07-16)
+
+### 🛠️ Code Refactor
+
+* remove suffix from files for Angular v20 compatibility ([#243](https://github.com/kstepien3/ng-zen/issues/243)) ([d26e2f2](https://github.com/kstepien3/ng-zen/commit/d26e2f2faeb052b8f984f82a59e7d95248b2964b))
+
 ## [20.0.0-next.1](https://github.com/kstepien3/ng-zen/compare/v19.4.0...v20.0.0-next.1) (2025-07-15)
 
 ### ⚠ BREAKING CHANGES
