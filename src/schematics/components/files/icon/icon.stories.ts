@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenIconComponent } from './icon.component';
+import { ZenIcon } from './icon';
 
-type Options = ZenIconComponent;
+type Options = ZenIcon;
 
 export default {
   title: 'Components/Icon',
-  component: ZenIconComponent,
+  component: ZenIcon,
   tags: ['autodocs'],
 } satisfies Meta<Options>;
 

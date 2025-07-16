@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenInputComponent } from './input.component';
+import { ZenSwitch } from './switch';
 
-describe('InputComponent', () => {
-  let component: ZenInputComponent;
-  let fixture: ComponentFixture<ZenInputComponent>;
+describe('ZenSwitch', () => {
+  let component: ZenSwitch;
+  let fixture: ComponentFixture<ZenSwitch>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenInputComponent],
+      imports: [ZenSwitch],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenInputComponent);
+    fixture = TestBed.createComponent(ZenSwitch);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

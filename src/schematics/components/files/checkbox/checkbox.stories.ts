@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenCheckboxComponent } from './checkbox.component';
+import { ZenCheckbox } from './checkbox';
 
 export default {
   title: 'Components/Checkbox',
-  component: ZenCheckboxComponent,
+  component: ZenCheckbox,
   tags: ['autodocs'],
   argTypes: {
     value: { control: 'boolean' },
@@ -18,9 +18,9 @@ export default {
     required: false,
     id: '',
   },
-} satisfies Meta<ZenCheckboxComponent>;
+} satisfies Meta<ZenCheckbox>;
 
-type Story = StoryObj<ZenCheckboxComponent>;
+type Story = StoryObj<ZenCheckbox>;
 
 export const Default: Story = {
   render: args => ({
