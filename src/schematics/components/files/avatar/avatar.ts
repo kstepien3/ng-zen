@@ -40,15 +40,15 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   imports: [NgOptimizedImage],
   template: `
     @if (src()) {
-      <img [alt]="alt()" [ngSrc]="src()" fill onerror="console.log('test')" />
+      <img [alt]="alt()" [ngSrc]="src()" fill />
     } @else {
       <ng-content />
     }
   `,
-  styleUrl: './avatar.component.scss',
+  styleUrl: './avatar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenAvatarComponent {
+export class ZenAvatar {
   /**
    * Name of the source image. Image name will be processed by the image loader,
    * and the final URL will be applied as the src property of the image.

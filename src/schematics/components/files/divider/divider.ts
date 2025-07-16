@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core';
 
 /**
- * ZenDividerComponent is a reusable divider component that provides a simple way to
+ * ZenDivider is a reusable divider component that provides a simple way to
  * separate content sections visually. It supports both horizontal (default) and vertical
  * orientations and can contain optional content.
  *
@@ -34,14 +34,14 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input
 @Component({
   selector: `zen-divider, zen-divider[vertical],`,
   template: '<ng-content/>',
-  styleUrl: './divider.component.scss',
+  styleUrl: './divider.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.has-content]': 'hasContent()',
     '[class]': '"zen-align-"+align()',
   },
 })
-export class ZenDividerComponent {
+export class ZenDivider {
   /**
    * Controls the alignment of content within the divider.
    * @default 'center'

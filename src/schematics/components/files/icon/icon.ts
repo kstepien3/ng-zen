@@ -27,7 +27,7 @@ type Icon = keyof typeof icons;
   imports: [HugeiconsIconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenIconComponent {
+export class ZenIcon {
   /** Icon file names from HugeIcons */
   readonly icon = input.required({ transform: (icon: Icon) => icons[icon] });
   readonly size = input<number>(24);

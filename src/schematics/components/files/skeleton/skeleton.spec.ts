@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenCheckboxComponent } from './checkbox.component';
+import { ZenSkeleton } from './skeleton';
 
-describe('ZenCheckboxComponent', () => {
-  let component: ZenCheckboxComponent;
-  let fixture: ComponentFixture<ZenCheckboxComponent>;
+describe('ZenSkeleton', () => {
+  let component: ZenSkeleton;
+  let fixture: ComponentFixture<ZenSkeleton>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenCheckboxComponent],
+      imports: [ZenSkeleton],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenCheckboxComponent);
+    fixture = TestBed.createComponent(ZenSkeleton);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

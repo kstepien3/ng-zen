@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
- * ZenCheckboxComponent is a reusable checkbox component designed to provide
+ * ZenCheckbox is a reusable checkbox component designed to provide
  * a consistent and customizable checkbox style across the application.
  * It supports Angular forms integration and provides two-way data binding
  * for boolean values.
@@ -51,13 +51,13 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
     }
     <!-- @else { ✕ } -->
   `,
-  styleUrls: ['./checkbox.component.scss'],
+  styleUrls: ['./checkbox.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ZenCheckboxComponent),
+      useExisting: forwardRef(() => ZenCheckbox),
       multi: true,
     },
   ],
@@ -65,7 +65,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
     '(blur)': 'onTouched()',
   },
 })
-export class ZenCheckboxComponent implements ControlValueAccessor {
+export class ZenCheckbox implements ControlValueAccessor {
   /** Holds the current checkbox value. */
   readonly value = model(false);
   /** Determines if the checkbox is disabled. */

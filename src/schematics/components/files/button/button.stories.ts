@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenButtonComponent } from './button.component';
+import { ZenButton } from './button';
 
 export default {
   title: 'Components/Button',
-  component: ZenButtonComponent,
+  component: ZenButton,
   tags: ['autodocs'],
   render: args => ({ props: { ...args } }),
-} satisfies Meta<ZenButtonComponent>;
+} satisfies Meta<ZenButton>;
 
-type Story = StoryObj<ZenButtonComponent>;
+type Story = StoryObj<ZenButton>;
 
 export const Default: Story = {
   render: () => ({
