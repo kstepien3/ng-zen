@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenSkeletonComponent } from './skeleton.component';
+import { ZenSkeleton } from './skeleton';
 
 interface StoryParams {
   rounded: boolean;
@@ -8,11 +8,11 @@ interface StoryParams {
   width: number;
 }
 
-type StoryType = ZenSkeletonComponent & StoryParams;
+type StoryType = ZenSkeleton & StoryParams;
 
 export default {
   title: 'Components/Skeleton',
-  component: ZenSkeletonComponent,
+  component: ZenSkeleton,
   tags: ['autodocs'],
   argTypes: {
     rounded: { control: { type: 'boolean' } },

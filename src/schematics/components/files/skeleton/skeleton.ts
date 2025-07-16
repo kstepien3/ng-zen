@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
- * ZenInputComponent loader component that displays loading states.
+ * ZenInput loader component that displays loading states.
  *
  * @example
  *
@@ -30,7 +30,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'zen-skeleton, zen-skeleton[rounded]',
   template: ``,
-  styleUrl: './skeleton.component.scss',
+  styleUrl: './skeleton.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenSkeletonComponent {}
+export class ZenSkeleton {}

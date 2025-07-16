@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenTextareaComponent } from './textarea.component';
+import { ZenTextarea } from './textarea';
 
 interface StoryParams {
   value: string;
@@ -12,7 +12,7 @@ interface StoryParams {
 
 export default {
   title: 'Components/Textarea',
-  component: ZenTextareaComponent,
+  component: ZenTextarea,
   tags: ['autodocs'],
   args: {
     value: '',
@@ -28,9 +28,9 @@ export default {
     required: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
-} satisfies Meta<ZenTextareaComponent & StoryParams>;
+} satisfies Meta<ZenTextarea & StoryParams>;
 
-type Story = StoryObj<ZenTextareaComponent & StoryParams>;
+type Story = StoryObj<ZenTextarea & StoryParams>;
 
 export const Default: Story = {
   render: args => ({

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenDividerComponent } from './divider.component';
+import { ZenDivider } from './divider';
 
 interface StoryParams {
   content: string;
@@ -9,7 +9,7 @@ interface StoryParams {
 
 export default {
   title: 'Components/Divider',
-  component: ZenDividerComponent,
+  component: ZenDivider,
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
@@ -20,9 +20,9 @@ export default {
     align: { control: 'select', options: ['start', 'center', 'end'] },
   },
   args: { content: '', vertical: false, align: 'center' },
-} satisfies Meta<ZenDividerComponent & StoryParams>;
+} satisfies Meta<ZenDivider & StoryParams>;
 
-type Story = StoryObj<ZenDividerComponent & StoryParams>;
+type Story = StoryObj<ZenDivider & StoryParams>;
 
 export const Default: Story = {
   render: args => ({

@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenAvatarComponent } from './avatar.component';
+import { ZenAvatar } from './avatar';
 
 export default {
   title: 'Components/Avatar',
-  component: ZenAvatarComponent,
+  component: ZenAvatar,
   tags: ['autodocs'],
   render: args => ({ props: { ...args } }),
-} satisfies Meta<ZenAvatarComponent>;
+} satisfies Meta<ZenAvatar>;
 
-type Story = StoryObj<ZenAvatarComponent>;
+type Story = StoryObj<ZenAvatar>;
 
 export const Image: Story = {
   args: {

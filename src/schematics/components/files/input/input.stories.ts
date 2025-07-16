@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenInputComponent } from './input.component';
+import { ZenInput } from './input';
 
 export default {
   title: 'Components/Input',
-  component: ZenInputComponent,
+  component: ZenInput,
   tags: ['autodocs'],
   argTypes: {
     value: { control: 'text' },
@@ -20,9 +20,9 @@ export default {
     required: false,
     id: '',
   },
-} satisfies Meta<ZenInputComponent>;
+} satisfies Meta<ZenInput>;
 
-type Story = StoryObj<ZenInputComponent>;
+type Story = StoryObj<ZenInput>;
 
 export const Default: Story = {
   render: args => ({
