@@ -1,3 +1,9 @@
+## [20.0.0-next.3](https://github.com/kstepien3/ng-zen/compare/v20.0.0-next.2...v20.0.0-next.3) (2025-07-21)
+
+### 🚀 New Features
+
+* **icon:** remove @hugeicons/angular package & improvements ([#248](https://github.com/kstepien3/ng-zen/issues/248)) ([cceabb0](https://github.com/kstepien3/ng-zen/commit/cceabb036f092170da66724d29ffca8ccd702983))
+
 ## [20.0.0-next.2](https://github.com/kstepien3/ng-zen/compare/v20.0.0-next.1...v20.0.0-next.2) (2025-07-16)
 
 ### 🛠️ Code Refactor
