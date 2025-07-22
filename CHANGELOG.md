@@ -1,3 +1,21 @@
+## [20.0.0](https://github.com/kstepien3/ng-zen/compare/v19.4.0...v20.0.0) (2025-07-22)
+
+### ⚠ BREAKING CHANGES
+
+* **angular:** upgrade to v20 (#241)
+
+### 🚀 New Features
+
+* **icon:** remove @hugeicons/angular package & improvements ([#248](https://github.com/kstepien3/ng-zen/issues/248)) ([cceabb0](https://github.com/kstepien3/ng-zen/commit/cceabb036f092170da66724d29ffca8ccd702983))
+
+### 🛠️ Code Refactor
+
+* remove suffix from files for Angular v20 compatibility ([#243](https://github.com/kstepien3/ng-zen/issues/243)) ([d26e2f2](https://github.com/kstepien3/ng-zen/commit/d26e2f2faeb052b8f984f82a59e7d95248b2964b))
+
+### 🏗️ Build Changes
+
+* **angular:** upgrade to v20 ([#241](https://github.com/kstepien3/ng-zen/issues/241)) ([a97126c](https://github.com/kstepien3/ng-zen/commit/a97126cbe780cb6fca9fe6c7944aa70cb86b5273))
+
 ## [20.0.0-next.3](https://github.com/kstepien3/ng-zen/compare/v20.0.0-next.2...v20.0.0-next.3) (2025-07-21)
 
 ### 🚀 New Features
