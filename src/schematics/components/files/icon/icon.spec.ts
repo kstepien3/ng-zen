@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenSwitchComponent } from './switch.component';
+import { ZenIcon } from './icon';
 
-describe('ZenSwitchComponent', () => {
-  let component: ZenSwitchComponent;
-  let fixture: ComponentFixture<ZenSwitchComponent>;
+describe('ZenIcon', () => {
+  let component: ZenIcon;
+  let fixture: ComponentFixture<ZenIcon>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenSwitchComponent],
+      imports: [ZenIcon],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenSwitchComponent);
+    fixture = TestBed.createComponent(ZenIcon);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('icon', 'Tree02Icon');
     fixture.detectChanges();
   });
 

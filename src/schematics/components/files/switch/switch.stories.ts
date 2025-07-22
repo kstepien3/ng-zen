@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenSwitchComponent } from './switch.component';
+import { ZenSwitch } from './switch';
 
 export default {
   title: 'Components/Switch',
-  component: ZenSwitchComponent,
+  component: ZenSwitch,
   tags: ['autodocs'],
   argTypes: {
     value: { control: 'boolean' },
@@ -14,9 +14,9 @@ export default {
     value: false,
     disabled: false,
   },
-} satisfies Meta<ZenSwitchComponent>;
+} satisfies Meta<ZenSwitch>;
 
-type Story = StoryObj<ZenSwitchComponent>;
+type Story = StoryObj<ZenSwitch>;
 
 export const Default: Story = {
   render: args => ({

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenAvatarComponent } from './avatar.component';
+import { ZenAvatar } from './avatar';
 
-describe('ZenAvatarComponent', () => {
-  let component: ZenAvatarComponent;
-  let fixture: ComponentFixture<ZenAvatarComponent>;
+describe('ZenAvatar', () => {
+  let component: ZenAvatar;
+  let fixture: ComponentFixture<ZenAvatar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenAvatarComponent],
+      imports: [ZenAvatar],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenAvatarComponent);
+    fixture = TestBed.createComponent(ZenAvatar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

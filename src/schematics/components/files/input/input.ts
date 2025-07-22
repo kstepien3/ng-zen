@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
- * ZenInputComponent is a reusable text input component designed to provide
+ * ZenInput is a reusable text input component designed to provide
  * a consistent and customizable input style across the application.
  * It supports Angular forms integration and provides two-way data binding.
  *
@@ -43,18 +43,18 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
       (ngModelChange)="onInputChange($event)"
     />
   `,
-  styleUrls: ['./input.component.scss'],
+  styleUrls: ['./input.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ZenInputComponent),
+      useExisting: forwardRef(() => ZenInput),
       multi: true,
     },
   ],
   imports: [FormsModule],
 })
-export class ZenInputComponent implements ControlValueAccessor {
+export class ZenInput implements ControlValueAccessor {
   /** Holds the current input value. */
   readonly value = model('');
   /** Determines if the input is disabled. */

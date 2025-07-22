@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
- * ZenButtonComponent is a reusable button component designed to provide
+ * ZenButton is a reusable button component designed to provide
  * a consistent and customizable button style across the application.
  * It can be used with both `<button>` and `<a>` HTML elements by applying
  * the `zen-button` attribute.
@@ -33,7 +33,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <ng-content />
   `,
-  styleUrl: './button.component.scss',
+  styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenButtonComponent {}
+export class ZenButton {}

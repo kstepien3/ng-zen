@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenTextareaComponent } from './textarea.component';
+import { ZenTextarea } from './textarea';
 
 describe('ZenTextareaComponent', () => {
-  let component: ZenTextareaComponent;
-  let fixture: ComponentFixture<ZenTextareaComponent>;
+  let component: ZenTextarea;
+  let fixture: ComponentFixture<ZenTextarea>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenTextareaComponent],
+      imports: [ZenTextarea],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenTextareaComponent);
+    fixture = TestBed.createComponent(ZenTextarea);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

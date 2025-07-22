@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, model } from '@angular/
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
- * ZenInputComponent is a reusable text input component designed to provide
+ * ZenInput is a reusable text input component designed to provide
  * a consistent and customizable input style across the application.
  * It supports Angular forms integration and provides two-way data binding.
  *
@@ -39,12 +39,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       <!-- @if (!value()) { ─ } -->
     </span>
   `,
-  styleUrl: './switch.component.scss',
+  styleUrl: './switch.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ZenSwitchComponent),
+      useExisting: forwardRef(() => ZenSwitch),
       multi: true,
     },
   ],
@@ -57,7 +57,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     '(keydown)': 'onKeyDown($event)',
   },
 })
-export class ZenSwitchComponent implements ControlValueAccessor {
+export class ZenSwitch implements ControlValueAccessor {
   /** Holds the current checkbox value. */
   readonly value = model(false);
   /** Determines if the checkbox is disabled. */

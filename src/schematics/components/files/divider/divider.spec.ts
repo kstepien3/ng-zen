@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZenDividerComponent } from './divider.component';
+import { ZenDivider } from './divider';
 
-describe('DividerComponent', () => {
-  let component: ZenDividerComponent;
-  let fixture: ComponentFixture<ZenDividerComponent>;
+describe('ZenDivider', () => {
+  let component: ZenDivider;
+  let fixture: ComponentFixture<ZenDivider>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenDividerComponent],
+      imports: [ZenDivider],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenDividerComponent);
+    fixture = TestBed.createComponent(ZenDivider);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

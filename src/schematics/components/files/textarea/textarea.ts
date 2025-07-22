@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
- * ZenTextareaComponent is a reusable textarea component designed to provide
+ * ZenTextarea is a reusable textarea component designed to provide
  * a consistent and customizable textarea style across the application.
  * It supports Angular forms integration and provides two-way data binding.
  *
@@ -32,7 +32,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <ng-content />
   `,
-  styleUrls: ['./textarea.component.scss'],
+  styleUrls: ['./textarea.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenTextareaComponent {}
+export class ZenTextarea {}

@@ -25,7 +25,7 @@
             { "type": "feat", "section": "🚀 New Features", "hidden": false },
             { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
             { "type": "perf", "section": "⚡️ Performance Improvements", "hidden": false },
-            { "type": "build", "section": "🏗️ Build Changes", "hidden": true },
+            { "type": "build", "section": "🏗️ Build Changes", "hidden": false },
             { "type": "ci", "section": "🔄 Continuous Integration", "hidden": true },
             { "type": "refactor", "section": "🛠️ Code Refactor", "hidden": false },
             { "type": "test", "section": "✅ Tests", "hidden": false },
@@ -46,6 +46,7 @@
             { "type": "fix", "section": "🐛 Bug Fixes" },
             { "type": "perf", "section": "⚡️ Performance Improvements" },
             { "type": "refactor", "section": "🛠️ Code Refactor" },
+            { "type": "build", "section": "🏗️ Build Changes" },
             { "type": "test", "section": "✅ Tests" }
           ]
         }
