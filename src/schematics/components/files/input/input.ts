@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ControlValueAccessorProvider, ZenControlValueAccessor } from '@zen/abstract/control-value-accessor';
 
 /**
  * ZenInput is a reusable text input component designed to provide
@@ -33,69 +34,20 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
   standalone: true,
   template: `
     <input
-      [attr.id]="id()"
       [attr.placeholder]="placeholder()"
       [attr.required]="required()"
       [disabled]="disabled()"
       [ngModel]="value()"
       [value]="value()"
       (blur)="onTouched()"
-      (ngModelChange)="onInputChange($event)"
+      (ngModelChange)="onInput($event)"
     />
   `,
   styleUrls: ['./input.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ZenInput),
-      multi: true,
-    },
-  ],
+  providers: [ControlValueAccessorProvider(ZenInput)],
   imports: [FormsModule],
 })
-export class ZenInput implements ControlValueAccessor {
-  /** Holds the current input value. */
+export class ZenInput extends ZenControlValueAccessor<string> {
   readonly value = model('');
-  /** Determines if the input is disabled. */
-  readonly disabled = model(false);
-  /** Determines if the input is required.*/
-  readonly required = input(false, { transform: booleanAttribute });
-  /** Sets the HTML id attribute for the input element.*/
-  readonly id = input<string>();
-  /** Provides a hint or example text that will be displayed */
-  readonly placeholder = input<string>();
-
-  /** @ignore */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: string) => void = () => {};
-  /** @ignore */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched: () => void = () => {};
-
-  /** @ignore */
-  writeValue(value: string): void {
-    this.value.set(value);
-  }
-  /** @ignore */
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-  /** @ignore */
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  /** @ignore */
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
-
-  /** Handles input change event */
-  onInputChange(value: string): void {
-    if (this.disabled()) return;
-
-    this.value.set(value);
-    this.onChange(value);
-  }
 }
