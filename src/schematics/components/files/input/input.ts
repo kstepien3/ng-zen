@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ControlValueAccessorProvider, ZenControlValueAccessor } from '@zen/abstract/control-value-accessor';
+
+import { ZenFormControl, ZenFormControlProvider } from '../form-control/form-control';
 
 /**
  * ZenInput is a reusable text input component designed to provide
@@ -23,7 +24,7 @@ import { ControlValueAccessorProvider, ZenControlValueAccessor } from '@zen/abst
  * }
  * ```
  *
- * @implements {ControlValueAccessor}
+ * @implements {ZenFormControl<string>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
@@ -45,9 +46,9 @@ import { ControlValueAccessorProvider, ZenControlValueAccessor } from '@zen/abst
   `,
   styleUrls: ['./input.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ControlValueAccessorProvider(ZenInput)],
+  providers: [ZenFormControlProvider(ZenInput)],
   imports: [FormsModule],
 })
-export class ZenInput extends ZenControlValueAccessor<string> {
+export class ZenInput extends ZenFormControl<string> {
   readonly value = model('');
 }
