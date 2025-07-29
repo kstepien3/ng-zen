@@ -17,11 +17,7 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
-    "paths": {
-      "ng-zen/components/*": ["./src/schematics/components/files/*"],
-      "ng-zen/directives/*": ["./src/schematics/directives/files/*"]
-    }
+    "module": "ES2022"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

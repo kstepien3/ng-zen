@@ -5,6 +5,7 @@ export type ComponentType =
   | 'button'
   | 'checkbox'
   | 'divider'
+  | 'form-control'
   | 'icon'
   | 'input'
   | 'skeleton'
