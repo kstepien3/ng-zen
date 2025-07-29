@@ -27,7 +27,7 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  * }
  * ```
  *
- * @implements {ZenFormControl}
+ * @implements {ZenFormControl<boolean>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}

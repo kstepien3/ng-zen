@@ -27,6 +27,8 @@ export const ZenFormControlProvider = <T extends ZenFormControl<any>>(component:
  * }
  * ```
  *
+ * @implements {ControlValueAccessor}
+ *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
