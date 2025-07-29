@@ -26,6 +26,10 @@ export const ZenFormControlProvider = <T extends ZenFormControl<any>>(component:
  *   readonly value = model<string>('')
  * }
  * ```
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Directive({})
 export abstract class ZenFormControl<Value> implements ControlValueAccessor {
