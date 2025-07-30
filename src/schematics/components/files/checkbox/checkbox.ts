@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, model, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ZenFormControl, ZenFormControlProvider } from '../form-control';
@@ -10,7 +10,9 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  * for boolean values.
  *
  * @example
- * <zen-checkbox value="false" />
+ * <zen-checkbox [value]="true" /> Checked
+ * <zen-checkbox [value]="false" /> Unchecked
+ * <zen-checkbox [value]="null" /> Indeterminate
  *
  * ### CSS Custom Properties
  *
@@ -60,7 +62,20 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
     '(blur)': 'onTouched()',
   },
 })
-export class ZenCheckbox extends ZenFormControl<boolean> {
-  /** Holds the current checkbox value. */
-  readonly value = model(false);
+export class ZenCheckbox extends ZenFormControl<boolean | null> {
+  /**
+   * Holds the current checkbox value.
+   * Set value to `null` to mark the checkbox as indeterminate
+   */
+  readonly value = model<boolean | null>(false);
+  /** @ignore */
+  private readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
+
+  constructor() {
+    super();
+
+    effect(() => {
+      if (this.value() === null) this.inputElement().nativeElement.indeterminate = true;
+    });
+  }
 }

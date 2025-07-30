@@ -7,7 +7,10 @@ export default {
   component: ZenCheckbox,
   tags: ['autodocs'],
   argTypes: {
-    value: { control: 'boolean' },
+    value: {
+      control: 'radio',
+      options: [true, false, null],
+    },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
   },
