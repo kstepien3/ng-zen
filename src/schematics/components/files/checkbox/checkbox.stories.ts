@@ -7,16 +7,17 @@ export default {
   component: ZenCheckbox,
   tags: ['autodocs'],
   argTypes: {
-    value: { control: 'boolean' },
+    value: {
+      control: 'radio',
+      options: [true, false, null],
+    },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    id: { control: 'text' },
   },
   args: {
     value: false,
     disabled: false,
     required: false,
-    id: '',
   },
 } satisfies Meta<ZenCheckbox>;
 
@@ -29,7 +30,6 @@ export const Default: Story = {
       <zen-checkbox
         [disabled]="${args.disabled}"
         [value]="${args.value}"
-        ${args.id ? 'id="' + args.id + '"' : ''}
         ${args.required ? 'required' : ''}
       />`,
   }),
