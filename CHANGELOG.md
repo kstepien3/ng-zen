@@ -1,3 +1,10 @@
+## [20.1.0](https://github.com/kstepien3/ng-zen/compare/v20.0.0...v20.1.0) (2025-08-04)
+
+### 🚀 New Features
+
+* **checkbox:** add indeterminate state if value is null ([#260](https://github.com/kstepien3/ng-zen/issues/260)) ([d13c241](https://github.com/kstepien3/ng-zen/commit/d13c2416984df1de188082760aadfe280c7ed315))
+* **form-control:** add abstract logic for form control components ([#252](https://github.com/kstepien3/ng-zen/issues/252)) ([10e66b4](https://github.com/kstepien3/ng-zen/commit/10e66b4b0606a05d02ba527de42407129e085cbe))
+
 ## [20.1.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.0.0...v20.1.0-next.1) (2025-07-30)
 
 ### 🚀 New Features
