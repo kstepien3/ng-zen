@@ -3,13 +3,5 @@
   "$id": "NgZenCliComponents",
   "title": "Schema to create Zen UI library",
   "type": "object",
-  "description": "Adds Zen CLI library and configure project 📦",
-  "properties": {
-    "path": {
-      "description": "Where should be created the library",
-      "type": "string",
-      "format": "path",
-      "default": "projects/ng-zen"
-    }
-  }
+  "description": "Adds Zen CLI library and configure project 📦"
 }

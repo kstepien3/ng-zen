@@ -12,6 +12,6 @@ export type ComponentType =
   | 'switch'
   | 'textarea';
 
-export interface ComponentGeneratorSchema extends GeneratorSchemaBase {
+export interface Schema extends GeneratorSchemaBase {
   components: ComponentType[];
 }

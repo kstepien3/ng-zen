@@ -70,10 +70,20 @@ pnpm add -D @ng-zen/cli@next
 
 ### Generating Components
 
-Use the Angular CLI schematic:
+You can create a new component in your Angular project using the `@ng-zen/cli` schematic.
 
 ```bash
 ng generate @ng-zen/cli:component
+```
+
+> 💡 Run the command inside a subfolder of your project, the schematic will place the new components in that directory.
+
+### Examples
+
+```bash
+ng generate @ng-zen/cli:component ./src/app/ui #insert an optional path
+ng generate @ng-zen/cli:component --components avatar button # declare components without interactive prompt
+ng generate @ng-zen/cli:component ./src/app/ui --components avatar button --stories # generate stories files
 ```
 
 This interactive prompt guides you through selecting and configuring the desired component(s) 📊.
