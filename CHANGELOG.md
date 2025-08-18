@@ -1,3 +1,9 @@
+## [20.2.0](https://github.com/kstepien3/ng-zen/compare/v20.1.0...v20.2.0) (2025-08-18)
+
+### 🚀 New Features
+
+* **components:** generate code in workingDirectory ([#270](https://github.com/kstepien3/ng-zen/issues/270)) ([2f2060f](https://github.com/kstepien3/ng-zen/commit/2f2060fd26b5cd45ce004daf5a651aa3030556f0))
+
 ## [20.2.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.1.0...v20.2.0-next.1) (2025-08-13)
 
 ### 🚀 New Features
