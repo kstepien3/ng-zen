@@ -1,3 +1,3 @@
-import { ComponentType } from '../schematics/components/components-generator';
+import { ComponentType } from '../schematics/components/schema';
 
 export type SchematicsFolder = ComponentType;

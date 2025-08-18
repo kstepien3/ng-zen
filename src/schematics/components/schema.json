@@ -5,8 +5,26 @@
   "type": "object",
   "description": "Adds Zen UI component 📦",
   "properties": {
+    "currentDirectory": {
+      "description": "Base path from working directory",
+      "type": "string",
+      "format": "path",
+      "hidden": true,
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "readOnly": true
+    },
+    "path": {
+      "description": "Relative subpath to append to rootPath",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
     "components": {
-      "description": "Select component to generate (e.g: --components=avatar pin)",
+      "description": "Select components to generate",
       "type": "array",
       "items": {
         "type": "string",
@@ -24,18 +42,14 @@
         ]
       },
       "multiselect": true,
-      "x-prompt": "Which component should be generated?"
-    },
-    "path": {
-      "description": "Where should be created the components",
-      "type": "string",
-      "format": "path",
-      "default": "/projects/ng-zen/components"
+      "minItems": 1,
+      "x-prompt": "Which component(s) should be generated?"
     },
     "stories": {
       "description": "Include component's stories for better documentation and testing",
       "type": "boolean",
       "default": false
     }
-  }
+  },
+  "required": ["components"]
 }

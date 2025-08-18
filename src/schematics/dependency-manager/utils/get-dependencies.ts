@@ -1,7 +1,7 @@
 import { NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 
 import { FilesConfig } from '../../../types';
-import { ComponentType } from '../../components/components-generator';
+import { ComponentType } from '../../components/schema';
 
 export function getDependencies(
   selectedElements: ComponentType[],
