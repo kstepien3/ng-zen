@@ -17,7 +17,6 @@ export default {
   },
   argTypes: {
     value: { control: false },
-    placeholder: { control: false },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
   },

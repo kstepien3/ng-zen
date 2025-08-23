@@ -41,9 +41,6 @@ export abstract class ZenFormControl<Value> implements ControlValueAccessor {
    */
   abstract readonly value: ModelSignal<Value>;
 
-  /** The placeholder text for the form control. */
-  readonly placeholder = input<string>();
-
   /**
    * Whether the form control is disabled.
    */
