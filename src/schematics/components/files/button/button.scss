@@ -37,7 +37,8 @@ $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 }
 
 /* Disabled state */
-:host[aria-disabled='true'] {
+:host[aria-disabled]:not([aria-disabled='false']),
+:host[disabled]:not([disabled='false']) {
   cursor: not-allowed;
   opacity: 0.6;
 }
