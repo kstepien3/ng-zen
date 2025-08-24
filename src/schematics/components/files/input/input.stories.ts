@@ -2,15 +2,54 @@ import { Meta, StoryObj } from '@storybook/angular';
 
 import { ZenInput } from './input';
 
+type Options = ZenInput;
+
 export default {
   title: 'Components/Input',
   component: ZenInput,
-  tags: ['autodocs'],
   argTypes: {
-    value: { control: 'text' },
-    placeholder: { control: 'text' },
-    disabled: { control: 'boolean' },
-    required: { control: 'boolean' },
+    value: {
+      control: 'text',
+      table: {
+        category: 'models',
+        type: {
+          summary: 'string',
+        },
+        defaultValue: {
+          summary: '',
+        },
+      },
+    },
+    placeholder: { control: 'text', table: { type: { summary: 'string' } } },
+    disabled: {
+      control: 'boolean',
+      table: {
+        category: 'models',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        category: 'inputs',
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
+    onInput: {
+      table: {
+        readonly: true,
+        type: {
+          summary: '(value: string) => void',
+        },
+      },
+    },
   },
   args: {
     value: '',
@@ -18,22 +57,11 @@ export default {
     disabled: false,
     required: false,
   },
-} satisfies Meta<ZenInput>;
+} satisfies Meta<Options>;
 
-type Story = StoryObj<ZenInput>;
+type Story = StoryObj<Options>;
 
-export const Default: Story = {
-  render: args => ({
-    props: { ...args },
-    template: `
-      <zen-input
-        [disabled]="${args.disabled}"
-        [value]="'${args.value}'"
-        ${args.placeholder ? 'placeholder="' + args.placeholder + '"' : ''}
-        ${args.required ? 'required' : ''}
-      />`,
-  }),
-};
+export const Default: Story = {};
 
 export const WithLabel: Story = {
   render: () => ({

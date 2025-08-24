@@ -46,7 +46,7 @@
             "configDir": ".storybook",
             "browserTarget": "cli:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "./documentation/"],
+            "compodocArgs": ["-e", "json", "-d", "./documentation/", "--disablePrivate", "--disableProtected"],
             "port": 6006
           }
         },
@@ -56,7 +56,7 @@
             "configDir": ".storybook",
             "browserTarget": "cli:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "./documentation/"],
+            "compodocArgs": ["-e", "json", "-d", "./documentation/", "--disablePrivate", "--disableProtected"],
             "outputDir": "dist/storybook"
           }
         }

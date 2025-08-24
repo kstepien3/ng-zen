@@ -37,31 +37,18 @@ export const ZenFormControlProvider = <T extends ZenFormControl<any>>(component:
 export abstract class ZenFormControl<Value> implements ControlValueAccessor {
   /**
    * The underlying value of the control.
-   * Subclasses must provide their own implementation, typically using `model()`.
+   * Subclasses must provide their own implementation using `model()`.
    */
   abstract readonly value: ModelSignal<Value>;
 
-  /**
-   * Whether the form control is disabled.
-   */
   readonly disabled = model(false);
-
-  /** Whether the form control is required. */
   readonly required = input(false, { transform: booleanAttribute });
 
-  /**
-   * @internal For internal use by Angular forms.
-   * @ignore
-   */
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: Value) => void = () => {};
+  protected onChange: (value: Value) => void = () => {};
 
-  /**
-   * @internal For internal use by Angular forms.
-   * @ignore
-   */
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched: () => void = () => {};
+  protected onTouched: () => void = () => {};
 
   /**
    * Should be called by the subclass when the control's value changes
