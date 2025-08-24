@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input
  * Content alignment can be controlled via the `align` input property.
  *
  * @example
+ *
  * ```html
  * <zen-divider/>
  * <zen-divider>With content</zen-divider>
@@ -42,17 +43,14 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input
   },
 })
 export class ZenDivider {
-  /**
-   * Controls the alignment of content within the divider.
-   * @default 'center'
-   */
+  /** Controls the alignment of content within the divider. */
   readonly align = input<'start' | 'end' | 'center'>('center');
 
   /**
    * Computed property that determines if the divider contains any content.
    * Used to apply appropriate styling when content is present.
    */
-  readonly hasContent = computed(() => {
+  protected readonly hasContent = computed(() => {
     return this.elementRef.nativeElement.childNodes.length > 0;
   });
 

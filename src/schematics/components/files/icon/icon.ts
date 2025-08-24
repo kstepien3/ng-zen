@@ -20,7 +20,6 @@ interface Path {
  * @example
  * <zen-icon icon="Tree02Icon" />
  *
- * @license {@link https://github.com/hugeicons/angular/blob/main/README.md#license|MIT}
  * @see [Hugeicons](https://hugeicons.com)
  */
 @Component({
@@ -29,9 +28,9 @@ interface Path {
     <svg
       [attr.color]="color()"
       [attr.height]="size()"
+      [attr.viewBox]="'0 0 ' + BASE_SIZE + ' ' + BASE_SIZE"
       [attr.width]="size()"
       fill="none"
-      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
       @for (path of paths(); track path) {
@@ -41,7 +40,7 @@ interface Path {
           [attr.fill]="path.fill"
           [attr.opacity]="path.opacity"
           [attr.stroke-width]="path.strokeWidth"
-          [attr.stroke]="'currentColor'"
+          stroke="currentColor"
         />
       }
     </svg>
@@ -51,21 +50,18 @@ interface Path {
 export class ZenIcon {
   /** Icon file names from HugeIcons */
   readonly icon = input.required({ transform: (icon: Icon) => icons[icon] });
+  /** Size of the icon in pixels. */
   readonly size = input<number>(24);
+  /** Determines if stroke width scales with icon size. */
   readonly absoluteStrokeWidth = input<boolean, unknown>(false, { transform: booleanAttribute });
+  /** Width of the stroke for icon paths. */
   readonly strokeWidth = input<number>(1.5);
+  /** Color of the icon. */
   readonly color = input<string>('currentColor');
 
-  readonly paths = computed<Path[]>(() => this.updatePaths());
-
+  protected readonly BASE_SIZE = 24;
+  protected readonly paths = computed<Path[]>(() => this.updatePaths());
   private readonly calculatedStrokeWidth = computed(() => this.calculateStrokeWidth());
-
-  private calculateStrokeWidth(): number {
-    if (!this.absoluteStrokeWidth()) return this.strokeWidth();
-
-    const BASE_SIZE = 24;
-    return (this.strokeWidth() * BASE_SIZE) / this.size();
-  }
 
   private updatePaths(): Path[] {
     return this.icon().map(([, attrs]) => ({
@@ -75,5 +71,11 @@ export class ZenIcon {
       fillRule: attrs['fillRule'],
       strokeWidth: this.calculatedStrokeWidth(),
     }));
+  }
+
+  private calculateStrokeWidth(): number {
+    if (!this.absoluteStrokeWidth()) return this.strokeWidth();
+
+    return (this.strokeWidth() * this.BASE_SIZE) / this.size();
   }
 }

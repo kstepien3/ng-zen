@@ -3,45 +3,78 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { ZenTextarea } from './textarea';
 
 interface StoryParams {
-  value: string;
+  content: string;
   placeholder: string;
   required: boolean;
   autoresize: boolean;
   disabled: boolean;
 }
+type Options = ZenTextarea & StoryParams;
 
 export default {
   title: 'Components/Textarea',
   component: ZenTextarea,
-  tags: ['autodocs'],
   args: {
-    value: '',
+    content: '',
     autoresize: false,
     placeholder: 'ZenTextareaComponent',
     required: false,
     disabled: false,
   },
   argTypes: {
-    value: { control: 'text' },
-    autoresize: { control: 'boolean' },
-    placeholder: { control: 'text' },
-    required: { control: 'boolean' },
-    disabled: { control: 'boolean' },
+    content: {
+      control: 'text',
+      table: {
+        category: 'story parameters',
+        type: {
+          summary: 'ng-content',
+        },
+      },
+    },
+    placeholder: {
+      control: 'text',
+      table: {
+        category: 'attributes',
+        type: {
+          summary: 'string',
+        },
+      },
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        category: 'attributes',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        category: 'attributes',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    autoresize: {
+      table: {
+        category: 'attributes',
+      },
+    },
   },
-} satisfies Meta<ZenTextarea & StoryParams>;
+} satisfies Meta<Options>;
 
-type Story = StoryObj<ZenTextarea & StoryParams>;
+type Story = StoryObj<Options>;
 
 export const Default: Story = {
   render: args => ({
     template: `
-      <textarea
-      zen-textarea
-      placeholder="${args.placeholder}"
-      ${args.required ? 'required' : ''}
-      ${args.autoresize ? 'autoresize' : ''}
-      ${args.disabled ? 'disabled' : ''}
-      >${args.value}</textarea>`,
+      <textarea zen-textarea placeholder="${args.placeholder}" ${args.required ? 'required' : ''} ${args.autoresize ? 'autoresize' : ''} ${args.disabled ? 'disabled' : ''}>${args.content}</textarea>`.replace(
+      /\s+/g,
+      ' '
+    ),
   }),
 };
 

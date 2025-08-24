@@ -50,6 +50,7 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
   imports: [FormsModule],
 })
 export class ZenInput extends ZenFormControl<string> {
+  /** The current input value with two-way binding support. */
   readonly value = model('');
 
   /** The placeholder text for the form control. */

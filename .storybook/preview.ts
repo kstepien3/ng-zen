@@ -7,6 +7,9 @@ setCompodocJson(docJson);
 const preview: Preview = {
   parameters: {
     layout: 'centered',
+    docs: {
+      codePanel: true,
+    },
   },
   tags: ['autodocs'],
 };

@@ -8,30 +8,51 @@ interface StoryParams {
   width: number;
 }
 
-type StoryType = ZenSkeleton & StoryParams;
+type Options = ZenSkeleton & StoryParams;
 
 export default {
   title: 'Components/Skeleton',
   component: ZenSkeleton,
-  tags: ['autodocs'],
   argTypes: {
-    rounded: { control: { type: 'boolean' } },
-    height: { control: { type: 'range', min: 1, max: 20, step: 0.25 }, description: 'Height managed by css' },
-    width: { control: { type: 'range', min: 1, max: 20, step: 0.25 }, description: 'Width managed by css' },
+    rounded: {
+      control: { type: 'boolean' },
+      table: {
+        category: 'attributes',
+      },
+    },
+    height: {
+      control: { type: 'range', min: 1, max: 20, step: 0.25 },
+      description: 'Height managed by css',
+      table: {
+        category: 'story parameters',
+        type: {
+          summary: undefined,
+        },
+      },
+    },
+    width: {
+      control: { type: 'range', min: 1, max: 20, step: 0.25 },
+      description: 'Width managed by css',
+      table: {
+        category: 'story parameters',
+        type: {
+          summary: undefined,
+        },
+      },
+    },
   },
   args: {
     rounded: false,
     height: 3,
     width: 3,
   },
-} satisfies Meta<StoryType>;
-
-type Story = StoryObj<StoryType>;
-
-export const Default: Story = {
   render: args => ({
     props: { ...args },
     template: `
       <zen-skeleton ${args.rounded ? 'rounded' : ''} style="width: ${args.width}rem; height: ${args.height}rem"/>`,
   }),
-};
+} satisfies Meta<Options>;
+
+type Story = StoryObj<Options>;
+
+export const Default: Story = {};

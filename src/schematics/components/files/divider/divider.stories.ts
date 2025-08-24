@@ -7,22 +7,42 @@ interface StoryParams {
   vertical: boolean;
 }
 
+type Options = ZenDivider & StoryParams;
+
 export default {
   title: 'Components/Divider',
   component: ZenDivider,
-  tags: ['autodocs'],
   parameters: {
     layout: 'padded',
   },
   argTypes: {
-    content: { control: 'text' },
-    vertical: { control: 'boolean' },
-    align: { control: 'select', options: ['start', 'center', 'end'] },
+    content: {
+      control: 'text',
+      table: {
+        category: 'Story parameters',
+        type: {
+          summary: 'ng-content',
+        },
+      },
+    },
+    vertical: {
+      control: 'boolean',
+      table: { category: 'attributes', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    align: {
+      control: 'select',
+      options: ['start', 'center', 'end'],
+      table: {
+        category: 'Inputs',
+        defaultValue: { summary: 'center' },
+        type: { summary: '"start" | "center" | "end"' },
+      },
+    },
   },
   args: { content: '', vertical: false, align: 'center' },
-} satisfies Meta<ZenDivider & StoryParams>;
+} satisfies Meta<Options>;
 
-type Story = StoryObj<ZenDivider & StoryParams>;
+type Story = StoryObj<Options>;
 
 export const Default: Story = {
   render: args => ({
