@@ -58,6 +58,7 @@ export class ZenSwitch extends ZenFormControl<boolean> {
 
   /**
    * Handles keyboard events for accessibility.
+   * Supports `Enter`, `Space`, `ArrowRight`, and `ArrowLeft` keys.
    */
   onKeyDown(event: KeyboardEvent): void {
     switch (event.code) {

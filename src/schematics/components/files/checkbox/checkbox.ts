@@ -68,7 +68,6 @@ export class ZenCheckbox extends ZenFormControl<boolean | null> {
    * Set value to `null` to mark the checkbox as indeterminate
    */
   readonly value = model<boolean | null>(false);
-  /** @ignore */
   private readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
   constructor() {

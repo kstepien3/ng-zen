@@ -2,38 +2,65 @@ import { Meta, StoryObj } from '@storybook/angular';
 
 import { ZenCheckbox } from './checkbox';
 
+type Options = ZenCheckbox;
+
 export default {
   title: 'Components/Checkbox',
   component: ZenCheckbox,
-  tags: ['autodocs'],
   argTypes: {
     value: {
+      table: {
+        category: 'models',
+        type: {
+          summary: 'boolean | null',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
       control: 'radio',
       options: [true, false, null],
     },
-    disabled: { control: 'boolean' },
-    required: { control: 'boolean' },
+    disabled: {
+      control: 'boolean',
+      table: {
+        category: 'models',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        category: 'inputs',
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
+    onInput: {
+      table: {
+        readonly: true,
+        type: {
+          summary: '(value: boolean | null) => void',
+        },
+      },
+    },
   },
   args: {
     value: false,
     disabled: false,
     required: false,
   },
-} satisfies Meta<ZenCheckbox>;
+} satisfies Meta<Options>;
 
-type Story = StoryObj<ZenCheckbox>;
+type Story = StoryObj<Options>;
 
-export const Default: Story = {
-  render: args => ({
-    props: { ...args },
-    template: `
-      <zen-checkbox
-        [disabled]="${args.disabled}"
-        [value]="${args.value}"
-        ${args.required ? 'required' : ''}
-      />`,
-  }),
-};
+export const Default: Story = {};
 
 export const WithLabel: Story = {
   render: () => ({
