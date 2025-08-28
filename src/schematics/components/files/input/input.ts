@@ -32,7 +32,6 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  */
 @Component({
   selector: 'zen-input',
-  standalone: true,
   template: `
     <input
       [attr.placeholder]="placeholder()"

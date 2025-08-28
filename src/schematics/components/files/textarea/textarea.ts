@@ -29,7 +29,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   // @TODO: add support for autoresize for mozilla browsers https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'textarea[zen-textarea], textarea[zen-textarea][autoresize]',
-  standalone: true,
   template: `
     <ng-content />
   `,
