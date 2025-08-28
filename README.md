@@ -1,168 +1,360 @@
-# @ng-zen/cli
+<div align="center">
+  <a href="https://kstepien3.github.io/ng-zen/">
+    <img src="https://raw.githubusercontent.com/kstepien3/ng-zen/docs/logo-n-better-readme/images/logo.png" alt="@ng-zen/cli Logo" width="256" />
+  </a>
+  
+  <h1>@ng-zen/cli</h1>
 
-[![Build Status ](https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=master&label=build)](https://github.com/kstepien3/ng-zen/actions/workflows/ci.yml)
-[![NPM Version ](https://img.shields.io/npm/v/@ng-zen/cli/latest?label=npm%40latest)](https://www.npmjs.com/package/@ng-zen/cli)
-[![License](https://img.shields.io/github/license/kstepien3/ng-zen)](https://github.com/kstepien3/ng-zen/blob/master/LICENSE)
+  <p style="display: flex; gap: 1rem; justify-content: center;">
+    <a href="https://github.com/kstepien3/ng-zen/actions/workflows/ci.yml">
+      <img src="https://img.shields.io/github/actions/workflow/status/kstepien3/ng-zen/ci.yml?branch=master&label=build" alt="Build Status" />
+    </a>
+    <a href="https://www.npmjs.com/package/@ng-zen/cli">
+      <img src="https://img.shields.io/npm/v/@ng-zen/cli/latest?label=npm%40latest" alt="NPM Version" />
+    </a>
+    <a href="https://github.com/kstepien3/ng-zen/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/kstepien3/ng-zen" alt="License" />
+    </a>
+  </p>
 
-[![](https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white)](https://github.com/kstepien3/ng-zen)
-[![](https://img.shields.io/badge/-Storybook%20Demo-FF4785?style=flat&logo=storybook&logoColor=white)](https://kstepien3.github.io/ng-zen/)
+  <p style="display: flex; gap: 1rem; justify-content: center;">
+    <a href="https://github.com/kstepien3/ng-zen">
+      <img src="https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white" alt="Repository" />
+    </a>
+    <a href="https://kstepien3.github.io/ng-zen/">
+      <img src="https://img.shields.io/badge/-Storybook%20Demo-FF4785?style=flat&logo=storybook&logoColor=white" alt="Storybook Demo" />
+    </a>
+  </p>
 
-Generate modern, customizable Angular UI components and elements directly into your project 🚀
+  <p><strong>Generate production-ready, customizable Angular UI components directly into your project 🚀</strong></p>
 
-Built with the best practices and developer experience in mind 💡
+  <p>Stop wrestling with rigid UI libraries. @ng-zen/cli generates beautiful, modern Angular components <strong>as source code</strong> in your project, giving you complete control and ownership.</p>
+</div>
+
+## 🎯 Why Choose @ng-zen/cli?
+
+### ✨ **Own Your Components**
+
+Unlike traditional UI libraries that give you `<library-button>` black boxes, @ng-zen generates **actual TypeScript, HTML, and SCSS files** directly into your project. You own the code, you control the future.
+
+### 🏎️ **Instant Productivity**
+
+- **Production-Ready Components:** Avatar, Button, Checkbox, Divider, Form Control, Icon, Input, Skeleton, Switch, Textarea
+- **Zero Configuration:** Works with Angular 20+ out of the box
+- **Complete Setup:** Each component includes unit tests, Storybook stories, and documentation
+
+### 🎨 **Built for Customization**
+
+- **CSS Variables:** Easy theming without touching component internals
+- **Editable SCSS:** Modify styles directly when you need deeper customization
+- **Modern Architecture:** Standalone components, OnPush change detection, Angular signals
+
+### 📚 **Developer Experience First**
+
+- **Interactive Documentation:** Live Storybook examples for every component
+- **TypeScript Ready:** Full type safety and IntelliSense support
+- **Test Coverage:** Generated components include comprehensive unit tests
+- **JSDoc Annotations:** Detailed inline documentation
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Ideal for](#ideal-for)
-3. [Quick Start](#quick-start)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Why @ng-zen/cli?](#why-ng-zencli)
-7. [Examples](#examples)
-8. [Documentation](#documentation)
-9. [Project Status](#project-status)
-10. [Contributing](#contributing)
-11. [License](#license)
-12. [Author](#author)
-13. [See also](#see-also)
-14. [FAQ](#faq)
+1. [Quick Start](#-quick-start)
+2. [Installation](#-installation)
+3. [Available Components](#-available-components)
+4. [Usage Examples](#-usage-examples)
+5. [Perfect For](#-perfect-for)
+6. [Advanced Features](#-advanced-features)
+7. [Documentation](#-documentation)
+8. [Project Status](#-project-status)
+9. [Contributing](#-contributing)
+10. [License](#license)
+11. [Author](#author)
+12. [See Also](#see-also)
+13. [FAQ](#faq)
 
-## Features
+## 🚀 Quick Start
 
-- 🧩 **Component Schematics:** Generates ready-to-use UI component code (`.ts`, `.html`, `.scss`).
-- 🎨 **Fully Customizable:** Easily theme and modify components via CSS variables and editable SCSS.
-- 📱 **Responsive Design:** Components designed to adapt across various screen sizes.
-- 📚 **Comprehensive Documentation:** Includes Storybook examples, JSDoc annotations, and `README.md` per component.
-- ✅ **Test Coverage:** Generated components include unit tests (`.spec.ts`).
-- 🚀 **Modern Angular:** Leverages standalone components, `OnPush` change detection, signals, and current best practices.
-- 🛠 **Extensible:** Planned support for generating directives, pipes, services, and more.
-
-## Ideal for
-
-- 🏢 **Enterprise UI Kits:** A great starting point for building consistent, internal component libraries.
-- 📈 **Custom Projects:** Accelerates development when custom UI elements are needed, avoiding vendor lock-in.
-- 👩‍💻 **Developers:** Speeds up UI creation and ensures adherence to modern Angular patterns.
-
-## Quick Start
-
-The easiest way to add `@ng-zen/cli` and its schematics to your project:
+The fastest way to get started:
 
 ```bash
 ng add @ng-zen/cli
 ```
 
-This command installs the package and performs initial setup.
+This command:
 
-## Installation
+- ✅ Installs the package
+- ✅ Sets up your project configuration
+- ✅ Ready to generate components
 
-Alternatively, you can install it manually:
-
-```bash
-# For the latest stable version
-pnpm add -D @ng-zen/cli
-
-# For the latest pre-release version (includes newest features/fixes)
-pnpm add -D @ng-zen/cli@next
-```
-
-## Usage
-
-### Generating Components
-
-You can create a new component in your Angular project using the `@ng-zen/cli` schematic.
+Then generate your first component:
 
 ```bash
 ng generate @ng-zen/cli:component
 ```
 
-> 💡 Run the command inside a subfolder of your project, the schematic will place the new components in that directory.
+Select components from an interactive menu and they'll be generated directly into your current directory! 🎉
 
-### Examples
+## 📦 Installation
 
-```bash
-ng generate @ng-zen/cli:component ./src/app/ui #insert an optional path
-ng generate @ng-zen/cli:component --components avatar button # declare components without interactive prompt
-ng generate @ng-zen/cli:component ./src/app/ui --components avatar button --stories # generate stories files
-```
-
-This interactive prompt guides you through selecting and configuring the desired component(s) 📊.
-
-To see available options without running interactively:
+### Recommended: Using ng add
 
 ```bash
-ng generate @ng-zen/cli:component --help
+ng add @ng-zen/cli
 ```
 
-### Future Generators
+### Manual Installation
 
-Support for generating other Angular building blocks is planned:
+```bash
+# Stable version
+pnpm add -D @ng-zen/cli
 
-- 📝 Directives
-- 💧 Pipes
-- 🛠 Services
-- ... and more!
+# Latest features and fixes
+pnpm add -D @ng-zen/cli@next
+```
 
-## Why @ng-zen/cli?
+## 🧩 Available Components
 
-Unlike pre-compiled UI libraries, `@ng-zen/cli`:
+| Component        | Description                      | Features                                           |
+| ---------------- | -------------------------------- | -------------------------------------------------- |
+| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles      |
+| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons  |
+| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation    |
+| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness |
+| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators   |
+| **Icon**         | SVG icon system                  | Huge Icons integration, size variants, colors      |
+| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types        |
+| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive             |
+| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels       |
+| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation          |
 
-- **Generates Source Code:** You get actual, editable component code in your project, not opaque `<library-button>` tags.
-- **Full Control:** Modify the generated code and styles freely to perfectly match your application's needs.
-- **Modern Foundation:** Built on current Angular features (standalone, signals, etc.).
-- **Transparency:** Understand exactly how components work and evolve them with your project.
-- **Developer Experience:** Focuses on ease of use, customization, and maintainability.
+> 💡 **More components coming soon!** Planned: Directives, Pipes, Services, and additional UI elements.
 
-## Examples
+## 💡 Usage Examples
 
-Each generated component set includes:
+### Basic Component Generation
 
-- Angular component code (`.ts`, `.html`, `.scss`)
-- Unit tests (`.spec.ts`)
-- Storybook stories (`.stories.ts`) for visual development and documentation.
-- An `index.ts` for easy exporting.
-- A component-specific `README.md` (generated from a template).
+```bash
+# Interactive mode - choose components from a menu
+ng generate @ng-zen/cli:component
 
-## Documentation
+# Generate specific components
+ng generate @ng-zen/cli:component --components avatar button
 
-- **Storybook:** The primary source for visual examples and interactive demos: [View Storybook Demo](https://kstepien3.github.io/ng-zen/)
-- **JSDoc:** Code includes documentation comments.
-- **READMEs:** Project-level (`README.md`, `DEVELOPMENT.md`, `CONTRIBUTING.md`) and component-level READMEs.
-- **Changelog:** Automatically generated history of changes: [CHANGELOG.md](https://github.com/kstepien3/ng-zen/blob/master/CHANGELOG.md)
+# Custom location
+ng generate @ng-zen/cli:component ./src/app/ui --components input checkbox
 
-## Project Status
+# Include Storybook stories
+ng generate @ng-zen/cli:component --components button --stories
+```
 
-🚧 **Actively Developed** 🚧
+### What Gets Generated
 
-- The core schematics and existing components are functional but continuously improved.
-- New generators (directives, pipes, etc.) are planned.
-- The `master` branch represents the latest **stable** release.
-- The `next` branch contains **pre-release** versions with the newest features and fixes – use `@ng-zen/cli@next` to try them out.
+Each component set includes:
 
-Since the tool generates code directly into your project, you own and control that code. Updates to `@ng-zen/cli` itself primarily bring new generator features or improvements to the generation process, not breaking changes to already generated components.
+```
+src/app/ui/
+├── button/
+│   ├── button.ts           # Component logic
+│   ├── button.scss         # Customizable styles
+│   ├── button.spec.ts      # Unit tests
+│   ├── button.stories.ts   # Storybook documentation
+│   ├── index.ts           # Barrel exports
+│   └── README.md          # Component-specific docs
+└── input/
+    ├── input.ts
+    ├── input.scss
+    ├── input.spec.ts
+    ├── input.stories.ts
+    ├── index.ts
+    └── README.md
+```
 
-## Contributing
+### Real-World Usage
 
-Contributions are highly welcome! If you'd like to help improve `@ng-zen/cli`, please read our **[Contribution Guidelines (CONTRIBUTING.md)](https://github.com/kstepien3/ng-zen/blob/master/CONTRIBUTING.md)** for details on the workflow, commit message requirements, and setup. 🤝
+```typescript
+// After generation, import and use like any Angular component
+import { ZenButton } from './ui/button';
+import { ZenInput } from './ui/input';
+
+@Component({
+  selector: 'app-login',
+  imports: [ZenButton, ZenInput],
+  template: `
+    <form>
+      <zen-input placeholder="Enter email" type="email" />
+      <button variant="primary" zen-button>Sign In</button>
+    </form>
+  `,
+})
+export class LoginComponent {}
+```
+
+## 🎯 Perfect For
+
+### 🏢 **Enterprise Teams**
+
+- Build consistent internal component libraries
+- Maintain design system compliance across projects
+- Avoid vendor lock-in with owned source code
+
+### 🚀 **Startup Projects**
+
+- Rapid prototyping with production-ready components
+- Easy customization as requirements evolve
+- No licensing concerns or bundle size bloat
+
+### 👩‍💻 **Angular Developers**
+
+- Learn modern Angular patterns (signals, standalone components)
+- Speed up UI development workflow
+- Maintain full control over component behavior
+
+### 🎨 **Design Systems**
+
+- Use as foundation for custom component libraries
+- Extend and modify components to match brand guidelines
+- Generate consistent documentation automatically
+
+## ⚡ Advanced Features
+
+### **Modern Angular Architecture**
+
+- **Standalone Components:** No NgModule dependencies
+- **OnPush Change Detection:** Optimized performance
+- **Angular Signals:** Reactive state management
+- **TypeScript 5.8+:** Latest language features
+
+### **Customization System**
+
+```scss
+// Easy theming with CSS variables
+:root {
+  --zen-button-primary-bg: #your-brand-color;
+  --zen-button-border-radius: 8px;
+  --zen-button-font-weight: 600;
+}
+```
+
+### **Testing Integration**
+
+- **Jest Ready:** All tests use Jest framework
+- **Component Testing:** Isolated unit tests for each component
+- **Storybook Testing:** Visual testing and documentation
+
+### **Development Tools**
+
+- **ESLint Integration:** Code quality enforcement
+- **Prettier Support:** Consistent code formatting
+- **Husky Hooks:** Pre-commit validation
+
+## 📚 Documentation
+
+- **📖 [Live Storybook Demo](https://kstepien3.github.io/ng-zen/)** - Interactive component examples
+- **🔧 [Development Guide](DEVELOPMENT.md)** - Setup and contribution workflow
+- **🤝 [Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+- **📝 [Changelog](CHANGELOG.md)** - Version history and breaking changes
+- **💬 Component READMEs** - Detailed docs generated with each component
+
+## 🚧 Project Status
+
+**🟢 Actively Developed & Production Ready**
+
+- ✅ **Core Features:** Component generation is stable and tested
+- ✅ **Angular 20+ Support:** Compatible with latest Angular versions
+- 🔄 **Continuous Improvement:** Regular updates and new components
+- 📋 **Roadmap:** Directives, pipes, services, and more UI components planned
+
+### Release Channels
+
+- **`@ng-zen/cli`** - Stable releases from `master` branch
+- **`@ng-zen/cli@next`** - Pre-releases from `next` branch with latest features
+
+> **Important:** Since @ng-zen/cli generates code into your project, you own that code completely. Updates to the CLI primarily add new features and components - they won't break your existing generated components.
+
+## 🤝 Contributing
+
+We welcome contributions! Whether it's:
+
+- 🐛 **Bug Reports** - Help us improve reliability
+- 💡 **Feature Requests** - Suggest new components or capabilities
+- 🔧 **Code Contributions** - Add features or fix issues
+- 📚 **Documentation** - Improve guides and examples
+
+> 🚀 **Do you urgently need some new features? Report them in the [`issues`](https://github.com/kstepien3/ng-zen/issues) section! They will be scheduled for the next deployments.**
+
+**Getting Started:**
+
+1. Read our [Contributing Guidelines](CONTRIBUTING.md)
+2. Check the [Development Setup](DEVELOPMENT.md)
+3. Browse [open issues](https://github.com/kstepien3/ng-zen/issues)
+4. Join the discussion!
 
 ## License
 
-This project is licensed under the [BSD 2-Clause License](https://github.com/kstepien3/ng-zen/blob/master/LICENSE) 📜.
+This project is licensed under the [BSD 2-Clause License](LICENSE) 📜.
 
 ## Author
 
-Maintained by Konrad Stępień.
+**Konrad Stępień** - Creator & Maintainer
 
-- GitHub: [@kstepien3](https://github.com/kstepien3)
-- LinkedIn: [Konrad Stępień](https://www.linkedin.com/in/konradstepien/) 👥
-- Email: [kord.stp@gmail.com](mailto:kord.stp@gmail.com?subject=%5BNG-ZEN%5D%20Query) 📨
+- 🐙 GitHub: [@kstepien3](https://github.com/kstepien3)
+- 💼 LinkedIn: [Konrad Stępień](https://www.linkedin.com/in/konradstepien/)
+- 📧 Email: [kord.stp@gmail.com](mailto:kord.stp@gmail.com?subject=%5BNG-ZEN%5D%20Question)
 
-## See also
+## See Also
 
-- [ngx-schematic-builder](https://github.com/kstepien3/ngx-schematic-builder) - A custom Angular builder for compiling and bundling Angular schematics.
+- **[ngx-schematic-builder](https://github.com/kstepien3/ngx-schematic-builder)** - Custom Angular builder for compiling schematics (used by this project)
 
 ## FAQ
 
-### How do I customize a generated component?
+### ❓ **How is this different from Angular Material or PrimeNG?**
 
-Generated components reside entirely within your project's source code. You can directly edit the `.ts`, `.html`, and `.scss` files. Components are structured to use CSS variables and SCSS for easier theming and modification.
+Traditional UI libraries give you pre-compiled components that you can't modify. @ng-zen/cli generates the actual source code into your project, so you have complete control. You can modify the TypeScript, HTML, and SCSS files however you need.
+
+### ❓ **Can I customize the generated components?**
+
+Absolutely! That's the whole point. Every component is generated as editable source code in your project. You can:
+
+- Modify the TypeScript logic
+- Change the HTML templates
+- Customize the SCSS styles
+- Extend functionality as needed
+
+### ❓ **What happens when I update @ng-zen/cli?**
+
+Updates to the CLI add new features and components but don't affect your already-generated code. Your components belong to you and won't be overwritten. You can always generate new components with the latest features.
+
+### ❓ **Does this work with existing Angular projects?**
+
+Yes! @ng-zen/cli works with any Angular 20+ project. Just run `ng add @ng-zen/cli` in your existing project and start generating components.
+
+### ❓ **Can I use this in production?**
+
+Definitely! The generated components are production-ready with:
+
+- Full TypeScript type safety
+- Comprehensive unit tests
+- Optimized performance (OnPush change detection)
+- Accessibility considerations
+- Modern Angular best practices
+
+### ❓ **How do I theme the components?**
+
+Components use CSS variables for easy theming:
+
+```scss
+:root {
+  --zen-primary-color: #your-brand-color;
+  --zen-border-radius: 8px;
+}
+```
+
+For deeper customization, edit the generated SCSS files directly.
+
+### ❓ **Why no Tailwind CSS?**
+
+You can tweak the code to use Tailwind if you want, but avoid adding extra libraries. Our goal is to create base components that are easy to improve later, work without any CSS libraries, and are fully customizable right out of the box.
+
+---
+
+**Ready to take control of your Angular UI components?** [Get started now!](#-quick-start) 🚀
