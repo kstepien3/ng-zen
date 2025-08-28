@@ -37,7 +37,6 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  */
 @Component({
   selector: 'zen-checkbox',
-  standalone: true,
   template: `
     <input
       [attr.aria-disabled]="disabled()"
