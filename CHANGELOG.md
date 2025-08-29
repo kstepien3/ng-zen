@@ -1,3 +1,14 @@
+## [20.2.1-next.1](https://github.com/kstepien3/ng-zen/compare/v20.2.0...v20.2.1-next.1) (2025-08-29)
+
+### 🐛 Bug Fixes
+
+* **button:** improve styles to detect disabled states ([#283](https://github.com/kstepien3/ng-zen/issues/283)) ([757108f](https://github.com/kstepien3/ng-zen/commit/757108f9b455d699f416d893c027209d3fa9cbc0))
+* **form-control:** move placeholder into the input component ([#277](https://github.com/kstepien3/ng-zen/issues/277)) ([aec69b4](https://github.com/kstepien3/ng-zen/commit/aec69b43575556b29d6256f1b3fbd61ae7eae515))
+
+### 🛠️ Code Refactor
+
+* remove unnecessary standalone property ([#290](https://github.com/kstepien3/ng-zen/issues/290)) ([d984f17](https://github.com/kstepien3/ng-zen/commit/d984f174ed7e25febaf3c908cb14573f3eaf7dee))
+
 ## [20.2.0](https://github.com/kstepien3/ng-zen/compare/v20.1.0...v20.2.0) (2025-08-18)
 
 ### 🚀 New Features
