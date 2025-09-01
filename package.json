@@ -1,6 +1,6 @@
 {
   "name": "@ng-zen/cli",
-  "version": "20.2.1-next.1",
+  "version": "20.2.1",
   "description": "A CLI tool for generating customizable, modern Angular UI components using schematics.",
   "scripts": {
     "ng": "ng",

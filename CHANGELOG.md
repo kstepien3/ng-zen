@@ -1,3 +1,20 @@
+## [20.2.1](https://github.com/kstepien3/ng-zen/compare/v20.2.0...v20.2.1) (2025-09-01)
+
+### 🐛 Bug Fixes
+
+* **button:** improve styles to detect disabled states ([#283](https://github.com/kstepien3/ng-zen/issues/283)) ([757108f](https://github.com/kstepien3/ng-zen/commit/757108f9b455d699f416d893c027209d3fa9cbc0))
+* **form-control:** move placeholder into the input component ([#277](https://github.com/kstepien3/ng-zen/issues/277)) ([aec69b4](https://github.com/kstepien3/ng-zen/commit/aec69b43575556b29d6256f1b3fbd61ae7eae515))
+
+### 🛠️ Code Refactor
+
+* remove unnecessary standalone property ([#290](https://github.com/kstepien3/ng-zen/issues/290)) ([d984f17](https://github.com/kstepien3/ng-zen/commit/d984f174ed7e25febaf3c908cb14573f3eaf7dee))
+
+### 📚 Documentation
+
+* **readme:** add logo and improve the file ([#289](https://github.com/kstepien3/ng-zen/issues/289)) ([2e8da82](https://github.com/kstepien3/ng-zen/commit/2e8da82c42817eb251a5957a2bd9862e07f2390b))
+* **storybook:** add docs about the suggested storybook configuration ([#288](https://github.com/kstepien3/ng-zen/issues/288)) ([f9e0bc5](https://github.com/kstepien3/ng-zen/commit/f9e0bc555e3d1349dfa9f532ba883fe03baf0dec))
+* **storybook:** improve documentations and stories code ([#287](https://github.com/kstepien3/ng-zen/issues/287)) ([c0312e9](https://github.com/kstepien3/ng-zen/commit/c0312e9de51e949527ec81abf70bb968ee2a84c4))
+
 ## [20.2.1-next.1](https://github.com/kstepien3/ng-zen/compare/v20.2.0...v20.2.1-next.1) (2025-09-01)
 
 ### 🐛 Bug Fixes
