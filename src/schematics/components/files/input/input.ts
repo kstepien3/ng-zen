@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control/form-control';
+import { ZenFormControl, ZenFormControlProvider } from '../form-control';
 
 /**
  * ZenInput is a reusable text input component designed to provide
@@ -32,7 +32,6 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control/form-con
  */
 @Component({
   selector: 'zen-input',
-  standalone: true,
   template: `
     <input
       [attr.placeholder]="placeholder()"
@@ -50,5 +49,9 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control/form-con
   imports: [FormsModule],
 })
 export class ZenInput extends ZenFormControl<string> {
+  /** The current input value with two-way binding support. */
   readonly value = model('');
+
+  /** The placeholder text for the form control. */
+  readonly placeholder = input<string>();
 }

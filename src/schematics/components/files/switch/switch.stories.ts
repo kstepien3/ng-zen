@@ -2,40 +2,63 @@ import { Meta, StoryObj } from '@storybook/angular';
 
 import { ZenSwitch } from './switch';
 
+type Options = ZenSwitch;
+
 export default {
   title: 'Components/Switch',
   component: ZenSwitch,
-  tags: ['autodocs'],
   argTypes: {
-    value: { control: 'boolean' },
-    disabled: { control: 'boolean' },
+    value: {
+      control: 'boolean',
+      table: {
+        category: 'models',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        category: 'models',
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        category: 'inputs',
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
+    onInput: {
+      table: {
+        readonly: true,
+        type: {
+          summary: '(value: boolean) => void',
+        },
+      },
+    },
+    onKeyDown: {
+      table: {
+        readonly: true,
+      },
+    },
   },
   args: {
     value: false,
     disabled: false,
+    required: false,
   },
-} satisfies Meta<ZenSwitch>;
+} satisfies Meta<Options>;
 
-type Story = StoryObj<ZenSwitch>;
+type Story = StoryObj<Options>;
 
-export const Default: Story = {
-  render: args => ({
-    props: { ...args },
-    template: `
-      <zen-switch
-        [disabled]="${args.disabled}"
-        [value]="${args.value}"
-      />`,
-  }),
-};
-
-export const WithLabel: Story = {
-  render: () => ({
-    template: `
-      <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-switch id="label-example"/>
-        <label for="label-example"> With label </label>
-      </div>
-  `,
-  }),
-};
+export const Default: Story = {};

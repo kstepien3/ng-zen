@@ -49,13 +49,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenAvatar {
-  /**
-   * Name of the source image. Image name will be processed by the image loader,
-   * and the final URL will be applied as the src property of the image.
-   */
+  /** Source path for the image which will be processed by Angular's image loader. */
   readonly src = input<string>('');
-  /**
-   * Sets or retrieves a text alternative to the graphic.
-   */
+  /** Sets or retrieves a text alternative to the graphic. */
   readonly alt = input<string>('');
 }
