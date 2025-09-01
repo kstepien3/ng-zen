@@ -22,7 +22,7 @@
   "license": "BSD-2-Clause",
   "private": false,
   "repository": {
-    "url": "https://github.com/kstepien3/ng-zen"
+    "url": "git+https://github.com/kstepien3/ng-zen.git"
   },
   "bugs": {
     "url": "https://github.com/kstepien3/ng-zen/issues"
