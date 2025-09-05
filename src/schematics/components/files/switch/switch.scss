@@ -1,10 +1,9 @@
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $transition-duration: 0.15s;
 $placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
-$size: var(--zen-switch-size, 16px);
+$size: var(--zen-switch-size, 1rem);
 $margin: var(--zen-switch-margin, 2px);
 $width: var(--zen-switch-width, 30px);
-$right-end: calc(#{$width} - #{$size} - #{$margin} * 2);
 $height: calc(#{$size} + #{$margin} * 2);
 
 :host {
@@ -21,6 +20,8 @@ $height: calc(#{$size} + #{$margin} * 2);
   transition-duration: $transition-duration;
   vertical-align: middle;
   user-select: none;
+  padding: $margin;
+  box-sizing: border-box;
 
   .switch-handle {
     display: grid;
@@ -33,10 +34,13 @@ $height: calc(#{$size} + #{$margin} * 2);
     justify-content: center;
     place-items: center;
     color: $placeholder-color;
-    margin: 2px;
-    animation-fill-mode: revert;
-    transition: width ease;
-    transition-duration: $transition-duration;
+    transition:
+      background-color $transition-duration ease,
+      border-color $transition-duration ease,
+      left $transition-duration ease,
+      transform $transition-duration ease;
+    left: $margin;
+    transform: translateX(0);
   }
 
   &:active .switch-handle {
@@ -52,7 +56,8 @@ $height: calc(#{$size} + #{$margin} * 2);
 
     .switch-handle {
       color: hsl(0deg 0% 10%);
-      right: 0;
+      left: 100%;
+      transform: translateX(calc(-100% - #{$margin}));
     }
   }
 
