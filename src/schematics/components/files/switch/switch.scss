@@ -1,68 +1,82 @@
+// Globals
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
-$transition-duration: 0.15s;
-$placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
-$size: var(--zen-switch-size, 1rem);
-$margin: var(--zen-switch-margin, 2px);
-$width: var(--zen-switch-width, 30px);
-$height: calc(#{$size} + #{$margin} * 2);
+$transition-duration: var(--zen-transition-duration-quick, 0.1s);
+$placeholder-color: var(--zen-placeholder-color, hsl(0deg 0% 60%));
+$focus-shadow: var(--zen-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
+$appearance: var(--zen-appearance, hsl(0deg 0% 10%));
 
 :host {
-  cursor: pointer;
-  background: hsl(0deg 0% 80%);
-  border-radius: 9999px;
-  width: $width;
-  height: $height;
-  position: relative;
-  display: block;
-  transition:
-    background-color ease,
-    border-color ease;
-  transition-duration: $transition-duration;
-  vertical-align: middle;
-  user-select: none;
-  padding: $margin;
-  box-sizing: border-box;
+  --zen-switch-thumb-size: 1rem;
+  --zen-switch-height: 1.25rem;
+  --zen-switch-width: 2rem;
+  --zen-switch-apperance: #{$appearance};
+  --zen-switch-background: hsl(0deg 0% 80%);
+}
 
-  .switch-handle {
-    display: grid;
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  $thumb-x-center-position: calc(var(--zen-switch-height) / 2 - var(--zen-switch-thumb-size) / 2);
+
+  background: var(--zen-switch-background);
+  height: var(--zen-switch-height);
+  width: var(--zen-switch-width);
+  cursor: pointer;
+  border-radius: 9999px;
+  position: relative;
+  display: flex;
+  place-items: center;
+  user-select: none;
+
+  // Animation
+  transition-property: background-color, border-color;
+  transition-duration: $transition-duration;
+  transition-timing-function: ease;
+
+  .thumb {
+    height: var(--zen-switch-thumb-size);
+    width: var(--zen-switch-thumb-size);
     position: absolute;
-    height: $size;
-    width: $size;
     background-color: white;
     border-radius: 9999px;
-    font-size: 12px;
-    justify-content: center;
-    place-items: center;
-    color: $placeholder-color;
-    transition:
-      background-color $transition-duration ease,
-      border-color $transition-duration ease,
-      left $transition-duration ease,
-      transform $transition-duration ease;
-    left: $margin;
-    transform: translateX(0);
-  }
 
-  &:active .switch-handle {
-    width: calc(#{$size} + 2px);
+    // Animation
+    transition-property: left, transform, width;
+    transition-timing-function: ease;
+    transition-duration: $transition-duration;
+    left: $thumb-x-center-position;
+    transform: translateX(0);
+
+    &:not(:empty) {
+      // Handle content
+      display: grid;
+      font-size: small;
+      justify-content: center;
+      place-items: center;
+      color: $placeholder-color;
+    }
   }
 
   &:focus-visible {
     outline: $outline;
+    box-shadow: $focus-shadow;
   }
 
   &[data-checked='true'] {
-    background-color: hsl(0deg 0% 10%);
+    background-color: var(--zen-switch-apperance);
 
-    .switch-handle {
-      color: hsl(0deg 0% 10%);
+    .thumb {
       left: 100%;
-      transform: translateX(calc(-100% - #{$margin}));
+      color: var(--zen-switch-apperance);
+      transform: translateX(calc(-100% - #{$thumb-x-center-position}));
     }
   }
 
   &[data-disabled='true'] {
-    pointer-events: none;
+    cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  &:active:not([data-disabled='true']) .thumb {
+    width: calc(var(--zen-switch-thumb-size) + 2px);
   }
 }

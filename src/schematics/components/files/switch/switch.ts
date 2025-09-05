@@ -35,7 +35,7 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
 @Component({
   selector: 'zen-switch',
   template: `
-    <span class="switch-handle">
+    <span class="thumb">
       <!-- @if (value()) { ✓ } -->
       <!-- @if (!value()) { ─ } -->
     </span>
@@ -45,6 +45,7 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
   providers: [ZenFormControlProvider(ZenSwitch)],
   host: {
     tabindex: '0',
+    role: 'switch',
     '[attr.data-disabled]': 'disabled()',
     '[attr.data-checked]': 'value()',
     '(blur)': 'onTouched()',
