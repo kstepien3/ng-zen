@@ -1,18 +1,20 @@
-// Component Variables
-$border: var(--zen-input-border, 1px solid hsl(0deg 0% 80%));
-$border-radius: var(--zen-input-border-radius, 8px);
-$padding: var(--zen-input-padding, 0.5rem 1rem);
-$focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
-$placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
-
-// Color Palette
+// Globals
+$focus-shadow: var(--zen-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $error: var(--zen-error, hsl(0deg 70% 50%));
 
 :host {
-  border: $border;
-  border-radius: $border-radius;
-  padding: $padding;
+  --zen-textarea-border: var(--zen-input-border, 1px solid hsl(0deg 0% 80%));
+  --zen-textarea-border-radius: var(--zen-input-border-radius, 8px);
+  --zen-textarea-padding: var(--zen-input-padding, 0.5rem 1rem);
+  --zen-textarea-placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  border: var(--zen-textarea-border);
+  border-radius: var(--zen-textarea-border-radius);
+  padding: var(--zen-textarea-padding);
 
   &[autoresize] {
     field-sizing: content;
@@ -33,6 +35,6 @@ $error: var(--zen-error, hsl(0deg 70% 50%));
   }
 
   &::placeholder {
-    color: $placeholder-color;
+    color: var(--zen-textarea-placeholder-color);
   }
 }
