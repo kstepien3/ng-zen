@@ -1,3 +1,18 @@
+## [20.3.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.2.1...v20.3.0-next.1) (2025-09-09)
+
+### 🚀 New Features
+
+* **switch:** add animations ([#303](https://github.com/kstepien3/ng-zen/issues/303)) ([6b48d4f](https://github.com/kstepien3/ng-zen/commit/6b48d4f39db1e5bfe22920fa749b652ac65e4432))
+
+### 🛠️ Code Refactor
+
+* **switch:** improve styles, css variables ([#304](https://github.com/kstepien3/ng-zen/issues/304)) ([3c04b87](https://github.com/kstepien3/ng-zen/commit/3c04b8754cd25af8cfc0c0ffa89ac8633de33145))
+* **textarea:** improve css variables ([#305](https://github.com/kstepien3/ng-zen/issues/305)) ([a9b412c](https://github.com/kstepien3/ng-zen/commit/a9b412c8ab1f77ba3d602384c963aade62308e6b))
+
+### 📚 Documentation
+
+* **README.md:** fix links ([#302](https://github.com/kstepien3/ng-zen/issues/302)) ([089587c](https://github.com/kstepien3/ng-zen/commit/089587c2ecbb8c27492bc34abd4896e7842e7d04))
+
 ## [20.2.1](https://github.com/kstepien3/ng-zen/compare/v20.2.0...v20.2.1) (2025-09-01)
 
 ### 🐛 Bug Fixes
