@@ -1,13 +1,16 @@
-$background: var(--zen-skeleton-background, hsl(0deg 0% 80%));
-$radius: var(--zen-skeleton-border-radius, 0.5rem);
-$animation-duration: var(--zen-skeleton-animation-duration, 1.6s);
-
 :host {
-  background: $background;
+  --zen-skeleton-background: hsl(0deg 0% 80%);
+  --zen-skeleton-border-radius: 0.5rem;
+  --zen-skeleton-animation-duration: 1.6s;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  background: var(--zen-skeleton-background);
+  border-radius: var(--zen-skeleton-border-radius);
   display: inline-block;
   min-height: 1rem;
   min-width: 1rem;
-  border-radius: $radius;
   position: relative;
   overflow: hidden;
 
@@ -29,7 +32,7 @@ $animation-duration: var(--zen-skeleton-animation-duration, 1.6s);
       transparent 100%
     );
     transform: translateX(-100%);
-    animation: shimmer $animation-duration ease-in-out infinite;
+    animation: shimmer var(--zen-skeleton-animation-duration) ease-in-out infinite;
   }
 
   &[rounded] {
@@ -46,7 +49,7 @@ $animation-duration: var(--zen-skeleton-animation-duration, 1.6s);
     }
 
     // Subtle pulse animation as fallback
-    animation: pulse $animation-duration ease-in-out infinite alternate;
+    animation: pulse var(--zen-skeleton-animation-duration) ease-in-out infinite alternate;
   }
 }
 
