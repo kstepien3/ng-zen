@@ -1,3 +1,14 @@
+## [20.3.0-next.2](https://github.com/kstepien3/ng-zen/compare/v20.3.0-next.1...v20.3.0-next.2) (2025-09-11)
+
+### 🛠️ Code Refactor
+
+* **input:** improve css variables ([#314](https://github.com/kstepien3/ng-zen/issues/314)) ([58cdbb3](https://github.com/kstepien3/ng-zen/commit/58cdbb3bafb9c10057b75d73c7234247e519c97e))
+* **skeleton:** improve css variables ([#313](https://github.com/kstepien3/ng-zen/issues/313)) ([9f0c8fd](https://github.com/kstepien3/ng-zen/commit/9f0c8fd1b23172fa5bb9bf9f42b6739c7b232876))
+
+### 📚 Documentation
+
+* **textarea:** update jsdoc about css variables ([#311](https://github.com/kstepien3/ng-zen/issues/311)) ([6ceabb5](https://github.com/kstepien3/ng-zen/commit/6ceabb58e6549e87bdbbe3b3b2f6e2e0928ab49b))
+
 ## [20.3.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.2.1...v20.3.0-next.1) (2025-09-09)
 
 ### 🚀 New Features
