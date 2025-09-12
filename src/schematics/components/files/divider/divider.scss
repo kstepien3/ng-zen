@@ -1,15 +1,18 @@
-$appearance: var(--zen-divider-appearance, hsl(0deg 0% 60%));
-$type: var(--zen-divider-type, solid);
-$align-offset: var(--zen-divider-align-offset, 25%);
-$gap: var(--zen-divider-gap, 0.25rem);
-$thickness: var(--zen-divider-thickness, 1px);
-
 :host {
+  --zen-divider-appearance: hsl(0deg 0% 60%);
+  --zen-divider-type: solid;
+  --zen-divider-align-offset: 25%;
+  --zen-divider-gap: 0.25rem;
+  --zen-divider-thickness: 1px;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  color: var(--zen-divider-appearance);
+  gap: var(--zen-divider-gap);
   width: 100%;
   display: flex;
   align-items: center;
-  gap: $gap;
-  color: $appearance;
 
   &::before,
   &::after {
@@ -17,12 +20,12 @@ $thickness: var(--zen-divider-thickness, 1px);
     display: block;
     width: 100%;
     height: 0;
-    border-color: $appearance;
-    border-style: $type;
-    border-width: #{$thickness} 0 0;
+    border-color: var(--zen-divider-appearance);
+    border-style: var(--zen-divider-type);
+    border-width: var(--zen-divider-thickness) 0 0;
   }
 
-  &:not(.has-content) {
+  &:empty {
     gap: 0;
 
     &::after {
@@ -32,7 +35,7 @@ $thickness: var(--zen-divider-thickness, 1px);
 
   &.zen-align-start::before,
   &.zen-align-end::after {
-    width: $align-offset;
+    width: var(--zen-divider-align-offset);
   }
 }
 
@@ -47,11 +50,11 @@ $thickness: var(--zen-divider-thickness, 1px);
     display: block;
     width: unset;
     height: 100%;
-    border-width: 0 #{$thickness} 0 0;
+    border-width: 0 var(--zen-divider-thickness) 0 0;
   }
 
   &.zen-align-start::before,
   &.zen-align-end::after {
-    height: $align-offset;
+    height: var(--zen-divider-align-offset);
   }
 }
