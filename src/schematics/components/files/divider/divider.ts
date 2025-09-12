@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
  * ZenDivider is a reusable divider component that provides a simple way to
@@ -38,21 +38,10 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input
   styleUrl: './divider.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.has-content]': 'hasContent()',
     '[class]': '"zen-align-"+align()',
   },
 })
 export class ZenDivider {
   /** Controls the alignment of content within the divider. */
   readonly align = input<'start' | 'end' | 'center'>('center');
-
-  /**
-   * Computed property that determines if the divider contains any content.
-   * Used to apply appropriate styling when content is present.
-   */
-  protected readonly hasContent = computed(() => {
-    return this.elementRef.nativeElement.childNodes.length > 0;
-  });
-
-  private readonly elementRef = inject(ElementRef);
 }
