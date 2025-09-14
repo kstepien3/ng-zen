@@ -1,26 +1,31 @@
-$bg-color-hover: var(--zen-button-bg-color-hover, hsl(0deg 0% 20%));
-$bg-color: var(--zen-button-bg-color, hsl(0deg 0% 0%));
-$color: var(--zen-button-color, hsl(0deg 0% 100%));
-$padding: var(--zen-button-padding, 0.5rem 1rem);
-$shadow: var(--zen-button-shadow, 0 2px 4px hsl(0deg 0% 0% / 10%));
+// Globals
 $transition-duration: var(--zen-transition-duration, 0.4s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
+  --zen-button-padding: 0.5rem 1rem;
+  --zen-button-bg-color: hsl(0deg 0% 0%);
+  --zen-button-bg-color-hover: hsl(0deg 0% 20%);
+  --zen-button-color: hsl(0deg 0% 100%);
+  --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  padding: var(--zen-button-padding);
+  background-color: var(--zen-button-bg-color);
+  color: var(--zen-button-color);
+  box-shadow: var(--zen-button-shadow);
   display: inline-block;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   border: none;
-  padding: $padding;
   border-radius: 99999px;
   transition-property: background-color, opacity;
   transition-duration: $transition-duration;
   transition-timing-function: ease;
-  background-color: $bg-color;
-  color: $color;
-  box-shadow: $shadow;
   text-decoration: none;
   overflow: hidden;
   position: relative;
@@ -28,7 +33,7 @@ $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 /* Hover state */
 :host:hover {
-  background-color: $bg-color-hover;
+  background-color: var(--zen-button-bg-color-hover);
 }
 
 /* Focus state */
