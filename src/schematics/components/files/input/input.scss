@@ -20,12 +20,12 @@ input {
   }
 
   &:focus-visible {
-    outline: var(--zen-outline);
+    outline: $outline;
     box-shadow: var(--zen-input-focus-shadow);
   }
 
   &:user-invalid {
-    border-color: var(--zen-error);
+    border-color: $error;
   }
 
   &::placeholder {

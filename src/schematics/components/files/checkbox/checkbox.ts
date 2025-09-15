@@ -20,9 +20,8 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  *
  * ```css
  * :root {
- *  --zen-checkbox-size: 16px;
- *  --zen-checkbox-border-radius: 6px;
- *  --zen-checkbox-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
+ *  --zen-checkbox-size: 1rem;
+ *  --zen-checkbox-border-radius: 0.375rem;
  *  --zen-checkbox-appearance: hsl(0deg 0% 10%);
  *  --zen-checkbox-disabled-opacity: 0.6;
  *  --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);

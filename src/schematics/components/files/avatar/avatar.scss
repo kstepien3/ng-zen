@@ -1,20 +1,23 @@
-$size: var(--zen-avatar-size, 2rem);
-$bg-color: var(--zen-avatar-bg-color, hsl(0deg 0% 80%));
-$color: var(--zen-avatar-color, hsl(0deg 0% 20%));
-$font-size: var(--zen-avatar-font-size, small);
-
 :host {
+  --zen-avatar-size: 2rem;
+  --zen-avatar-bg-color: hsl(0deg 0% 80%);
+  --zen-avatar-color: hsl(0deg 0% 20%);
+  --zen-avatar-font-size: small;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  height: var(--zen-avatar-size);
+  width: var(--zen-avatar-size);
   display: flex;
-  height: $size;
-  width: $size;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
 
   // Content styles
-  background-color: $bg-color;
-  color: $color;
-  font-size: $font-size;
+  background-color: var(--zen-avatar-bg-color);
+  color: var(--zen-avatar-color);
+  font-size: var(--zen-avatar-font-size);
   justify-content: center;
   align-items: center;
   font-weight: bold;
