@@ -250,9 +250,9 @@ export class LoginComponent {}
 ## 📚 Documentation
 
 - **📖 [Live Storybook Demo](https://kstepien3.github.io/ng-zen/)** - Interactive component examples
-- **🔧 [Development Guide](DEVELOPMENT.md)** - Setup and contribution workflow
-- **🤝 [Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
-- **📝 [Changelog](CHANGELOG.md)** - Version history and breaking changes
+- **🔧 [Development Guide](https://github.com/kstepien3/ng-zen/blob/master/DEVELOPMENT.md)** - Setup and contribution workflow
+- **🤝 [Contributing Guide](https://github.com/kstepien3/ng-zen/blob/master/CONTRIBUTING.md)** - How to contribute to the project
+- **📝 [Changelog](https://github.com/kstepien3/ng-zen/blob/master/CHANGELOG.md)** - Version history and breaking changes
 - **💬 Component READMEs** - Detailed docs generated with each component
 
 ## 🚧 Project Status
@@ -284,14 +284,14 @@ We welcome contributions! Whether it's:
 
 **Getting Started:**
 
-1. Read our [Contributing Guidelines](CONTRIBUTING.md)
-2. Check the [Development Setup](DEVELOPMENT.md)
+1. Read our [Contributing Guidelines](https://github.com/kstepien3/ng-zen/blob/master/CONTRIBUTING.md)
+2. Check the [Development Setup](https://github.com/kstepien3/ng-zen/blob/master/DEVELOPMENT.md)
 3. Browse [open issues](https://github.com/kstepien3/ng-zen/issues)
 4. Join the discussion!
 
 ## License
 
-This project is licensed under the [BSD 2-Clause License](LICENSE) 📜.
+This project is licensed under the [BSD 2-Clause License](https://github.com/kstepien3/ng-zen/blob/master/LICENSE) 📜.
 
 ## Author
 

@@ -1,3 +1,42 @@
+## [20.3.0-next.3](https://github.com/kstepien3/ng-zen/compare/v20.3.0-next.2...v20.3.0-next.3) (2025-09-15)
+
+### 🐛 Bug Fixes
+
+* **avatar:** improve css variables ([#323](https://github.com/kstepien3/ng-zen/issues/323)) ([eef614a](https://github.com/kstepien3/ng-zen/commit/eef614a0e2060fe32f72e00809b66009ae24832f))
+* **input:** resolve problem with wrong variables ([#322](https://github.com/kstepien3/ng-zen/issues/322)) ([30f5d10](https://github.com/kstepien3/ng-zen/commit/30f5d10c4c559f01ed3445b77e174340b4f2fb6f))
+
+### 🛠️ Code Refactor
+
+* **button:** improve css variables ([#321](https://github.com/kstepien3/ng-zen/issues/321)) ([4ed1310](https://github.com/kstepien3/ng-zen/commit/4ed1310450dde749164c419ec6b5da0a4fbb98bc))
+* **checkbox:** improve css variables ([#317](https://github.com/kstepien3/ng-zen/issues/317)) ([bbe1437](https://github.com/kstepien3/ng-zen/commit/bbe143704163394a9c9ce446aa9d749a57f9c62c))
+* **divider:** improve css variables ([#316](https://github.com/kstepien3/ng-zen/issues/316)) ([7a19ce7](https://github.com/kstepien3/ng-zen/commit/7a19ce72db58e8d23a4786aae2787db6bcfdbf6d))
+
+## [20.3.0-next.2](https://github.com/kstepien3/ng-zen/compare/v20.3.0-next.1...v20.3.0-next.2) (2025-09-11)
+
+### 🛠️ Code Refactor
+
+* **input:** improve css variables ([#314](https://github.com/kstepien3/ng-zen/issues/314)) ([58cdbb3](https://github.com/kstepien3/ng-zen/commit/58cdbb3bafb9c10057b75d73c7234247e519c97e))
+* **skeleton:** improve css variables ([#313](https://github.com/kstepien3/ng-zen/issues/313)) ([9f0c8fd](https://github.com/kstepien3/ng-zen/commit/9f0c8fd1b23172fa5bb9bf9f42b6739c7b232876))
+
+### 📚 Documentation
+
+* **textarea:** update jsdoc about css variables ([#311](https://github.com/kstepien3/ng-zen/issues/311)) ([6ceabb5](https://github.com/kstepien3/ng-zen/commit/6ceabb58e6549e87bdbbe3b3b2f6e2e0928ab49b))
+
+## [20.3.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.2.1...v20.3.0-next.1) (2025-09-09)
+
+### 🚀 New Features
+
+* **switch:** add animations ([#303](https://github.com/kstepien3/ng-zen/issues/303)) ([6b48d4f](https://github.com/kstepien3/ng-zen/commit/6b48d4f39db1e5bfe22920fa749b652ac65e4432))
+
+### 🛠️ Code Refactor
+
+* **switch:** improve styles, css variables ([#304](https://github.com/kstepien3/ng-zen/issues/304)) ([3c04b87](https://github.com/kstepien3/ng-zen/commit/3c04b8754cd25af8cfc0c0ffa89ac8633de33145))
+* **textarea:** improve css variables ([#305](https://github.com/kstepien3/ng-zen/issues/305)) ([a9b412c](https://github.com/kstepien3/ng-zen/commit/a9b412c8ab1f77ba3d602384c963aade62308e6b))
+
+### 📚 Documentation
+
+* **README.md:** fix links ([#302](https://github.com/kstepien3/ng-zen/issues/302)) ([089587c](https://github.com/kstepien3/ng-zen/commit/089587c2ecbb8c27492bc34abd4896e7842e7d04))
+
 ## [20.2.1](https://github.com/kstepien3/ng-zen/compare/v20.2.0...v20.2.1) (2025-09-01)
 
 ### 🐛 Bug Fixes
