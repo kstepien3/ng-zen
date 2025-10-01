@@ -1,0 +1,39 @@
+// Globals
+$transition-duration: var(--zen-transition-duration, 0.4s);
+$outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
+
+:host {
+  --zen-alert-padding: 1rem;
+  --zen-alert-bg-color: hsl(0deg 0% 100%);
+  --zen-alert-color: hsl(0deg 0% 0%);
+  --zen-alert-border: 1px solid hsl(0deg 0% 80%);
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  padding: var(--zen-alert-padding);
+  background-color: var(--zen-alert-bg-color);
+  color: var(--zen-alert-color);
+  border: var(--zen-alert-border);
+  border-radius: 0.625rem;
+  font-size: 14px;
+  transition-property: background-color, opacity;
+  transition-duration: $transition-duration;
+  transition-timing-function: ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+/* Title styles */
+::ng-deep [alert-title] {
+  padding: 0;
+  margin: 0;
+}
