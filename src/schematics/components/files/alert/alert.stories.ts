@@ -55,7 +55,7 @@ export default {
     props: {},
     template: `
       <zen-alert>
-        ${icon ? '<zen-icon icon="' + icon + '" absoluteStrokeWidth/>' : ''}
+        ${icon ? '<zen-icon alert-icon icon="' + icon + '" />' : ''}
         <h3 alert-title>${title}</h3>
         ${content}
       </zen-alert>`,
