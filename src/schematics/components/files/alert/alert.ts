@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  *
  * ```html
  * <zen-alert>
+ *   <zen-icon alert-icon icon="Notification02Icon" />
  *   <h3 alert-title>Title</h3>
  *   content
  * </zen-alert>
@@ -34,7 +35,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'zen-alert',
   template: `
-    <ng-content select="zen-icon" />
+    <ng-content select="[alert-icon]" />
     <div class="content">
       <ng-content select="[alert-title]" />
       <ng-content />
