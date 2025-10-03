@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://kstepien3.github.io/ng-zen/">
-    <img src="https://raw.githubusercontent.com/kstepien3/ng-zen/master/images/logo.png" alt="@ng-zen/cli Logo" width="256" />
+    <img src="https://raw.githubusercontent.com/kstepien3/ng-zen/master/assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
   </a>
   
   <h1>@ng-zen/cli</h1>
@@ -117,6 +117,7 @@ pnpm add -D @ng-zen/cli@next
 | Component        | Description                      | Features                                           |
 | ---------------- | -------------------------------- | -------------------------------------------------- |
 | **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles      |
+| **Alert**        | Informational messages           | Customizable styles, dismissible options           |
 | **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons  |
 | **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation    |
 | **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness |

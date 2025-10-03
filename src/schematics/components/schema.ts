@@ -10,7 +10,8 @@ export type ComponentType =
   | 'input'
   | 'skeleton'
   | 'switch'
-  | 'textarea';
+  | 'textarea'
+  | 'alert';
 
 export interface Schema extends GeneratorSchemaBase {
   components: ComponentType[];
