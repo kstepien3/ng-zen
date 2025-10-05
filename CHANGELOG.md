@@ -1,3 +1,17 @@
+## [20.4.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.3.0...v20.4.0-next.1) (2025-10-03)
+
+### 🚀 New Features
+
+* **alert:** add component ([#337](https://github.com/kstepien3/ng-zen/issues/337)) ([bc59953](https://github.com/kstepien3/ng-zen/commit/bc59953dc263561b0a8fb4e3fd0e753c1c14df77))
+
+### 🐛 Bug Fixes
+
+* **alert:** update icon selector ([#338](https://github.com/kstepien3/ng-zen/issues/338)) ([99b9d63](https://github.com/kstepien3/ng-zen/commit/99b9d63e0bbd9ef4dc61672b2b1b393ecd26c406))
+
+### 📚 Documentation
+
+* **seo:** add seo features ([#332](https://github.com/kstepien3/ng-zen/issues/332)) ([3afc125](https://github.com/kstepien3/ng-zen/commit/3afc12595d39ae8ffad8223e787862d143ec9b6a))
+
 ## [20.3.0](https://github.com/kstepien3/ng-zen/compare/v20.2.1...v20.3.0) (2025-09-21)
 
 ### 🚀 New Features
