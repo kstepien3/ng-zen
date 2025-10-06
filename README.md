@@ -128,7 +128,58 @@ pnpm add -D @ng-zen/cli@next
 | **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels       |
 | **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation          |
 
-> 💡 **More components coming soon!** Planned: Directives, Pipes, Services, and additional UI elements.
+## 📋 Roadmap
+
+We're expanding @ng-zen/cli with high-priority UI components, directives, pipes, and services—ordered by importance and reusability. This ensures foundational elements (like icons) support complex ones (like modals).
+
+### Components
+
+1. **Card** - Core layout container
+2. **Modal/Dialog** - Essential for interactions
+3. **Select/Dropdown** - Key for forms
+4. **Tabs** - Navigation basics
+5. **Accordion** - Collapsible content
+6. **Progress Bar** - Loading feedback
+7. **Spinner** - Loading states
+8. **Badge** - Status indicators
+9. **Tooltip** - Contextual help
+10. **Breadcrumb** - Navigation aids
+11. **Pagination** - Data lists
+12. **Menu/Dropdown Menu** - Advanced navigation
+13. **Sidebar** - Layout structure
+14. **Table/Data Table** - Data display
+15. **Stepper/Wizard** - Multi-step flows
+16. **Toast/Notification** - Alert extensions
+17. **Chip/Tag** - Labels
+18. **Slider/Range** - Form inputs
+19. **Date Picker** - Advanced forms
+
+### Directives
+
+1. **Click Outside** - Modal/dropdown behavior
+2. **Tooltip Directive** - Attachable tooltips
+3. **Skeleton Loading** - Loading placeholders
+4. **Spinner Directive** - Loading overlays
+5. **Focus Trap** - Accessibility
+6. **Ripple Effect** - Button feedback
+7. **Auto Focus** - Form UX
+8. **Debounce** - Input performance
+
+### Pipes
+
+1. **Truncate** - Text display
+2. **Date Format** - Date handling
+3. **Currency** - Financial display
+4. **Pluralize** - Dynamic text
+
+### Services
+
+1. **Theme Service** - Global theming
+2. **Notification Service** - Toast management
+3. **Breakpoint Service** - Responsive logic
+4. **Icon Registry Service** - Icon management
+
+> 📖 [Full Roadmap Details](https://kstepien3.github.io/ng-zen/?path=/docs/roadmap--page) - Interactive breakdown in Storybook.
 
 ## 💡 Usage Examples
 
@@ -263,7 +314,7 @@ export class LoginComponent {}
 - ✅ **Core Features:** Component generation is stable and tested
 - ✅ **Angular 20+ Support:** Compatible with latest Angular versions
 - 🔄 **Continuous Improvement:** Regular updates and new components
-- 📋 **Roadmap:** Directives, pipes, services, and more UI components planned
+- 📋 **Roadmap:** See below for prioritized expansions
 
 ### Release Channels
 

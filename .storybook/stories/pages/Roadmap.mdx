@@ -1,0 +1,127 @@
+# 🗺️ Roadmap
+
+Welcome to the **@ng-zen/cli roadmap**! This page outlines our planned expansions, prioritized by **importance** (fundamental role in UI building) and **reusability** (how often components can be embedded in others). We focus on production-ready, customizable Angular elements that integrate seamlessly with existing components.
+
+> **📝 Note**: This roadmap is not set in stone and may evolve based on community feedback, technical constraints, or new priorities. Items can be reordered, added, or removed as development progresses.
+
+## 🎯 Why This Roadmap?
+
+- **🚀 Importance**: Builds from core UI primitives (e.g., cards, modals) to advanced features (e.g., tables, wizards).
+- **🔄 Reusability**: Prioritizes elements like icons and directives that enhance multiple components.
+- **📊 Progress**: Existing components are marked ✅. Future ones are planned for upcoming releases.
+
+## 📋 Table of Contents
+
+- [Components](#components)
+- [Directives](#directives)
+- [Pipes](#pipes)
+- [Services](#services)
+- [Contributing](#contributing-to-the-roadmap)
+
+## 🧩 Components
+
+Components are the core UI building blocks. Existing ones are **✅ implemented** and available now.
+
+### 🔥 High Importance
+
+These are essential for most apps and highly reusable.
+
+- **Icon** ✅ - SVG icon system; foundational for visual consistency in buttons, alerts, etc.
+- **Button** ✅ - Interactive buttons with primary/secondary variants, loading states, and icons.
+- **Input** ✅ - Text input fields with validation, prefixes/suffixes, and types.
+- **Card** - Core layout container; reusable in modals, lists, and content sections.
+- **Modal/Dialog** - Essential for user interactions, confirmations, and overlays; embeds cards and buttons.
+- **Select/Dropdown** - Key for forms; uses icons and inputs for selections.
+- **Tabs** - Navigation component; integrates buttons and icons for tabbed interfaces.
+- **Accordion** - Collapsible content sections; uses icons and buttons for expansion.
+
+### ⚖️ Medium Importance
+
+Useful for enhanced UX and specific use cases.
+
+- **Avatar** ✅ - User profile images and initials with fallback support.
+- **Alert** ✅ - Informational messages with customizable styles and dismissible options.
+- **Checkbox** ✅ - Form checkboxes with indeterminate state and validation.
+- **Divider** ✅ - Visual separators, horizontal or vertical, with labels and custom thickness.
+- **Form Control** ✅ - Form field wrapper with labels, validation messages, and indicators.
+- **Switch** ✅ - Toggle controls with on/off states, disabled state, and custom labels.
+- **Textarea** ✅ - Multi-line text inputs with auto-resize, character counts, and validation.
+- **Progress Bar** - Loading feedback component; integrates with skeletons and modals.
+- **Spinner** - Loading states; can be used in buttons, modals, and with directives.
+- **Badge** - Status indicators and notifications; reusable in avatars and buttons.
+- **Tooltip** - Contextual help; attaches to any element for guidance.
+- **Breadcrumb** - Navigation aids; uses icons and links for path display.
+- **Pagination** - Data list navigation; uses buttons and inputs for page controls.
+- **Menu/Dropdown Menu** - Advanced navigation; uses icons and buttons for menus.
+- **Sidebar** - Layout structure; embeds menus and icons for side navigation.
+- **Table/Data Table** - Data display; uses pagination and inputs for sorting/filtering.
+- **Skeleton** ✅ - Loading placeholders with animation and responsive shapes.
+
+### 🧊 Low Importance
+
+Nice-to-have for specialized apps.
+
+- **Stepper/Wizard** - Multi-step flows; uses buttons and progress bars.
+- **Toast/Notification** - Alert extensions for temporary messages.
+- **Chip/Tag** - Labels for selections; reusable in inputs and selects.
+- **Slider/Range** - Form input for ranges; extends form-control.
+- **Date Picker** - Advanced date selection; uses inputs and modals.
+
+## 🎣 Directives
+
+Directives enhance behavior without adding DOM elements.
+
+### 🔥 High Importance
+
+- **Click Outside** - Handles modal/dropdown closing; highly reusable for UX.
+- **Tooltip Directive** - Attaches tooltips to any element for better help.
+
+### ⚖️ Medium Importance
+
+- **Skeleton Loading** - Shows skeleton placeholders during async operations on containers.
+- **Spinner Directive** - Overlays spinner on elements during actions.
+- **Focus Trap** - Improves accessibility by trapping focus in modals.
+- **Ripple Effect** - Adds button feedback animations on buttons and cards.
+
+### 🧊 Low Importance
+
+- **Auto Focus** - Automatically focuses form elements for better UX.
+- **Debounce** - Optimizes input performance in searches and inputs.
+
+## 🔧 Pipes
+
+Pipes transform data for display.
+
+### ⚖️ Medium Importance
+
+- **Truncate** - Shortens text for display in cards and tooltips.
+- **Date Format** - Formats dates for tables and inputs.
+- **Currency** - Handles financial display in tables and inputs.
+
+### 🧊 Low Importance
+
+- **Pluralize** - Dynamically pluralizes text in badges and alerts.
+
+## ⚙️ Services
+
+Services provide app-wide logic and state.
+
+### 🔥 High Importance
+
+- **Theme Service** - Manages global theming; affects all components via CSS variables.
+- **Notification Service** - Handles toast and alert management across the app.
+
+### ⚖️ Medium Importance
+
+- **Breakpoint Service** - Provides responsive breakpoints for sidebars and modals.
+- **Icon Registry Service** - Centralizes icon management for consistency.
+
+## 🤝 Contributing to the Roadmap
+
+Want to help shape the future of @ng-zen/cli?
+
+- **💡 Suggest Ideas**: Check [open issues](https://github.com/kstepien3/ng-zen/issues) or propose new components/directives.
+- **📊 Provide Feedback**: Prioritization may shift based on community needs.
+- **🔧 Contribute Code**: See the [Development Guide](https://github.com/kstepien3/ng-zen/blob/master/DEVELOPMENT.md) for setup.
+
+Let's build the ultimate Angular UI toolkit together! 🚀
