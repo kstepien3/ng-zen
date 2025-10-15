@@ -77,7 +77,7 @@ importers:
         version: 1.0.4(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))
       '@hugeicons/core-free-icons':
         specifier: ^1.0.14
-        version: 1.0.14
+        version: 1.1.0
       '@schematics/angular':
         specifier: ^20.0.2
         version: 20.0.2(chokidar@4.0.3)
@@ -1808,8 +1808,8 @@ packages:
       '@angular/common': '>=17.0.0 <20.0.0'
       '@angular/core': '>=17.0.0 <20.0.0'
 
-  '@hugeicons/core-free-icons@1.0.14':
-    resolution: {integrity: sha512-0vY3lyMDZVgA+wBJHjuvOAx6y0Mg0cBgYNsHt8Rw5eAXZ0LqM3T3xwIrovEJ1TtusUwFPb7QUBi1Ubux4VhQJg==}
+  '@hugeicons/core-free-icons@1.1.0':
+    resolution: {integrity: sha512-xLLQcIiLKvazXjjhnO2qZ/piOo9yxAFQ5A67XP+HNpvFrO5hVEGv1qebHSHPK1tbSST9dZF3fhH4AfdyumqJsg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -11094,7 +11094,7 @@ snapshots:
       '@angular/core': 20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)
       tslib: 2.8.1
 
-  '@hugeicons/core-free-icons@1.0.14': {}
+  '@hugeicons/core-free-icons@1.1.0': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -12518,7 +12518,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.34.0(typescript@5.8.3)
       '@typescript-eslint/types': 8.34.0
-      debug: 4.4.3
+      debug: 4.4.1
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
