@@ -14,7 +14,7 @@ jobs:
     outputs:
       cache-key: ${{ steps.cache-key.outputs.cache-key }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
@@ -41,7 +41,7 @@ jobs:
     needs: install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
@@ -65,7 +65,7 @@ jobs:
     needs: install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
@@ -90,7 +90,7 @@ jobs:
     needs: [install, lint, test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
