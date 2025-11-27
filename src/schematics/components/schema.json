@@ -29,6 +29,7 @@
       "items": {
         "type": "string",
         "enum": [
+          "alert",
           "avatar",
           "button",
           "checkbox",
@@ -36,10 +37,10 @@
           "form-control",
           "icon",
           "input",
+          "radio",
           "skeleton",
           "switch",
-          "textarea",
-          "alert"
+          "textarea"
         ]
       },
       "multiselect": true,
