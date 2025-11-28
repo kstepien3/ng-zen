@@ -1,6 +1,7 @@
 import { GeneratorSchemaBase } from '../../types';
 
 export type ComponentType =
+  | 'alert'
   | 'avatar'
   | 'button'
   | 'checkbox'
@@ -8,10 +9,10 @@ export type ComponentType =
   | 'form-control'
   | 'icon'
   | 'input'
+  | 'radio'
   | 'skeleton'
   | 'switch'
-  | 'textarea'
-  | 'alert';
+  | 'textarea';
 
 export interface Schema extends GeneratorSchemaBase {
   components: ComponentType[];
