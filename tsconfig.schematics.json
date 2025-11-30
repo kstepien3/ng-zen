@@ -20,7 +20,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es2022",
-    "types": ["jest"]
+    "types": ["node"]
   },
   "angularCompilerOptions": {
     "compilationMode": "partial"

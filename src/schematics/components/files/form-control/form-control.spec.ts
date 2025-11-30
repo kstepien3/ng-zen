@@ -1,5 +1,6 @@
-import { Component, model } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, model, provideZonelessChangeDetection } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { ZenFormControl, ZenFormControlProvider } from './form-control';
 
@@ -12,20 +13,16 @@ class FormControl extends ZenFormControl<string> {
 }
 
 describe('FormControl', () => {
-  let component: FormControl;
-  let fixture: ComponentFixture<FormControl>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormControl],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(FormControl);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(FormControl);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

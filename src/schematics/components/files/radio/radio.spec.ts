@@ -1,6 +1,8 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ZenRadio } from './radio';
 import { ZenRadioRegistry } from './radio.registry';
@@ -13,7 +15,7 @@ describe('ZenRadio', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ZenRadio, FormsModule, ReactiveFormsModule],
-      providers: [ZenRadioRegistry],
+      providers: [ZenRadioRegistry, provideZonelessChangeDetection()],
     }).compileComponents();
 
     registry = TestBed.inject(ZenRadioRegistry);
@@ -61,7 +63,7 @@ describe('ZenRadio', () => {
   });
 
   it('should call onInput when radio is selected', () => {
-    const spy = jest.spyOn(component, 'onInput');
+    const spy = vi.spyOn(component, 'onInput');
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
     inputElement.checked = true;
@@ -74,7 +76,7 @@ describe('ZenRadio', () => {
     component.disabled.set(true);
     fixture.detectChanges();
 
-    const spy = jest.spyOn(component, 'onInput');
+    const spy = vi.spyOn(component, 'onInput');
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
     inputElement.checked = true;
@@ -158,7 +160,7 @@ describe('ZenRadio', () => {
   });
 
   it('should call onTouched when host element loses focus', () => {
-    const onTouchedSpy = jest.fn();
+    const onTouchedSpy = vi.fn();
     component.registerOnTouched(onTouchedSpy);
 
     const hostElement = fixture.debugElement.nativeElement;
@@ -204,7 +206,7 @@ describe('ZenRadioRegistry', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ZenRadio],
-      providers: [ZenRadioRegistry],
+      providers: [ZenRadioRegistry, provideZonelessChangeDetection()],
     });
 
     registry = TestBed.inject(ZenRadioRegistry);
@@ -225,8 +227,8 @@ describe('ZenRadioRegistry', () => {
     registry.add('test-group', radio2);
 
     // Test that radios are added by checking if select works
-    const spy1 = jest.spyOn(radio1, 'onInput');
-    const spy2 = jest.spyOn(radio2, 'onInput');
+    const spy1 = vi.spyOn(radio1, 'onInput');
+    const spy2 = vi.spyOn(radio2, 'onInput');
 
     registry.select('test-group', 'option1');
 
@@ -241,8 +243,8 @@ describe('ZenRadioRegistry', () => {
     registry.remove('test-group', radio1);
 
     // Test that radio1 is removed by checking if select only affects radio2
-    const spy1 = jest.spyOn(radio1, 'onInput');
-    const spy2 = jest.spyOn(radio2, 'onInput');
+    const spy1 = vi.spyOn(radio1, 'onInput');
+    const spy2 = vi.spyOn(radio2, 'onInput');
 
     registry.select('test-group', 'option1');
 
@@ -251,8 +253,8 @@ describe('ZenRadioRegistry', () => {
   });
 
   it('should select value in group', () => {
-    const spy1 = jest.spyOn(radio1, 'onInput');
-    const spy2 = jest.spyOn(radio2, 'onInput');
+    const spy1 = vi.spyOn(radio1, 'onInput');
+    const spy2 = vi.spyOn(radio2, 'onInput');
 
     registry.add('test-group', radio1);
     registry.add('test-group', radio2);
