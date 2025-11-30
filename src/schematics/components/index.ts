@@ -1,12 +1,25 @@
-import { join, normalize } from '@angular-devkit/core';
-import { chain, Rule, schematic } from '@angular-devkit/schematics';
+import { join, normalize, Path } from '@angular-devkit/core';
+import { chain, Rule, schematic, Tree } from '@angular-devkit/schematics';
+import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 
 import { applyFileTemplateUtil } from '../../utils';
 import { Schema as ComponentOptions } from './schema';
 
 export function componentGenerator({ components, ...options }: ComponentOptions): Rule {
-  return async () => {
-    const workingDirectory = normalize(join(options.currentDirectory, options.path ?? './'));
+  return async (tree: Tree) => {
+    const workspace = await getWorkspace(tree);
+    const projectName = options.project || (workspace.extensions['defaultProject'] as string);
+    const project = workspace.projects.get(projectName);
+
+    if (!project) {
+      throw new Error(`Project "${projectName}" not found in workspace.`);
+    }
+
+    if (options.path === undefined) {
+      options.path = buildDefaultPath(project) as Path;
+    }
+
+    const workingDirectory = normalize(join(options.currentDirectory, options.path));
 
     return chain([
       ...applyFileTemplateUtil(components, { ...options, path: workingDirectory }),

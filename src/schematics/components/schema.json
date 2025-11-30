@@ -16,11 +16,19 @@
       "readOnly": true
     },
     "path": {
-      "description": "Relative subpath to append to rootPath",
+      "description": "The path at which to create the component file, relative to the current workspace. If not provided, a folder with the same name as the component will be created in the project's source directory.",
       "type": "string",
+      "format": "path",
       "$default": {
         "$source": "argv",
         "index": 0
+      }
+    },
+    "project": {
+      "description": "The name of the project",
+      "type": "string",
+      "$default": {
+        "$source": "projectName"
       }
     },
     "components": {
