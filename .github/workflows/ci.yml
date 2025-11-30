@@ -78,7 +78,7 @@ jobs:
             node_modules
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
-      - run: pnpm run test
+      - run: pnpm run test:no-watch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
