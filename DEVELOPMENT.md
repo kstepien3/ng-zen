@@ -180,7 +180,7 @@ Output artifacts are placed in the `dist/` directory
 
 Test your local build in a separate project before submitting a PR to develop.
 
-1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g`), then `verdaccio`.\
+1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g verdaccio`),
 2. Build Library: `pnpm run build`.
 3. Publish Locally: `pnpm run publish:verdaccio`.
 4. Install in Test Project: `ng add @ng-zen/cli --registry http://localhost:4873/` (or pnpm add ...).

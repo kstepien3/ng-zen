@@ -1,0 +1,86 @@
+// Globals
+$error: var(--zen-error, hsl(0deg 70% 50%));
+$focus-shadow: var(--zen-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
+$outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
+$transition-duration: var(--zen-transition-duration, 0.2s);
+
+:host {
+  --zen-radio-size: 1rem;
+  --zen-radio-border-radius: 50%;
+  --zen-radio-appearance: hsl(0deg 0% 10%);
+  --zen-radio-disabled-opacity: 0.6;
+  --zen-radio-border: 1px solid hsl(0deg 0% 80%);
+}
+
+input {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  border: var(--zen-radio-border);
+  border-radius: var(--zen-radio-border-radius);
+  height: var(--zen-radio-size);
+  width: var(--zen-radio-size);
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition:
+    background-color ease,
+    border-color ease;
+  transition-duration: $transition-duration;
+  user-select: none;
+  justify-content: center;
+  display: grid;
+  place-items: center;
+
+  &:has(input:checked) {
+    border-color: var(--zen-radio-appearance);
+  }
+
+  &:has(input[type='radio']:disabled) {
+    opacity: var(--zen-radio-disabled-opacity);
+
+    &,
+    input {
+      cursor: not-allowed;
+    }
+  }
+
+  &:has(input:focus-visible) {
+    outline: $outline;
+    box-shadow: $focus-shadow;
+  }
+
+  &:has(input:user-invalid) {
+    border-color: $error;
+  }
+}
+
+.radio-dot {
+  width: calc(var(--zen-radio-size) * 0.4);
+  height: calc(var(--zen-radio-size) * 0.4);
+  background-color: var(--zen-radio-appearance);
+  border-radius: 50%;
+  animation: radio-dot-enter 0.2s ease-out;
+}
+
+@keyframes radio-dot-enter {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
