@@ -1,3 +1,14 @@
+## [20.5.0](https://github.com/kstepien3/ng-zen/compare/v20.4.0...v20.5.0) (2025-11-30)
+
+### 🚀 New Features
+
+* **radio:** add component ([#358](https://github.com/kstepien3/ng-zen/issues/358)) ([a2f170e](https://github.com/kstepien3/ng-zen/commit/a2f170e0b18eadfc43c39a1d36597192d0f90c73))
+
+### 📚 Documentation
+
+* **assets:** optimize logos ([#354](https://github.com/kstepien3/ng-zen/issues/354)) ([66fd5ba](https://github.com/kstepien3/ng-zen/commit/66fd5ba61e005b407c036dd34dcfa996e8884e8b))
+* **development:** fix verdaccio installation command in guide ([#359](https://github.com/kstepien3/ng-zen/issues/359)) ([6945e65](https://github.com/kstepien3/ng-zen/commit/6945e65f648362ec096e17de6a2118be3340cbee))
+
 ## [20.5.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.4.0...v20.5.0-next.1) (2025-11-28)
 
 ### 🚀 New Features
