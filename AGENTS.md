@@ -22,12 +22,16 @@ src/schematics/components/files
 ## Commands
 
 - **Build**: `ng build` or `pnpm run build`
-- **Test all**: `ng test` or `pnpm run test`
-- **Test single**: `ng test --include="**/component.spec.ts"`
+- **Test all**: `ng test:no-watch` or `pnpm run test:no-watch`
+- **Test single**: `ng test:no-watch --include="**/component.spec.ts"`
 - **Lint**: `ng lint` or `pnpm run lint`
 - **Lint fix**: `ng lint --fix` or `pnpm run lint:fix`
 - **Storybook serve**: `ng run cli:storybook` or `pnpm run storybook`
 - **Storybook build**: `ng run cli:build-storybook` or `pnpm run storybook:build`
+
+### Avoid commands:
+
+- `ng test` or `pnpm run test` - avoid watch mode. Run tests witch `--no-watch` flag like `ng test:no-watch` or `pnpm run test:no-watch`.
 
 ## Code Style
 

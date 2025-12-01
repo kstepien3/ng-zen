@@ -13,5 +13,9 @@ const config: StorybookConfig = {
   docs: {
     defaultName: 'Docs',
   },
+  env: config => ({
+    ...config,
+    NODE_ENV: 'development',
+  }),
 };
 export default config;
