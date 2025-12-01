@@ -72,9 +72,6 @@ importers:
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.1
-      '@hugeicons/angular':
-        specifier: ^1.0.4
-        version: 1.0.4(@angular/common@20.3.14(@angular/core@20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1))
       '@hugeicons/core-free-icons':
         specifier: ^1.2.1
         version: 1.2.1
@@ -1608,12 +1605,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@hugeicons/angular@1.0.4':
-    resolution: {integrity: sha512-tonqmJZMfdVCoKyktnWY2I2pSoVYlLukxI9M0nV8fNP8XjJ0ZoBTbK+vMSTPn7kT2tgx6I0j+vSLjE3bjCB8PQ==}
-    peerDependencies:
-      '@angular/common': '>=17.0.0 <20.0.0'
-      '@angular/core': '>=17.0.0 <20.0.0'
 
   '@hugeicons/core-free-icons@1.2.1':
     resolution: {integrity: sha512-ho0QdGMkgL+kt+QsZocCsKvJou1rfyVQWARrxIhNLi+9tCKayUUtD9jlHgioaRphmskSl84TxrDm9Ae0G4Uu1g==}
@@ -10806,12 +10797,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
-
-  '@hugeicons/angular@1.0.4(@angular/common@20.3.14(@angular/core@20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1))':
-    dependencies:
-      '@angular/common': 20.3.14(@angular/core@20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
-      '@angular/core': 20.3.14(@angular/compiler@20.3.14)(rxjs@7.8.2)(zone.js@0.15.1)
-      tslib: 2.8.1
 
   '@hugeicons/core-free-icons@1.2.1': {}
 

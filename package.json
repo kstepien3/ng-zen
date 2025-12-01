@@ -78,7 +78,7 @@
     "save": "devDependencies"
   },
   "schematics": "./schematics/collection.json",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.24.0",
   "peerDependencies": {
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0"
@@ -107,7 +107,6 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@compodoc/compodoc": "^1.1.32",
     "@eslint/js": "^9.39.1",
-    "@hugeicons/angular": "^1.0.4",
     "@hugeicons/core-free-icons": "^1.2.1",
     "@schematics/angular": "^20.3.12",
     "@semantic-release/changelog": "^6.0.3",
