@@ -1,22 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { ZenSkeleton } from './skeleton';
 
 describe('ZenSkeleton', () => {
-  let component: ZenSkeleton;
-  let fixture: ComponentFixture<ZenSkeleton>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ZenSkeleton],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(ZenSkeleton);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(ZenSkeleton);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
