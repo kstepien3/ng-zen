@@ -1,3 +1,17 @@
+## [21.0.0-next.1](https://github.com/kstepien3/ng-zen/compare/v20.5.0...v21.0.0-next.1) (2025-12-16)
+
+### ⚠ BREAKING CHANGES
+
+* upgrade Angular v21 + Storybook v10, add vitest  (#363)
+
+### chore
+
+* upgrade Angular v21 + Storybook v10, add vitest  ([#363](https://github.com/kstepien3/ng-zen/issues/363)) ([13bd57e](https://github.com/kstepien3/ng-zen/commit/13bd57ebd5b5fd26721947645dace5da97defa45))
+
+### 📚 Documentation
+
+* **readme:** update info about testing framework ([#371](https://github.com/kstepien3/ng-zen/issues/371)) ([9fe8e7f](https://github.com/kstepien3/ng-zen/commit/9fe8e7f28911731c5c6482d7b69463e72a4c4232))
+
 ## [20.5.0](https://github.com/kstepien3/ng-zen/compare/v20.4.0...v20.5.0) (2025-11-30)
 
 ### 🚀 New Features
