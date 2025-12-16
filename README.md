@@ -238,7 +238,7 @@ export class LoginComponent {}
 
 ### **Testing Integration**
 
-- **Jest Ready:** All tests use Jest framework
+- **Vitest Ready:** All tests use Vitest framework for fast, modern unit testing
 - **Component Testing:** Isolated unit tests for each component
 - **Storybook Testing:** Visual testing and documentation
 
