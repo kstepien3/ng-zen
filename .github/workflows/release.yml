@@ -9,7 +9,7 @@ on:
 
 env:
   NODE_VERSION: 22
-  PNPM_VERSION: 10.0.0
+  PNPM_VERSION: 10.24.0
   RETENTION_DAYS: 7
 
 jobs:
