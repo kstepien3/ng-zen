@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: 22
-  PNPM_VERSION: 10.0.0
+  PNPM_VERSION: 10.24.0
 
 permissions:
   contents: read
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
       - name: Setup pnpm
