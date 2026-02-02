@@ -1,0 +1,29 @@
+:host {
+  position-anchor: --profile-button;
+  position: absolute;
+  margin: 0;
+  inset: auto 0 0;
+  width: max-content;
+  max-width: 300px;
+  z-index: 1000;
+  bottom: calc(anchor(top) + 8px);
+  place-self: center anchor-center;
+  position-try-fallbacks:
+    --bottom,
+    --top,
+    flip-block flip-inline;
+}
+
+:host[popover]:popover-open {
+  display: block;
+}
+
+@position-try --bottom {
+  position-area: bottom center;
+  bottom: 8px;
+}
+
+@position-try --top {
+  position-area: top center;
+  top: 8px;
+}
