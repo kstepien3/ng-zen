@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-export type ZenPopoverType = 'auto' | 'manual' | 'hint';
-export type ZenPopoverPosition = 'top' | 'bottom' | 'left' | 'right';
-
 /**
  * ZenPopover is a reusable popover component that leverages the native Popover API.
  * It provides a consistent and customizable popover style with support for anchor positioning,
@@ -23,7 +20,7 @@ export type ZenPopoverPosition = 'top' | 'bottom' | 'left' | 'right';
   template: `
     <ng-content />
   `,
-  styleUrl: './popover.scss',
+  styleUrl: './popover-host.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     popover: 'auto',

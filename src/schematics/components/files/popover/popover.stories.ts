@@ -5,8 +5,9 @@ import { ZenPopover } from './popover';
 
 type Story = StoryObj<ZenPopover>;
 
+// TODO: Move to directives
 export default {
-  title: 'Components/Popover',
+  title: 'Directive/Popover',
   component: ZenPopover,
   decorators: [moduleMetadata({ imports: [ZenButton] })],
   argTypes: {},

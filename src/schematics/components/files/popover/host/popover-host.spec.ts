@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { ZenPopover } from './popover-host';
+import { ZenPopoverHost } from './popover-host';
 
-describe('ZenPopover', () => {
-  let component: ZenPopover;
-  let fixture: ComponentFixture<ZenPopover>;
+describe('ZenPopoverHost', () => {
+  let component: ZenPopoverHost;
+  let fixture: ComponentFixture<ZenPopoverHost>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenPopover],
+      imports: [ZenPopoverHost],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ZenPopover);
+    fixture = TestBed.createComponent(ZenPopoverHost);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
