@@ -1,2 +1,2 @@
 export * from './popover';
-export * from './popover-target';
+export * from './popover-host';

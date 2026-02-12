@@ -1,36 +1,67 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  Directive,
+  effect,
+  ElementRef,
+  EmbeddedViewRef,
+  inject,
+  input,
+  Renderer2,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 
-export type ZenPopoverType = 'auto' | 'manual' | 'hint';
-export type ZenPopoverPosition = 'top' | 'bottom' | 'left' | 'right';
+import { ZenPopoverHost } from './popover-host';
 
-/**
- * ZenPopover is a reusable popover component that leverages the native Popover API.
- * It provides a consistent and customizable popover style with support for anchor positioning,
- * animations, and various trigger modes.
- *
- * ### CSS Custom Properties
- *
- * You can customize the component using CSS custom properties:
- *
- *
- * @author Konrad Stępień
- * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
- * @see [GitHub](https://github.com/kstepien3/ng-zen)
- * @see [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
- */
-@Component({
-  selector: 'zen-popover',
-  template: `
-    <ng-content />
-  `,
-  styleUrl: './popover.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    popover: 'true',
-    '[attr.id]': 'id()',
-  },
+@Directive({
+  selector: '[zenPopover]',
+  standalone: true,
 })
 export class ZenPopover {
-  private static counter = 0;
-  readonly id = input<string>(`zen-popover-${ZenPopover.counter++}`);
+  readonly content = input.required<TemplateRef<unknown> | string>({ alias: 'zenPopover' });
+
+  private vcr = inject(ViewContainerRef);
+  private renderer = inject(Renderer2);
+  private triggerEl = inject(ElementRef).nativeElement;
+
+  private static uniqueId = 0;
+  private readonly id = `zen-popover-${ZenPopover.uniqueId++}`;
+  private readonly anchorName = `--anchor-${this.id}`;
+
+  private viewRef: EmbeddedViewRef<unknown> | null = null;
+
+  constructor() {
+    effect(onCleanup => {
+      const contentValue = this.content();
+
+      // 1. Konfiguracja przycisku (Trigger)
+      this.renderer.setStyle(this.triggerEl, 'anchor-name', this.anchorName);
+      this.renderer.setAttribute(this.triggerEl, 'popovertarget', this.id);
+
+      // 2. Tworzenie hosta popovera
+      const hostRef = this.vcr.createComponent(ZenPopoverHost);
+      hostRef.setInput('id', this.id);
+
+      const popoverEl = hostRef.location.nativeElement;
+      this.renderer.setStyle(popoverEl, 'position-anchor', this.anchorName);
+
+      // 3. Logika renderowania zawartości
+      if (contentValue instanceof TemplateRef) {
+        // Renderowanie szablonu
+        this.viewRef = contentValue.createEmbeddedView({});
+        this.renderer.appendChild(popoverEl, this.viewRef.rootNodes[0]);
+      } else {
+        // Renderowanie zwykłego tekstu
+        const textNode = this.renderer.createText(contentValue);
+        this.renderer.appendChild(popoverEl, textNode);
+      }
+
+      // Sprzątanie przy niszczeniu lub zmianie inputa
+      onCleanup(() => {
+        this.viewRef?.destroy();
+        this.viewRef = null;
+        hostRef.destroy();
+        this.vcr.clear();
+      });
+    });
+  }
 }

@@ -2,14 +2,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenButton } from '../button';
 import { ZenPopover } from './popover';
-import { ZenPopoverTarget } from './popover-target';
 
 type Story = StoryObj<ZenPopover>;
 
 export default {
   title: 'Components/Popover',
   component: ZenPopover,
-  decorators: [moduleMetadata({ imports: [ZenPopoverTarget, ZenButton] })],
+  decorators: [moduleMetadata({ imports: [ZenButton] })],
   argTypes: {},
   args: {},
 } satisfies Meta<ZenPopover>;
@@ -19,10 +18,18 @@ export const Default: Story = {
   render: args => ({
     props: args,
     template: `
-        <zen-popover #popover >Test</zen-popover>
-        <button zen-btn [zenPopoverTarget]="popover" >
-          Toggle Popover
-        </button>
+      <ng-template #tpl>
+        <div>Test</div>
+      </ng-template>
+
+      <button zen-btn [zenPopover]="tpl">
+        Toggle Popover
+      </button>
+
+
+      <button zen-btn [zenPopover]="'Text'">
+        Toggle Popover
+      </button>
     `,
   }),
 };

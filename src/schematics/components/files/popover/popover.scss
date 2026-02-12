@@ -1,29 +1,356 @@
+/* CSS Variables for Customization */
 :host {
-  position-anchor: --profile-button;
+  --zen-popover-max-width: 300px;
+  --zen-popover-min-width: 200px;
+  --zen-popover-margin: 12px;
+  --zen-popover-arrow-size: 10px;
+  --zen-popover-arrow-color: white;
+  --zen-popover-border-color: #ccc;
+  --zen-popover-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  --zen-popover-border-radius: 8px;
+  --zen-popover-z-index: 1000;
+}
+
+:host {
   position: absolute;
   margin: 0;
-  inset: auto 0 0;
+  position-area: top center;
+  margin-bottom: var(--zen-popover-margin);
   width: max-content;
-  max-width: 300px;
-  z-index: 1000;
-  bottom: calc(anchor(top) + 8px);
-  place-self: center anchor-center;
+  min-width: var(--zen-popover-min-width);
+  max-width: var(--zen-popover-max-width);
+  max-height: 80vh;
+  z-index: var(--zen-popover-z-index);
+  overflow: visible;
+
+  /* Enhanced position-try with collision detection */
   position-try-fallbacks:
-    --bottom,
-    --top,
-    flip-block flip-inline;
+    --top-center, --bottom-center, --left-center, --right-center, --top-start, --top-end, --bottom-start, --bottom-end,
+    --left-start, --left-end, --right-start, --right-end, --center, --top-outside, --bottom-outside, --left-outside,
+    --right-outside;
+
+  /* Popover styling */
+  background: white;
+  border: 1px solid var(--zen-popover-border-color);
+  border-radius: var(--zen-popover-border-radius);
+  padding: 0.5rem;
+  box-shadow: var(--zen-popover-shadow);
+  overflow-y: auto;
+
+  /* Arrow positioning variables */
+  --arrow-top: calc(50% - var(--zen-popover-arrow-size) / 2);
+  --arrow-right: auto;
+  --arrow-bottom: auto;
+  --arrow-left: calc(50% - var(--zen-popover-arrow-size) / 2);
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 0;
+  --arrow-rotate: 45deg;
+  --arrow-color: var(--zen-popover-arrow-color);
+}
+
+:host[popover]:popover-open {
+  display: block;
+  contain: layout style;
+}
+
+/* Arrow - rotated square */
+:host::before {
+  content: '';
+  position: absolute;
+  width: var(--zen-popover-arrow-size);
+  height: var(--zen-popover-arrow-size);
+  background: var(--arrow-color);
+  border-width: 1px;
+  border-color: var(--zen-popover-border-color);
+  border-style: none solid solid none;
+  inset: var(--arrow-top) var(--arrow-right) var(--arrow-bottom) var(--arrow-left);
+  translate: var(--arrow-translate-x) var(--arrow-translate-y);
+  rotate: var(--arrow-rotate);
+  pointer-events: none;
+}
+
+/* Enhanced positioning fallbacks */
+@position-try --top-center {
+  position-area: top center;
+  margin: 0 0 var(--zen-popover-margin);
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: 50%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: -50%;
+}
+
+@position-try --bottom-center {
+  position-area: bottom center;
+  margin: var(--zen-popover-margin) 0 0;
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: 50%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: 50%;
+}
+
+@position-try --left-center {
+  position-area: left center;
+  margin: 0 var(--zen-popover-margin) 0 0;
+  --arrow-top: 50%;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: 100%;
+  --arrow-translate-x: 50%;
+  --arrow-translate-y: -50%;
+}
+
+@position-try --right-center {
+  position-area: right center;
+  margin: 0 0 0 var(--zen-popover-margin);
+  --arrow-top: 50%;
+  --arrow-bottom: auto;
+  --arrow-left: 100%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: -50%;
+}
+
+@position-try --top-start {
+  position-area: top start;
+  margin: 0 0 var(--zen-popover-margin);
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: 20px;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: -50%;
+}
+
+@position-try --top-end {
+  position-area: top end;
+  margin: 0 0 var(--zen-popover-margin);
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: 20px;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: -50%;
+}
+
+@position-try --bottom-start {
+  position-area: bottom start;
+  margin: var(--zen-popover-margin) 0 0;
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: 20px;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 50%;
+}
+
+@position-try --bottom-end {
+  position-area: bottom end;
+  margin: var(--zen-popover-margin) 0 0;
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: auto;
+  --arrow-right: 20px;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 50%;
+}
+
+@position-try --left-start {
+  position-area: left start;
+  margin: 0 var(--zen-popover-margin) 0 0;
+  --arrow-top: 20px;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: 100%;
+  --arrow-translate-x: 50%;
+  --arrow-translate-y: 0;
+}
+
+@position-try --left-end {
+  position-area: left end;
+  margin: 0 var(--zen-popover-margin) 0 0;
+  --arrow-top: auto;
+  --arrow-bottom: 20px;
+  --arrow-left: auto;
+  --arrow-right: 100%;
+  --arrow-translate-x: 50%;
+  --arrow-translate-y: 0;
+}
+
+@position-try --right-start {
+  position-area: right start;
+  margin: 0 0 0 var(--zen-popover-margin);
+  --arrow-top: 20px;
+  --arrow-bottom: auto;
+  --arrow-left: 100%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: 0;
+}
+
+@position-try --right-end {
+  position-area: right end;
+  margin: 0 0 0 var(--zen-popover-margin);
+  --arrow-top: auto;
+  --arrow-bottom: 20px;
+  --arrow-left: 100%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: 0;
+}
+
+@position-try --center {
+  position-area: center;
+  margin: 0;
+  --arrow-top: auto;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 0;
+  --arrow-rotate: 0;
+}
+
+@position-try --top-outside,
+@position-try --bottom-outside,
+@position-try --left-outside,
+@position-try --right-outside {
+  position-area: top center;
+  margin: 0;
+  --arrow-top: auto;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 0;
+  --arrow-rotate: 0;
 }
 
 :host[popover]:popover-open {
   display: block;
 }
 
-@position-try --bottom {
-  position-area: bottom center;
-  bottom: 8px;
+/* Strzałka - obrócony kwadrat */
+:host::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-width: 1px;
+  border-color: #ccc;
+  border-style: none solid solid none;
+  inset: var(--arrow-top) var(--arrow-right) var(--arrow-bottom) var(--arrow-left);
+  translate: var(--arrow-translate-x) var(--arrow-translate-y);
+  rotate: var(--arrow-rotate, 45deg);
+  pointer-events: none;
 }
 
+/* ========== FALLBACKI ========== */
+
+/* GÓRA - ŚRODEK */
 @position-try --top {
   position-area: top center;
-  top: 8px;
+  margin: 0 0 12px;
+
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: 50%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: -50%;
+}
+
+/* DÓŁ - ŚRODEK */
+@position-try --bottom {
+  position-area: bottom center;
+  margin: 12px 0 0;
+
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: 50%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: 50%;
+}
+
+/* LEWA - ŚRODEK */
+@position-try --left {
+  position-area: left center;
+  margin: 0 12px 0 0;
+
+  --arrow-top: 50%;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: 100%;
+  --arrow-translate-x: 50%;
+  --arrow-translate-y: -50%;
+}
+
+/* PRAWA - ŚRODEK */
+@position-try --right {
+  position-area: right center;
+  margin: 0 0 0 12px;
+
+  --arrow-top: 50%;
+  --arrow-bottom: auto;
+  --arrow-left: 100%;
+  --arrow-right: auto;
+  --arrow-translate-x: -50%;
+  --arrow-translate-y: -50%;
+}
+
+/* GÓRA - LEWA */
+@position-try --top-left {
+  position-area: top start;
+  margin: 0 0 12px;
+
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: 20px;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: -50%;
+}
+
+/* GÓRA - PRAWA */
+@position-try --top-right {
+  position-area: top end;
+  margin: 0 0 12px;
+
+  --arrow-top: 100%;
+  --arrow-bottom: auto;
+  --arrow-left: auto;
+  --arrow-right: 20px;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: -50%;
+}
+
+/* DÓŁ - LEWA */
+@position-try --bottom-left {
+  position-area: bottom start;
+  margin: 12px 0 0;
+
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: 20px;
+  --arrow-right: auto;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 50%;
+}
+
+/* DÓŁ - PRAWA */
+@position-try --bottom-right {
+  position-area: bottom end;
+  margin: 12px 0 0;
+
+  --arrow-top: auto;
+  --arrow-bottom: 100%;
+  --arrow-left: auto;
+  --arrow-right: 20px;
+  --arrow-translate-x: 0;
+  --arrow-translate-y: 50%;
 }
