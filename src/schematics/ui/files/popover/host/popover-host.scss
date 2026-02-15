@@ -1,0 +1,76 @@
+:host {
+  --zen-popover-offset: 0.5rem;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  position: fixed;
+  inset: auto;
+  margin: var(--zen-popover-offset);
+  width: max-content;
+  max-width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  overflow: visible;
+
+  // Auto-reposition if the popover would overflow
+  position-try-fallbacks:
+    flip-block,
+    flip-inline,
+    flip-block flip-inline;
+
+  /* TOP */
+  &[data-placement='top'] {
+    position-area: top center;
+  }
+
+  &[data-placement='top-start'] {
+    position-area: top left;
+  }
+
+  &[data-placement='top-end'] {
+    position-area: top right;
+  }
+
+  /* BOTTOM */
+  &[data-placement='bottom'] {
+    position-area: bottom center;
+  }
+
+  &[data-placement='bottom-start'] {
+    position-area: bottom left;
+  }
+
+  &[data-placement='bottom-end'] {
+    position-area: bottom right;
+  }
+
+  /* LEFT */
+  &[data-placement='left'] {
+    position-area: left center;
+  }
+
+  &[data-placement='left-start'] {
+    position-area: left top;
+  }
+
+  &[data-placement='left-end'] {
+    position-area: left bottom;
+  }
+
+  /* RIGHT */
+  &[data-placement='right'] {
+    position-area: right center;
+  }
+
+  &[data-placement='right-start'] {
+    position-area: right top;
+  }
+
+  &[data-placement='right-end'] {
+    position-area: right bottom;
+  }
+}

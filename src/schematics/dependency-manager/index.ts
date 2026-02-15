@@ -11,7 +11,7 @@ export function dependencyManager(): Rule {
     const dependenciesToInstall: NodeDependency[] = getDependencies(selectedElements, DEPENDENCIES_CONFIG);
 
     if (!dependenciesToInstall.length) {
-      context.logger.info('✅ No dependencies to install for the selected components.');
+      context.logger.info('✅ No dependencies to install for the selected elements.');
       return tree;
     }
 

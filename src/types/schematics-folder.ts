@@ -1,3 +1,3 @@
-import { ComponentType } from '../schematics/components/schema';
+import { UiType } from '../schematics/ui/schema';
 
-export type SchematicsFolder = ComponentType;
+export type SchematicsFolder = UiType;

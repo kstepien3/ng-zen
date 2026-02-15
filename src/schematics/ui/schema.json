@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "NgZenCliComponents",
+  "title": "Schema to create Zen UI components",
+  "type": "object",
+  "description": "Adds Zen UI component 📦",
+  "properties": {
+    "currentDirectory": {
+      "description": "Base path from working directory",
+      "type": "string",
+      "format": "path",
+      "hidden": true,
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "readOnly": true
+    },
+    "path": {
+      "description": "The path at which to create the component file, relative to the current workspace. If not provided, components will be generated in the 'ui' folder within the project's source directory (e.g., src/app/ui).",
+      "type": "string",
+      "format": "path",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "description": "The name of the project",
+      "type": "string",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "ui": {
+      "description": "Select elements to generate",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "alert",
+          "avatar",
+          "button",
+          "checkbox",
+          "divider",
+          "form-control",
+          "icon",
+          "input",
+          "popover",
+          "radio",
+          "skeleton",
+          "switch",
+          "textarea"
+        ]
+      },
+      "multiselect": true,
+      "minItems": 1,
+      "x-prompt": "Which ui elements should be generated?"
+    },
+    "stories": {
+      "description": "Include stories for better documentation and testing",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["ui"]
+}

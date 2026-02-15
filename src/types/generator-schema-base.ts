@@ -2,6 +2,7 @@ import { Path } from '@angular-devkit/core';
 
 export interface GeneratorSchemaBase {
   currentDirectory: Path;
-  path: Path;
+  path?: Path;
   stories: boolean;
+  project?: string;
 }
