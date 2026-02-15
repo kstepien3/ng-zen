@@ -1,3 +1,14 @@
+## [21.1.0-next.1](https://github.com/kstepien3/ng-zen/compare/v21.0.0...v21.1.0-next.1) (2026-02-15)
+
+### 🚀 New Features
+
+* **components:** improve path component generation ([#362](https://github.com/kstepien3/ng-zen/issues/362)) ([8503565](https://github.com/kstepien3/ng-zen/commit/8503565076e2189a36c18b8555639cf86adb2fcc))
+* **popover:** add new component ([#374](https://github.com/kstepien3/ng-zen/issues/374)) ([c67daea](https://github.com/kstepien3/ng-zen/commit/c67daea23027ecfdd868b96ff29b65903059ac20))
+
+### 🛠️ Code Refactor
+
+* **ui:** rename `components` to `ui` across schematics ([#376](https://github.com/kstepien3/ng-zen/issues/376)) ([6b1bc9f](https://github.com/kstepien3/ng-zen/commit/6b1bc9fc6197fefa85d3eb0d2d9947ef44547533))
+
 ## [21.0.0](https://github.com/kstepien3/ng-zen/compare/v20.5.0...v21.0.0) (2025-12-18)
 
 ### ⚠ BREAKING CHANGES
