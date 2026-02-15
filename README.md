@@ -39,7 +39,7 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 
 ### 🏎️ **Instant Productivity**
 
-- **Production-Ready Components:** Avatar, Button, Checkbox, Divider, Form Control, Icon, Input, Skeleton, Switch, Textarea
+- **Production-Ready UI Elements:** Alert, Avatar, Button, Checkbox, Divider, Form Control, Icon, Input, Popover, Radio, Skeleton, Switch, Textarea
 - **Zero Configuration:** Works with Angular 20+ out of the box
 - **Complete Setup:** Each component includes unit tests, Storybook stories, and documentation
 
@@ -60,7 +60,7 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 
 1. [Quick Start](#-quick-start)
 2. [Installation](#-installation)
-3. [Available Components](#-available-components)
+3. [Available Elements](#-available-elements)
 4. [Usage Examples](#-usage-examples)
 5. [Perfect For](#-perfect-for)
 6. [Advanced Features](#-advanced-features)
@@ -89,7 +89,7 @@ This command:
 Then generate your first component:
 
 ```bash
-ng generate @ng-zen/cli:component
+ng generate @ng-zen/cli:ui
 ```
 
 Select components from an interactive menu and they'll be generated in the `ui` folder within your project's source directory (e.g., `src/app/ui`)! 🎉
@@ -112,21 +112,23 @@ pnpm add -D @ng-zen/cli
 pnpm add -D @ng-zen/cli@next
 ```
 
-## 🧩 Available Components
+## 🧩 Available UIs
 
-| Component        | Description                      | Features                                           |
-| ---------------- | -------------------------------- | -------------------------------------------------- |
-| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles      |
-| **Alert**        | Informational messages           | Customizable styles, dismissible options           |
-| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons  |
-| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation    |
-| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness |
-| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators   |
-| **Icon**         | SVG icon system                  | Huge Icons integration, size variants, colors      |
-| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types        |
-| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive             |
-| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels       |
-| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation          |
+| Component        | Description                      | Features                                                                  |
+| ---------------- | -------------------------------- | ------------------------------------------------------------------------- |
+| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles                             |
+| **Alert**        | Informational messages           | Customizable styles, dismissible options                                  |
+| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons                         |
+| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation                           |
+| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness                        |
+| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators                          |
+| **Icon**         | SVG icon system                  | Huge Icons integration, size variants, colors                             |
+| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types                               |
+| **Popover**      | Native Popover API directive     | Template/string content, placements, click toggle, CSS anchor positioning |
+| **Radio**        | Form radio buttons               | Group selection, two-way binding, custom styling, disabled state          |
+| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive                                    |
+| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels                              |
+| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation                                 |
 
 > 💡 **More components coming soon!** Planned: Directives, Pipes, Services, and additional UI elements.
 
@@ -136,16 +138,16 @@ pnpm add -D @ng-zen/cli@next
 
 ```bash
 # Interactive mode - choose components from a menu  (default path: src/app/ui if not provided)
-ng generate @ng-zen/cli:component
+ng generate @ng-zen/cli:ui
 
-# Generate specific components
-ng generate @ng-zen/cli:component --components avatar button
+# Generate specific UI elements
+ng generate @ng-zen/cli:ui --ui avatar button
 
 # Custom location
-ng generate @ng-zen/cli:component ./src/app/custom --components input checkbox
+ng generate @ng-zen/cli:ui ./src/app/custom --ui input checkbox
 
 # Include Storybook stories
-ng generate @ng-zen/cli:component --components button --stories
+ng generate @ng-zen/cli:ui --ui button --stories
 ```
 
 ### What Gets Generated

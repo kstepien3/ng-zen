@@ -1,10 +1,10 @@
 import { NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 
 import { FilesConfig } from '../../../types';
-import { ComponentType } from '../../components/schema';
+import { UiType } from '../../ui/schema';
 
 export function getDependencies(
-  selectedElements: ComponentType[],
+  selectedElements: UiType[],
   dependenciesConfig: Partial<FilesConfig>
 ): NodeDependency[] {
   const dependencies: NodeDependency[] = [];

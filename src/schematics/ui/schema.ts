@@ -1,6 +1,6 @@
 import { GeneratorSchemaBase } from '../../types';
 
-export type ComponentType =
+export type UiType =
   | 'alert'
   | 'avatar'
   | 'button'
@@ -16,5 +16,5 @@ export type ComponentType =
   | 'textarea';
 
 export interface Schema extends GeneratorSchemaBase {
-  components: ComponentType[];
+  ui: UiType[];
 }

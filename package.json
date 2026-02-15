@@ -1,6 +1,6 @@
 {
   "name": "@ng-zen/cli",
-  "version": "21.0.1",
+  "version": "21.0.2",
   "description": "Angular UI components generator – Zen UI Kit CLI for schematics-based creation of customizable components like avatar, button, checkbox, divider, form-control, icon, input, skeleton, switch, textarea with Storybook demos.",
   "scripts": {
     "ng": "ng",
