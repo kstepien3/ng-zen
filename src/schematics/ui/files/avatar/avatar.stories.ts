@@ -5,7 +5,7 @@ import { ZenAvatar } from './avatar';
 type Options = ZenAvatar;
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Ui/Avatar',
   component: ZenAvatar,
   argTypes: {
     src: {

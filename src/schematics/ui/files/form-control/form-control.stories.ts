@@ -8,7 +8,7 @@ import { ZenFormControl } from './form-control';
 type Options = ZenFormControl<unknown>;
 
 export default {
-  title: 'Components/FormControl',
+  title: 'Ui/FormControl',
   component: ZenFormControl,
   decorators: [
     moduleMetadata({ imports: [ZenCheckbox, ZenInput, ZenSwitch] }),

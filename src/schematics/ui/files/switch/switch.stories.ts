@@ -5,7 +5,7 @@ import { ZenSwitch } from './switch';
 type Options = ZenSwitch;
 
 export default {
-  title: 'Components/Switch',
+  title: 'Ui/Switch',
   component: ZenSwitch,
   argTypes: {
     value: {

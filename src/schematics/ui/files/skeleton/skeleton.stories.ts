@@ -11,7 +11,7 @@ interface StoryParams {
 type Options = ZenSkeleton & StoryParams;
 
 export default {
-  title: 'Components/Skeleton',
+  title: 'Ui/Skeleton',
   component: ZenSkeleton,
   argTypes: {
     rounded: {

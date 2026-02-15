@@ -13,7 +13,7 @@ interface StoryParams {
 type Options = ZenAlert & StoryParams;
 
 export default {
-  title: 'Components/Alert',
+  title: 'Ui/Alert',
   component: ZenAlert,
   decorators: [moduleMetadata({ imports: [ZenIcon] })],
   args: {

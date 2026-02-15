@@ -10,7 +10,7 @@ interface StoryParams {
 type Options = ZenDivider & StoryParams;
 
 export default {
-  title: 'Components/Divider',
+  title: 'Ui/Divider',
   component: ZenDivider,
   parameters: {
     layout: 'padded',

@@ -5,7 +5,7 @@ import { ZenCheckbox } from './checkbox';
 type Options = ZenCheckbox;
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Ui/Checkbox',
   component: ZenCheckbox,
   argTypes: {
     value: {

@@ -10,7 +10,7 @@ interface StoryParams {
 type Options = ZenRadio & StoryParams;
 
 export default {
-  title: 'Components/Radio',
+  title: 'Ui/Radio',
   component: ZenRadio,
   argTypes: {
     value: {

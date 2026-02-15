@@ -10,7 +10,7 @@ interface StoryParams {
 type Options = ZenButton & StoryParams;
 
 export default {
-  title: 'Components/Button',
+  title: 'Ui/Button',
   component: ZenButton,
   args: {
     content: 'Test',

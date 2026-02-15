@@ -6,7 +6,7 @@ import { ZenIcon } from './icon';
 type Options = ZenIcon;
 
 export default {
-  title: 'Components/Icon',
+  title: 'Ui/Icon',
   component: ZenIcon,
   argTypes: {
     icon: {

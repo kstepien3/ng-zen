@@ -5,7 +5,7 @@ import { ZenInput } from './input';
 type Options = ZenInput;
 
 export default {
-  title: 'Components/Input',
+  title: 'Ui/Input',
   component: ZenInput,
   argTypes: {
     value: {

@@ -12,7 +12,7 @@ interface StoryParams {
 type Options = ZenTextarea & StoryParams;
 
 export default {
-  title: 'Components/Textarea',
+  title: 'Ui/Textarea',
   component: ZenTextarea,
   args: {
     content: '',

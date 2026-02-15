@@ -7,7 +7,7 @@ import type { PopoverPlacement } from './popover-positions.type';
 type Story = StoryObj<ZenPopover>;
 
 const meta = {
-  title: 'Directive/Popover',
+  title: 'Ui/Popover',
   component: ZenPopover,
   decorators: [
     moduleMetadata({
