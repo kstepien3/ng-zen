@@ -55,18 +55,18 @@ module.exports = tseslint.config(
       '@angular-eslint/template/prefer-self-closing-tags': ['error'],
     },
   },
-  {
-    files: ['**/*.html', '**/*.ts'],
-    extends: [prettierRecommended],
-    rules: {
-      'prettier/prettier': [
-        'warn',
-        {
-          endOfLine: 'auto',
-        },
-      ],
-    },
-  },
+  // {
+  //   files: ['**/*.html', '**/*.ts'],
+  //   extends: [prettierRecommended],
+  //   rules: {
+  //     'prettier/prettier': [
+  //       'warn',
+  //       {
+  //         endOfLine: '',
+  //       },
+  //     ],
+  //   },
+  // },
   {
     ignores: ['!.storybook'],
   }

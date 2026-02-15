@@ -10,7 +10,7 @@ export default {
   argTypes: {
     src: {
       table: {
-        category: 'Inputs',
+        category: 'inputs',
         type: {
           summary: 'string',
         },
@@ -22,7 +22,7 @@ export default {
     },
     alt: {
       table: {
-        category: 'Inputs',
+        category: 'inputs',
         type: {
           summary: 'string',
         },
