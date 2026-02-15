@@ -1,12 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/semantic-release",
-  "branches": [
-    "master",
-    {
-      "name": "next",
-      "prerelease": true
-    }
-  ],
+  "branches": ["master", { "name": "next", "prerelease": true }],
+  "tagFormat": "v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -53,15 +48,9 @@
       }
     ],
     ["@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" }],
-    [
-      "@semantic-release/npm",
-      {
-        "npmPublish": false,
-        "pkgRoot": "."
-      }
-    ],
+    ["@semantic-release/npm", { "npmPublish": false, "pkgRoot": "." }],
     ["@semantic-release/exec", { "prepareCmd": "pnpm run build" }],
-    ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/" }],
+    ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/", "npmPublish": true }],
     [
       "@semantic-release/git",
       {
