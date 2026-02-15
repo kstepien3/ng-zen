@@ -33,7 +33,7 @@ export default {
       control: 'select',
       options: ['start', 'center', 'end'],
       table: {
-        category: 'Inputs',
+        category: 'inputs',
         defaultValue: { summary: 'center' },
         type: { summary: '"start" | "center" | "end"' },
       },

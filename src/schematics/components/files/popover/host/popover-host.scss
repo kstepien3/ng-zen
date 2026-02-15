@@ -1,18 +1,14 @@
 :host {
-  position: absolute;
-  margin: 0;
+  --zen-popover-offset: 0.5rem;
+}
 
-  /* Domyślna pozycja */
-  position-area: top center;
-  margin-bottom: 12px;
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  position: fixed;
+  inset: auto;
+  margin: var(--zen-popover-offset);
   width: max-content;
   max-width: 300px;
-  z-index: 1000;
-
-  /* Fallbacki - wszystkie 8 kierunków */
-  position-try-fallbacks: --top, --bottom, --left, --right, --top-left, --top-right, --bottom-left, --bottom-right;
-
-  /* Style popovera */
   background: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -20,137 +16,61 @@
   box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
   overflow: visible;
 
-  /* CSS variables dla strzałki - domyślne (TOP) */
-  --arrow-top: calc(100% + 1px);
-  --arrow-right: auto;
-  --arrow-bottom: auto;
-  --arrow-left: 50%;
-  --arrow-translate-x: -50%;
-  --arrow-translate-y: -50%;
-}
+  // Auto-reposition if the popover would overflow
+  position-try-fallbacks:
+    flip-block,
+    flip-inline,
+    flip-block flip-inline;
 
-:host[popover]:popover-open {
-  display: block;
-}
+  /* TOP */
+  &[data-placement='top'] {
+    position-area: top center;
+  }
 
-/* Strzałka - obrócony kwadrat */
-:host::before {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-width: 1px;
-  border-color: #ccc;
-  border-style: none solid solid none;
-  inset: var(--arrow-top) var(--arrow-right) var(--arrow-bottom) var(--arrow-left);
-  translate: var(--arrow-translate-x) var(--arrow-translate-y);
-  rotate: var(--arrow-rotate, 45deg);
-  pointer-events: none;
-}
+  &[data-placement='top-start'] {
+    position-area: top left;
+  }
 
-/* ========== FALLBACKI ========== */
+  &[data-placement='top-end'] {
+    position-area: top right;
+  }
 
-/* GÓRA - ŚRODEK */
-@position-try --top {
-  position-area: top center;
-  margin: 0 0 12px;
+  /* BOTTOM */
+  &[data-placement='bottom'] {
+    position-area: bottom center;
+  }
 
-  --arrow-top: 100%;
-  --arrow-bottom: auto;
-  --arrow-left: 50%;
-  --arrow-right: auto;
-  --arrow-translate-x: -50%;
-  --arrow-translate-y: -50%;
-}
+  &[data-placement='bottom-start'] {
+    position-area: bottom left;
+  }
 
-/* DÓŁ - ŚRODEK */
-@position-try --bottom {
-  position-area: bottom center;
-  margin: 12px 0 0;
+  &[data-placement='bottom-end'] {
+    position-area: bottom right;
+  }
 
-  --arrow-top: auto;
-  --arrow-bottom: 100%;
-  --arrow-left: 50%;
-  --arrow-right: auto;
-  --arrow-translate-x: -50%;
-  --arrow-translate-y: 50%;
-}
+  /* LEFT */
+  &[data-placement='left'] {
+    position-area: left center;
+  }
 
-/* LEWA - ŚRODEK */
-@position-try --left {
-  position-area: left center;
-  margin: 0 12px 0 0;
+  &[data-placement='left-start'] {
+    position-area: left top;
+  }
 
-  --arrow-top: 50%;
-  --arrow-bottom: auto;
-  --arrow-left: auto;
-  --arrow-right: 100%;
-  --arrow-translate-x: 50%;
-  --arrow-translate-y: -50%;
-}
+  &[data-placement='left-end'] {
+    position-area: left bottom;
+  }
 
-/* PRAWA - ŚRODEK */
-@position-try --right {
-  position-area: right center;
-  margin: 0 0 0 12px;
+  /* RIGHT */
+  &[data-placement='right'] {
+    position-area: right center;
+  }
 
-  --arrow-top: 50%;
-  --arrow-bottom: auto;
-  --arrow-left: 100%;
-  --arrow-right: auto;
-  --arrow-translate-x: -50%;
-  --arrow-translate-y: -50%;
-}
+  &[data-placement='right-start'] {
+    position-area: right top;
+  }
 
-/* GÓRA - LEWA */
-@position-try --top-left {
-  position-area: top start;
-  margin: 0 0 12px;
-
-  --arrow-top: 100%;
-  --arrow-bottom: auto;
-  --arrow-left: 20px;
-  --arrow-right: auto;
-  --arrow-translate-x: 0;
-  --arrow-translate-y: -50%;
-}
-
-/* GÓRA - PRAWA */
-@position-try --top-right {
-  position-area: top end;
-  margin: 0 0 12px;
-
-  --arrow-top: 100%;
-  --arrow-bottom: auto;
-  --arrow-left: auto;
-  --arrow-right: 20px;
-  --arrow-translate-x: 0;
-  --arrow-translate-y: -50%;
-}
-
-/* DÓŁ - LEWA */
-@position-try --bottom-left {
-  position-area: bottom start;
-  margin: 12px 0 0;
-
-  --arrow-top: auto;
-  --arrow-bottom: 100%;
-  --arrow-left: 20px;
-  --arrow-right: auto;
-  --arrow-translate-x: 0;
-  --arrow-translate-y: 50%;
-}
-
-/* DÓŁ - PRAWA */
-@position-try --bottom-right {
-  position-area: bottom end;
-  margin: 12px 0 0;
-
-  --arrow-top: auto;
-  --arrow-bottom: 100%;
-  --arrow-left: auto;
-  --arrow-right: 20px;
-  --arrow-translate-x: 0;
-  --arrow-translate-y: 50%;
+  &[data-placement='right-end'] {
+    position-area: right bottom;
+  }
 }

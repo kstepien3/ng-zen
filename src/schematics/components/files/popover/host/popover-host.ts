@@ -1,22 +1,26 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { PopoverPlacement } from '../popover-positions.type';
+
 /**
- * ZenPopover is a reusable popover component that leverages the native Popover API.
- * It provides a consistent and customizable popover style with support for anchor positioning,
- * animations, and various trigger modes.
+ * ZenPopoverHost is a minimal host component created dynamically by the `ZenPopover` directive.
+ * It exists mainly to provide a real DOM element that can act as a native popover (`popover="auto"`),
+ * receive styles, and host projected content.
  *
- * ### CSS Custom Properties
+ * The directive is responsible for creating/destroying this component instance, attaching content
+ * (text or a TemplateRef), configuring positioning, and calling the Popover API methods to toggle it.
  *
- * You can customize the component using CSS custom properties:
- *
+ * ### Notes
+ * This component intentionally contains no behavior logic. All lifecycle and interaction logic is handled
+ * by the directive that creates it.
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  * @see [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  */
+
 @Component({
-  selector: 'zen-popover',
   template: `
     <ng-content />
   `,
@@ -25,8 +29,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   host: {
     popover: 'auto',
     '[attr.id]': 'id()',
+    '[attr.data-placement]': 'placement()',
   },
 })
 export class ZenPopoverHost {
   readonly id = input.required<string>();
+  readonly placement = input<PopoverPlacement>('top');
 }
