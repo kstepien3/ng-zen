@@ -9,7 +9,7 @@ Every logic follows the same structure by type:
 ### Component structure
 
 ```text
-src/schematics/components/files
+src/schematics/ui/files
 └── *name*/
     ├── *name*.ts                # Component logic
     ├── *name*.scss              # Customizable styles (optional)
