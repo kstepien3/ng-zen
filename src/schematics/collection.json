@@ -7,10 +7,10 @@
       "schema": "./ng-add/schema.json"
     },
     "ui": {
-      "description": "This schematic generates ui components",
+      "description": "This schematic generates UI components",
       "factory": "./ui/index#uiGenerator",
       "schema": "./ui/schema.json",
-      "aliases": ["c"]
+      "aliases": ["c", "component", "components"]
     },
     "dependency-manager": {
       "description": "Manage dependencies for selected elements",
