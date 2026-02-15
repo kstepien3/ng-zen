@@ -5,6 +5,8 @@ import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/work
 import { applyFileTemplateUtil } from '../../utils';
 import { Schema as ComponentOptions } from './schema';
 
+const DEFAULT_GENERATION_PATH = 'ui'; // src/app/ui
+
 export function componentGenerator({ components, ...options }: ComponentOptions): Rule {
   return async (tree: Tree) => {
     const workspace = await getWorkspace(tree);
@@ -16,7 +18,7 @@ export function componentGenerator({ components, ...options }: ComponentOptions)
     }
 
     if (options.path === undefined) {
-      options.path = buildDefaultPath(project) as Path;
+      options.path = (buildDefaultPath(project) + '/' + DEFAULT_GENERATION_PATH) as Path;
     }
 
     const workingDirectory = normalize(join(options.currentDirectory, options.path));

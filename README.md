@@ -92,7 +92,7 @@ Then generate your first component:
 ng generate @ng-zen/cli:component
 ```
 
-Select components from an interactive menu and they'll be generated directly into your current directory! 🎉
+Select components from an interactive menu and they'll be generated in the `ui` folder within your project's source directory (e.g., `src/app/ui`)! 🎉
 
 ## 📦 Installation
 
@@ -135,14 +135,14 @@ pnpm add -D @ng-zen/cli@next
 ### Basic Component Generation
 
 ```bash
-# Interactive mode - choose components from a menu
+# Interactive mode - choose components from a menu  (default path: src/app/ui if not provided)
 ng generate @ng-zen/cli:component
 
 # Generate specific components
 ng generate @ng-zen/cli:component --components avatar button
 
 # Custom location
-ng generate @ng-zen/cli:component ./src/app/ui --components input checkbox
+ng generate @ng-zen/cli:component ./src/app/custom --components input checkbox
 
 # Include Storybook stories
 ng generate @ng-zen/cli:component --components button --stories

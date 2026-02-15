@@ -16,7 +16,7 @@
       "readOnly": true
     },
     "path": {
-      "description": "The path at which to create the component file, relative to the current workspace. If not provided, a folder with the same name as the component will be created in the project's source directory.",
+      "description": "The path at which to create the component file, relative to the current workspace. If not provided, components will be generated in the 'ui' folder within the project's source directory (e.g., src/app/ui).",
       "type": "string",
       "format": "path",
       "$default": {
