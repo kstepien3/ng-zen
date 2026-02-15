@@ -9,6 +9,7 @@ export type ComponentType =
   | 'form-control'
   | 'icon'
   | 'input'
+  | 'popover'
   | 'radio'
   | 'skeleton'
   | 'switch'
