@@ -1,7 +1,7 @@
 import * as icons from '@hugeicons/core-free-icons';
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { ZenIcon } from './icon';
+import { IconName, ZenIcon } from './icon';
 
 type Options = ZenIcon;
 
@@ -11,7 +11,7 @@ export default {
   argTypes: {
     icon: {
       control: 'select',
-      options: Object.keys(icons),
+      options: Object.keys(icons) as IconName[],
       table: {
         type: { summary: 'string' },
         category: 'inputs',
@@ -40,7 +40,7 @@ export default {
     size: 24,
     strokeWidth: 1.5,
     absoluteStrokeWidth: false,
-    icon: 'Tree02Icon',
+    icon: 'fdsfs' as IconName,
   },
 } satisfies Meta<Options>;
 
