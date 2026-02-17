@@ -1,28 +1,26 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  isDevMode,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import * as icons from '@hugeicons/core-free-icons';
 
-type IconName = keyof typeof icons;
+/** SVG icon data structure from HugeIcons library - an array of [tagName, attributes] tuples. */
+export type IconSvgObject = readonly (readonly [string, Record<string, string | number>])[];
 
 /**
  * A reusable Angular component for rendering icons from the Hugeicons library.
  *
- * This component renders an SVG icon from the `@hugeicons/core-free-icons` collection by name.
- * The size, stroke width, and color are configurable through inputs. It dynamically generates the SVG
- * and its paths, providing a flexible and efficient way to use Hugeicons in an Angular application.
+ * This component renders an SVG icon by accepting an imported SVG object from Ui Libraries
+ * The size, stroke width, and color are configurable.
+
  *
  * @example
- * <zen-icon icon="Tree02Icon" />
+ * ```html
+ * <zen-icon [icon]="SvgObject" />
+ * ```
  *
- * @see [Hugeicons](https://hugeicons.com)
+ * Tested with `@hugeicons/core-free-icons`.
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
   selector: 'zen-icon',
@@ -45,8 +43,8 @@ type IconName = keyof typeof icons;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenIcon {
-  /** Icon file names from HugeIcons */
-  readonly icon = input.required({ transform: this.resolveIconData });
+  /** SVG object imported from HugeIcons library. */
+  readonly icon = input.required<IconSvgObject>();
   /** Size of the icon in pixels. */
   readonly size = input<number>(24);
   /** Determines if stroke width scales with icon size. */
@@ -67,27 +65,12 @@ export class ZenIcon {
 
   /** Converts icon data into a sanitized HTML string of SVG elements. */
   protected readonly safeSvgContent = computed<SafeHtml>(() => {
-    const iconData = this.icon();
-    if (!Array.isArray(iconData)) {
-      if (isDevMode()) {
-        throw new Error(`[ZenIcon] Icon data not found. Check if the icon name is correct.`);
-      }
-      return '';
-    }
-
-    const htmlString = iconData.map(([tag, attrs]) => this.buildTag(tag, attrs)).join('');
+    const htmlString = this.icon()
+      .map(([tag, attrs]) => this.buildTag(tag, attrs))
+      .join('');
 
     return this.sanitizer.bypassSecurityTrustHtml(htmlString);
   });
-
-  /** Validates the existence of the icon and returns its data, throwing in dev mode if missing. */
-  private resolveIconData(name: IconName) {
-    const data = icons[name];
-    if (!data && isDevMode()) {
-      throw new Error(`[ZenIcon] Icon "${name}" not found in @hugeicons/core-free-icons.`);
-    }
-    return data;
-  }
 
   /** Generates a single SVG element string (e.g., <path ...>) with its mapped attributes. */
   private buildTag(tag: string, attrs: Record<string, string | number>): string {
