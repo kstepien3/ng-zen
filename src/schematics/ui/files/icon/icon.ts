@@ -10,11 +10,22 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as icons from '@hugeicons/core-free-icons';
 
-export type IconName = keyof typeof icons;
+type IconName = keyof typeof icons;
 
+/**
+ * A reusable Angular component for rendering icons from the Hugeicons library.
+ *
+ * This component renders an SVG icon from the `@hugeicons/core-free-icons` collection by name.
+ * The size, stroke width, and color are configurable through inputs. It dynamically generates the SVG
+ * and its paths, providing a flexible and efficient way to use Hugeicons in an Angular application.
+ *
+ * @example
+ * <zen-icon icon="Tree02Icon" />
+ *
+ * @see [Hugeicons](https://hugeicons.com)
+ */
 @Component({
   selector: 'zen-icon',
-  standalone: true,
   template: `
     <svg
       [attr.height]="size()"
