@@ -81,10 +81,11 @@ export class ZenIcon {
   /** Generates a single SVG element string (e.g., <path ...>) with its mapped attributes. */
   private buildTag(tag: string, attrs: Record<string, string | number>): string {
     const attributes = Object.entries(attrs)
+      .filter(([key]) => !['strokeWidth', 'stroke-width'].includes(key))
       .map(([key, value]) => `${this.toKebabCase(key)}="${value}"`)
       .join(' ');
 
-    return `<${tag} ${attributes}></${tag}>`;
+    return `<${tag} ${attributes} stroke-width="${this.calculatedStrokeWidth()}"></${tag}>`;
   }
 
   /** Formats attribute names from camelCase (used in JS library) to a kebab-case for SVG compatibility. */
