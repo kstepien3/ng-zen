@@ -19,7 +19,7 @@ const includeStories = (include: boolean) => filter(filePath => include || !file
 export function applyFileTemplateUtil(folders: SchematicsFolder[], config: GeneratorSchemaBase): Rule[] {
   selectedElements.push(...folders);
   return folders.map(folder => {
-    const RULES = createTemplateRules(folder, config.path);
+    const RULES = createTemplateRules(folder, config.path as string);
 
     const folderSource = apply(url(`./files/${folder}`), [includeStories(config.stories), ...RULES]);
 

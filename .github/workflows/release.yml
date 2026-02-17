@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 22
+  NODE_VERSION: 24
   PNPM_VERSION: 10.24.0
   RETENTION_DAYS: 7
 
@@ -16,6 +16,13 @@ jobs:
   release:
     name: Build, Test and Release
     runs-on: ubuntu-latest
+
+    # Required for npm Trusted Publishing (OIDC) and for semantic-release GitHub operations
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -64,7 +71,6 @@ jobs:
         env:
           HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Upload artifacts
         if: success()
         uses: actions/upload-artifact@v4
