@@ -1,5 +1,5 @@
 import { join, normalize, Path } from '@angular-devkit/core';
-import { chain, Rule, schematic, Tree } from '@angular-devkit/schematics';
+import { chain, Rule, Tree } from '@angular-devkit/schematics';
 import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 
 import { applyFileTemplateUtil } from '../../utils';
@@ -23,9 +23,6 @@ export function uiGenerator({ ui, project, ...options }: UiOptions): Rule {
 
     const workingDirectory = normalize(join(options.currentDirectory, options.path));
 
-    return chain([
-      ...applyFileTemplateUtil(ui, { ...options, path: workingDirectory }),
-      schematic('dependency-manager', {}),
-    ]);
+    return chain([...applyFileTemplateUtil(ui, { ...options, path: workingDirectory })]);
   };
 }

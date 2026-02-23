@@ -1,9 +1,16 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { Rule } from '@angular-devkit/schematics';
 
-export function ngAdd(): Rule {
-  return async (tree: Tree, context: SchematicContext) => {
+import { installIconLibrary, logIconLibraryManualInstructions } from './icon-library';
+import { Schema } from './schema';
+
+export function ngAdd(options: Schema): Rule {
+  return (tree, context) => {
     context.logger.info('🔧 Setting up ng-zen...');
 
-    return tree;
+    if (options.installIconLibrary) {
+      return installIconLibrary()(tree, context);
+    }
+
+    return logIconLibraryManualInstructions()(tree, context);
   };
 }
