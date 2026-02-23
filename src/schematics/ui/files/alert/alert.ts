@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  *
  * ```html
  * <zen-alert>
- *   <zen-icon alert-icon icon="Notification02Icon" />
+ *   <zen-icon alert-icon [icon]="Notification02Icon" />
  *   <h3 alert-title>Title</h3>
  *   content
  * </zen-alert>

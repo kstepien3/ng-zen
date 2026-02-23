@@ -4,19 +4,30 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { ZenIcon } from './icon';
 
 type Options = ZenIcon;
+const iconKeys = Object.keys(icons) as (keyof typeof icons)[];
+const iconMapping = icons as Record<string, unknown>;
+const iconLabels = Object.fromEntries(iconKeys.map(k => [k as string, String(k).replace(/Icon$/, '')])) as Record<
+  string,
+  string
+>;
+
+console.log(iconKeys);
 
 export default {
   title: 'Ui/Icon',
   component: ZenIcon,
   argTypes: {
     icon: {
-      control: 'select',
-      options: Object.keys(icons),
+      control: {
+        type: 'select',
+        labels: iconLabels,
+      },
+      options: iconKeys,
+      mapping: iconMapping,
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'IconSvgObject' },
         category: 'inputs',
         subcategory: 'required',
-        defaultValue: { summary: '' },
       },
     },
     size: {
@@ -40,7 +51,7 @@ export default {
     size: 24,
     strokeWidth: 1.5,
     absoluteStrokeWidth: false,
-    icon: 'Tree02Icon',
+    icon: 'Tree02Icon' as never,
   },
 } satisfies Meta<Options>;
 

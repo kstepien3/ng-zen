@@ -1,5 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { HomeIcon } from '@hugeicons/core-free-icons';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { ZenIcon } from './icon';
@@ -15,7 +16,7 @@ describe('ZenIcon', () => {
   it('should create', () => {
     const fixture = TestBed.createComponent(ZenIcon);
     const component = fixture.componentInstance;
-    fixture.componentRef.setInput('icon', 'Tree02Icon');
+    fixture.componentRef.setInput('icon', HomeIcon);
     expect(component).toBeTruthy();
   });
 });
