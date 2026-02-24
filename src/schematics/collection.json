@@ -11,11 +11,6 @@
       "factory": "./ui/index#uiGenerator",
       "schema": "./ui/schema.json",
       "aliases": ["c", "component", "components"]
-    },
-    "dependency-manager": {
-      "description": "Manage dependencies for selected elements",
-      "factory": "./dependency-manager/index#dependencyManager",
-      "schema": "./dependency-manager/schema.json"
     }
   }
 }

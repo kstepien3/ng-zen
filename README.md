@@ -60,7 +60,7 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 
 1. [Quick Start](#-quick-start)
 2. [Installation](#-installation)
-3. [Available Elements](#-available-elements)
+3. [Available Elements](#-available-uis)
 4. [Usage Examples](#-usage-examples)
 5. [Perfect For](#-perfect-for)
 6. [Advanced Features](#-advanced-features)
@@ -110,6 +110,32 @@ pnpm add -D @ng-zen/cli
 
 # Latest features and fixes
 pnpm add -D @ng-zen/cli@next
+```
+
+### Icon Library (Optional)
+
+To use the `zen-icon` component, install an icon library:
+
+```bash
+# Using HugeIcons (recommended)
+pnpm add @hugeicons/core-free-icons
+
+# Or use any other SVG icon library
+```
+
+Then import icons and pass them to the component:
+
+```typescript
+import { CheckmarkIcon } from '@hugeicons/core-free-icons';
+import { ZenIcon } from '@ng-zen/cli';
+
+@Component({
+  imports: [ZenIcon],
+  template: `
+    <zen-icon [icon]="CheckmarkIcon" />
+  `,
+})
+export class MyComponent {}
 ```
 
 ## 🧩 Available UIs

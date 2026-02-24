@@ -5,17 +5,20 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export type IconSvgObject = readonly (readonly [string, Record<string, string | number>])[];
 
 /**
- * A reusable Angular component for rendering icons from the Hugeicons library.
+ * Reusable Angular component for rendering SVG icons from icon libraries.
  *
- * This component renders an SVG icon by accepting an imported SVG object from Ui Libraries
- * The size, stroke width, and color are configurable.
-
+ * The component renders an icon by accepting an SVG definition object via the `[icon]` input.
+ * Size, stroke width, and color are configurable.
+ *
+ * Security note: the icon data is converted to HTML and trusted via `DomSanitizer.bypassSecurityTrustHtml`,
+ * so the provided icon object must come from a trusted source.
  *
  * @example
  * ```html
  * <zen-icon [icon]="SvgObject" />
  * ```
  *
+ * Compatible with libraries that export icons as `[tagName, attributes]` tuples.
  * Tested with `@hugeicons/core-free-icons`.
  *
  * @author Konrad Stępień
