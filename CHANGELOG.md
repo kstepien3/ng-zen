@@ -1,3 +1,13 @@
+## [21.1.1-next.2](https://github.com/kstepien3/ng-zen/compare/v21.1.1-next.1...v21.1.1-next.2) (2026-02-24)
+
+### 🛠️ Code Refactor
+
+* **ng-add:** improve icon library installation ([#384](https://github.com/kstepien3/ng-zen/issues/384)) ([a0145de](https://github.com/kstepien3/ng-zen/commit/a0145deed42eb009a78f2dbef3873710a316215f))
+
+### 📚 Documentation
+
+* **icon:** update component description and usage guidance ([#385](https://github.com/kstepien3/ng-zen/issues/385)) ([eb329bd](https://github.com/kstepien3/ng-zen/commit/eb329bdcf7e383bf7a2a54a39f75be7257c4377f))
+
 ## [21.1.1-next.1](https://github.com/kstepien3/ng-zen/compare/v21.1.0...v21.1.1-next.1) (2026-02-23)
 
 ### 🐛 Bug Fixes
