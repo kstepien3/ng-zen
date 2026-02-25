@@ -1,4 +1,4 @@
-import * as icons from '@hugeicons/core-free-icons';
+import { Notification02Icon } from '@hugeicons/core-free-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenIcon } from '../icon';
@@ -6,7 +6,6 @@ import { ZenAlert } from './alert';
 
 interface StoryParams {
   content: string;
-  icon: string;
   title: string;
 }
 
@@ -17,7 +16,6 @@ export default {
   component: ZenAlert,
   decorators: [moduleMetadata({ imports: [ZenIcon] })],
   args: {
-    icon: 'Notification02Icon',
     title: 'Alert Title',
     content: 'This is an alert message',
   },
@@ -31,16 +29,6 @@ export default {
         },
       },
     },
-    icon: {
-      control: 'select',
-      options: Object.keys(icons),
-      table: {
-        category: 'story parameters',
-        type: {
-          summary: 'string',
-        },
-      },
-    },
     title: {
       control: 'text',
       table: {
@@ -51,15 +39,17 @@ export default {
       },
     },
   },
-  render: ({ content, icon, title }) => ({
-    props: {},
-    template: `
-      <zen-alert>
-        ${icon ? '<zen-icon alert-icon icon="' + icon + '" />' : ''}
-        <h3 alert-title>${title}</h3>
-        ${content}
-      </zen-alert>`,
-  }),
+  render: ({ content, title }) => {
+    return {
+      props: { Notification02Icon },
+      template: `
+        <zen-alert>
+          <zen-icon alert-icon [icon]="Notification02Icon" />
+          <h3 alert-title>${title}</h3>
+          ${content}
+        </zen-alert>`,
+    };
+  },
 } satisfies Meta<Options>;
 
 type Story = StoryObj<Options>;

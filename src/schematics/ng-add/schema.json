@@ -3,5 +3,11 @@
   "$id": "NgZenCliComponents",
   "title": "Schema to create Zen UI library",
   "type": "object",
-  "description": "Adds Zen CLI library and configure project 📦"
+  "description": "Adds Zen CLI library and configure project 📦",
+  "properties": {
+    "installIconLibrary": {
+      "type": "boolean",
+      "x-prompt": "Would you like to install @hugeicons/core-free-icons? This package provides the icon set for zen-icon component. You can also install it manually later."
+    }
+  }
 }
