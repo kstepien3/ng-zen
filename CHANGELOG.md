@@ -1,3 +1,18 @@
+## [21.1.1](https://github.com/kstepien3/ng-zen/compare/v21.1.0...v21.1.1) (2026-02-25)
+
+### 🐛 Bug Fixes
+
+* **icon:** support all SVG shapes and normalize attribute naming ([#380](https://github.com/kstepien3/ng-zen/issues/380)) ([56cf31f](https://github.com/kstepien3/ng-zen/commit/56cf31ffbd59ca427ddb2f284f264a110d63ad4e))
+
+### 🛠️ Code Refactor
+
+* **ng-add:** improve icon library installation ([#384](https://github.com/kstepien3/ng-zen/issues/384)) ([a0145de](https://github.com/kstepien3/ng-zen/commit/a0145deed42eb009a78f2dbef3873710a316215f))
+
+### 📚 Documentation
+
+* **alert:** update example ([#382](https://github.com/kstepien3/ng-zen/issues/382)) ([3d29acb](https://github.com/kstepien3/ng-zen/commit/3d29acbd575d2a3eb3e5028f1abb9d0118918cc2))
+* **icon:** update component description and usage guidance ([#385](https://github.com/kstepien3/ng-zen/issues/385)) ([eb329bd](https://github.com/kstepien3/ng-zen/commit/eb329bdcf7e383bf7a2a54a39f75be7257c4377f))
+
 ## [21.1.1-next.2](https://github.com/kstepien3/ng-zen/compare/v21.1.1-next.1...v21.1.1-next.2) (2026-02-24)
 
 ### 🛠️ Code Refactor
