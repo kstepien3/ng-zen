@@ -1,9 +1,8 @@
 name: Deploy Storybook to GitHub Pages
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'
+  release:
+    types: [published]
   workflow_dispatch:
 
 env:
@@ -17,6 +16,7 @@ permissions:
 
 jobs:
   deploy:
+    if: github.event.release.prerelease == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
