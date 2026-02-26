@@ -136,6 +136,7 @@ const meta = {
     closeOnEscape: true,
     id: 'zen-dialog-story',
   },
+  tags: ['ui', 'dialog', 'modal'],
 } satisfies Meta<ZenDialog>;
 
 export default meta;
