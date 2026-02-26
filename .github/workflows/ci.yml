@@ -3,6 +3,9 @@ name: CI
 on:
   pull_request:
     branches: [master, develop, next]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [master, develop, next]
 
 env:
   NODE_VERSION: 22
