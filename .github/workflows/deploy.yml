@@ -34,7 +34,7 @@ jobs:
           cache: 'pnpm'
       - name: Build and deploy Storybook
         id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
         with:
           install_command: pnpm install --frozen-lockfile
           build_command: pnpm run storybook:build
