@@ -58,7 +58,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
       - run: pnpm run lint
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lint-report
@@ -82,7 +82,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
       - run: pnpm run test:no-watch
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test-report
@@ -107,7 +107,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
       - run: pnpm run build
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: build-report
