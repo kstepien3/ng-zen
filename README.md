@@ -22,7 +22,7 @@
       <img src="https://img.shields.io/badge/-Repository-181818?style=flat&logo=github&logoColor=white" alt="Repository" />
     </a>
     <a href="https://kstepien3.github.io/ng-zen/">
-      <img src="https://img.shields.io/badge/-Storybook%20Demo-FF4785?style=flat&logo=storybook&logoColor=white" alt="Storybook Demo" />
+      <img src="https://img.shields.io/badge/-Storybook%20Demo-FF4785?style=flat&logo=storybook&logoColor=white" alt="Storybook" />
     </a>
   </p>
 
