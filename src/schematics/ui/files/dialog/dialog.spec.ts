@@ -7,7 +7,15 @@ import { ZenDialogService } from './dialog.service';
 
 @Component({
   template: `
-    <dialog [header]="header()" [size]="size()" [(open)]="isOpen" zen-dialog>
+    <dialog
+      [backdrop]="backdrop()"
+      [closeOnEscape]="closeOnEscape()"
+      [header]="header()"
+      [id]="id()"
+      [size]="size()"
+      [(open)]="isOpen"
+      zen-dialog
+    >
       <p>Dialog content</p>
     </dialog>
   `,
@@ -18,6 +26,9 @@ class DialogTestComponent {
   readonly isOpen = signal(false);
   readonly header = signal('Test Dialog');
   readonly size = signal<'sm' | 'md' | 'lg' | 'xl' | 'full'>('md');
+  readonly id = signal('test-dialog');
+  readonly backdrop = signal(true);
+  readonly closeOnEscape = signal(true);
 }
 
 @Component({
@@ -128,6 +139,45 @@ describe('ZenDialog', () => {
       fixture.detectChanges();
 
       expect(fixture.componentInstance.isOpen()).toBe(false);
+    });
+
+    it('should not close when backdrop is clicked and backdrop is false', async () => {
+      const fixture = TestBed.createComponent(DialogTestComponent);
+      fixture.componentInstance.isOpen.set(true);
+      fixture.componentInstance.backdrop.set(false);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const dialogEl = getDialogEl(fixture)!;
+      Object.defineProperty(dialogEl, 'tagName', { value: 'DIALOG' });
+      dialogEl.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.isOpen()).toBe(true);
+    });
+
+    it('should not close on escape when closeOnEscape is false', async () => {
+      const fixture = TestBed.createComponent(DialogTestComponent);
+      fixture.componentInstance.isOpen.set(true);
+      fixture.componentInstance.closeOnEscape.set(false);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const dialogEl = getDialogEl(fixture)!;
+      const cancelEvent = new Event('cancel', { bubbles: true, cancelable: true });
+      dialogEl.dispatchEvent(cancelEvent);
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.isOpen()).toBe(true);
+    });
+
+    it('should apply id to dialog element', () => {
+      const fixture = TestBed.createComponent(DialogTestComponent);
+      fixture.componentInstance.id.set('custom-dialog-id');
+      fixture.detectChanges();
+
+      const dialogEl = getDialogEl(fixture)!;
+      expect(dialogEl.id).toBe('custom-dialog-id');
     });
   });
 });

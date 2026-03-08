@@ -6,7 +6,8 @@ import { ZenIcon } from '../icon';
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
- * Native dialog component with customizable header and sizes.
+ * ZenDialog is a reusable dialog component built on the native HTML `<dialog>` element.
+ * It provides a modal dialog with customizable header, size, and content.
  *
  * @example
  * ```html
@@ -14,6 +15,26 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
  *   <p>Dialog content</p>
  * </dialog>
  * ```
+ *
+ * ### CSS Custom Properties
+ *
+ * You can customize the component using CSS custom properties:
+ * ```css
+ * :root {
+ *   --zen-dialog-padding: 1rem;
+ *   --zen-dialog-bg: white;
+ *   --zen-dialog-border-radius: 8px;
+ *   --zen-dialog-shadow: 0 4px 24px rgb(0 0 0 / 20%);
+ *   --zen-dialog-max-height: 90vh;
+ *   --zen-dialog-max-width: 90vw;
+ *   --zen-dialog-backdrop-bg: rgba(0, 0, 0, 0.5);
+ * }
+ * ```
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
+ * @see [MDN Dialog Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -40,12 +61,11 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
     '[attr.aria-label]': 'header()',
     '[attr.data-size]': 'size()',
     '(close)': 'onClose()',
+    '(cancel)': 'onCancel($event)',
     '(click)': 'onDialogClick($event)',
   },
 })
 export class ZenDialog {
-  private static uniqueId = 0;
-
   /**
    * Controls the open state of the dialog.
    * Supports two-way binding via `[(open)]` syntax.
@@ -62,7 +82,7 @@ export class ZenDialog {
 
   /**
    * Size variant of the dialog.
-   * Affects the width of the dialog via `data-size` attribute.
+   * Affects the width of the dialog via the `data-size` attribute.
    */
   readonly size = input<DialogSize>('md');
 
@@ -82,12 +102,6 @@ export class ZenDialog {
    * This is a native dialog feature.
    */
   readonly closeOnEscape = input(true);
-
-  /**
-   * Unique identifier for the dialog element.
-   * Auto-generated if not provided.
-   */
-  readonly id = input(`zen-dialog-${ZenDialog.uniqueId++}`);
 
   protected readonly closeIcon = Cancel01Icon;
 
@@ -114,6 +128,12 @@ export class ZenDialog {
 
     if ((event.target as HTMLElement).tagName === 'DIALOG') {
       this.onClose();
+    }
+  }
+
+  protected onCancel(event: Event): void {
+    if (!this.closeOnEscape()) {
+      event.preventDefault();
     }
   }
 

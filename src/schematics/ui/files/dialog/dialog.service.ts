@@ -75,17 +75,22 @@ class DialogRef<T> {
 const DIALOG_REF = new InjectionToken<DialogRef<unknown>>('DIALOG_REF');
 
 /**
- * Service for dynamically opening dialogs with custom components.
+ * ZenDialogService provides methods to dynamically open dialogs with custom components.
  *
  * @example
  * ```typescript
- * const ref = this.dialog.open(MyComponent, {
+ * const ref = this.dialogService.open(MyComponent, {
  *   header: 'My Dialog',
  *   size: 'md',
  *   inputs: { message: 'Hello!' },
  *   outputs: { confirm: () => ref.close() },
  * });
  * ```
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
+ * @see [MDN Dialog Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
  */
 @Injectable()
 class ZenDialogService {

@@ -1,4 +1,5 @@
 $transition-duration: var(--zen-transition-duration, 0.3s);
+$content-max-height-offset: 100px;
 $sizes: (
   sm: 300px,
   md: 500px,
@@ -31,8 +32,6 @@ $sizes: (
   max-height: var(--zen-dialog-max-height);
   max-width: var(--zen-dialog-max-width);
   overflow: auto;
-
-  /* Nowoczesne przejścia dla natywnego dialogu (Chrome 125+, Edge 125+) */
   transition:
     opacity $transition-duration ease,
     transform $transition-duration ease,
@@ -41,12 +40,10 @@ $sizes: (
   opacity: 0;
   transform: translateY(-10px);
 
-  /* Stan otwarty */
   &[open] {
     opacity: 1;
     transform: translateY(0);
 
-    /* Definiuje stan początkowy dla animacji wejścia */
     @starting-style {
       opacity: 0;
       transform: translateY(-10px);
@@ -142,7 +139,6 @@ $sizes: (
 }
 
 .zen-dialog-content {
-  /* Zapewnia, że treść nie "wylewa się" przy małych ekranach */
   overflow: auto;
-  max-height: calc(var(--zen-dialog-max-height) - 100px);
+  max-height: calc(var(--zen-dialog-max-height) - #{$content-max-height-offset});
 }

@@ -32,8 +32,7 @@ const meta = {
     closable: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     backdrop: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     closeOnEscape: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
-    id: { control: 'text', table: { defaultValue: { summary: 'zen-dialog-*X*' } } },
-    open: { control: 'boolean', table: { readonly: true, category: 'models' } },
+    open: { control: 'boolean', table: { readonly: false, category: 'models' } },
   },
   args: {
     size: 'md',
@@ -41,24 +40,27 @@ const meta = {
     closable: true,
     backdrop: true,
     closeOnEscape: true,
-    id: 'zen-dialog-story',
+    open: false,
   },
 } satisfies Meta<ZenDialog>;
 
 export default meta;
 
 export const Default: Story = {
-  render: args => ({
-    props: { ...args, isOpen: signal(false) },
-    template: `
-      <button zen-btn (click)="isOpen.set(true)">Open Dialog</button>
+  render: ({ open, ...args }) => {
+    const mutatedArgs = { ...args, open: signal(open) };
+    return {
+      props: { ...mutatedArgs },
+      template: `
+      <button zen-btn (click)="open.set(true)">Open Dialog</button>
 
-      <dialog zen-dialog [(open)]="isOpen" ${argsToTemplate(args)}>
+      <dialog zen-dialog [(open)]="open" ${argsToTemplate(args)}>
         <p>This is the dialog content. You can put any content here.</p>
-        <button zen-btn (click)="isOpen.set(false)">Close</button>
+        <button zen-btn (click)="open.set(false)">Close</button>
       </dialog>
     `,
-  }),
+    };
+  },
 };
 
 export const Sizes: Story = {
