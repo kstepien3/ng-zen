@@ -1,114 +1,20 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { signal } from '@angular/core';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenButton } from '../button';
 import { ZenDialog } from './dialog';
-import { DIALOG_REF, type DialogRef, ZenDialogService } from './dialog.service';
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 type Story = StoryObj<ZenDialog>;
 
-@Component({
-  template: `
-    <p>{{ message() }}</p>
-    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-      <button (click)="confirmClick.emit('confirmed!')" zen-btn>Confirm</button>
-      <button (click)="cancelClick.emit()" zen-btn>Cancel</button>
-    </div>
-  `,
-  standalone: true,
-  imports: [ZenButton],
-})
-class DemoDialogContent {
-  readonly message = input.required<string>();
-  readonly confirmClick = output<string>();
-  readonly cancelClick = output<void>();
-}
-
-@Component({
-  template: `
-    <p>{{ message() }}</p>
-    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-      <button (click)="onConfirm()" zen-btn>Confirm & Close</button>
-      <button (click)="onCancel()" zen-btn>Cancel</button>
-    </div>
-  `,
-  standalone: true,
-  imports: [ZenButton],
-})
-class DemoDialogContentWithRef {
-  readonly message = input.required<string>();
-  private readonly dialogRef = inject(DIALOG_REF) as DialogRef<DemoDialogContentWithRef>;
-
-  onConfirm(): void {
-    alert('Confirmed from inside component!');
-    this.dialogRef.close();
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-}
-
-@Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-service-demo',
-  template: `
-    <button (click)="openDialog()" zen-btn>Open via Service</button>
-  `,
-  standalone: true,
-  imports: [ZenButton],
-  providers: [ZenDialogService],
-})
-class ServiceDemoComponent {
-  private readonly dialogService = inject(ZenDialogService);
-
-  openDialog(): void {
-    const ref = this.dialogService.open(DemoDialogContent, {
-      header: 'Service Dialog',
-      size: 'md',
-      inputs: { message: 'This dialog was opened via service!' },
-      outputs: {
-        confirmClick: (value: string) => {
-          alert(`Confirmed: ${value}`);
-          ref.close();
-        },
-        cancelClick: () => ref.close(),
-      },
-    });
-  }
-}
-
-@Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-service-demo-ref',
-  template: `
-    <button (click)="openDialog()" zen-btn>Open with DIALOG_REF</button>
-  `,
-  standalone: true,
-  imports: [ZenButton],
-  providers: [ZenDialogService],
-})
-class ServiceDemoRefComponent {
-  private readonly dialogService = inject(ZenDialogService);
-
-  openDialog(): void {
-    this.dialogService.open(DemoDialogContentWithRef, {
-      header: 'Dialog with DIALOG_REF',
-      size: 'md',
-      inputs: { message: 'This dialog closes itself using inject(DIALOG_REF)!' },
-    });
-  }
-}
-
 const meta = {
-  title: 'Ui/Dialog',
+  title: 'UI/Dialog/Dialog',
   component: ZenDialog,
+  tags: ['autodocs'],
   decorators: [
     moduleMetadata({
       imports: [ZenButton, ZenDialog],
-      providers: [ZenDialogService],
     }),
   ],
   argTypes: {
@@ -127,6 +33,7 @@ const meta = {
     backdrop: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     closeOnEscape: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     id: { control: 'text', table: { defaultValue: { summary: 'zen-dialog-*X*' } } },
+    open: { control: 'boolean', table: { readonly: true, category: 'models' } },
   },
   args: {
     size: 'md',
@@ -136,7 +43,6 @@ const meta = {
     closeOnEscape: true,
     id: 'zen-dialog-story',
   },
-  tags: ['ui', 'dialog', 'modal'],
 } satisfies Meta<ZenDialog>;
 
 export default meta;
@@ -193,27 +99,5 @@ export const Sizes: Story = {
         <p>Full screen dialog content</p>
       </dialog>
     `,
-  }),
-};
-
-export const ServiceUsage: Story = {
-  decorators: [
-    moduleMetadata({
-      imports: [ServiceDemoComponent],
-    }),
-  ],
-  render: () => ({
-    template: `<app-service-demo />`,
-  }),
-};
-
-export const ServiceWithDialogRef: Story = {
-  decorators: [
-    moduleMetadata({
-      imports: [ServiceDemoRefComponent],
-    }),
-  ],
-  render: () => ({
-    template: `<app-service-demo-ref />`,
   }),
 };

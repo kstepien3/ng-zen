@@ -18,6 +18,7 @@ $sizes: (
   --zen-dialog-close-btn-size: 2rem;
   --zen-dialog-close-btn-color: hsl(0deg 0% 40%);
   --zen-dialog-close-btn-hover-color: hsl(0deg 0% 20%);
+  --zen-dialog-backdrop-bg: rgb(0 0 0 / 50%);
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
@@ -31,6 +32,27 @@ $sizes: (
   max-width: var(--zen-dialog-max-width);
   overflow: auto;
 
+  /* Nowoczesne przejścia dla natywnego dialogu (Chrome 125+, Edge 125+) */
+  transition:
+    opacity $transition-duration ease,
+    transform $transition-duration ease,
+    overlay $transition-duration allow-discrete,
+    display $transition-duration allow-discrete;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  /* Stan otwarty */
+  &[open] {
+    opacity: 1;
+    transform: translateY(0);
+
+    /* Definiuje stan początkowy dla animacji wejścia */
+    @starting-style {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
   @each $name, $width in $sizes {
     &[data-size='#{$name}'] {
       width: $width;
@@ -43,15 +65,30 @@ $sizes: (
     max-width: 100%;
     max-height: 100%;
     border-radius: 0;
+    transform: none;
+
+    &[open] {
+      @starting-style {
+        transform: none;
+      }
+    }
   }
 
   &::backdrop {
-    background: var(--zen-dialog-backdrop-bg, rgb(0 0 0 / 50%));
-    animation: zen-dialog-backdrop-fade-in $transition-duration ease;
+    background: var(--zen-dialog-backdrop-bg);
+    transition:
+      opacity $transition-duration ease,
+      overlay $transition-duration allow-discrete,
+      display $transition-duration allow-discrete;
+    opacity: 0;
   }
 
-  &:not([open]) {
-    display: none;
+  &[open]::backdrop {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
 
@@ -84,10 +121,13 @@ $sizes: (
   border-radius: 4px;
   color: var(--zen-dialog-close-btn-color);
   cursor: pointer;
-  transition: color $transition-duration ease;
+  transition:
+    background-color $transition-duration ease,
+    color $transition-duration ease;
 
   &:hover {
     color: var(--zen-dialog-close-btn-hover-color);
+    background-color: hsl(0deg 0% 96%);
   }
 
   &:focus-visible {
@@ -95,22 +135,14 @@ $sizes: (
     outline-offset: 2px;
   }
 
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
+  zen-icon {
+    display: flex;
+    line-height: 0;
   }
 }
 
 .zen-dialog-content {
+  /* Zapewnia, że treść nie "wylewa się" przy małych ekranach */
   overflow: auto;
-}
-
-@keyframes zen-dialog-backdrop-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  max-height: calc(var(--zen-dialog-max-height) - 100px);
 }
