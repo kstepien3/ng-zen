@@ -5,6 +5,7 @@ export type UiType =
   | 'avatar'
   | 'button'
   | 'checkbox'
+  | 'dialog'
   | 'divider'
   | 'form-control'
   | 'icon'
