@@ -1,9 +1,8 @@
 name: Deploy Storybook to GitHub Pages
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'
+  release:
+    types: [published]
   workflow_dispatch:
 
 env:
@@ -17,6 +16,7 @@ permissions:
 
 jobs:
   deploy:
+    if: github.event.release.prerelease == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,13 +28,13 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - name: Build and deploy Storybook
         id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
         with:
           install_command: pnpm install --frozen-lockfile
           build_command: pnpm run storybook:build

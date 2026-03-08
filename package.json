@@ -67,6 +67,7 @@
     "avatar",
     "button",
     "checkbox",
+    "dialog",
     "divider",
     "form-control",
     "icon",
@@ -111,7 +112,7 @@
     "@compodoc/compodoc": "^1.1.32",
     "@eslint/js": "^9.39.1",
     "@hugeicons/core-free-icons": "^1.2.1",
-    "@schematics/angular": "^20.3.12",
+    "@schematics/angular": "^21.0.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/exec": "^7.1.0",
@@ -151,7 +152,6 @@
     "stylelint-config-standard-scss": "^15.0.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "~8.48.0",
-    "vitest": "^4.0.14",
-    "zone.js": "^0.15.1"
+    "vitest": "^4.0.14"
   }
 }
