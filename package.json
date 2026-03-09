@@ -18,7 +18,9 @@
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md",
+    "postinstall": "pnpm run mock:changelog"
   },
   "license": "BSD-2-Clause",
   "private": false,
