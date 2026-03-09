@@ -51,13 +51,6 @@
     ["@semantic-release/npm", { "npmPublish": false, "pkgRoot": "." }],
     ["@semantic-release/exec", { "prepareCmd": "pnpm run build" }],
     ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/", "npmPublish": true }],
-    [
-      "@semantic-release/git",
-      {
-        "assets": ["package.json", "CHANGELOG.md", "pnpm-lock.yaml"],
-        "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
-      }
-    ],
     "@semantic-release/github"
   ]
 }
