@@ -8,6 +8,7 @@
 /tmp
 /out-tsc
 /bazel-out
+CHANGELOG.md
 
 # Node
 /node_modules
