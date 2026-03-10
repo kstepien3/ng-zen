@@ -32,6 +32,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
+      - name: Download CHANGELOG.md
+        run: |
+          curl -L -o CHANGELOG.md https://unpkg.com/@ng-zen/cli/CHANGELOG.md
+          echo "CHANGELOG.md downloaded successfully"
       - name: Build and deploy Storybook
         id: build-publish
         uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
