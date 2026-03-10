@@ -43,7 +43,7 @@ const meta = {
       },
     },
     id: { control: 'text', table: { defaultValue: { summary: 'zen-popover-*X*' } } },
-    content: { name: 'zenPopover', control: 'text' },
+    content: { name: 'zenPopover', control: 'text', table: { defaultValue: { summary: '' } } },
   },
   args: {
     placement: 'top',
@@ -63,4 +63,21 @@ export const Default: Story = {
       </button>
     `,
   }),
+};
+
+export const WithTemplate: Story = {
+  render: ({ placement, content }) => ({
+    template: `
+      <ng-template #popoverContent>
+        <i>${content}</i>
+      </ng-template>
+      <button zen-btn [zenPopover]="popoverContent" [zenPopoverPlacement]="'${placement}'">
+        Template
+      </button>
+    `,
+  }),
+  args: {
+    id: 'zen-popover-template-story',
+    placement: 'top',
+  },
 };
