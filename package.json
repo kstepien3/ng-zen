@@ -1,6 +1,6 @@
 {
   "name": "@ng-zen/cli",
-  "version": "21.1.1",
+  "version": "0.0.0",
   "description": "Angular UI components generator – Zen UI Kit CLI for schematics-based creation of customizable components like avatar, button, checkbox, divider, form-control, icon, input, skeleton, switch, textarea with Storybook demos.",
   "scripts": {
     "ng": "ng",
@@ -18,7 +18,9 @@
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md",
+    "postinstall": "pnpm run mock:changelog"
   },
   "license": "BSD-2-Clause",
   "private": false,
@@ -67,6 +69,7 @@
     "avatar",
     "button",
     "checkbox",
+    "dialog",
     "divider",
     "form-control",
     "icon",
@@ -111,11 +114,10 @@
     "@compodoc/compodoc": "^1.1.32",
     "@eslint/js": "^9.39.1",
     "@hugeicons/core-free-icons": "^1.2.1",
-    "@schematics/angular": "^20.3.12",
+    "@schematics/angular": "^21.0.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/exec": "^7.1.0",
-    "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.6",
     "@semantic-release/npm": "^13.1.4",
     "@semantic-release/release-notes-generator": "^14.1.0",
@@ -151,7 +153,6 @@
     "stylelint-config-standard-scss": "^15.0.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "~8.48.0",
-    "vitest": "^4.0.14",
-    "zone.js": "^0.15.1"
+    "vitest": "^4.0.14"
   }
 }

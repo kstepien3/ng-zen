@@ -3,9 +3,10 @@ name: CI
 on:
   pull_request:
     branches: [master, develop, next]
+    types: [opened, synchronize, reopened]
 
 env:
-  NODE_VERSION: 22
+  NODE_VERSION: 24
   RETENTION_DAYS: 30
 
 jobs:
@@ -18,7 +19,7 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -26,7 +27,7 @@ jobs:
         run: |
           CACHE_KEY="${{ runner.os }}-node-${{ env.NODE_VERSION }}-pnpm-cache-$(sha256sum pnpm-lock.yaml | cut -d' ' -f1)"
           echo "cache-key=$CACHE_KEY" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         id: pnpm-cache
         with:
           path: |
@@ -45,17 +46,17 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             node_modules
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
       - run: pnpm run lint
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lint-report
@@ -69,17 +70,17 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             node_modules
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
       - run: pnpm run test:no-watch
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test-report
@@ -94,17 +95,18 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             node_modules
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
+      - run: pnpm run mock:changelog
       - run: pnpm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: build-report

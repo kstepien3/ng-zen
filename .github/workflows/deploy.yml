@@ -1,13 +1,12 @@
 name: Deploy Storybook to GitHub Pages
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'
+  release:
+    types: [published]
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 22
+  NODE_VERSION: 24
   PNPM_VERSION: 10.24.0
 
 permissions:
@@ -17,6 +16,7 @@ permissions:
 
 jobs:
   deploy:
+    if: github.event.release.prerelease == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,13 +28,17 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
+      - name: Download CHANGELOG.md
+        run: |
+          curl -L -o CHANGELOG.md https://unpkg.com/@ng-zen/cli/CHANGELOG.md
+          echo "CHANGELOG.md downloaded successfully"
       - name: Build and deploy Storybook
         id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
         with:
           install_command: pnpm install --frozen-lockfile
           build_command: pnpm run storybook:build
