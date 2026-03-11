@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "prepare": "husky",
-    "storybook": "ng run cli:storybook",
+    "storybook": "ng run cli:storybook && pnpm run mock:changelog",
     "storybook:build": "ng run cli:build-storybook",
     "storybook:doc": "compodoc -e json -p tsconfig.json -t --disablePrivate --disableProtected",
     "storybook:doc:watch": "npx nodemon --watch src --ext ts,md --exec \"pnpm run storybook:doc\"",
@@ -19,8 +19,7 @@
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
     "semantic-release": "semantic-release",
-    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md",
-    "postinstall": "pnpm run mock:changelog"
+    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md"
   },
   "license": "BSD-2-Clause",
   "private": false,
