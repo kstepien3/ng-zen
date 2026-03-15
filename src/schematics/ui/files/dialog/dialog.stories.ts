@@ -56,7 +56,7 @@ export const Default: Story = {
 
       <dialog zen-dialog [(open)]="open" ${argsToTemplate(args)}>
         <p>This is the dialog content. You can put any content here.</p>
-        <button zen-btn (click)="open.set(false)">Close</button>
+        <button zen-btn (click)="open.set(false)" variant="secondary">Close</button>
       </dialog>
     `,
     };

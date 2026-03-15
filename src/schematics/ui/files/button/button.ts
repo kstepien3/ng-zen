@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
  * ZenButton is a reusable button component designed to provide
@@ -35,5 +35,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.type]': '"button"',
+    '[attr.data-size]': 'size()',
+    '[attr.data-variant]': 'variant()',
+  },
 })
-export class ZenButton {}
+export class ZenButton {
+  readonly size = input<'sm' | 'md' | 'lg'>('md');
+  readonly variant = input<'primary' | 'secondary' | 'link' | 'ghost'>('primary');
+}

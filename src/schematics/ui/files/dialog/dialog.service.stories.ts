@@ -66,9 +66,9 @@ See [GitHub](https://github.com/kstepien3/ng-zen), [MDN Dialog Element](https://
 @Component({
   template: `
     <p>{{ message() }}</p>
-    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+    <div style="display: flex; gap: 0.5rem; margin-top: 1rem; justify-content: end">
+      <button (click)="cancel()" variant="secondary" zen-btn>Cancel</button>
       <button (click)="confirmClick.emit('confirmed!')" zen-btn>Confirm</button>
-      <button (click)="cancel()" zen-btn>Cancel</button>
     </div>
   `,
   standalone: true,
