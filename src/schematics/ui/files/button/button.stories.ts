@@ -50,8 +50,8 @@ export const IconButton: Story = {
   decorators: [moduleMetadata({ imports: [ZenIcon] })],
   render: args => ({
     props: { Add01Icon, ...args },
-    template: `<button zen-btn ${argsToTemplate(args)}>
-    <zen-icon [icon]="Add01Icon" [size]="16" [strokeWidth]="3" /> Add
+    template: `<button zen-btn variant="ghost" ${argsToTemplate(args)}>
+    <zen-icon [icon]="Add01Icon" [size]="16" [strokeWidth]="3" />
   </button>`,
   }),
 };
@@ -60,10 +60,72 @@ export const AllVariants: Story = {
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem">
-        <button zen-button variant="primary">Primary</button>
-        <button zen-button variant="secondary">Secondary</button>
-        <button zen-button variant="link">Link</button>
+        <button zen-button variant="solid">Solid</button>
+        <button zen-button variant="filled">Filled</button>
+        <button zen-button variant="outline">Outline</button>
         <button zen-button variant="ghost">Ghost</button>
+        <button zen-button variant="link">Link</button>
+      </div>
+    `,
+  }),
+};
+export const AllColorVariants: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Default (No color attribute) -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button variant="solid">Solid</button>
+          <button zen-button variant="filled">Filled</button>
+          <button zen-button variant="outline">Outline</button>
+          <button zen-button variant="ghost">Ghost</button>
+          <button zen-button variant="link">Link</button>
+        </div>
+
+        <!-- Primary -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button color="primary" variant="solid">Solid</button>
+          <button zen-button color="primary" variant="filled">Filled</button>
+          <button zen-button color="primary" variant="outline">Outline</button>
+          <button zen-button color="primary" variant="ghost">Ghost</button>
+          <button zen-button color="primary" variant="link">Link</button>
+        </div>
+
+        <!-- Success -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button color="success" variant="solid">Solid</button>
+          <button zen-button color="success" variant="filled">Filled</button>
+          <button zen-button color="success" variant="outline">Outline</button>
+          <button zen-button color="success" variant="ghost">Ghost</button>
+          <button zen-button color="success" variant="link">Link</button>
+        </div>
+
+        <!-- Warning -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button color="warning" variant="solid">Solid</button>
+          <button zen-button color="warning" variant="filled">Filled</button>
+          <button zen-button color="warning" variant="outline">Outline</button>
+          <button zen-button color="warning" variant="ghost">Ghost</button>
+          <button zen-button color="warning" variant="link">Link</button>
+        </div>
+
+        <!-- Danger -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button color="danger" variant="solid">Solid</button>
+          <button zen-button color="danger" variant="filled">Filled</button>
+          <button zen-button color="danger" variant="outline">Outline</button>
+          <button zen-button color="danger" variant="ghost">Ghost</button>
+          <button zen-button color="danger" variant="link">Link</button>
+        </div>
+
+        <!-- Info -->
+        <div style="display: flex; gap: 0.5rem;">
+          <button zen-button color="info" variant="solid">Solid</button>
+          <button zen-button color="info" variant="filled">Filled</button>
+          <button zen-button color="info" variant="outline">Outline</button>
+          <button zen-button color="info" variant="ghost">Ghost</button>
+          <button zen-button color="info" variant="link">Link</button>
+        </div>
       </div>
     `,
   }),

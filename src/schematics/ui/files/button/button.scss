@@ -1,69 +1,69 @@
 @use 'sass:map';
 
 // Globals
-$transition-duration: var(--zen-transition-duration, 0.4s);
+$transition-duration: var(--zen-transition-duration, 0.2s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
-  --zen-button-radius: 8px;
-  --zen-button-bg-color: hsl(0deg 0% 10%);
-  --zen-button-bg-color-hover: hsl(0deg 0% 20%);
+  --zen-button-radius: 0.625rem;
+  --zen-button-bg-color: hsl(0deg 0% 10%); // Domyślne tło (Primary / Neutral)
   --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
-  background-color: var(--zen-button-bg-color);
-  box-shadow: var(--zen-button-shadow);
-  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.625rem;
+  line-height: 1;
   font-weight: bold;
   text-align: center;
-  cursor: pointer;
-  border: none;
-  transition-property: background-color, opacity;
-  transition-duration: $transition-duration;
-  transition-timing-function: ease;
   text-decoration: none;
   white-space: nowrap;
   user-select: none;
-  color: oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h); // fallback
+  cursor: pointer;
+  border: none;
+  border-radius: var(--zen-button-radius);
+  background-color: var(--zen-button-bg-color);
+  box-shadow: var(--zen-button-shadow);
+  transition: all $transition-duration ease;
+
+  // Automatyczny kolor tekstu ze wsparciem fallback (dla wariantu solid)
+  color: var(--zen-button-color, oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h));
 
   @supports (color: contrast-color(white)) {
-    color: contrast-color(var(--zen-button-bg-color));
+    color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
   }
 }
 
+// --- STAN BAZOWY DLA SOLID (Hover / Active) ---
+:host:hover {
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) 85%, var(--zen-button-color, white));
+}
+
 :host:active {
-  background: var(--zen-btn-active-bg);
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) 75%, var(--zen-button-color, white));
   transform: translateY(1px);
 }
 
-/* Hover state */
-:host:hover {
-  background-color: var(--zen-button-bg-color-hover);
-}
-
-/* Focus state */
+// --- STANY WSPÓLNE ---
 :host:focus-visible {
   outline: $outline;
+  outline-offset: 2px;
 }
 
-/* Disabled state */
 :host[aria-disabled='true'],
 :host[disabled]:not([disabled='false']) {
   cursor: not-allowed;
   opacity: 0.6;
+  pointer-events: none;
 }
 
-/* Sizes */
+// --- ROZMIARY ---
 $sizes: (
   sm: (
     padding: 0.35rem 0.625rem,
-    font-size: 0.725rem,
+    font-size: 0.75rem,
     gap: 0.375rem,
   ),
   md: (
@@ -80,50 +80,88 @@ $sizes: (
 
 @each $name, $config in $sizes {
   :host([data-size='#{$name}']) {
-    padding: #{map.get($config, padding)};
-    font-size: #{map.get($config, font-size)};
-    gap: #{map.get($config, gap)};
+    padding: map.get($config, padding);
+    font-size: map.get($config, font-size);
+    gap: map.get($config, gap);
   }
 }
 
-/* VARIANTS */
-:host([data-variant='ghost'], [data-variant='link']) {
+// --- KOLORY BAZOWE (5 intencji, 1 domyślna) ---
+$colors: (
+  neutral: hsl(30deg 5% 10%),
+  primary: hsl(95deg 15% 50%),
+  success: hsl(105deg 20% 35%),
+  warning: hsl(40deg 45% 60%),
+  danger: hsl(5deg 50% 45%),
+  info: hsl(205deg 30% 40%),
+);
+
+@each $name, $bg-color in $colors {
+  :host([data-color='#{$name}']) {
+    --zen-button-bg-color: #{$bg-color};
+  }
+}
+
+// --- WARIANTY POBOCZNE ---
+
+/* Wariant Outline */
+:host([data-variant='outline']) {
   background-color: transparent;
+  color: var(--zen-button-bg-color); // Kolor pobierany automatycznie z intencji
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--zen-button-bg-color);
   box-shadow: none;
-  color: black;
 
   &:hover {
-    background-color: hsl(0deg 0% 0% / 6%);
+    color: color-mix(in srgb, var(--zen-button-bg-color) 70%, transparent);
+    border-color: color-mix(in srgb, var(--zen-button-bg-color) 70%, transparent);
   }
 
   &:active {
-    background-color: hsl(0deg 0% 0% / 10%);
+    background-color: color-mix(in srgb, var(--zen-button-bg-color) 20%, transparent);
   }
 }
 
+/* Wariant Filled (Zastępuje stary 'Secondary' lub 'Neutral') */
+:host([data-variant='filled']) {
+  // Dla wariantu "filled" używamy wariantu bg z domieszką 8% jako tło i 100% jako napis
+  background-color: color-mix(in srgb, var(--zen-button-bg-color) 8%, transparent);
+  color: var(--zen-button-bg-color);
+  box-shadow: none;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--zen-button-bg-color) 16%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--zen-button-bg-color) 24%, transparent);
+  }
+}
+
+/* Warianty Ghost i Link */
+:host([data-variant='ghost']),
+:host([data-variant='link']) {
+  background-color: transparent;
+  color: var(--zen-button-bg-color);
+  box-shadow: none;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--zen-button-bg-color) 10%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--zen-button-bg-color) 20%, transparent);
+  }
+}
+
+/* Dodatki tylko dla wariantu Link */
 :host([data-variant='link']) {
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
 
   &:hover {
-    background-color: transparent;
-    text-decoration-thickness: 3px;
-  }
-
-  &:active {
-    background-color: transparent;
-  }
-}
-
-:host([data-variant='secondary']) {
-  --zen-button-bg-color: hsl(0deg 0% 95%);
-
-  &:hover {
-    --zen-button-bg-color-hover: hsl(0deg 0% 90%);
-  }
-
-  &:active {
-    background-color: hsl(0deg 0% 85%);
+    text-decoration-thickness: 2px;
   }
 }

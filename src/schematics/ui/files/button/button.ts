@@ -39,9 +39,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     '[attr.type]': '"button"',
     '[attr.data-size]': 'size()',
     '[attr.data-variant]': 'variant()',
+    '[attr.data-color]': 'color()',
   },
 })
 export class ZenButton {
   readonly size = input<'sm' | 'md' | 'lg'>('md');
-  readonly variant = input<'primary' | 'secondary' | 'link' | 'ghost'>('primary');
+  readonly color = input<'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info'>('neutral');
+  readonly variant = input<'solid' | 'outline' | 'filled' | 'ghost' | 'link'>('solid');
 }
