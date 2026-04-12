@@ -5,7 +5,6 @@ $transition-duration: var(--zen-transition-duration, 0.2s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
-  --zen-button-radius: 0.625rem;
   --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
   --zen-button-neutral: hsl(30deg 5% 10%);
   --zen-button-primary: hsl(95deg 15% 50%);
@@ -56,7 +55,7 @@ $colors: (
   user-select: none;
   cursor: pointer;
   border: none;
-  border-radius: var(--zen-button-radius);
+  border-radius: 0.625rem;
   box-shadow: var(--zen-button-shadow);
   transition: all $transition-duration ease;
   color: var(--zen-button-color, oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h));
