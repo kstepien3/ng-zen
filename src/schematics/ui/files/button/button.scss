@@ -6,60 +6,15 @@ $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
   --zen-button-radius: 0.625rem;
-  --zen-button-bg-color: hsl(0deg 0% 10%); // Domyślne tło (Primary / Neutral)
   --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
+  --zen-button-neutral: hsl(30deg 5% 10%);
+  --zen-button-primary: hsl(95deg 15% 50%);
+  --zen-button-success: hsl(105deg 20% 35%);
+  --zen-button-warning: hsl(40deg 45% 60%);
+  --zen-button-danger: hsl(5deg 50% 45%);
+  --zen-button-info: hsl(205deg 30% 40%);
 }
 
-/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
-:host {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  user-select: none;
-  cursor: pointer;
-  border: none;
-  border-radius: var(--zen-button-radius);
-  background-color: var(--zen-button-bg-color);
-  box-shadow: var(--zen-button-shadow);
-  transition: all $transition-duration ease;
-
-  // Automatyczny kolor tekstu ze wsparciem fallback (dla wariantu solid)
-  color: var(--zen-button-color, oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h));
-
-  @supports (color: contrast-color(white)) {
-    color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
-  }
-}
-
-// --- STAN BAZOWY DLA SOLID (Hover / Active) ---
-:host:hover {
-  background-color: color-mix(in oklch, var(--zen-button-bg-color) 85%, var(--zen-button-color, white));
-}
-
-:host:active {
-  background-color: color-mix(in oklch, var(--zen-button-bg-color) 75%, var(--zen-button-color, white));
-  transform: translateY(1px);
-}
-
-// --- STANY WSPÓLNE ---
-:host:focus-visible {
-  outline: $outline;
-  outline-offset: 2px;
-}
-
-:host[aria-disabled='true'],
-:host[disabled]:not([disabled='false']) {
-  cursor: not-allowed;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-// --- ROZMIARY ---
 $sizes: (
   sm: (
     padding: 0.35rem 0.625rem,
@@ -77,7 +32,61 @@ $sizes: (
     gap: 0.5rem,
   ),
 );
+$colors: (
+  primary: var(--zen-button-primary),
+  success: var(--zen-button-success),
+  warning: var(--zen-button-warning),
+  danger: var(--zen-button-danger),
+  info: var(--zen-button-info),
+);
 
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  --zen-button-bg-color: var(--zen-button-neutral); // default
+
+  background-color: var(--zen-button-bg-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--zen-button-radius);
+  box-shadow: var(--zen-button-shadow);
+  transition: all $transition-duration ease;
+  color: var(--zen-button-color, oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h));
+
+  @supports (color: contrast-color(white)) {
+    color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
+  }
+}
+
+:host:hover {
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) 85%, var(--zen-button-color, white));
+}
+
+:host:active {
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) 75%, var(--zen-button-color, white));
+  transform: translateY(1px);
+}
+
+:host:focus-visible {
+  outline: $outline;
+  outline-offset: 2px;
+}
+
+:host([disabled]) {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// --- SIZES ---
 @each $name, $config in $sizes {
   :host([data-size='#{$name}']) {
     padding: map.get($config, padding);
@@ -86,28 +95,19 @@ $sizes: (
   }
 }
 
-// --- KOLORY BAZOWE (5 intencji, 1 domyślna) ---
-$colors: (
-  neutral: hsl(30deg 5% 10%),
-  primary: hsl(95deg 15% 50%),
-  success: hsl(105deg 20% 35%),
-  warning: hsl(40deg 45% 60%),
-  danger: hsl(5deg 50% 45%),
-  info: hsl(205deg 30% 40%),
-);
-
+// --- COLORS ---
 @each $name, $bg-color in $colors {
   :host([data-color='#{$name}']) {
     --zen-button-bg-color: #{$bg-color};
   }
 }
 
-// --- WARIANTY POBOCZNE ---
+// --- VARIANTS ---
 
-/* Wariant Outline */
+/* Outline variant */
 :host([data-variant='outline']) {
   background-color: transparent;
-  color: var(--zen-button-bg-color); // Kolor pobierany automatycznie z intencji
+  color: var(--zen-button-bg-color);
   border-width: 1px;
   border-style: solid;
   border-color: var(--zen-button-bg-color);
@@ -123,9 +123,8 @@ $colors: (
   }
 }
 
-/* Wariant Filled (Zastępuje stary 'Secondary' lub 'Neutral') */
+/* Filled variant */
 :host([data-variant='filled']) {
-  // Dla wariantu "filled" używamy wariantu bg z domieszką 8% jako tło i 100% jako napis
   background-color: color-mix(in srgb, var(--zen-button-bg-color) 8%, transparent);
   color: var(--zen-button-bg-color);
   box-shadow: none;
@@ -139,7 +138,7 @@ $colors: (
   }
 }
 
-/* Warianty Ghost i Link */
+/* Ghost and Link variants */
 :host([data-variant='ghost']),
 :host([data-variant='link']) {
   background-color: transparent;
@@ -155,7 +154,7 @@ $colors: (
   }
 }
 
-/* Dodatki tylko dla wariantu Link */
+/* Link variant only */
 :host([data-variant='link']) {
   text-decoration: underline;
   text-underline-offset: 0.2em;

@@ -4,10 +4,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  * ZenButton is a reusable button component designed to provide
  * a consistent and customizable button style across the application.
  * It can be used with both `<button>` and `<a>` HTML elements by applying
- * the `zen-button` attribute.
+ * the `zen-button` or `zen-btn` attribute.
  *
  * @example
+ * <button zen-button> ... </button>
  * <button zen-btn> ... </button>
+ * <a zen-button href="..."> ... </a>
  *
  * ### CSS Custom Properties
  *
@@ -15,11 +17,14 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  *
  * ```css
  * :root {
- *   --zen-button-bg-color-hover: lightgrey;
- *   --zen-button-bg-color: grey;
- *   --zen-button-color: white;
- *   --zen-button-padding: 0.5rem 2rem;
+ *   --zen-button-radius: 0.625rem;
  *   --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
+ *   --zen-button-neutral: hsl(30deg 5% 10%);
+ *   --zen-button-primary: hsl(95deg 15% 50%);
+ *   --zen-button-success: hsl(105deg 20% 35%);
+ *   --zen-button-warning: hsl(40deg 45% 60%);
+ *   --zen-button-danger: hsl(5deg 50% 45%);
+ *   --zen-button-info: hsl(205deg 30% 40%);
  * }
  * ```
  *

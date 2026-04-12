@@ -1,10 +1,12 @@
-import { Add01Icon } from '@hugeicons/core-free-icons';
+import { FavouriteIcon } from '@hugeicons/core-free-icons';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenIcon } from '../icon';
 import { ZenButton } from './button';
 
 interface StoryParams {
+  color: 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
+  variant: 'solid' | 'filled' | 'outline' | 'ghost' | 'link';
   disabled: boolean;
 }
 
@@ -16,11 +18,21 @@ export default {
   args: {
     disabled: false,
     size: 'md',
+    color: 'neutral',
+    variant: 'solid',
   },
   argTypes: {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
+    },
+    color: {
+      control: 'select',
+      options: ['neutral', 'primary', 'success', 'warning', 'danger', 'info'],
+    },
+    variant: {
+      control: 'select',
+      options: ['solid', 'filled', 'outline', 'ghost', 'link'],
     },
     disabled: {
       control: 'boolean',
@@ -31,14 +43,10 @@ export default {
         },
       },
     },
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary', 'link', 'ghost'],
-    },
   },
   render: ({ ...args }) => ({
     props: args,
-    template: `<button zen-btn ${argsToTemplate(args)} >Button</button>`,
+    template: `<button zen-btn ${argsToTemplate(args)}>Button</button>`,
   }),
 } satisfies Meta<Options>;
 
@@ -49,9 +57,9 @@ export const Default: Story = {};
 export const IconButton: Story = {
   decorators: [moduleMetadata({ imports: [ZenIcon] })],
   render: args => ({
-    props: { Add01Icon, ...args },
-    template: `<button zen-btn variant="ghost" ${argsToTemplate(args)}>
-    <zen-icon [icon]="Add01Icon" [size]="16" [strokeWidth]="3" />
+    props: { FavouriteIcon, ...args },
+    template: `<button zen-btn variant="ghost" ${argsToTemplate(args, { exclude: ['variant'] })}>
+    <zen-icon [icon]="FavouriteIcon" [size]="16" [strokeWidth]="3" />
   </button>`,
   }),
 };
@@ -69,6 +77,19 @@ export const AllVariants: Story = {
     `,
   }),
 };
+
+export const AllSizes: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <button zen-button size="sm">Small</button>
+        <button zen-button size="md">Medium</button>
+        <button zen-button size="lg">Large</button>
+      </div>
+    `,
+  }),
+};
+
 export const AllColorVariants: Story = {
   render: () => ({
     template: `
