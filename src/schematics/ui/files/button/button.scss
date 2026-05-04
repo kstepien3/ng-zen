@@ -6,12 +6,12 @@ $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 
 :host {
   --zen-button-shadow: 0 2px 4px hsl(0deg 0% 0% / 10%);
-  --zen-button-neutral: hsl(30deg 5% 10%);
-  --zen-button-primary: hsl(95deg 15% 50%);
-  --zen-button-success: hsl(105deg 20% 35%);
-  --zen-button-warning: hsl(40deg 45% 60%);
-  --zen-button-danger: hsl(5deg 50% 45%);
-  --zen-button-info: hsl(205deg 30% 40%);
+  --zen-button-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
+  --zen-button-primary: var(--zen-primary, hsl(193deg 58% 34%));
+  --zen-button-success: var(--zen-success, hsl(142deg 38% 36%));
+  --zen-button-warning: var(--zen-warning, hsl(36deg 72% 46%));
+  --zen-button-danger: var(--zen-danger, hsl(348deg 52% 42%));
+  --zen-button-info: var(--zen-info, hsl(214deg 34% 46%));
 }
 
 $sizes: (
@@ -58,11 +58,7 @@ $colors: (
   border-radius: 0.625rem;
   box-shadow: var(--zen-button-shadow);
   transition: all $transition-duration ease;
-  color: var(--zen-button-color, oklch(from var(--zen-button-bg-color) clamp(0, (l / 0.6 - 1) * -999999, 1) 0 h));
-
-  @supports (color: contrast-color(white)) {
-    color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
-  }
+  color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
 }
 
 :host:hover {
