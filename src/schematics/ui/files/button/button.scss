@@ -39,6 +39,25 @@ $colors: (
   info: var(--zen-button-info),
 );
 
+// Color mix percentages for filled variant states
+$filled-hover-opacity: 15%;
+$filled-active-opacity: 25%;
+
+// Ghost/Link variant opacity levels
+$ghost-hover-opacity: 10%;
+$ghost-active-opacity: 20%;
+
+// Outline variant opacity levels
+$outline-hover-opacity: 70%;
+$outline-active-bg-opacity: 20%;
+
+// Disabled state
+$disabled-opacity: 0.6;
+
+// Default state hover/active mixing ratios (oklch)
+$default-hover-mix: 85%;
+$default-active-mix: 75%;
+
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
   --zen-button-bg-color: var(--zen-button-neutral); // default
@@ -57,16 +76,20 @@ $colors: (
   border: none;
   border-radius: 0.625rem;
   box-shadow: var(--zen-button-shadow);
-  transition: all $transition-duration ease;
+  transition:
+    background-color $transition-duration ease,
+    transform $transition-duration ease,
+    color $transition-duration ease,
+    border-color $transition-duration ease;
   color: var(--zen-button-color, contrast-color(var(--zen-button-bg-color)));
 }
 
 :host:hover {
-  background-color: color-mix(in oklch, var(--zen-button-bg-color) 85%, var(--zen-button-color, white));
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) $default-hover-mix, var(--zen-button-color, white));
 }
 
 :host:active {
-  background-color: color-mix(in oklch, var(--zen-button-bg-color) 75%, var(--zen-button-color, white));
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) $default-active-mix, var(--zen-button-color, white));
   transform: translateY(1px);
 }
 
@@ -77,7 +100,7 @@ $colors: (
 
 :host([disabled]) {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: $disabled-opacity;
   pointer-events: none;
 }
 
@@ -109,27 +132,27 @@ $colors: (
   box-shadow: none;
 
   &:hover {
-    color: color-mix(in srgb, var(--zen-button-bg-color) 70%, transparent);
-    border-color: color-mix(in srgb, var(--zen-button-bg-color) 70%, transparent);
+    color: color-mix(in oklch, var(--zen-button-bg-color) $outline-hover-opacity, transparent);
+    border-color: color-mix(in oklch, var(--zen-button-bg-color) $outline-hover-opacity, transparent);
   }
 
   &:active {
-    background-color: color-mix(in srgb, var(--zen-button-bg-color) 20%, transparent);
+    background-color: color-mix(in oklch, var(--zen-button-bg-color) $outline-active-bg-opacity, transparent);
   }
 }
 
 /* Filled variant */
 :host([data-variant='filled']) {
-  background-color: color-mix(in srgb, var(--zen-button-bg-color) 8%, transparent);
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) 8%, transparent);
   color: var(--zen-button-bg-color);
   box-shadow: none;
 
   &:hover {
-    background-color: color-mix(in srgb, var(--zen-button-bg-color) 16%, transparent);
+    background-color: color-mix(in oklch, var(--zen-button-bg-color) $filled-hover-opacity, transparent);
   }
 
   &:active {
-    background-color: color-mix(in srgb, var(--zen-button-bg-color) 24%, transparent);
+    background-color: color-mix(in oklch, var(--zen-button-bg-color) $filled-active-opacity, transparent);
   }
 }
 
@@ -141,11 +164,11 @@ $colors: (
   box-shadow: none;
 
   &:hover {
-    background-color: color-mix(in srgb, var(--zen-button-bg-color) 10%, transparent);
+    background-color: color-mix(in oklch, var(--zen-button-bg-color) $ghost-hover-opacity, transparent);
   }
 
   &:active {
-    background-color: color-mix(in srgb, var(--zen-button-bg-color) 20%, transparent);
+    background-color: color-mix(in oklch, var(--zen-button-bg-color) $ghost-active-opacity, transparent);
   }
 }
 
