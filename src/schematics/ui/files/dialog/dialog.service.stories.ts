@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenButton } from '../button';
@@ -72,7 +72,6 @@ See [GitHub](https://github.com/kstepien3/ng-zen), [MDN Dialog Element](https://
     </div>
   `,
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ZenButton],
 })
 class DemoDialogContent {
