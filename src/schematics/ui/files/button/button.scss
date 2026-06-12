@@ -40,6 +40,7 @@ $colors: (
 );
 
 // Color mix percentages for filled variant states
+$filled-base-opacity: 8%;
 $filled-hover-opacity: 15%;
 $filled-active-opacity: 25%;
 
@@ -143,7 +144,7 @@ $default-active-mix: 75%;
 
 /* Filled variant */
 :host([data-variant='filled']) {
-  background-color: color-mix(in oklch, var(--zen-button-bg-color) 8%, transparent);
+  background-color: color-mix(in oklch, var(--zen-button-bg-color) $filled-base-opacity, transparent);
   color: var(--zen-button-bg-color);
   box-shadow: none;
 
