@@ -14,6 +14,8 @@ import {
 import { ZenPopoverHost } from './host/popover-host';
 import { PopoverPlacement } from './popover-positions.type';
 
+type HostProperties = keyof ZenPopoverHost;
+
 /**
  * ZenPopover is a reusable popover directive built on the native Popover API.
  * It provides a consistent, themeable popover surface with CSS-based positioning,
@@ -21,25 +23,51 @@ import { PopoverPlacement } from './popover-positions.type';
  *
  * ### Limitations (arrow)
  * ZenPopover may use CSS fallback positioning (e.g. via `position-try-fallbacks`) to keep the
- * popover inside the viewport. Today CSS doesn’t provide a stable, cross-browser way to detect
- * which fallback placement was ultimately chosen, so an “arrow” implemented with `::before/::after`
- * can’t be reliably synchronized with the final placement without extra JavaScript.
+ * popover inside the viewport. Today CSS doesn't provide a stable, cross-browser way to detect
+ * which fallback placement was ultimately chosen, so an "arrow" implemented with `::before/::after`
+ * can't be reliably synchronized with the final placement without extra JavaScript.
  * A CSS-only solution becomes possible with Anchored Container Queries (e.g. `container-type: anchored`
  * and `@container anchored(fallback: ...)`) where supported.
  *
- * @see https://developer.chrome.com/blog/anchored-container-queries
+ * @see [Detect fallback positions with anchored container queries](https://developer.chrome.com/blog/anchored-container-queries)
+ *
+ * @example
+ *
+ * ```html
+ * <!-- String content -->
+ * <button [zenPopover]="'Hello World'" [zenPopoverPlacement]="'bottom'">
+ *   Trigger
+ * </button>
+ *
+ * <!-- TemplateRef content -->
+ * <button [zenPopover]="popoverContent" zenPopoverPlacement="right">
+ *   Trigger
+ * </button>
+ * <ng-template #popoverContent>
+ *   <div>Custom content</div>
+ * </ng-template>
+ * ```
  *
  * ### CSS Custom Properties
- * You can customize the popover using CSS custom properties (see component styles/docs).
+ *
+ * You can customize the component using CSS custom properties:
+ * ```css
+ * :root {
+ *   --zen-popover-offset: 0.5rem;
+ *   --zen-popover-bg: white;
+ *   --zen-popover-border: 1px solid #ccc;
+ *   --zen-popover-border-radius: 8px;
+ *   --zen-popover-padding: 0.5rem;
+ *   --zen-popover-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+ *   --zen-popover-max-width: 300px;
+ * }
+ * ```
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  * @see [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  */
-
-type HostProperties = keyof ZenPopoverHost;
-
 @Directive({
   selector: '[zenPopover]',
   standalone: true,
