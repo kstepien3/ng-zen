@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * ZenDivider is a reusable divider component that provides a simple way to
@@ -36,7 +36,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: `zen-divider, zen-divider[vertical],`,
   template: '<ng-content/>',
   styleUrl: './divider.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '"zen-align-"+align()',
   },

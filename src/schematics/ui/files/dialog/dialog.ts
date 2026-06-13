@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, model, untracked } from '@angular/core';
+import { Component, effect, ElementRef, inject, input, model, untracked } from '@angular/core';
 import { Cancel01Icon } from '@hugeicons/core-free-icons';
 
 import { ZenIcon } from '../icon';
@@ -55,7 +55,6 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
     </div>
   `,
   styleUrl: './dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ZenIcon],
   host: {
     '[attr.aria-label]': 'header()',

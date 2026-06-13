@@ -1,28 +1,25 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { Component, model } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 
 /**
- * ZenInput is a reusable text input component designed to provide
- * a consistent and customizable input style across the application.
- * It supports Angular forms integration and provides two-way data binding.
+ * ZenSwitch is a toggle switch component backed by Signal Forms.
  *
  * @example
- *
  * ```html
- * <zen-switch [disabled]="false" [value]="true" />
- *```
+ * <zen-switch [formField]="myForm.notifications" />
+ * ```
  *
  * ### CSS Custom Properties
  * You can customize the component using CSS custom properties:
  *
  * ```css
  * :root {
- *  --zen-input-border: 1px solid hsl(0deg 0% 80%);
- *  --zen-input-border-radius: 8px;
- *  --zen-input-padding: 0.5rem 1rem;
- *  --zen-input-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
- *  --zen-input-placeholder-color: hsl(0deg 0% 60%);
+ *  --zen-switch-thumb-size: 1rem;
+ *  --zen-switch-height: 1.25rem;
+ *  --zen-switch-width: 2rem;
+ *  --zen-switch-apperance: hsl(0deg 0% 10%);
+ *  --zen-switch-background: hsl(0deg 0% 80%);
  * }
  * ```
  *
@@ -41,14 +38,13 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
     </span>
   `,
   styleUrl: './switch.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ZenFormControlProvider(ZenSwitch)],
+
   host: {
     tabindex: '0',
     role: 'switch',
     '[attr.data-disabled]': 'disabled()',
     '[attr.data-checked]': 'value()',
-    '(blur)': 'onTouched()',
+    '(blur)': 'touched.set(true)',
     '(click)': 'onInput(!this.value())',
     '(keydown)': 'onKeyDown($event)',
   },

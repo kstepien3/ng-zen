@@ -1,18 +1,15 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, model, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, effect, ElementRef, model, viewChild } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 
 /**
- * ZenCheckbox is a reusable checkbox component designed to provide
- * a consistent and customizable checkbox style across the application.
- * It supports Angular forms integration and provides two-way data binding
- * for boolean values.
+ * ZenCheckbox is a reusable checkbox component supporting checked and
+ * indeterminate (`null`) states, backed by Signal Forms.
  *
  * @example
- * <zen-checkbox [value]="true" /> Checked
- * <zen-checkbox [value]="false" /> Unchecked
- * <zen-checkbox [value]="null" /> Indeterminate
+ * ```html
+ * <zen-checkbox [formField]="myForm.agree" />
+ * ```
  *
  * ### CSS Custom Properties
  *
@@ -28,7 +25,7 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
  * }
  * ```
  *
- * @implements {ZenFormControl<boolean>}
+ * @implements {ZenFormControl<boolean | null>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
@@ -39,9 +36,9 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
   template: `
     <input
       [attr.aria-disabled]="disabled()"
+      [checked]="value()"
       [disabled]="disabled()"
-      [ngModel]="value()"
-      (ngModelChange)="onInput($event)"
+      (change)="onInput(inputElement.checked)"
       #inputElement
       type="checkbox"
     />
@@ -53,11 +50,8 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
     <!-- @else { ✕ } -->
   `,
   styleUrls: ['./checkbox.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
-  providers: [ZenFormControlProvider(ZenCheckbox)],
   host: {
-    '(blur)': 'onTouched()',
+    '(blur)': 'touched.set(true)',
   },
 })
 export class ZenCheckbox extends ZenFormControl<boolean | null> {

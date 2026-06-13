@@ -1,27 +1,16 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  input,
-  model,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { afterNextRender, Component, computed, DestroyRef, inject, input, model } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 import { ZenRadioRegistry } from './radio.registry';
 
 /**
- * ZenRadio is a reusable radio button component designed to provide
- * a consistent and customizable radio button style across the application.
- * It supports Angular forms integration and provides two-way data binding
- * for string values.
+ * ZenRadio is a reusable radio button component backed by Signal Forms.
  *
  * @example
- * <zen-radio name="group" option="option1" [(ngModel)]="selectedValue" /> Option 1
- * <zen-radio name="group" option="option2" [(ngModel)]="selectedValue" /> Option 2
+ * ```html
+ * <zen-radio [formField]="myForm.color" name="color" option="red" />
+ * <zen-radio [formField]="myForm.color" name="color" option="blue" />
+ * ```
  *
  * ### CSS Custom Properties
  *
@@ -62,11 +51,8 @@ import { ZenRadioRegistry } from './radio.registry';
     }
   `,
   styleUrls: ['./radio.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
-  providers: [ZenFormControlProvider(ZenRadio)],
   host: {
-    '(blur)': 'onTouched()',
+    '(blur)': 'touched.set(true)',
   },
 })
 export class ZenRadio extends ZenFormControl<string | null> {

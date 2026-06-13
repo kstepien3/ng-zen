@@ -1,15 +1,14 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, input, model } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 
 /**
- * ZenInput is a reusable text input component designed to provide
- * a consistent and customizable input style across the application.
- * It supports Angular forms integration and provides two-way data binding.
+ * ZenInput is a reusable text input component backed by Signal Forms.
  *
  * @example
- * <zen-input value="string" />
+ * ```html
+ * <zen-input [formField]="myForm.name" />
+ * ```
  *
  * ### CSS Custom Properties
  * You can customize the component using CSS custom properties:
@@ -37,16 +36,13 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
       [attr.placeholder]="placeholder()"
       [attr.required]="required()"
       [disabled]="disabled()"
-      [ngModel]="value()"
       [value]="value()"
-      (blur)="onTouched()"
-      (ngModelChange)="onInput($event)"
+      (blur)="touched.set(true)"
+      (input)="onInput(inputRef.value)"
+      #inputRef
     />
   `,
   styleUrls: ['./input.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ZenFormControlProvider(ZenInput)],
-  imports: [FormsModule],
 })
 export class ZenInput extends ZenFormControl<string> {
   /** The current input value with two-way binding support. */

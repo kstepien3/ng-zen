@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { PopoverPlacement } from '../popover-positions.type';
 
@@ -25,7 +25,6 @@ import { PopoverPlacement } from '../popover-positions.type';
     <ng-content />
   `,
   styleUrl: './popover-host.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     popover: 'auto',
     '[attr.id]': 'id()',

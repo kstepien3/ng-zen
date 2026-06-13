@@ -1,4 +1,7 @@
+import { NgComponentOutlet } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { form, FormField } from '@angular/forms/signals';
 import { Meta, StoryObj } from '@storybook/angular';
 
 import { ZenRadio } from './radio';
@@ -100,6 +103,56 @@ export const WithLabel: Story = {
   }),
 };
 
+export const WithSignalForm: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: RadioSignalFormComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<zen-radio [formField]="form.color" option="red" />
+<zen-radio [formField]="form.color" option="green" />
+<zen-radio [formField]="form.color" option="blue" />`,
+      },
+    },
+  },
+};
+
+@Component({
+  standalone: true,
+  imports: [FormField, ZenRadio],
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+      <div>
+        <strong>Selected:</strong>
+        {{ form.color().value() }}
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem">
+        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
+        <label style="display: flex; align-items: center; gap: 0.25rem">
+          <zen-radio [formField]="form.color" option="red" />
+          Red
+        </label>
+        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
+        <label style="display: flex; align-items: center; gap: 0.25rem">
+          <zen-radio [formField]="form.color" option="green" />
+          Green
+        </label>
+        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
+        <label style="display: flex; align-items: center; gap: 0.25rem">
+          <zen-radio [formField]="form.color" option="blue" />
+          Blue
+        </label>
+      </div>
+    </div>
+  `,
+})
+class RadioSignalFormComponent {
+  readonly form = form(signal({ color: 'blue' }));
+}
+
 export const NgModel: Story = {
   render: () => ({
     moduleMetadata: {
@@ -133,7 +186,7 @@ export const NgModel: Story = {
   }),
 };
 
-export const AsFromControl: Story = {
+export const LegacyFormControl: Story = {
   render: () => {
     return {
       moduleMetadata: {
