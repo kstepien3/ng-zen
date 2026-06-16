@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 24
+  NODE_VERSION: 26
   PNPM_VERSION: 10.24.0
 
 permissions:
@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
       - name: Enable Corepack
         run: corepack enable
       - name: Setup pnpm
@@ -36,10 +38,14 @@ jobs:
         run: |
           curl -L -o CHANGELOG.md https://unpkg.com/@ng-zen/cli/CHANGELOG.md
           echo "CHANGELOG.md downloaded successfully"
-      - name: Build and deploy Storybook
-        id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build Storybook
+        run: pnpm run storybook:build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          install_command: pnpm install --frozen-lockfile
-          build_command: pnpm run storybook:build
           path: dist/storybook
+      - id: deploy
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
