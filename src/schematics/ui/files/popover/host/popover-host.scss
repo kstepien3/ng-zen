@@ -1,5 +1,11 @@
 :host {
   --zen-popover-offset: 0.5rem;
+  --zen-popover-bg: white;
+  --zen-popover-border: 1px solid #ccc;
+  --zen-popover-border-radius: 8px;
+  --zen-popover-padding: 0.5rem;
+  --zen-popover-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  --zen-popover-max-width: 300px;
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
@@ -8,12 +14,12 @@
   inset: auto;
   margin: var(--zen-popover-offset);
   width: max-content;
-  max-width: 300px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 0.5rem;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  max-width: var(--zen-popover-max-width);
+  background: var(--zen-popover-bg);
+  border: var(--zen-popover-border);
+  border-radius: var(--zen-popover-border-radius);
+  padding: var(--zen-popover-padding);
+  box-shadow: var(--zen-popover-shadow);
   overflow: visible;
 
   // Auto-reposition if the popover would overflow
