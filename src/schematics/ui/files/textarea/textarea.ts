@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 /**
  * ZenTextarea is a reusable textarea component designed to provide
@@ -32,6 +32,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <ng-content />
   `,
   styleUrls: ['./textarea.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenTextarea {}
