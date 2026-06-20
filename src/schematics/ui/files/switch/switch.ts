@@ -3,29 +3,31 @@ import { Component, model } from '@angular/core';
 import { ZenFormControl } from '../form-control';
 
 /**
- * ZenSwitch is a toggle switch component backed by Signal Forms.
+ * ZenSwitch is a toggle switch component for boolean values backed by
+ * Signal Forms.
  *
- * @example
+ * Connect it to a Signal Forms field with `[formField]`:
+ *
  * ```html
  * <zen-switch [formField]="myForm.notifications" />
  * ```
  *
+ * Supports keyboard interaction: `Enter`, `Space`, `ArrowRight`, and
+ * `ArrowLeft` keys toggle or set the value.
+ *
  * ### CSS Custom Properties
- * You can customize the component using CSS custom properties:
  *
- * ```css
- * :root {
- *  --zen-switch-thumb-size: 1rem;
- *  --zen-switch-height: 1.25rem;
- *  --zen-switch-width: 2rem;
- *  --zen-switch-apperance: hsl(0deg 0% 10%);
- *  --zen-switch-background: hsl(0deg 0% 80%);
+ * {@schema
+ *   --zen-switch-thumb-size: 1rem;
+ *   --zen-switch-height: 1.25rem;
+ *   --zen-switch-width: 2rem;
+ *   --zen-switch-apperance: hsl(0deg 0% 10%);
+ *   --zen-switch-background: hsl(0deg 0% 80%);
  * }
- * ```
  *
- * @implements {ZenFormControl<boolean>}
+ * @extends {ZenFormControl<boolean>}
  *
- * @author Konrad Stępień
+ * @author Konrad Stepień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
@@ -44,7 +46,6 @@ import { ZenFormControl } from '../form-control';
     role: 'switch',
     '[attr.data-disabled]': 'disabled()',
     '[attr.data-checked]': 'value()',
-    '(blur)': 'touched.set(true)',
     '(click)': 'onInput(!this.value())',
     '(keydown)': 'onKeyDown($event)',
   },

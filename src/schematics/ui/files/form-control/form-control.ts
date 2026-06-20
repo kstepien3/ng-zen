@@ -1,23 +1,29 @@
-import { booleanAttribute, Directive, input, model, ModelSignal } from '@angular/core';
+import { booleanAttribute, Directive, input, InputSignal, model, ModelSignal } from '@angular/core';
+import type { DisabledReason, ValidationError, WithOptionalFieldTree } from '@angular/forms/signals';
 import { FormValueControl } from '@angular/forms/signals';
 
 /**
- * A base class for creating custom Angular form controls that integrate with
- * Signal Forms (via `[formField]`) and are backward compatible with
- * reactive and template-driven forms (via `[formControl]` / `[(ngModel)]`).
+ * Abstract base class for custom Angular form controls that integrate with
+ * Signal Forms.
  *
- * Subclasses must provide an implementation for the abstract `value` property.
+ * Decorated with `@Directive` only to declare the host event binding
+ * `(blur) -> touched.set(true)`. Not intended for standalone use.
  *
- * Auto-generated helper — do not modify if you intend to regenerate later.
+ * Implements the {@link FormValueControl} contract. The Signal Forms
+ * directive auto-binds state (value, disabled, errors, touched, dirty,
+ * etc.) to matching inputs declared on the subclass.
+ *
+ * Subclasses must implement the abstract `value` model signal.
  *
  * @example
  *
  * ```ts
  * @Component({
- *   template: '...',
+ *   selector: 'my-input',
+ *   template: `<input [value]="value()" (input)="onInput($event.target.value)" />`,
  * })
- * export class Input extends ZenFormControl<string> {
- *   readonly value = model<string>('')
+ * export class MyInput extends ZenFormControl<string> {
+ *   readonly value = model<string>('');
  * }
  * ```
  *
@@ -27,7 +33,11 @@ import { FormValueControl } from '@angular/forms/signals';
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
-@Directive({})
+@Directive({
+  host: {
+    '(blur)': 'touched.set(true)',
+  },
+})
 export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
   /**
    * The underlying value of the control.
@@ -35,9 +45,54 @@ export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
    */
   abstract readonly value: ModelSignal<Value>;
 
-  readonly disabled = input(false);
+  /** Whether the control is disabled. Auto-bound by the Signal Forms directive. */
+  readonly disabled: InputSignal<boolean> = input(false);
+
+  /**
+   * Whether the field is required. Auto-bound by the Signal Forms directive from schema validators
+   * (e.g. `required(s.field)`).
+   */
   readonly required = input(false, { transform: booleanAttribute });
-  readonly touched = model(false);
+
+  /**
+   * Whether the user has interacted with the field. Two-way bound with the Signal Forms directive.
+   * Set to `true` on blur via the host listener.
+   */
+  readonly touched: ModelSignal<boolean> = model(false);
+
+  /** Whether the field value has been modified. Auto-bound by the Signal Forms directive. */
+  readonly dirty: InputSignal<boolean> = input(false);
+
+  /** Whether the field has validation errors. Auto-bound by the Signal Forms directive. */
+  readonly invalid: InputSignal<boolean> = input(false);
+
+  /** Whether async validation is in progress. Auto-bound by the Signal Forms directive. */
+  readonly pending: InputSignal<boolean> = input(false);
+
+  /** Whether the field is hidden. Auto-bound by the Signal Forms directive. */
+  readonly hidden: InputSignal<boolean> = input(false);
+
+  /** Whether the field is read-only. Auto-bound by the Signal Forms directive. */
+  readonly readonly: InputSignal<boolean> = input(false);
+
+  /** Field name in the form. Auto-bound by the Signal Forms directive. */
+  readonly name: InputSignal<string> = input('');
+
+  /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
+  readonly errors: InputSignal<readonly ValidationError[]> = input<readonly ValidationError[]>([]);
+
+  /** Reasons why the field is disabled. Auto-bound by the Signal Forms directive. */
+  readonly disabledReasons: InputSignal<readonly WithOptionalFieldTree<DisabledReason>[]> = input<
+    readonly WithOptionalFieldTree<DisabledReason>[]
+  >([]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  focus(_options?: FocusOptions): void {
+    // overridden by subclasses when host focus is needed
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  reset(): void {}
 
   /**
    * Should be called by the subclass when the control's value changes
@@ -47,6 +102,5 @@ export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
     if (this.disabled()) return;
 
     this.value.set(value);
-    this.touched.set(true);
   }
 }
