@@ -54,7 +54,7 @@ export class ZenInput extends ZenFormControl<string> {
   readonly value = model('');
 
   /** The placeholder text for the form control. */
-  readonly placeholder = input<string>();
+  readonly placeholder = input<string>('');
 
   readonly type = input<'text' | 'email' | 'url' | 'password'>('text');
 }
