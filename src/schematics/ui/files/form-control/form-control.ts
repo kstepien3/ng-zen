@@ -65,7 +65,6 @@ export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
   readonly name = input('');
   /** Whether the field is required. Auto-bound by the Signal Forms directive from schema validators. */
   readonly required = input(false, { transform: booleanAttribute });
-
   /** Emitted when the field is blurred. The {@link FormField} directive listens to this output to mark the field as touched. */
   readonly touch = output<void>();
 
