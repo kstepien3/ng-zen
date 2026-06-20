@@ -1,6 +1,6 @@
 import { NgComponentOutlet } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Meta, StoryObj } from '@storybook/angular';
 
 import FormControlStories from '../form-control/form-control.stories';
@@ -66,6 +66,25 @@ export const WithSignalForm: Story = {
   },
 };
 
+export const WithFormRoot: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: InputFormRootComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<form [formRoot]="loginForm">
+  <zen-input [formField]="loginForm.email" placeholder="Email" />
+  <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+  <button type="submit">Sign in</button>
+</form>`,
+      },
+    },
+  },
+};
+
 @Component({
   standalone: true,
   template: `
@@ -83,5 +102,24 @@ export const WithSignalForm: Story = {
 class InputSignalFormComponent {
   readonly form = form(signal({ name: '' }), s => {
     required(s.name, { message: 'Name is required' });
+  });
+}
+
+@Component({
+  standalone: true,
+  template: `
+    <form [formRoot]="loginForm" style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
+      <zen-input [formField]="loginForm.email" placeholder="Email" />
+      <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+      <button type="submit">Sign in</button>
+    </form>
+  `,
+  imports: [FormRoot, FormField, ZenInput],
+})
+class InputFormRootComponent {
+  readonly loginModel = signal({ email: '', password: '' });
+  readonly loginForm = form(this.loginModel, s => {
+    required(s.email, { message: 'Email is required' });
+    required(s.password, { message: 'Password is required' });
   });
 }

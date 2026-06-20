@@ -54,7 +54,7 @@ import { ZenFormControl } from '../form-control';
   },
 })
 export class ZenSwitch extends ZenFormControl<boolean> {
-  /** Holds the current checkbox value. */
+  /** Holds the current switch value. */
   readonly value = model(false);
 
   /**

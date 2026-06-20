@@ -51,15 +51,15 @@ export default {
     },
     name: {
       control: 'text' as const,
-      table: { category: 'inputs', type: { summary: 'string' } },
+      table: { category: 'models', type: { summary: 'string' } },
     },
     errors: {
       control: false as const,
-      table: { category: 'inputs', type: { summary: 'ValidationError[]' }, readonly: true },
+      table: { category: 'models', type: { summary: 'ValidationError[]' }, readonly: true },
     },
     disabledReasons: {
       control: false as const,
-      table: { category: 'inputs', type: { summary: 'DisabledReason[]' }, readonly: true },
+      table: { category: 'models', type: { summary: 'DisabledReason[]' }, readonly: true },
     },
     value: {
       control: false as const,

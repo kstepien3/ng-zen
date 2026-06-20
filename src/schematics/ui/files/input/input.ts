@@ -37,10 +37,11 @@ import { ZenFormControl } from '../form-control';
   selector: 'zen-input',
   template: `
     <input
-      [attr.aria-invalid]="invalid() || null"
-      [attr.placeholder]="placeholder()"
-      [attr.required]="required()"
+      [aria-invalid]="invalid() || null"
       [disabled]="disabled()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [type]="type()"
       [value]="value()"
       (input)="onInput(inputRef.value)"
       #inputRef
@@ -54,4 +55,6 @@ export class ZenInput extends ZenFormControl<string> {
 
   /** The placeholder text for the form control. */
   readonly placeholder = input<string>();
+
+  readonly type = input<'text' | 'email' | 'url' | 'password'>('text');
 }

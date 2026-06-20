@@ -1,19 +1,20 @@
-import { booleanAttribute, Directive, input, model, ModelSignal } from '@angular/core';
+import { booleanAttribute, Directive, input, ModelSignal, output } from '@angular/core';
 import type { DisabledReason, ValidationError, WithOptionalFieldTree } from '@angular/forms/signals';
 import { FormValueControl } from '@angular/forms/signals';
 
 /**
- * Abstract base class for custom Angular form controls that integrate with
- * Signal Forms.
+ * Abstract base class for form controls that integrate with Signal Forms
+ * via the {@link FormValueControl} interface.
+ *
+ * Provides all {@link FormUiControl} state inputs (`disabled`, `required`,
+ * `touched`, `errors`, etc.) and the `touch` output used by the
+ * `[formField]` directive.
+ *
+ * Subclasses must provide an implementation of the `value` model signal
+ * with the appropriate value type.
  *
  * Decorated with `@Directive` only to declare the host event binding
- * `(blur) -> touched.set(true)`. Not intended for standalone use.
- *
- * Implements the {@link FormValueControl} contract. The Signal Forms
- * directive auto-binds state (value, disabled, errors, touched, dirty,
- * etc.) to matching inputs declared on the subclass.
- *
- * Subclasses must implement the abstract `value` model signal.
+ * `(blur) -> touch.emit()`.
  *
  * @example
  *
@@ -35,51 +36,48 @@ import { FormValueControl } from '@angular/forms/signals';
  */
 @Directive({
   host: {
-    '(blur)': 'touched.set(true)',
+    '(blur)': 'touch.emit()',
   },
 })
 export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
-  /**
-   * The underlying value of the control.
-   * Subclasses must provide their own implementation using `model()`.
-   */
+  /** The underlying value of the control. Subclasses must provide their own implementation using `model()`. */
   abstract readonly value: ModelSignal<Value>;
 
+  /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
+  readonly errors = input<readonly ValidationError.WithOptionalFieldTree[]>([]);
   /** Whether the control is disabled. Auto-bound by the Signal Forms directive. */
   readonly disabled = input(false);
-  /** Whether the field is required. Auto-bound by the Signal Forms directive from schema validators*/
-  readonly required = input(false, { transform: booleanAttribute });
-  /** Whether the user has interacted with the field. Two-way bound with the Signal Forms directive. */
-  readonly touched = model<boolean>(false);
-  /** Whether the field value has been modified. Auto-bound by the Signal Forms directive. */
-  readonly dirty = input(false);
-  /** Whether the field has validation errors. Auto-bound by the Signal Forms directive. */
-  readonly invalid = input(false);
-  /** Whether async validation is in progress. Auto-bound by the Signal Forms directive. */
-  readonly pending = input(false);
-  /** Whether the field is hidden. Auto-bound by the Signal Forms directive. */
-  readonly hidden = input(false);
-  /** Whether the field is read-only. Auto-bound by the Signal Forms directive. */
-  readonly readonly = input(false);
-  /** Field name in the form. Auto-bound by the Signal Forms directive. */
-  readonly name = input('');
-  /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
-  readonly errors = input<readonly ValidationError[]>([]);
   /** Reasons why the field is disabled. Auto-bound by the Signal Forms directive. */
   readonly disabledReasons = input<readonly WithOptionalFieldTree<DisabledReason>[]>([]);
+  /** Whether the field is read-only. Auto-bound by the Signal Forms directive. */
+  readonly readonly = input<boolean>(false);
+  /** Whether the field is hidden from view. Auto-bound by the Signal Forms directive. */
+  readonly hidden = input<boolean>(false);
+  /** Whether the field has validation errors. Auto-bound by the Signal Forms directive. */
+  readonly invalid = input<boolean>(false);
+  /** Whether async validation is in progress. Auto-bound by the Signal Forms directive. */
+  readonly pending = input<boolean>(false);
+  /** Whether the user has focused and then blurred the field. */
+  readonly touched = input<boolean>(false);
+  /** Whether the field value has been modified. Auto-bound by the Signal Forms directive. */
+  readonly dirty = input(false);
+  /** Field name in the form. Auto-bound by the Signal Forms directive. */
+  readonly name = input('');
+  /** Whether the field is required. Auto-bound by the Signal Forms directive from schema validators. */
+  readonly required = input(false, { transform: booleanAttribute });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  focus(_options?: FocusOptions): void {
-    // overridden by subclasses when host focus is needed
-  }
+  /** Emitted when the field is blurred. The {@link FormField} directive listens to this output to mark the field as touched. */
+  readonly touch = output<void>();
 
+  // @ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  focus(_options?: FocusOptions): void {}
+
+  // @ignore
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   reset(): void {}
 
-  /**
-   * Should be called by the subclass when the control's value changes
-   * as a result of user interaction.
-   */
+  /** Should be called by the subclass when the control's value changes as a result of user interaction. */
   onInput(value: Value): void {
     if (this.disabled()) return;
 

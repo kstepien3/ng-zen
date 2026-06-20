@@ -84,15 +84,6 @@ describe('ZenRadio', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('should set touched on blur', () => {
-    expect(component.touched()).toBe(false);
-
-    const hostElement = fixture.debugElement.nativeElement;
-    hostElement.dispatchEvent(new Event('blur'));
-
-    expect(component.touched()).toBe(true);
-  });
-
   it('should have correct ARIA attributes', () => {
     component.value.set('test-value');
     fixture.detectChanges();
