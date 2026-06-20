@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input, InputSignal, model, ModelSignal } from '@angular/core';
+import { booleanAttribute, Directive, input, model, ModelSignal } from '@angular/core';
 import type { DisabledReason, ValidationError, WithOptionalFieldTree } from '@angular/forms/signals';
 import { FormValueControl } from '@angular/forms/signals';
 
@@ -46,45 +46,27 @@ export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
   abstract readonly value: ModelSignal<Value>;
 
   /** Whether the control is disabled. Auto-bound by the Signal Forms directive. */
-  readonly disabled: InputSignal<boolean> = input(false);
-
-  /**
-   * Whether the field is required. Auto-bound by the Signal Forms directive from schema validators
-   * (e.g. `required(s.field)`).
-   */
+  readonly disabled = input(false);
+  /** Whether the field is required. Auto-bound by the Signal Forms directive from schema validators*/
   readonly required = input(false, { transform: booleanAttribute });
-
-  /**
-   * Whether the user has interacted with the field. Two-way bound with the Signal Forms directive.
-   * Set to `true` on blur via the host listener.
-   */
-  readonly touched: ModelSignal<boolean> = model(false);
-
+  /** Whether the user has interacted with the field. Two-way bound with the Signal Forms directive. */
+  readonly touched = model<boolean>(false);
   /** Whether the field value has been modified. Auto-bound by the Signal Forms directive. */
-  readonly dirty: InputSignal<boolean> = input(false);
-
+  readonly dirty = input(false);
   /** Whether the field has validation errors. Auto-bound by the Signal Forms directive. */
-  readonly invalid: InputSignal<boolean> = input(false);
-
+  readonly invalid = input(false);
   /** Whether async validation is in progress. Auto-bound by the Signal Forms directive. */
-  readonly pending: InputSignal<boolean> = input(false);
-
+  readonly pending = input(false);
   /** Whether the field is hidden. Auto-bound by the Signal Forms directive. */
-  readonly hidden: InputSignal<boolean> = input(false);
-
+  readonly hidden = input(false);
   /** Whether the field is read-only. Auto-bound by the Signal Forms directive. */
-  readonly readonly: InputSignal<boolean> = input(false);
-
+  readonly readonly = input(false);
   /** Field name in the form. Auto-bound by the Signal Forms directive. */
-  readonly name: InputSignal<string> = input('');
-
+  readonly name = input('');
   /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
-  readonly errors: InputSignal<readonly ValidationError[]> = input<readonly ValidationError[]>([]);
-
+  readonly errors = input<readonly ValidationError[]>([]);
   /** Reasons why the field is disabled. Auto-bound by the Signal Forms directive. */
-  readonly disabledReasons: InputSignal<readonly WithOptionalFieldTree<DisabledReason>[]> = input<
-    readonly WithOptionalFieldTree<DisabledReason>[]
-  >([]);
+  readonly disabledReasons = input<readonly WithOptionalFieldTree<DisabledReason>[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   focus(_options?: FocusOptions): void {

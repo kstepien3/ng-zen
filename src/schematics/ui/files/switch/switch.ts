@@ -17,13 +17,16 @@ import { ZenFormControl } from '../form-control';
  *
  * ### CSS Custom Properties
  *
- * {@schema
+ *
+ * ```css
+ * :root {
  *   --zen-switch-thumb-size: 1rem;
  *   --zen-switch-height: 1.25rem;
  *   --zen-switch-width: 2rem;
  *   --zen-switch-apperance: hsl(0deg 0% 10%);
  *   --zen-switch-background: hsl(0deg 0% 80%);
  * }
+ * ```
  *
  * @extends {ZenFormControl<boolean>}
  *

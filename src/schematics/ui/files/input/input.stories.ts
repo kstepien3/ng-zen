@@ -3,6 +3,7 @@ import { Component, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 import { Meta, StoryObj } from '@storybook/angular';
 
+import FormControlStories from '../form-control/form-control.stories';
 import { ZenInput } from './input';
 
 type Options = ZenInput;
@@ -11,54 +12,27 @@ export default {
   title: 'Ui/Input',
   component: ZenInput,
   argTypes: {
+    ...FormControlStories.argTypes,
     value: {
-      control: 'text',
+      control: 'text' as const,
       table: {
         category: 'models',
-        type: {
-          summary: 'string',
-        },
-        defaultValue: {
-          summary: '',
-        },
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
       },
     },
-    placeholder: { control: 'text', table: { type: { summary: 'string' } } },
-    disabled: {
-      control: 'boolean',
-      table: {
-        category: 'models',
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    required: {
-      control: 'boolean',
-      table: {
-        category: 'inputs',
-        type: {
-          summary: 'boolean',
-        },
-        defaultValue: {
-          summary: 'false',
-        },
-      },
-    },
+    placeholder: { control: 'text' as const, table: { type: { summary: 'string' } } },
     onInput: {
       table: {
         readonly: true,
-        type: {
-          summary: '(value: string) => void',
-        },
+        type: { summary: '(value: string) => void' },
       },
     },
   },
   args: {
+    ...FormControlStories.args,
     value: '',
     placeholder: '',
-    disabled: false,
-    required: false,
   },
 } satisfies Meta<Options>;
 

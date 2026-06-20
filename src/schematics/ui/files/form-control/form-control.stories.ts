@@ -16,59 +16,81 @@ export default {
       story => `<div style="display: flex; flex-direction: column; gap: 2rem; align-items: center">${story}</div>`
     ),
   ],
-  args: {
-    value: '',
-    disabled: false,
-    required: false,
-  },
   argTypes: {
-    value: {
-      control: false,
-      table: {
-        category: 'models',
-        readonly: true,
-        type: {
-          summary: 'T',
-        },
-      },
-    },
     disabled: {
-      control: 'boolean',
-      table: {
-        category: 'models',
-        type: {
-          summary: 'boolean',
-        },
-        readonly: true,
-      },
+      control: 'boolean' as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     required: {
-      control: 'boolean',
+      control: 'boolean' as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    touched: {
+      control: false as const,
+      table: { category: 'models', type: { summary: 'boolean' }, readonly: true },
+    },
+    dirty: {
+      control: false as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
+    },
+    invalid: {
+      control: false as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
+    },
+    pending: {
+      control: false as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
+    },
+    hidden: {
+      control: 'boolean' as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    readonly: {
+      control: 'boolean' as const,
+      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    name: {
+      control: 'text' as const,
+      table: { category: 'inputs', type: { summary: 'string' } },
+    },
+    errors: {
+      control: false as const,
+      table: { category: 'inputs', type: { summary: 'ValidationError[]' }, readonly: true },
+    },
+    disabledReasons: {
+      control: false as const,
+      table: { category: 'inputs', type: { summary: 'DisabledReason[]' }, readonly: true },
+    },
+    value: {
+      control: false as const,
       table: {
-        category: 'inputs',
-        type: {
-          summary: 'boolean',
-        },
-        defaultValue: {
-          summary: 'false',
-        },
+        category: 'models',
         readonly: true,
+        type: { summary: 'T' },
       },
     },
     onInput: {
       table: {
         readonly: true,
-        type: {
-          summary: '(value: T) => void',
-        },
+        type: { summary: '(value: T) => void' },
       },
     },
+  },
+  args: {
+    disabled: false,
+    required: false,
+    touched: false,
+    dirty: false,
+    invalid: false,
+    pending: false,
+    hidden: false,
+    readonly: false,
+    name: '',
+    value: '',
   },
   parameters: {
     docs: {
       canvas: {
-        // This will remove the "show code" button
-        // https://storybook.js.org/docs/api/doc-blocks/doc-block-canvas#sourcestate
         sourceState: 'none',
       },
     },
