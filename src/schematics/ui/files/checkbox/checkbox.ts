@@ -1,34 +1,35 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, model, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, effect, ElementRef, model, viewChild } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 
 /**
- * ZenCheckbox is a reusable checkbox component designed to provide
- * a consistent and customizable checkbox style across the application.
- * It supports Angular forms integration and provides two-way data binding
- * for boolean values.
+ * ZenCheckbox is a checkbox component supporting checked (`true`),
+ * unchecked (`false`), and indeterminate (`null`) states.
  *
- * @example
- * <zen-checkbox [value]="true" /> Checked
- * <zen-checkbox [value]="false" /> Unchecked
- * <zen-checkbox [value]="null" /> Indeterminate
+ * Connect it to a Signal Forms field with `[formField]`:
+ *
+ * ```html
+ * <zen-checkbox [formField]="myForm.agree" />
+ * <label for="agree">I agree to the terms</label>
+ * ```
+ *
+ * When `value` is `null` the native checkbox is set to indeterminate via
+ * the `indeterminate` DOM property.
  *
  * ### CSS Custom Properties
  *
- * You can customize the component using CSS custom properties:
  *
  * ```css
  * :root {
- *  --zen-checkbox-size: 1rem;
- *  --zen-checkbox-border-radius: 0.375rem;
- *  --zen-checkbox-appearance: hsl(0deg 0% 10%);
- *  --zen-checkbox-disabled-opacity: 0.6;
- *  --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);
+ *   --zen-checkbox-size: 1rem;
+ *   --zen-checkbox-border-radius: 0.375rem;
+ *   --zen-checkbox-appearance: hsl(0deg 0% 10%);
+ *   --zen-checkbox-disabled-opacity: 0.6;
+ *   --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);
  * }
  * ```
  *
- * @implements {ZenFormControl<boolean>}
+ * @extends {ZenFormControl<boolean | null>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
@@ -39,9 +40,10 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
   template: `
     <input
       [attr.aria-disabled]="disabled()"
+      [attr.aria-invalid]="invalid() || null"
+      [checked]="value()"
       [disabled]="disabled()"
-      [ngModel]="value()"
-      (ngModelChange)="onInput($event)"
+      (change)="onInput(inputElement.checked)"
       #inputElement
       type="checkbox"
     />
@@ -53,12 +55,6 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
     <!-- @else { ✕ } -->
   `,
   styleUrls: ['./checkbox.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
-  providers: [ZenFormControlProvider(ZenCheckbox)],
-  host: {
-    '(blur)': 'onTouched()',
-  },
 })
 export class ZenCheckbox extends ZenFormControl<boolean | null> {
   /**

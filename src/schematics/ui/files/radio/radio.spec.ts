@@ -1,6 +1,5 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -14,7 +13,7 @@ describe('ZenRadio', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZenRadio, FormsModule, ReactiveFormsModule],
+      imports: [ZenRadio],
       providers: [ZenRadioRegistry, provideZonelessChangeDetection()],
     }).compileComponents();
 
@@ -73,7 +72,7 @@ describe('ZenRadio', () => {
   });
 
   it('should not call onInput when disabled', () => {
-    component.disabled.set(true);
+    fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
     const spy = vi.spyOn(component, 'onInput');
@@ -85,63 +84,8 @@ describe('ZenRadio', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('should integrate with ngModel', () => {
-    let selectedValue: string | null = null;
-
-    const testFixture = TestBed.createComponent(ZenRadio);
-    testFixture.componentRef.setInput('name', 'ng-model-group');
-    testFixture.componentRef.setInput('option', 'option1');
-    testFixture.detectChanges();
-
-    // Simulate ngModel binding
-    testFixture.componentInstance.registerOnChange((value: string | null) => {
-      selectedValue = value;
-    });
-
-    const inputElement = testFixture.debugElement.query(By.css('input')).nativeElement;
-    inputElement.checked = true;
-    inputElement.dispatchEvent(new Event('change'));
-
-    expect(selectedValue).toBe('option1');
-  });
-
-  it('should integrate with reactive forms', () => {
-    const formControl = new FormControl<string | null>(null);
-    const testFixture = TestBed.createComponent(ZenRadio);
-    testFixture.componentRef.setInput('name', 'reactive-group');
-    testFixture.componentRef.setInput('option', 'option1');
-
-    // Simulate form control binding
-    testFixture.componentInstance.writeValue(formControl.value);
-
-    testFixture.componentInstance.registerOnChange((value: string | null) => {
-      formControl.setValue(value);
-    });
-
-    testFixture.detectChanges();
-
-    const inputElement = testFixture.debugElement.query(By.css('input')).nativeElement;
-    inputElement.checked = true;
-    inputElement.dispatchEvent(new Event('change'));
-
-    // The component's onInput method should call the onChange callback
-    // which should update form control value
-    expect(formControl.value).toBe('option1');
-  });
-
-  it('should handle disabled state from form control', () => {
-    component.setDisabledState(true);
-    fixture.detectChanges();
-
-    expect(component.disabled()).toBe(true);
-
-    const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-    expect(inputElement.disabled).toBe(true);
-  });
-
   it('should have correct ARIA attributes', () => {
     component.value.set('test-value');
-    component.disabled.set(false);
     fixture.detectChanges();
 
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
@@ -151,7 +95,7 @@ describe('ZenRadio', () => {
 
   it('should update ARIA attributes when state changes', () => {
     component.value.set('different-value');
-    component.disabled.set(true);
+    fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
@@ -159,24 +103,12 @@ describe('ZenRadio', () => {
     expect(inputElement.getAttribute('aria-disabled')).toBe('true');
   });
 
-  it('should call onTouched when host element loses focus', () => {
-    const onTouchedSpy = vi.fn();
-    component.registerOnTouched(onTouchedSpy);
-
-    const hostElement = fixture.debugElement.nativeElement;
-    hostElement.dispatchEvent(new Event('blur'));
-
-    expect(onTouchedSpy).toHaveBeenCalled();
-  });
-
   it('should register with radio registry on initialization', () => {
-    // Create a new radio to test registry registration
     const newFixture = TestBed.createComponent(ZenRadio);
     newFixture.componentRef.setInput('name', 'registry-test');
     newFixture.componentRef.setInput('option', 'registry-option');
     newFixture.detectChanges();
 
-    // The radio should be registered after next render
     expect(newFixture.componentInstance).toBeTruthy();
   });
 
@@ -190,7 +122,6 @@ describe('ZenRadio', () => {
 
     const radio2 = radio2Fixture.componentInstance;
 
-    // Test registry selection
     registry.select('test-group', 'option2');
 
     expect(radio1.value()).toBe('option2');

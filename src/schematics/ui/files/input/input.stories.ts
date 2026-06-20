@@ -1,5 +1,9 @@
+import { NgComponentOutlet } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Meta, StoryObj } from '@storybook/angular';
 
+import FormControlStories from '../form-control/form-control.stories';
 import { ZenInput } from './input';
 
 type Options = ZenInput;
@@ -8,54 +12,27 @@ export default {
   title: 'Ui/Input',
   component: ZenInput,
   argTypes: {
+    ...FormControlStories.argTypes,
     value: {
-      control: 'text',
+      control: 'text' as const,
       table: {
         category: 'models',
-        type: {
-          summary: 'string',
-        },
-        defaultValue: {
-          summary: '',
-        },
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
       },
     },
-    placeholder: { control: 'text', table: { type: { summary: 'string' } } },
-    disabled: {
-      control: 'boolean',
-      table: {
-        category: 'models',
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    required: {
-      control: 'boolean',
-      table: {
-        category: 'inputs',
-        type: {
-          summary: 'boolean',
-        },
-        defaultValue: {
-          summary: 'false',
-        },
-      },
-    },
+    placeholder: { control: 'text' as const, table: { type: { summary: 'string' } } },
     onInput: {
       table: {
         readonly: true,
-        type: {
-          summary: '(value: string) => void',
-        },
+        type: { summary: '(value: string) => void' },
       },
     },
   },
   args: {
+    ...FormControlStories.args,
     value: '',
     placeholder: '',
-    disabled: false,
-    required: false,
   },
 } satisfies Meta<Options>;
 
@@ -73,3 +50,76 @@ export const WithLabel: Story = {
   `,
   }),
 };
+
+export const WithSignalForm: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: InputSignalFormComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<zen-input [formField]="form.name" />`,
+      },
+    },
+  },
+};
+
+export const WithFormRoot: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: InputFormRootComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<form [formRoot]="loginForm">
+  <zen-input [formField]="loginForm.email" placeholder="Email" />
+  <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+  <button type="submit">Sign in</button>
+</form>`,
+      },
+    },
+  },
+};
+
+@Component({
+  standalone: true,
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
+      <zen-input [formField]="form.name" placeholder="Type something" />
+      @if (form.name().invalid()) {
+        <p style="color: red; margin: 0; font-size: 0.875rem;">
+          {{ form.name().errors()![0].message }}
+        </p>
+      }
+    </div>
+  `,
+  imports: [FormField, ZenInput],
+})
+class InputSignalFormComponent {
+  readonly form = form(signal({ name: '' }), s => {
+    required(s.name, { message: 'Name is required' });
+  });
+}
+
+@Component({
+  standalone: true,
+  template: `
+    <form [formRoot]="loginForm" style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
+      <zen-input [formField]="loginForm.email" placeholder="Email" />
+      <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+      <button type="submit">Sign in</button>
+    </form>
+  `,
+  imports: [FormRoot, FormField, ZenInput],
+})
+class InputFormRootComponent {
+  readonly loginModel = signal({ email: '', password: '' });
+  readonly loginForm = form(this.loginModel, s => {
+    required(s.email, { message: 'Email is required' });
+    required(s.password, { message: 'Password is required' });
+  });
+}

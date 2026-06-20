@@ -1,30 +1,33 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, input, model } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 
 /**
- * ZenInput is a reusable text input component designed to provide
- * a consistent and customizable input style across the application.
- * It supports Angular forms integration and provides two-way data binding.
+ * ZenInput is a single-line text input component backed by Signal Forms.
  *
- * @example
- * <zen-input value="string" />
+ * Connect it to a Signal Forms field with `[formField]`:
+ *
+ * ```html
+ * <zen-input [formField]="myForm.name" placeholder="Enter name" />
+ * ```
+ *
+ * The `[formField]` directive automatically synchronises value, disabled
+ * state, validation errors, and touched/dirty status.
  *
  * ### CSS Custom Properties
- * You can customize the component using CSS custom properties:
+ *
  *
  * ```css
  * :root {
- *  --zen-input-border: 1px solid hsl(0deg 0% 80%);
- *  --zen-input-border-radius: 8px;
- *  --zen-input-padding: 0.5rem 1rem;
- *  --zen-input-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
- *  --zen-input-placeholder-color: hsl(0deg 0% 60%);
+ *   --zen-input-border: 1px solid hsl(0deg 0% 80%);
+ *   --zen-input-border-radius: 8px;
+ *   --zen-input-padding: 0.5rem 1rem;
+ *   --zen-input-focus-shadow: 0 1px 4px hsl(0deg 0% 60% / 20%) inset;
+ *   --zen-input-placeholder-color: hsl(0deg 0% 60%);
  * }
  * ```
  *
- * @implements {ZenFormControl<string>}
+ * @extends {ZenFormControl<string>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
@@ -34,24 +37,24 @@ import { ZenFormControl, ZenFormControlProvider } from '../form-control';
   selector: 'zen-input',
   template: `
     <input
-      [attr.placeholder]="placeholder()"
-      [attr.required]="required()"
+      [aria-invalid]="invalid() || null"
       [disabled]="disabled()"
-      [ngModel]="value()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [type]="type()"
       [value]="value()"
-      (blur)="onTouched()"
-      (ngModelChange)="onInput($event)"
+      (input)="onInput(inputRef.value)"
+      #inputRef
     />
   `,
   styleUrls: ['./input.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ZenFormControlProvider(ZenInput)],
-  imports: [FormsModule],
 })
 export class ZenInput extends ZenFormControl<string> {
   /** The current input value with two-way binding support. */
   readonly value = model('');
 
   /** The placeholder text for the form control. */
-  readonly placeholder = input<string>();
+  readonly placeholder = input<string>('');
+
+  readonly type = input<'text' | 'email' | 'url' | 'password'>('text');
 }

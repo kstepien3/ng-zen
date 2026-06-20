@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 /**
  * ZenAlert is a reusable alert component designed to provide
@@ -42,6 +42,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     </div>
   `,
   styleUrl: './alert.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenAlert {}

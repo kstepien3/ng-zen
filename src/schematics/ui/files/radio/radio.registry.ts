@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
 import { ZenRadio } from './radio';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ZenRadioRegistry {
   private readonly radios = new Map<string, ZenRadio[]>();
 
