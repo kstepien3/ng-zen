@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 /** SVG icon data structure from HugeIcons library - an array of [tagName, attributes] tuples. */
@@ -43,7 +43,6 @@ export type IconSvgObject = readonly (readonly [string, Record<string, string | 
     ></svg>
   `,
   styles: [':host { display: inline-flex; }'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenIcon {
   /** SVG object imported from HugeIcons library. */

@@ -1,43 +1,36 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  input,
-  model,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { afterNextRender, Component, computed, DestroyRef, inject, input, model } from '@angular/core';
 
-import { ZenFormControl, ZenFormControlProvider } from '../form-control';
+import { ZenFormControl } from '../form-control';
 import { ZenRadioRegistry } from './radio.registry';
 
 /**
- * ZenRadio is a reusable radio button component designed to provide
- * a consistent and customizable radio button style across the application.
- * It supports Angular forms integration and provides two-way data binding
- * for string values.
+ * ZenRadio is a radio button component backed by Signal Forms.
  *
- * @example
- * <zen-radio name="group" option="option1" [(ngModel)]="selectedValue" /> Option 1
- * <zen-radio name="group" option="option2" [(ngModel)]="selectedValue" /> Option 2
+ * Radio buttons with the same `name` form a group. The `value` is shared
+ * across the group — when one radio is selected, `onInput(value)` is called
+ * on every radio in the group via {@link ZenRadioRegistry}.
+ *
+ * Use together with a shared `[formField]` binding:
+ *
+ * ```html
+ * <zen-radio [formField]="form.color" name="color" option="red" />
+ * <zen-radio [formField]="form.color" name="color" option="green" />
+ * ```
  *
  * ### CSS Custom Properties
  *
- * You can customize the component using CSS custom properties:
  *
  * ```css
  * :root {
- *  --zen-radio-size: 1rem;
- *  --zen-radio-border-radius: 50%;
- *  --zen-radio-appearance: hsl(0deg 0% 10%);
- *  --zen-radio-disabled-opacity: 0.6;
- *  --zen-radio-border: 1px solid hsl(0deg 0% 80%);
+ *   --zen-radio-size: 1rem;
+ *   --zen-radio-border-radius: 50%;
+ *   --zen-radio-appearance: hsl(0deg 0% 10%);
+ *   --zen-radio-disabled-opacity: 0.6;
+ *   --zen-radio-border: 1px solid hsl(0deg 0% 80%);
  * }
  * ```
  *
- * @implements {ZenFormControl<string | null>}
+ * @extends {ZenFormControl<string | null>}
  *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
@@ -49,6 +42,7 @@ import { ZenRadioRegistry } from './radio.registry';
     <input
       [attr.aria-checked]="checked()"
       [attr.aria-disabled]="disabled()"
+      [attr.aria-invalid]="invalid() || null"
       [checked]="checked()"
       [disabled]="disabled()"
       [name]="name()"
@@ -62,12 +56,6 @@ import { ZenRadioRegistry } from './radio.registry';
     }
   `,
   styleUrls: ['./radio.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
-  providers: [ZenFormControlProvider(ZenRadio)],
-  host: {
-    '(blur)': 'onTouched()',
-  },
 })
 export class ZenRadio extends ZenFormControl<string | null> {
   /**
@@ -80,7 +68,7 @@ export class ZenRadio extends ZenFormControl<string | null> {
    * The name attribute for the radio button group.
    * Radio buttons with the same name will be grouped together.
    */
-  readonly name = input.required<string>();
+  override readonly name = input.required<string>();
 
   /**
    * The value for this specific radio button.

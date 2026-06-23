@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * ZenButton is a reusable button component designed to provide
@@ -39,7 +39,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     <ng-content />
   `,
   styleUrl: './button.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.type]': '"button"',
     '[attr.data-size]': 'size()',

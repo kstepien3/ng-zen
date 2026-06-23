@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * A component to display an avatar image.
@@ -46,7 +46,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
   `,
   styleUrl: './avatar.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenAvatar {
   /** Source path for the image which will be processed by Angular's image loader. */
