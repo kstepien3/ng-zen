@@ -4,6 +4,7 @@ export type UiType =
   | 'alert'
   | 'avatar'
   | 'button'
+  | 'card'
   | 'checkbox'
   | 'dialog'
   | 'divider'
