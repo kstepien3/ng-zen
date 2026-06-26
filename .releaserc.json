@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/semantic-release",
-  "branches": ["master", { "name": "next", "prerelease": true }],
+  "branches": [
+    { "name": "master", "channel": "latest" },
+    { "name": "next", "prerelease": true, "channel": "next" }
+  ],
   "tagFormat": "v${version}",
   "plugins": [
     [
