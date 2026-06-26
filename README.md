@@ -45,7 +45,7 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 
 ### 🏎️ **Instant Productivity**
 
-- **Production-Ready UI Elements:** Alert, Avatar, Button, Checkbox, Dialog, Divider, Form Control, Icon, Input, Popover, Radio, Skeleton, Switch, Textarea
+- **Production-Ready UI Elements:** Alert, Avatar, Button, Card, Checkbox, Dialog, Divider, Form Control, Icon, Input, Popover, Radio, Skeleton, Switch, Textarea
 - **Zero Configuration:** Works with Angular 20+ out of the box
 - **Complete Setup:** Each component includes unit tests, Storybook stories, and documentation
 
@@ -146,22 +146,23 @@ export class MyComponent {}
 
 ## 🧩 Available UIs
 
-| Component        | Description                      | Features                                                                  |
-| ---------------- | -------------------------------- | ------------------------------------------------------------------------- |
-| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles                             |
-| **Alert**        | Informational messages           | Customizable styles, dismissible options                                  |
-| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons                         |
-| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation                           |
-| **Dialog**       | Native modal dialogs             | Native dialog element, service API, size variants, backdrop config        |
-| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness                        |
-| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators                          |
-| **Icon**         | SVG icon system                  | Huge Icons integration, size variants, colors                             |
-| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types                               |
-| **Popover**      | Native Popover API directive     | Template/string content, placements, click toggle, CSS anchor positioning |
-| **Radio**        | Form radio buttons               | Group selection, two-way binding, custom styling, disabled state          |
-| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive                                    |
-| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels                              |
-| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation                                 |
+| Component        | Description                      | Features                                                                       |
+| ---------------- | -------------------------------- | ------------------------------------------------------------------------------ |
+| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles                                  |
+| **Alert**        | Informational messages           | Customizable styles, dismissible options                                       |
+| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons                              |
+| **Card**         | Content container                | Multi-slot projection (header, title, subtitle, footer), CSS custom properties |
+| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation                                |
+| **Dialog**       | Native modal dialogs             | Native dialog element, service API, size variants, backdrop config             |
+| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness                             |
+| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators                               |
+| **Icon**         | SVG icon system                  | Huge Icons integration, size variants, colors                                  |
+| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types                                    |
+| **Popover**      | Native Popover API directive     | Template/string content, placements, click toggle, CSS anchor positioning      |
+| **Radio**        | Form radio buttons               | Group selection, two-way binding, custom styling, disabled state               |
+| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive                                         |
+| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels                                   |
+| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation                                      |
 
 > 💡 **More components coming soon!** Planned: Directives, Pipes, Services, and additional UI elements.
 
