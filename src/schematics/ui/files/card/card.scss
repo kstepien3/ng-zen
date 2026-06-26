@@ -1,0 +1,57 @@
+:host {
+  --zen-card-border-radius: 0.75rem;
+  --zen-card-ring: 0 0 0 1px hsl(0deg 0% 0% / 10%);
+  --zen-card-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
+  --zen-card-bg: hsl(0deg 0% 100%);
+  --zen-card-color: hsl(0deg 0% 10%);
+  --zen-card-padding: 1.5rem;
+  --zen-card-gap: 1rem;
+  --zen-card-header-gap: 0.25rem;
+  --zen-card-title-font-size: 1.125rem;
+  --zen-card-title-font-weight: 600;
+  --zen-card-subtitle-font-size: 0.875rem;
+  --zen-card-subtitle-color: hsl(0deg 0% 40%);
+  --zen-card-border: 1px solid hsl(0deg 0% 0% / 10%);
+  --zen-card-footer-bg: hsl(0deg 0% 95%);
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  border-radius: var(--zen-card-border-radius);
+  box-shadow: var(--zen-card-ring), var(--zen-card-shadow);
+  background: var(--zen-card-bg);
+  color: var(--zen-card-color);
+  overflow: hidden;
+}
+
+.zen-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zen-card-gap);
+  padding: var(--zen-card-padding);
+}
+
+.zen-card-footer {
+  &:not(:empty) {
+    padding: var(--zen-card-padding);
+    border-top: var(--zen-card-border);
+    background: var(--zen-card-footer-bg);
+  }
+}
+
+:host ::ng-deep [card-title] {
+  margin: 0;
+  font-size: var(--zen-card-title-font-size);
+  font-weight: var(--zen-card-title-font-weight);
+  line-height: 1.4;
+}
+
+:host ::ng-deep [card-subtitle] {
+  margin: 0;
+  font-size: var(--zen-card-subtitle-font-size);
+  color: var(--zen-card-subtitle-color);
+  line-height: 1.5;
+}
