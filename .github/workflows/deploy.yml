@@ -43,7 +43,7 @@ jobs:
       - name: Build Storybook
         run: pnpm run storybook:build
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist/storybook
       - id: deploy
