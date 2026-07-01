@@ -1,23 +1,23 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - master
-      - next
   workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'Pre-release channel (leave empty for stable release)'
+        required: false
+        type: choice
+        options: ['', 'next']
 
 env:
   NODE_VERSION: 24
   PNPM_VERSION: 10.24.0
-  RETENTION_DAYS: 7
 
 jobs:
   release:
-    name: Build, Test and Release
+    name: Release
     runs-on: ubuntu-latest
 
-    # Required for npm Trusted Publishing (OIDC) and for semantic-release GitHub operations
     permissions:
       contents: write
       issues: write
@@ -25,56 +25,55 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
-          fetch-tags: true
+          token: ${{ secrets.GH_TOKEN }}
+
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Get pnpm cache directory
         id: pnpm-cache-dir
-        shell: bash
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-      - name: Generate cache key
-        id: cache-key
-        shell: bash
-        run: |
-          echo "key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-${{ hashFiles('**/pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
-          echo "restore_key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-" >> $GITHUB_OUTPUT
-      - name: Setup pnpm cache
-        uses: actions/cache@v5
+
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-cache-dir.outputs.STORE_PATH }}
-          key: ${{ steps.cache-key.outputs.key }}
-          restore-keys: ${{ steps.cache-key.outputs.restore_key }}
+          key: node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Run linter
-        run: pnpm run lint
-      - name: Run tests
-        run: pnpm run test:no-watch
-      - name: Build project
-        run: pnpm run build
-      - name: Run semantic-release
-        run: pnpm run semantic-release --debug
+
+      - name: Release
+        run: |
+          if [ -n "${{ inputs.prerelease }}" ]; then
+            pnpm release-it --preRelease=${{ inputs.prerelease }} --github.preRelease=true --ci
+          else
+            pnpm release-it --ci
+          fi
         env:
           HUSKY: 0
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload artifacts
-        if: success()
-        uses: actions/upload-artifact@v7
-        with:
-          name: release-build
-          path: release-build/
-          retention-days: ${{ env.RETENTION_DAYS }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to npm
+        run: |
+          cd dist/@ng-zen/cli
+          if [ -n "${{ inputs.prerelease }}" ]; then
+            npm publish --tag ${{ inputs.prerelease }} --provenance --access public
+          else
+            npm publish --provenance --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
