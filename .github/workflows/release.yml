@@ -67,13 +67,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish to npm
-        run: |
-          cd dist/@ng-zen/cli
-          if [ -n "${{ inputs.prerelease }}" ]; then
-            npm publish --tag ${{ inputs.prerelease }} --provenance --access public
-          else
-            npm publish --provenance --access public
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
