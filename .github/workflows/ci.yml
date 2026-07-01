@@ -33,7 +33,7 @@ jobs:
           path: |
             node_modules
             ~/.pnpm-store
-          key: ${{ steps.cache-key.outputs.cache-key }}
+          key: ${{ steps.cache-key.outputs.cache-key }
           restore-keys: |
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-pnpm-cache-
       - run: pnpm install --frozen-lockfile
@@ -104,7 +104,6 @@ jobs:
             node_modules
             ~/.pnpm-store
           key: ${{ needs.install.outputs.cache-key }}
-      - run: pnpm run mock:changelog
       - run: pnpm run build
       - uses: actions/upload-artifact@v7
         if: always()
