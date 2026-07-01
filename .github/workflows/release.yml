@@ -63,10 +63,11 @@ jobs:
       - name: Check for releasable commits
         id: check
         run: |
-          if pnpm release-it --dry-run --ci; then
-            echo "skip=false" >> $GITHUB_OUTPUT
-          else
+          NEXT_VERSION=$(pnpm release-it --release-version --ci 2>/dev/null || true)
+          if [ -z "$NEXT_VERSION" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
           fi
         env:
           HUSKY: 0
