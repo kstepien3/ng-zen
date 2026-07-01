@@ -1,6 +1,6 @@
 {
   "name": "@ng-zen/cli",
-  "version": "0.0.0",
+  "version": "22.1.0",
   "description": "Angular UI components generator – Zen UI Kit CLI for schematics-based creation of customizable components like alert, avatar, button, card, checkbox, dialog, divider, form-control, icon, input, popover, radio, skeleton, switch, textarea with Storybook demos.",
   "scripts": {
     "ng": "ng",
@@ -18,9 +18,9 @@
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
-    "semantic-release": "semantic-release",
-    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md",
-    "postinstall": "pnpm run mock:changelog"
+    "release": "release-it",
+    "release:next": "release-it --preRelease=next --github.preRelease=true",
+    "release:dry": "release-it --dry-run"
   },
   "license": "BSD-2-Clause",
   "private": false,
@@ -86,7 +86,6 @@
   },
   "schematics": "./schematics/collection.json",
   "packageManager": "pnpm@10.24.0",
-  "peerDependencies": {},
   "dependencies": {
     "@angular-devkit/core": "^22.0.1",
     "@angular-devkit/schematics": "^22.0.1",
@@ -110,13 +109,8 @@
     "@compodoc/compodoc": "^1.2.1",
     "@eslint/js": "^10.0.1",
     "@hugeicons/core-free-icons": "^4.2.0",
+    "@release-it/conventional-changelog": "^11.0.1",
     "@schematics/angular": "^22.0.1",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/exec": "^7.1.0",
-    "@semantic-release/github": "^12.0.8",
-    "@semantic-release/npm": "^13.1.4",
-    "@semantic-release/release-notes-generator": "^14.1.0",
     "@storybook/addon-docs": "^10.4.4",
     "@storybook/addon-links": "^10.4.4",
     "@storybook/angular": "^10.4.4",
@@ -132,7 +126,7 @@
     "ngx-schematic-builder": "^0.2.0",
     "prettier": "^3.7.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
-    "semantic-release": "^25.0.3",
+    "release-it": "^20.2.1",
     "storybook": "^10.4.4",
     "stylelint": "^17.13.0",
     "stylelint-config-standard-scss": "^17.0.0",

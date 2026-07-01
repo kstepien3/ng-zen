@@ -11,7 +11,7 @@ This guide details setting up a local development environment for **@ng-zen/cli*
 - **Conventional Commits:** **Mandatory format** for commit messages (https://www.conventionalcommits.org/). Crucial for automation.
 - **Automated Formatting/Linting:** `husky` + `nano-staged` apply formatting and basic fixes on commit.
 - **Automated CI:** GitHub Actions (`ci.yml`) validate Pull Requests.
-- **Automated Releases:** `semantic-release` manages releases based on commits.
+- **Automated Releases:** `release-it` manages releases based on commits.
 - **Branching Strategy:** Detailed below.
 
 ## Table of Contents
@@ -47,13 +47,13 @@ This project employs a branching model designed for stability and automated rele
 
 Strict adherence to the **Conventional Commits** specification (https://www.conventionalcommits.org/) is **required**.
 
-- **Why?** Commit messages directly control automatic version bumping (`semantic-release`) and `CHANGELOG.md` generation.
+- **Why?** Commit messages directly control automatic version bumping (`release-it`) and `CHANGELOG.md` generation.
 - **Format:** `<type>(<scope>): <subject>` (e.g., `feat(button): add loading spinner`).
 - **Key Types & Impact (on Stable Release):**
-- `feat`: New feature -> `minor` version bump.
-- `fix`: Bug fix -> `patch` version bump.
-- `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
-- Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
+  - `feat`: New feature -> `minor` version bump.
+  - `fix`: Bug fix -> `patch` version bump.
+  - `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
+  - Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
 - **Validation:** `husky` + `commitlint` automatically check message format upon commit. Invalid messages will fail the commit.
 
 _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itself)._
@@ -62,51 +62,63 @@ _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itsel
 
 ### Overview
 
-This project uses Pull Requests (PRs) for controlled release management through branch progression:  
-`develop` → `next` (pre-release) → `master` (stable release)
+This project uses [release-it](https://github.com/release-it/release-it) with the
+[@release-it/conventional-changelog](https://github.com/release-it/conventional-changelog) plugin
+for automated versioning, changelog generation, GitHub releases, and npm publishing.
 
-### Release Steps
+Releases follow [Conventional Commits](https://www.conventionalcommits.org/) and
+[Semantic Versioning](https://semver.org/).
 
-1. **Create Pre-release PR (`develop` → `next`)**
+### How to trigger a release
 
-- **Create PR**: [develop → next](https://github.com/kstepien3/ng-zen/compare/next...develop)
-- **Title**: `release: merge develop into next`
-- **Merge Strategy**: Regular merge commit (preserves commit history)
-- **Automation**:
-  - Triggers automated pre-release via `semantic-release`
-  - Publishes to NPM under `next` dist-tag
+Releases are triggered manually via GitHub Actions:
 
-2. **Create Stable Release PR (`next` → `master`)**
+1. Go to **Actions → Release → Run workflow**
+2. Select the target branch:
+   - `master` → stable release (e.g. `22.1.0`)
+   - `next` → pre-release (e.g. `22.2.0-next.1`)
+3. Choose pre-release channel (`next`) or leave empty for stable
+4. Click **Run workflow**
 
-- **Create PR**: [next → master](https://github.com/kstepien3/ng-zen/compare/master...next)
-- **Title**: `release: promote next to stable`
-- **Merge Strategy**: Regular merge commit
-- **Automation**:
-  - Triggers automated stable release via `semantic-release`
-  - Publishes to NPM under `latest` dist-tag
+The workflow will automatically:
 
-### Critical Requirements
+- Run lint and tests
+- Build the project
+- Bump version in `package.json` based on conventional commits
+- Generate / update `CHANGELOG.md`
+- Commit and tag the release (`vX.Y.Z`)
+- Create a GitHub Release with changelog notes
+- Publish `@ng-zen/cli` to npm
 
-- ✅ **Merge Commits Only**  
-  Required to preserve conventional commit history that `semantic-release` analyzes
-- ✅ **Valid Conventional Commits**  
-  All commits must follow Angular Conventional Commit standards
-- ✅ **CI Passes**  
-  All automated checks must complete successfully before merging
+### Local dry-run
 
-### Post-Merge Automation
+To preview what the next release would look like without making any changes:
 
-`semantic-release` automatically handles:
+```bash
+pnpm release:dry
+```
 
-1. Version determination from commit history
-2. CHANGELOG generation/updates
-3. NPM package publishing
-4. GitHub release creation
-5. Git tagging
+### Version bump rules
 
-### Hotfix Procedure
+| Commit type                         | Version bump                |
+| ----------------------------------- | --------------------------- |
+| `feat:`                             | minor (`22.1.0` → `22.2.0`) |
+| `fix:`, `perf:`, `refactor:`        | patch (`22.1.0` → `22.1.1`) |
+| `BREAKING CHANGE`                   | major (`22.0.0` → `23.0.0`) |
+| `chore:`, `ci:`, `build:`, `style:` | no release                  |
 
-Create PR directly to master and then follow Branch Synchronization
+### Skipping a release
+
+To push commits without triggering a release, use `scope: no-release` is NOT supported
+in release-it. Simply do not trigger the workflow manually. Commits pile up until
+you decide to release.
+
+### Required GitHub Secrets
+
+| Secret      | Description                                                                       |
+| ----------- | --------------------------------------------------------------------------------- |
+| `GH_TOKEN`  | Personal Access Token with `repo` scope — needed to push release commits and tags |
+| `NPM_TOKEN` | npm Automation token — needed to publish to registry                              |
 
 ### Branch Synchronization
 
