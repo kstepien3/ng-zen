@@ -1,0 +1,46 @@
+{
+  "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "🚀 New Features" },
+          { "type": "fix", "section": "🐛 Bug Fixes" },
+          { "type": "perf", "section": "⚡️ Performance Improvements" },
+          { "type": "refactor", "section": "🛠️ Code Refactor" },
+          { "type": "test", "section": "✅ Tests" },
+          { "type": "docs", "section": "📚 Documentation" },
+          { "type": "build", "section": "🏗️ Build Changes", "hidden": true },
+          { "type": "ci", "section": "🔄 CI", "hidden": true },
+          { "type": "chore", "section": "🧹 Chore", "hidden": true },
+          { "type": "style", "section": "🎨 Style", "hidden": true }
+        ]
+      },
+      "infile": "CHANGELOG.md",
+      "ignoreRecommendedBump": false
+    }
+  },
+  "git": {
+    "commitMessage": "chore(release): v${version}",
+    "tagName": "v${version}",
+    "tagAnnotation": "Release v${version}",
+    "requireCleanWorkingDir": false,
+    "requireUpstream": false,
+    "pushArgs": ["--follow-tags"]
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}",
+    "preRelease": false,
+    "tokenRef": "GITHUB_TOKEN"
+  },
+  "npm": {
+    "publish": true,
+    "publishPath": "./dist/@ng-zen/cli"
+  },
+  "hooks": {
+    "before:init": ["pnpm run lint", "pnpm run test:no-watch"],
+    "after:bump": "pnpm run build"
+  }
+}
