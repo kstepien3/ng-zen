@@ -84,30 +84,30 @@ jobs:
     needs: release
     if: success()
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Configure Git
+        run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git fetch origin --prune --tags
 
       - name: Sync next ← master
         if: github.ref_name == 'master'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          git switch next
-          git pull origin next
-          git merge origin/master --no-edit
-          git push origin next
+          gh pr create --base next --head master --title "chore: sync next with master" --body "Automated post-release sync." 2>/dev/null || true
+          gh pr merge master --auto --merge --subject "chore: sync next with master" || true
 
       - name: Sync develop ← next
         if: github.ref_name == 'master' || github.ref_name == 'next'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          git switch develop
-          git pull origin develop
-          git merge origin/next --no-edit
-          git push origin develop
+          gh pr create --base develop --head next --title "chore: sync develop with next" --body "Automated post-release sync." 2>/dev/null || true
+          gh pr merge next --auto --merge --subject "chore: sync develop with next" || true

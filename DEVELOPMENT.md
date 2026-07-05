@@ -110,50 +110,48 @@ Create PR directly to master and then follow Branch Synchronization
 
 ### Automated Branch Synchronization
 
-Branch syncing is automated in `release.yml` via a `sync-branches` job that runs after every successful release:
+Branch syncing is automated in `release.yml` via a `sync-branches` job that runs after every successful release. To comply with branch protection rules and trigger required CI checks, this process automatically opens Pull Requests and sets them to auto-merge:
 
-- **`master` released** → syncs `next` ← `master`, then `develop` ← `next`
-- **`next` pre-released** → syncs `develop` ← `next`
+- **`master` released** → Creates PRs to sync `next` ← `master`, and subsequently `develop` ← `next`.
+- **`next` pre-released** → Creates a PR to sync `develop` ← `next`.
 
-If a merge conflict occurs, the job fails with an annotation in the Actions UI. Use the manual commands below to resolve locally and push.
+**Merge Conflicts:** If a merge conflict occurs during synchronization, the automated PR will remain open and the auto-merge will fail. The maintainer must resolve the conflict manually via the GitHub UI or locally, and then merge the PR.
+
+> **Maintainer Infrastructure Note (`BOT_TOKEN`):**
+> The `sync-branches` workflow relies on a Fine-grained Personal Access Token stored as a repository secret named `BOT_TOKEN`. The default `GITHUB_TOKEN` is intentionally restricted by GitHub from triggering downstream CI workflows.
+> _If the automation stops working (e.g., the token expires), the repository administrator must generate a new Fine-grained PAT (scoped only to this repository with Read & Write access to `Contents` and `Pull requests`) and update the `BOT_TOKEN` secret._
 
 ---
 
-### Branch Synchronization
+### Manual Branch Synchronization & Local Updates
 
-**General Update Step:** Fetch latest remote state:
+While automation handles post-release syncing, contributors should regularly update their local branches to prevent conflicts.
+
+**General Update Step:** Fetch the latest remote state:
 
 ```bash
 git fetch origin --prune --tags
 ```
 
-### 1. Sync `next` with `master` (After Stable Release or Hotfix)
+**Syncing your local `develop` branch:**
+Contributors should always ensure their local `develop` is up to date before branching out for new features.
 
-This is the most comprehensive synchronization, ensuring all development branches are aligned with the latest production code.
+```bash
+git switch develop
+git pull origin develop
+```
 
-- **Purpose:** Incorporate stable changes into the release candidate branch.
-- **Flow:** `master` -> `next`.
+**Resolving Release Sync Conflicts (Maintainer Task):**
+If the automated bot PR encounters a conflict (e.g., when syncing `next` into `develop`), fetch the branches and resolve the conflict locally before pushing back to the PR branch.
 
-  ```bash
-  # Update local 'next', merge 'origin/master', push 'next'
-  git switch next && git pull origin next && git merge origin/master && git push origin next
-  ```
-
-  _(Note: Merge conflicts might occur at either merge step and need manual resolution before continuing/pushing.)_
-
-### 2. Sync `develop` with `next` (After Pre-release on next OR after syncing next with master)
-
-- **Purpose:** Keep `develop` aligned with the latest pre-release state or the latest stable code propagated through next. Includes release commits (`chore(release): ...`).
-- **Flow:** `next` -> `develop`.
-
-  ```bash
-  # Update local 'next', merge 'origin/master', push 'next'
-  git switch develop && git pull origin develop && git merge origin/next && git push origin develop
-  ```
-
-  _(Note: Resolve conflicts before pushing.)_
-
-  _Automated sync in `release.yml` handles the common case. The manual commands above are the reference for conflict resolution._
+```bash
+git switch develop
+git pull origin develop
+git merge origin/next
+# -> Resolve conflicts in your editor <-
+git commit -m "chore: resolve sync conflicts"
+git push origin develop
+```
 
 ---
 
