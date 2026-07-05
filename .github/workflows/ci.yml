@@ -5,107 +5,76 @@ on:
     branches: [master, develop, next]
     types: [opened, synchronize, reopened]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
-  NODE_VERSION: 24
+  NODE_VERSION: 26
+  PNPM_VERSION: 10.24.0
   RETENTION_DAYS: 30
 
 jobs:
-  install:
+  lint-and-test:
+    name: Lint & Test
     runs-on: ubuntu-latest
-    outputs:
-      cache-key: ${{ steps.cache-key.outputs.cache-key }}
     steps:
       - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - id: cache-key
-        run: |
-          CACHE_KEY="${{ runner.os }}-node-${{ env.NODE_VERSION }}-pnpm-cache-$(sha256sum pnpm-lock.yaml | cut -d' ' -f1)"
-          echo "cache-key=$CACHE_KEY" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v5
-        id: pnpm-cache
-        with:
-          path: |
-            node_modules
-            ~/.pnpm-store
-          key: ${{ steps.cache-key.outputs.cache-key }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-pnpm-cache-
-      - run: pnpm install --frozen-lockfile
 
-  lint:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Enable Corepack
-        run: corepack enable
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v5
-        with:
-          path: |
-            node_modules
-            ~/.pnpm-store
-          key: ${{ needs.install.outputs.cache-key }}
-      - run: pnpm run lint
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linter
+        run: pnpm run lint
+
+      - name: Run tests
+        run: pnpm run test:no-watch
+
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: lint-report
-          path: lint-report/
-          retention-days: ${{ env.RETENTION_DAYS }}
-  test:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Enable Corepack
-        run: corepack enable
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v5
-        with:
+          name: verification-reports
           path: |
-            node_modules
-            ~/.pnpm-store
-          key: ${{ needs.install.outputs.cache-key }}
-      - run: pnpm run test:no-watch
-      - uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: test-report
-          path: test-report/
+            lint-report/
+            test-report/
           retention-days: ${{ env.RETENTION_DAYS }}
 
   build:
-    needs: [install, lint, test]
+    needs: [lint-and-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Enable Corepack
+        run: corepack enable
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v5
-        with:
-          path: |
-            node_modules
-            ~/.pnpm-store
-          key: ${{ needs.install.outputs.cache-key }}
-      - run: pnpm run mock:changelog
-      - run: pnpm run build
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run mock changelog
+        run: pnpm run mock:changelog
+      - name: Build project
+        run: pnpm run build
+
       - uses: actions/upload-artifact@v7
         if: always()
         with:

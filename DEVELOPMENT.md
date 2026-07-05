@@ -27,10 +27,10 @@ This guide details setting up a local development environment for **@ng-zen/cli*
 
 ## Prerequisites & Setup
 
-1.  Ensure **Node.js** is installed (use a version compatible with the project's Angular version; check CI workflows for reference).
-2.  Enable **Corepack**: `corepack enable`.
-3.  Clone the repository.
-4.  Install dependencies using **pnpm**: `pnpm install`.
+1. Ensure **Node.js** is installed (use a version compatible with the project's Angular version; check CI workflows for reference).
+2. Enable **Corepack**: `corepack enable`.
+3. Clone the repository.
+4. Install dependencies using **pnpm**: `pnpm install`.
 
 ## Branching Strategy & Workflow
 
@@ -50,10 +50,10 @@ Strict adherence to the **Conventional Commits** specification (https://www.conv
 - **Why?** Commit messages directly control automatic version bumping (`semantic-release`) and `CHANGELOG.md` generation.
 - **Format:** `<type>(<scope>): <subject>` (e.g., `feat(button): add loading spinner`).
 - **Key Types & Impact (on Stable Release):**
-- `feat`: New feature -> `minor` version bump.
-- `fix`: Bug fix -> `patch` version bump.
-- `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
-- Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
+  - `feat`: New feature -> `minor` version bump.
+  - `fix`: Bug fix -> `patch` version bump.
+  - `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
+  - Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
 - **Validation:** `husky` + `commitlint` automatically check message format upon commit. Invalid messages will fail the commit.
 
 _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itself)._
@@ -65,48 +65,53 @@ _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itsel
 This project uses Pull Requests (PRs) for controlled release management through branch progression:  
 `develop` → `next` (pre-release) → `master` (stable release)
 
-### Release Steps
+### Release Steps (Automated)
 
-1. **Create Pre-release PR (`develop` → `next`)**
+Release PRs are created automatically using GitHub Actions. **Do not create these PRs manually.**
 
-- **Create PR**: [develop → next](https://github.com/kstepien3/ng-zen/compare/next...develop)
-- **Title**: `release: merge develop into next`
-- **Merge Strategy**: Regular merge commit (preserves commit history)
-- **Automation**:
-  - Triggers automated pre-release via `semantic-release`
-  - Publishes to NPM under `next` dist-tag
+1. Go to the **Actions** tab in the GitHub repository.
+2. Select **Trigger Release PR** from the left sidebar.
+3. Click the **Run workflow** button.
+4. Choose the appropriate release type from the dropdown:
 
-2. **Create Stable Release PR (`next` → `master`)**
+**Option A: Pre-release (`develop` → `next`)**
 
-- **Create PR**: [next → master](https://github.com/kstepien3/ng-zen/compare/master...next)
-- **Title**: `release: promote next to stable`
-- **Merge Strategy**: Regular merge commit
-- **Automation**:
-  - Triggers automated stable release via `semantic-release`
-  - Publishes to NPM under `latest` dist-tag
+- Select: `Pre-release (develop -> next)`
+- **Automation**: The bot creates a PR. Once CI passes, it auto-merges, triggers `semantic-release`, and publishes to NPM under the `next` dist-tag.
+
+**Option B: Stable Release (`next` → `master`)**
+
+- Select: `Stable Release (next -> master)`
+- **Automation**: The bot creates a PR. Once CI passes, it auto-merges, triggers `semantic-release`, and publishes to NPM under the `latest` dist-tag.
 
 ### Critical Requirements
 
 - ✅ **Merge Commits Only**  
-  Required to preserve conventional commit history that `semantic-release` analyzes
+  Required to preserve conventional commit history that `semantic-release` analyzes.
 - ✅ **Valid Conventional Commits**  
-  All commits must follow Angular Conventional Commit standards
+  All commits must follow Angular Conventional Commit standards.
 - ✅ **CI Passes**  
-  All automated checks must complete successfully before merging
+  All automated checks must complete successfully before auto-merging.
 
 ### Post-Merge Automation
 
 `semantic-release` automatically handles:
 
-1. Version determination from commit history
-2. CHANGELOG generation/updates
-3. NPM package publishing
-4. GitHub release creation
-5. Git tagging
+1. Version determination from commit history.
+2. CHANGELOG generation/updates.
+3. NPM package publishing.
+4. GitHub release creation.
+5. Git tagging.
 
 ### Hotfix Procedure
 
-Create PR directly to master and then follow Branch Synchronization
+For critical production bugs:
+
+1. Create a PR directly to `master`.
+2. Once merged, it triggers a stable patch release.
+3. The automated `sync-branches` job will propagate the fix down to `next` and `develop`.
+
+---
 
 ### Automated Branch Synchronization
 
@@ -153,10 +158,6 @@ git commit -m "chore: resolve sync conflicts"
 git push origin develop
 ```
 
----
-
-Contributors should regularly update their local `develop` branch (`git switch develop && git pull origin develop`). The automated sync in `release.yml` covers this after releases, but regular pulls are still recommended between releases.
-
 ## Working with Storybook
 
 Develop and visualize components using Storybook.
@@ -185,13 +186,13 @@ Build the distributable library files:
 pnpm run build
 ```
 
-Output artifacts are placed in the `dist/` directory
+Output artifacts are placed in the `dist/` directory.
 
 ## Optional: Local Testing with Verdaccio
 
 Test your local build in a separate project before submitting a PR to develop.
 
-1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g verdaccio`),
+1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g verdaccio`).
 2. Build Library: `pnpm run build`.
 3. Publish Locally: `pnpm run publish:verdaccio`.
-4. Install in Test Project: `ng add @ng-zen/cli --registry http://localhost:4873/` (or pnpm add ...).
+4. Install in Test Project: `ng add @ng-zen/cli --registry http://localhost:4873/` (or `pnpm add ...`).
