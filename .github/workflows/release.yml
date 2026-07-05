@@ -94,7 +94,7 @@ jobs:
           gh pr merge master --auto --merge --subject "chore: sync next with master" || true
 
       - name: Sync develop ← next
-        if: github.ref_name == 'master' || github.ref_name == 'next'
+        if: github.ref_name == 'next'
         env:
           GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
