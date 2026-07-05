@@ -108,6 +108,17 @@ This project uses Pull Requests (PRs) for controlled release management through 
 
 Create PR directly to master and then follow Branch Synchronization
 
+### Automated Branch Synchronization
+
+Branch syncing is automated in `release.yml` via a `sync-branches` job that runs after every successful release:
+
+- **`master` released** → syncs `next` ← `master`, then `develop` ← `next`
+- **`next` pre-released** → syncs `develop` ← `next`
+
+If a merge conflict occurs, the job fails with an annotation in the Actions UI. Use the manual commands below to resolve locally and push.
+
+---
+
 ### Branch Synchronization
 
 **General Update Step:** Fetch latest remote state:
@@ -142,9 +153,11 @@ This is the most comprehensive synchronization, ensuring all development branche
 
   _(Note: Resolve conflicts before pushing.)_
 
+  _Automated sync in `release.yml` handles the common case. The manual commands above are the reference for conflict resolution._
+
 ---
 
-Contributors should regularly update their local `develop` branch (`git switch develop && git pull origin develop`).
+Contributors should regularly update their local `develop` branch (`git switch develop && git pull origin develop`). The automated sync in `release.yml` covers this after releases, but regular pulls are still recommended between releases.
 
 ## Working with Storybook
 
