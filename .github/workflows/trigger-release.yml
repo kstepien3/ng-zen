@@ -1,0 +1,44 @@
+name: Trigger Release PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release Type'
+        required: true
+        type: choice
+        options:
+          - 'Pre-release (develop -> next)'
+          - 'Stable Release (next -> master)'
+
+jobs:
+  create-release-pr:
+    name: Create Release PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git fetch origin --prune --tags
+
+      - name: Create Pre-release PR (develop -> next)
+        if: ${{ inputs.release_type == 'Pre-release (develop -> next)' }}
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          gh pr create --base next --head develop --title "release: merge develop into next" --body "Automated PR to trigger pre-release via semantic-release." 2>/dev/null || true
+          gh pr merge develop --auto --merge --subject "release: merge develop into next" || true
+
+      - name: Create Stable Release PR (next -> master)
+        if: ${{ inputs.release_type == 'Stable Release (next -> master)' }}
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          gh pr create --base master --head next --title "release: promote next to stable" --body "Automated PR to trigger stable release via semantic-release." 2>/dev/null || true
+          gh pr merge next --auto --merge --subject "release: promote next to stable" || true
