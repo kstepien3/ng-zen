@@ -5,6 +5,6 @@ export const brand = {
   brandTarget: '_self',
 
   // Shared properties like typography
-  fontBase: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+  fontBase: 'Geist, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
   fontCode: 'Monaco, "Lucida Console", "Courier New", monospace',
 };

@@ -1,9 +1,17 @@
-import { GeneratorSchemaBase } from '../../types';
+import { Path } from '@angular-devkit/core';
+
+export interface GeneratorSchemaBase {
+  currentDirectory: Path;
+  path?: Path;
+  stories: boolean;
+  project?: string;
+}
 
 export type UiType =
   | 'alert'
   | 'avatar'
   | 'button'
+  | 'card'
   | 'checkbox'
   | 'dialog'
   | 'divider'

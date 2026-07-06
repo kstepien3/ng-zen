@@ -2,10 +2,7 @@
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
-const prettierRecommended = require('eslint-plugin-prettier/recommended');
-const eslintPluginImport = require('eslint-plugin-import');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
-const unicorn = require('eslint-plugin-unicorn');
 const unusedImports = require('eslint-plugin-unused-imports');
 const storybook = require('eslint-plugin-storybook');
 
@@ -22,8 +19,6 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     plugins: {
       'simple-import-sort': simpleImportSort,
-      'import/recommended': eslintPluginImport.flatConfigs,
-      unicorn: unicorn,
       'unused-imports': unusedImports,
     },
     rules: {
@@ -55,18 +50,6 @@ module.exports = tseslint.config(
       '@angular-eslint/template/prefer-self-closing-tags': ['error'],
     },
   },
-  // {
-  //   files: ['**/*.html', '**/*.ts'],
-  //   extends: [prettierRecommended],
-  //   rules: {
-  //     'prettier/prettier': [
-  //       'warn',
-  //       {
-  //         endOfLine: '',
-  //       },
-  //     ],
-  //   },
-  // },
   {
     ignores: ['!.storybook'],
   }

@@ -33,7 +33,7 @@ $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 }
 
 /* Title styles */
-::ng-deep [alert-title] {
+:host ::ng-deep [alert-title] {
   padding: 0;
   margin: 0;
 }

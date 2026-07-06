@@ -27,10 +27,10 @@ This guide details setting up a local development environment for **@ng-zen/cli*
 
 ## Prerequisites & Setup
 
-1.  Ensure **Node.js** is installed (use a version compatible with the project's Angular version; check CI workflows for reference).
-2.  Enable **Corepack**: `corepack enable`.
-3.  Clone the repository.
-4.  Install dependencies using **pnpm**: `pnpm install`.
+1. Ensure **Node.js** is installed (use a version compatible with the project's Angular version; check CI workflows for reference).
+2. Enable **Corepack**: `corepack enable`.
+3. Clone the repository.
+4. Install dependencies using **pnpm**: `pnpm install`.
 
 ## Branching Strategy & Workflow
 
@@ -50,10 +50,10 @@ Strict adherence to the **Conventional Commits** specification (https://www.conv
 - **Why?** Commit messages directly control automatic version bumping (`semantic-release`) and `CHANGELOG.md` generation.
 - **Format:** `<type>(<scope>): <subject>` (e.g., `feat(button): add loading spinner`).
 - **Key Types & Impact (on Stable Release):**
-- `feat`: New feature -> `minor` version bump.
-- `fix`: Bug fix -> `patch` version bump.
-- `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
-- Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
+  - `feat`: New feature -> `minor` version bump.
+  - `fix`: Bug fix -> `patch` version bump.
+  - `!` (e.g., `refactor(core)!:`) or `BREAKING CHANGE:` footer -> `major` version bump.
+  - Other types (`docs`, `chore`, `style`, `test`, `ci`, `build`, `refactor`, `perf`) document changes but don't trigger version bumps alone.
 - **Validation:** `husky` + `commitlint` automatically check message format upon commit. Invalid messages will fail the commit.
 
 _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itself)._
@@ -65,86 +65,98 @@ _(See `CONTRIBUTING.md` for a concise summary focused on the commit action itsel
 This project uses Pull Requests (PRs) for controlled release management through branch progression:  
 `develop` → `next` (pre-release) → `master` (stable release)
 
-### Release Steps
+### Release Steps (Automated)
 
-1. **Create Pre-release PR (`develop` → `next`)**
+Release PRs are created automatically using GitHub Actions. **Do not create these PRs manually.**
 
-- **Create PR**: [develop → next](https://github.com/kstepien3/ng-zen/compare/next...develop)
-- **Title**: `release: merge develop into next`
-- **Merge Strategy**: Regular merge commit (preserves commit history)
-- **Automation**:
-  - Triggers automated pre-release via `semantic-release`
-  - Publishes to NPM under `next` dist-tag
+1. Go to the **Actions** tab in the GitHub repository.
+2. Select **Trigger Release PR** from the left sidebar.
+3. Click the **Run workflow** button.
+4. Choose the appropriate release type from the dropdown:
 
-2. **Create Stable Release PR (`next` → `master`)**
+**Option A: Pre-release (`develop` → `next`)**
 
-- **Create PR**: [next → master](https://github.com/kstepien3/ng-zen/compare/master...next)
-- **Title**: `release: promote next to stable`
-- **Merge Strategy**: Regular merge commit
-- **Automation**:
-  - Triggers automated stable release via `semantic-release`
-  - Publishes to NPM under `latest` dist-tag
+- Select: `Pre-release (develop -> next)`
+- **Automation**: The bot creates a PR. Once CI passes, it auto-merges, triggers `semantic-release`, and publishes to NPM under the `next` dist-tag.
+
+**Option B: Stable Release (`next` → `master`)**
+
+- Select: `Stable Release (next -> master)`
+- **Automation**: The bot creates a PR. Once CI passes, it auto-merges, triggers `semantic-release`, and publishes to NPM under the `latest` dist-tag.
 
 ### Critical Requirements
 
 - ✅ **Merge Commits Only**  
-  Required to preserve conventional commit history that `semantic-release` analyzes
+  Required to preserve conventional commit history that `semantic-release` analyzes.
 - ✅ **Valid Conventional Commits**  
-  All commits must follow Angular Conventional Commit standards
+  All commits must follow Angular Conventional Commit standards.
 - ✅ **CI Passes**  
-  All automated checks must complete successfully before merging
+  All automated checks must complete successfully before auto-merging.
 
 ### Post-Merge Automation
 
 `semantic-release` automatically handles:
 
-1. Version determination from commit history
-2. CHANGELOG generation/updates
-3. NPM package publishing
-4. GitHub release creation
-5. Git tagging
+1. Version determination from commit history.
+2. CHANGELOG generation/updates.
+3. NPM package publishing.
+4. GitHub release creation.
+5. Git tagging.
 
 ### Hotfix Procedure
 
-Create PR directly to master and then follow Branch Synchronization
+For critical production bugs:
 
-### Branch Synchronization
+1. Create a PR directly to `master`.
+2. Once merged, it triggers a stable patch release.
+3. The automated `sync-branches` job will propagate the fix down to `next` and `develop`.
 
-**General Update Step:** Fetch latest remote state:
+---
+
+### Automated Branch Synchronization
+
+Branch syncing is automated in `release.yml` via a `sync-branches` job that runs after every successful release. To comply with branch protection rules and trigger required CI checks, this process automatically opens Pull Requests and sets them to auto-merge:
+
+- **`master` released** → Creates PRs to sync `next` ← `master`, and subsequently `develop` ← `next`.
+- **`next` pre-released** → Creates a PR to sync `develop` ← `next`.
+
+**Merge Conflicts:** If a merge conflict occurs during synchronization, the automated PR will remain open and the auto-merge will fail. The maintainer must resolve the conflict manually via the GitHub UI or locally, and then merge the PR.
+
+> **Maintainer Infrastructure Note (`BOT_TOKEN`):**
+> The `sync-branches` workflow relies on a Fine-grained Personal Access Token stored as a repository secret named `BOT_TOKEN`. The default `GITHUB_TOKEN` is intentionally restricted by GitHub from triggering downstream CI workflows.
+> _If the automation stops working (e.g., the token expires), the repository administrator must generate a new Fine-grained PAT (scoped only to this repository with Read & Write access to `Contents` and `Pull requests`) and update the `BOT_TOKEN` secret._
+
+---
+
+### Manual Branch Synchronization & Local Updates
+
+While automation handles post-release syncing, contributors should regularly update their local branches to prevent conflicts.
+
+**General Update Step:** Fetch the latest remote state:
 
 ```bash
 git fetch origin --prune --tags
 ```
 
-### 1. Sync `next` with `master` (After Stable Release or Hotfix)
+**Syncing your local `develop` branch:**
+Contributors should always ensure their local `develop` is up to date before branching out for new features.
 
-This is the most comprehensive synchronization, ensuring all development branches are aligned with the latest production code.
+```bash
+git switch develop
+git pull origin develop
+```
 
-- **Purpose:** Incorporate stable changes into the release candidate branch.
-- **Flow:** `master` -> `next`.
+**Resolving Release Sync Conflicts (Maintainer Task):**
+If the automated bot PR encounters a conflict (e.g., when syncing `next` into `develop`), fetch the branches and resolve the conflict locally before pushing back to the PR branch.
 
-  ```bash
-  # Update local 'next', merge 'origin/master', push 'next'
-  git switch next && git pull origin next && git merge origin/master && git push origin next
-  ```
-
-  _(Note: Merge conflicts might occur at either merge step and need manual resolution before continuing/pushing.)_
-
-### 2. Sync `develop` with `next` (After Pre-release on next OR after syncing next with master)
-
-- **Purpose:** Keep `develop` aligned with the latest pre-release state or the latest stable code propagated through next. Includes release commits (`chore(release): ...`).
-- **Flow:** `next` -> `develop`.
-
-  ```bash
-  # Update local 'next', merge 'origin/master', push 'next'
-  git switch develop && git pull origin develop && git merge origin/next && git push origin develop
-  ```
-
-  _(Note: Resolve conflicts before pushing.)_
-
----
-
-Contributors should regularly update their local `develop` branch (`git switch develop && git pull origin develop`).
+```bash
+git switch develop
+git pull origin develop
+git merge origin/next
+# -> Resolve conflicts in your editor <-
+git commit -m "chore: resolve sync conflicts"
+git push origin develop
+```
 
 ## Working with Storybook
 
@@ -174,13 +186,13 @@ Build the distributable library files:
 pnpm run build
 ```
 
-Output artifacts are placed in the `dist/` directory
+Output artifacts are placed in the `dist/` directory.
 
 ## Optional: Local Testing with Verdaccio
 
 Test your local build in a separate project before submitting a PR to develop.
 
-1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g verdaccio`),
+1. Install & Run Verdaccio: `npm install -g verdaccio` (or `pnpm add -g verdaccio`).
 2. Build Library: `pnpm run build`.
 3. Publish Locally: `pnpm run publish:verdaccio`.
-4. Install in Test Project: `ng add @ng-zen/cli --registry http://localhost:4873/` (or pnpm add ...).
+4. Install in Test Project: `ng add @ng-zen/cli --registry http://localhost:4873/` (or `pnpm add ...`).

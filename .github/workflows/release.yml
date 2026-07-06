@@ -7,8 +7,12 @@ on:
       - next
   workflow_dispatch:
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
-  NODE_VERSION: 24
+  NODE_VERSION: 26
   PNPM_VERSION: 10.24.0
   RETENTION_DAYS: 7
 
@@ -42,22 +46,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Get pnpm cache directory
-        id: pnpm-cache-dir
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-      - name: Generate cache key
-        id: cache-key
-        shell: bash
-        run: |
-          echo "key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-${{ hashFiles('**/pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
-          echo "restore_key=node-v${{ env.NODE_VERSION }}-pnpm-v${{ env.PNPM_VERSION }}-lock-" >> $GITHUB_OUTPUT
-      - name: Setup pnpm cache
-        uses: actions/cache@v5
-        with:
-          path: ${{ steps.pnpm-cache-dir.outputs.STORE_PATH }}
-          key: ${{ steps.cache-key.outputs.key }}
-          restore-keys: ${{ steps.cache-key.outputs.restore_key }}
+          cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run linter
@@ -78,3 +67,36 @@ jobs:
           name: release-build
           path: release-build/
           retention-days: ${{ env.RETENTION_DAYS }}
+
+  sync-branches:
+    name: Sync downstream branches
+    needs: release
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git fetch origin --prune --tags
+
+      - name: Sync next ← master
+        if: github.ref_name == 'master'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          gh pr create --base next --head master --title "chore: sync next with master" --body "Automated post-release sync." 2>/dev/null || true
+          gh pr merge master --auto --merge --subject "chore: sync next with master" || true
+
+      - name: Sync develop ← next
+        if: github.ref_name == 'next'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          gh pr create --base develop --head next --title "chore: sync develop with next" --body "Automated post-release sync." 2>/dev/null || true
+          gh pr merge next --auto --merge --subject "chore: sync develop with next" || true
