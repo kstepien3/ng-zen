@@ -32,12 +32,17 @@
     </a>
   </p>
 
-  <p><strong>Generate production-ready, customizable Angular UI components directly into your project 🚀</strong></p>
+  <p><strong>Standalone Angular UI Kit Generator — not a utility suite, not a rigid library.</strong> 
+<br/> Generate production-ready, customizable Angular UI components directly into your project 🚀</p>
 
-  <p>Stop wrestling with rigid UI libraries. @ng-zen/cli generates beautiful, modern Angular components <strong>as source code</strong> in your project, giving you complete control and ownership.</p>
+  <p>Stop wrestling with rigid UI libraries. **@ng-zen/cli** generates beautiful, modern Angular components <strong>as source code</strong> in your project, giving you complete control and ownership.</p>
 </div>
 
+<!-- TODO: Insert terminal recording GIF/WebM here showing the CLI in action -->
+
 ## 🎯 Why Choose @ng-zen/cli?
+
+Inspired by the philosophy of **shadcn/ui**, **@ng-zen/cli** brings the "own your components" approach natively to the modern Angular ecosystem.
 
 ### ✨ **Own Your Components**
 
@@ -79,6 +84,8 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 13. [FAQ](#faq)
 
 ## 🚀 Quick Start
+
+> 👀 **See it in action before installing:** [Live Storybook Demo](https://kstepien3.github.io/ng-zen/)
 
 The fastest way to get started:
 
