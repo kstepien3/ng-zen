@@ -10,6 +10,11 @@ $error: var(--zen-error, hsl(0deg 70% 50%));
   --zen-input-placeholder-color: hsl(0deg 0% 60%);
 }
 
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: contents;
+}
+
 input {
   border: var(--zen-input-border);
   border-radius: var(--zen-input-border-radius);
