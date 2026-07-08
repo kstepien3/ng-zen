@@ -70,6 +70,7 @@
     "ui components cli",
     "alert",
     "avatar",
+    "badge",
     "button",
     "card",
     "checkbox",
@@ -89,7 +90,6 @@
   },
   "schematics": "./schematics/collection.json",
   "packageManager": "pnpm@10.24.0",
-  "peerDependencies": {},
   "dependencies": {
     "@angular-devkit/core": "^22.0.1",
     "@angular-devkit/schematics": "^22.0.1",

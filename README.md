@@ -50,7 +50,7 @@ Unlike traditional UI libraries that give you `<library-button>` black boxes, @n
 
 ### 🏎️ **Instant Productivity**
 
-- **Production-Ready UI Elements:** Alert, Avatar, Button, Card, Checkbox, Dialog, Divider, Form Control, Icon, Input, Popover, Radio, Skeleton, Switch, Textarea
+- **Production-Ready UI Elements:** Alert, Avatar, Badge, Button, Card, Checkbox, Dialog, Divider, Form Control, Icon, Input, Popover, Radio, Skeleton, Switch, Textarea
 - **Zero Configuration:** Works with Angular 20+ out of the box
 - **Complete Setup:** Each component includes unit tests, Storybook stories, and documentation
 
@@ -157,6 +157,7 @@ export class MyComponent {}
 | ---------------- | -------------------------------- | ------------------------------------------------------------------------------ |
 | **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles                                  |
 | **Alert**        | Informational messages           | Customizable styles, dismissible options                                       |
+| **Badge**        | Status indicators and labels     | 6 variants, icons support, focus-visible ring                                  |
 | **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons                              |
 | **Card**         | Content container                | Multi-slot projection (header, title, subtitle, footer), CSS custom properties |
 | **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation                                |
