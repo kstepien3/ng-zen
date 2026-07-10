@@ -2,7 +2,7 @@
   <a href="https://kstepien3.github.io/ng-zen/">
     <img src="https://raw.githubusercontent.com/kstepien3/ng-zen/master/assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
   </a>
-  
+
   <h1>@ng-zen/cli</h1>
 
   <p style="display: flex; gap: 1rem; justify-content: center;">
@@ -76,11 +76,12 @@ export class MyComponent {}
 
 1. [Getting Started](#-getting-started)
 2. [Features](#-features)
-3. [Available UIs](#-available-uis)
-4. [Customization](#-customization)
-5. [Philosophy & Architecture](#-philosophy--architecture)
-6. [Community & Contributions](#-community--contributions)
-7. [Documentation & Links](#-documentation--links)
+3. [CLI Usage & Options](#-cli-usage--options)
+4. [Available UIs](#-available-uis)
+5. [Customization](#-customization)
+6. [Philosophy & Architecture](#-philosophy--architecture)
+7. [Community & Contributions](#-community--contributions)
+8. [Documentation & Links](#-documentation--links)
 
 ## ✨ Features
 
@@ -89,6 +90,43 @@ export class MyComponent {}
 - **Agnostic Styling:** Built with raw SCSS and CSS Variables. No forced dependencies on Tailwind CSS, but fully adaptable if needed.
 - **Modern Angular:** Leverages Standalone Components, OnPush change detection, and eliminates unnecessary RxJS overhead in UI layers.
 - **Production Ready:** Includes Vitest unit tests, Storybook stories, and accessibility features out of the box.
+
+## 🛠️ CLI Usage & Options
+
+Generate multiple components at once, specify custom paths, or include Storybook documentation files directly from the terminal.
+
+```bash
+ng generate @ng-zen/cli:ui [path] --ui <elements...> --stories
+```
+
+### Arguments & Flags
+
+| Property        | Status     | Default       | Description                                                                                                                  |
+| :-------------- | :--------- | :------------ | :--------------------------------------------------------------------------------------------------------------------------- |
+| **`[path]`**    | _Optional_ | `src/app/ui`  | The directory where components will be generated (e.g., `./src/app/shared/components`).                                      |
+| **`--ui`**      | _Required_ | -             | A space-separated list of components to generate (e.g., `button`, `alert`, `dialog`). Interactive prompt appears if omitted. |
+| **`--stories`** | _Optional_ | `false`       | Generates `.stories.ts` files alongside the component, instantly ready for your Storybook integration.                       |
+| **`--project`** | _Optional_ | auto-detected | Specify the target project name in a multi-project workspace.                                                                |
+
+### Examples
+
+**Interactive mode (Recommended):**
+
+```bash
+ng generate @ng-zen/cli:ui
+```
+
+**Generate specific components to a custom path:**
+
+```bash
+ng generate @ng-zen/cli:ui ./src/app/shared/components --ui avatar badge card
+```
+
+**Generate components with Storybook files:**
+
+```bash
+ng generate @ng-zen/cli:ui --ui button input --stories
+```
 
 ## 🧩 Available UIs
 
