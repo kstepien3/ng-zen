@@ -35,7 +35,7 @@
   <p><strong>Standalone Angular UI Kit Generator — not a utility suite, not a rigid library.</strong> 
 <br/> Generate production-ready, customizable Angular UI components directly into your project 🚀</p>
 
-  <p>Stop wrestling with rigid UI libraries. **@ng-zen/cli** generates beautiful, modern Angular components <strong>as source code</strong> in your project, giving you complete control and ownership.</p>
+  <p>Stop wrestling with rigid UI libraries. <strong>@ng-zen/cli</strong> generates beautiful, modern Angular components <strong>as source code</strong> in your project, giving you complete control and ownership.</p>
 </div>
 
 <!-- TODO: Insert terminal recording GIF/WebM here showing the CLI in action -->
@@ -354,7 +354,7 @@ This project is licensed under the [BSD 2-Clause License](https://github.com/kst
 
 ### ❓ **How is this different from Angular Material or PrimeNG?**
 
-Traditional UI libraries give you pre-compiled components that you can't modify. @ng-zen/cli generates the actual source code into your project, so you have complete control. You can modify the TypeScript, HTML, and SCSS files however you need.
+Traditional UI libraries give you pre-compiled components that you can't modify. __@ng-zen/cli__ generates the actual source code into your project, so you have complete control. You can modify the TypeScript, HTML, and SCSS files however you need.
 
 ### ❓ **Can I customize the generated components?**
 
@@ -371,7 +371,7 @@ Updates to the CLI add new features and components but don't affect your already
 
 ### ❓ **Does this work with existing Angular projects?**
 
-Yes! @ng-zen/cli works with any Angular 20+ project. Just run `ng add @ng-zen/cli` in your existing project and start generating components.
+Yes! __@ng-zen/cli__ works with any Angular 20+ project. Just run `ng add @ng-zen/cli` in your existing project and start generating components.
 
 ### ❓ **Can I use this in production?**
 
