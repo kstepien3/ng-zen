@@ -92,24 +92,41 @@ export class MyComponent {}
 
 ## 🧩 Available UIs
 
-| Component        | Description                      | Features                                                                       |
-| ---------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| **Alert**        | Informational messages           | Customizable styles, dismissible options                                       |
-| **Avatar**       | User profile images and initials | Image fallback, size variants, rounded styles                                  |
-| **Badge**        | Status indicators and labels     | 6 variants, icons support, focus-visible ring                                  |
-| **Button**       | Interactive buttons              | Primary/secondary variants, loading states, icons                              |
-| **Card**         | Content container                | Multi-slot projection (header, title, subtitle, footer), CSS custom properties |
-| **Checkbox**     | Form checkboxes                  | Indeterminate state, custom styling, validation                                |
-| **Dialog**       | Native modal dialogs             | Native dialog element, service API, size variants, backdrop config             |
-| **Divider**      | Visual separators                | Horizontal/vertical, with labels, custom thickness                             |
-| **Form Control** | Form field wrapper               | Labels, validation messages, required indicators                               |
-| **Icon**         | SVG icon system                  | Built to support any SVG icon library. Size variants, colors                   |
-| **Input**        | Text input fields                | Validation states, prefixes/suffixes, types                                    |
-| **Popover**      | Native Popover API directive     | Template/string content, placements, click toggle, CSS anchor positioning      |
-| **Radio**        | Form radio buttons               | Group selection, two-way binding, custom styling, disabled state               |
-| **Skeleton**     | Loading placeholders             | Multiple shapes, animation, responsive                                         |
-| **Switch**       | Toggle controls                  | On/off states, disabled state, custom labels                                   |
-| **Textarea**     | Multi-line text input            | Auto-resize, character counts, validation                                      |
+### Forms & Inputs
+
+| Component        | Description           | Features                                                         |
+| ---------------- | --------------------- | ---------------------------------------------------------------- |
+| **Checkbox**     | Form checkboxes       | Indeterminate state, custom styling, validation                  |
+| **Form Control** | Form field wrapper    | Labels, validation messages, required indicators                 |
+| **Input**        | Text input fields     | Validation states, prefixes/suffixes, types                      |
+| **Radio**        | Form radio buttons    | Group selection, two-way binding, custom styling, disabled state |
+| **Switch**       | Toggle controls       | On/off states, disabled state, custom labels                     |
+| **Textarea**     | Multi-line text input | Auto-resize, character counts, validation                        |
+
+### Data Display
+
+| Component   | Description                      | Features                                                                       |
+| ----------- | -------------------------------- | ------------------------------------------------------------------------------ |
+| **Avatar**  | User profile images and initials | Image fallback, size variants, rounded styles                                  |
+| **Badge**   | Status indicators and labels     | 6 variants, icons support, focus-visible ring                                  |
+| **Card**    | Content container                | Multi-slot projection (header, title, subtitle, footer), CSS custom properties |
+| **Divider** | Visual separators                | Horizontal/vertical, with labels, custom thickness                             |
+| **Icon**    | SVG icon system                  | Built to support any SVG icon library. Size variants, colors                   |
+
+### Feedback
+
+| Component    | Description            | Features                                 |
+| ------------ | ---------------------- | ---------------------------------------- |
+| **Alert**    | Informational messages | Customizable styles, dismissible options |
+| **Skeleton** | Loading placeholders   | Multiple shapes, animation, responsive   |
+
+### Actions & Overlays
+
+| Component   | Description                  | Features                                                                  |
+| ----------- | ---------------------------- | ------------------------------------------------------------------------- |
+| **Button**  | Interactive buttons          | Primary/secondary variants, loading states, icons                         |
+| **Dialog**  | Native modal dialogs         | Native dialog element, service API, size variants, backdrop config        |
+| **Popover** | Native Popover API directive | Template/string content, placements, click toggle, CSS anchor positioning |
 
 ## 🎨 Customization
 
