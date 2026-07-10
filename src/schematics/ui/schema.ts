@@ -10,6 +10,7 @@ export interface GeneratorSchemaBase {
 export type UiType =
   | 'alert'
   | 'avatar'
+  | 'badge'
   | 'button'
   | 'card'
   | 'checkbox'
