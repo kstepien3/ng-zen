@@ -36,7 +36,7 @@ import { FormValueControl } from '@angular/forms/signals';
  */
 @Directive({
   host: {
-    '(blur)': 'touch.emit()',
+    '(focusout)': 'touch.emit()',
   },
 })
 export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
