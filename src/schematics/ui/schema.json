@@ -39,6 +39,7 @@
         "enum": [
           "alert",
           "avatar",
+          "badge",
           "button",
           "card",
           "checkbox",

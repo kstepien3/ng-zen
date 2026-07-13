@@ -1,7 +1,7 @@
 {
   "name": "@ng-zen/cli",
   "version": "0.0.0",
-  "description": "Angular UI components generator – Zen UI Kit CLI for schematics-based creation of customizable components like alert, avatar, button, card, checkbox, dialog, divider, form-control, icon, input, popover, radio, skeleton, switch, textarea with Storybook demos.",
+  "description": "Angular CLI generator for creating fully customizable UI components.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,6 +38,9 @@
   },
   "homepage": "https://kstepien3.github.io/ng-zen/",
   "keywords": [
+    "shadcn",
+    "shadcn-ui",
+    "shadcn-angular",
     "angular",
     "angular-ui",
     "ui-kit",
@@ -67,6 +70,7 @@
     "ui components cli",
     "alert",
     "avatar",
+    "badge",
     "button",
     "card",
     "checkbox",
@@ -86,7 +90,6 @@
   },
   "schematics": "./schematics/collection.json",
   "packageManager": "pnpm@10.24.0",
-  "peerDependencies": {},
   "dependencies": {
     "@angular-devkit/core": "^22.0.1",
     "@angular-devkit/schematics": "^22.0.1",

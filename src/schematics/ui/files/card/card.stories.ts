@@ -1,6 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenButton } from '../button';
+import { ZenInput } from '../input';
 import { ZenCard } from './card';
 
 interface StoryParams {
@@ -14,7 +15,7 @@ type Options = ZenCard & StoryParams;
 export default {
   title: 'Ui/Card',
   component: ZenCard,
-  decorators: [moduleMetadata({ imports: [ZenButton] })],
+  decorators: [moduleMetadata({ imports: [ZenButton, ZenInput] })],
   args: {
     content: 'This is the card content.',
     title: 'Card Title',
@@ -122,8 +123,8 @@ export const LoginForm: Story = {
         <h3 card-title>Login to your account</h3>
         <p card-subtitle>Enter your email below to login to your account</p>
         <div style="display: grid; gap: 0.75rem;">
-          <input type="email" placeholder="Email" style="border: 1px solid hsl(0deg 0% 80%); border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.875rem;">
-          <input type="password" placeholder="Password" style="border: 1px solid hsl(0deg 0% 80%); border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.875rem;">
+          <zen-input type="email" placeholder="Email" />
+          <zen-input type="password" placeholder="Password" />
           <a href="#" style="font-size: 0.75rem; color: hsl(0deg 0% 40%); text-align: right;">Forgot your password?</a>
         </div>
         <div card-footer style="display: flex; flex-direction: column; gap: 0.5rem;">

@@ -59,7 +59,7 @@ jobs:
         run: pnpm run semantic-release --debug
         env:
           HUSKY: 0
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Upload artifacts
         if: success()
         uses: actions/upload-artifact@v7
