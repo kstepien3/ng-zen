@@ -1,6 +1,7 @@
 // Globals
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $error: var(--zen-error, hsl(0deg 70% 50%));
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 :host {
   --zen-input-border: 1px solid hsl(0deg 0% 80%);
@@ -21,7 +22,7 @@ input {
   padding: var(--zen-input-padding);
 
   &:disabled {
-    opacity: 0.6;
+    opacity: $disabled-opacity;
   }
 
   &:focus-visible {

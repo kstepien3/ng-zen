@@ -4,6 +4,8 @@
   --zen-skeleton-animation-duration: 1.6s;
 }
 
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
+
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
   background: var(--zen-skeleton-background);
@@ -55,7 +57,7 @@
 
 @keyframes pulse {
   0% {
-    opacity: 0.6;
+    opacity: $disabled-opacity;
   }
 
   100% {
