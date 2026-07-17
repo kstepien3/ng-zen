@@ -7,6 +7,7 @@ import { ZenBadge } from './badge';
 interface StoryParams {
   color: 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
   variant: 'solid' | 'filled' | 'outline' | 'ghost';
+  disabled: boolean;
   label: string;
 }
 
@@ -19,6 +20,7 @@ export default {
     label: 'Badge',
     color: 'neutral',
     variant: 'solid',
+    disabled: false,
   },
   argTypes: {
     label: {
@@ -37,6 +39,15 @@ export default {
     variant: {
       control: 'select',
       options: ['solid', 'filled', 'outline', 'ghost'],
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        category: 'attributes',
+        type: {
+          summary: 'boolean',
+        },
+      },
     },
   },
   render: ({ label, ...args }) => ({
@@ -131,6 +142,62 @@ export const AllColorVariants: Story = {
           <zen-badge color="info" variant="filled">Filled</zen-badge>
           <zen-badge color="info" variant="outline">Outline</zen-badge>
           <zen-badge color="info" variant="ghost">Ghost</zen-badge>
+        </div>
+      </div>
+    `,
+  }),
+};
+
+export const DisabledVariants: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Default (No color attribute) -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled variant="solid">Solid</zen-badge>
+          <zen-badge disabled variant="filled">Filled</zen-badge>
+          <zen-badge disabled variant="outline">Outline</zen-badge>
+          <zen-badge disabled variant="ghost">Ghost</zen-badge>
+        </div>
+
+        <!-- Primary -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled color="primary" variant="solid">Solid</zen-badge>
+          <zen-badge disabled color="primary" variant="filled">Filled</zen-badge>
+          <zen-badge disabled color="primary" variant="outline">Outline</zen-badge>
+          <zen-badge disabled color="primary" variant="ghost">Ghost</zen-badge>
+        </div>
+
+        <!-- Success -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled color="success" variant="solid">Solid</zen-badge>
+          <zen-badge disabled color="success" variant="filled">Filled</zen-badge>
+          <zen-badge disabled color="success" variant="outline">Outline</zen-badge>
+          <zen-badge disabled color="success" variant="ghost">Ghost</zen-badge>
+        </div>
+
+        <!-- Warning -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled color="warning" variant="solid">Solid</zen-badge>
+          <zen-badge disabled color="warning" variant="filled">Filled</zen-badge>
+          <zen-badge disabled color="warning" variant="outline">Outline</zen-badge>
+          <zen-badge disabled color="warning" variant="ghost">Ghost</zen-badge>
+        </div>
+
+        <!-- Danger -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled color="danger" variant="solid">Solid</zen-badge>
+          <zen-badge disabled color="danger" variant="filled">Filled</zen-badge>
+          <zen-badge disabled color="danger" variant="outline">Outline</zen-badge>
+          <zen-badge disabled color="danger" variant="ghost">Ghost</zen-badge>
+        </div>
+
+        <!-- Info -->
+        <div style="display: flex; gap: 0.5rem;">
+          <zen-badge disabled color="info" variant="solid">Solid</zen-badge>
+          <zen-badge disabled color="info" variant="filled">Filled</zen-badge>
+          <zen-badge disabled color="info" variant="outline">Outline</zen-badge>
+          <zen-badge disabled color="info" variant="ghost">Ghost</zen-badge>
         </div>
       </div>
     `,

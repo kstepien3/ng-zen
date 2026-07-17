@@ -2,9 +2,9 @@
 
 $transition-duration: var(--zen-transition-duration, 0.2s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 :host {
-  --zen-badge-shadow: 0 1px 2px hsl(0deg 0% 0% / 8%);
   --zen-badge-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
   --zen-badge-primary: var(--zen-primary, hsl(193deg 58% 34%));
   --zen-badge-success: var(--zen-success, hsl(142deg 38% 36%));
@@ -25,6 +25,7 @@ $colors: (
 $ghost-hover-opacity: 10%;
 $ghost-active-opacity: 20%;
 
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
   --zen-badge-bg-color: var(--zen-badge-neutral);
 
@@ -63,8 +64,8 @@ $ghost-active-opacity: 20%;
   height: 0.75rem;
 }
 
-:host([disabled]) {
-  opacity: 0.6;
+:host([data-disabled]) {
+  opacity: $disabled-opacity;
   pointer-events: none;
 }
 
