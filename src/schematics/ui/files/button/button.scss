@@ -53,7 +53,7 @@ $outline-hover-opacity: 70%;
 $outline-active-bg-opacity: 20%;
 
 // Disabled state
-$disabled-opacity: 0.6;
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 // Default state hover/active mixing ratios (oklch)
 $default-hover-mix: 85%;

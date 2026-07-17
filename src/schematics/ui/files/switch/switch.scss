@@ -4,6 +4,7 @@ $transition-duration: var(--zen-transition-duration-quick, 0.1s);
 $placeholder-color: var(--zen-placeholder-color, hsl(0deg 0% 60%));
 $focus-shadow: var(--zen-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
 $appearance: var(--zen-appearance, hsl(0deg 0% 10%));
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 :host {
   --zen-switch-thumb-size: 1rem;
@@ -73,7 +74,7 @@ $appearance: var(--zen-appearance, hsl(0deg 0% 10%));
 
   &[data-disabled='true'] {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: $disabled-opacity;
   }
 
   &:active:not([data-disabled='true']) .thumb {

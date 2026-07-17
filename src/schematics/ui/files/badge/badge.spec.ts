@@ -12,6 +12,23 @@ describe('ZenBadge', () => {
     }).compileComponents();
   });
 
+  describe('disabled', () => {
+    it('should not have disabled attribute by default', () => {
+      const fixture = TestBed.createComponent(ZenBadge);
+      fixture.detectChanges();
+      const badge = fixture.nativeElement as HTMLElement;
+      expect(badge.hasAttribute('disabled')).toBe(false);
+    });
+
+    it('should apply disabled attribute when set', () => {
+      const fixture = TestBed.createComponent(ZenBadge);
+      fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+      const badge = fixture.nativeElement as HTMLElement;
+      expect(badge.hasAttribute('data-disabled')).toBe(true);
+    });
+  });
+
   it('should create', () => {
     const fixture = TestBed.createComponent(ZenBadge);
     const component = fixture.componentInstance;
