@@ -24,7 +24,7 @@ import { ZenFormControl } from '../form-control';
  *   --zen-checkbox-size: 1rem;
  *   --zen-checkbox-border-radius: 0.375rem;
  *   --zen-checkbox-appearance: hsl(0deg 0% 10%);
- *   --zen-checkbox-disabled-opacity: 0.6;
+ *   --zen-disabled-opacity: 0.6;
  *   --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);
  * }
  * ```

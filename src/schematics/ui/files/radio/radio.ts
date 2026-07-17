@@ -25,7 +25,7 @@ import { ZenRadioRegistry } from './radio.registry';
  *   --zen-radio-size: 1rem;
  *   --zen-radio-border-radius: 50%;
  *   --zen-radio-appearance: hsl(0deg 0% 10%);
- *   --zen-radio-disabled-opacity: 0.6;
+ *   --zen-disabled-opacity: 0.6;
  *   --zen-radio-border: 1px solid hsl(0deg 0% 80%);
  * }
  * ```
