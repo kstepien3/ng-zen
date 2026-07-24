@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://kstepien3.github.io/ng-zen/">
-    <img src="/assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
+    <img src="assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
   </a>
 
   <h1>@ng-zen/cli</h1>
@@ -39,7 +39,7 @@
 </div>
 
 <p align="center">
-  <img src="/assets/demo.gif" alt="CLI demo" width="800" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);">
+  <img src="assets/demo.gif" alt="CLI demo" width="800" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);">
 </p>
 
 ---
