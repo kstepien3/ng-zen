@@ -22,7 +22,7 @@
         "build": {
           "builder": "ngx-schematic-builder:build",
           "options": {
-            "files": ["src/**", "README.md", "LICENSE", "CHANGELOG.md"],
+            "files": ["src/**", "README.md", "LICENSE"],
             "tsConfig": "tsconfig.schematics.json"
           }
         },
