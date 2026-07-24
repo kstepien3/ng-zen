@@ -39,8 +39,9 @@
 </div>
 
 <p align="center">
-  <img src="/assets/demo.gif" alt="CLI demo" width="800">
+  <img src="/assets/demo.gif" alt="CLI demo" width="800" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);">
 </p>
+
 ---
 
 ## 🚀 Getting Started

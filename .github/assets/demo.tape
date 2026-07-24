@@ -5,9 +5,9 @@ Require ng
 Set Shell zsh
 Set WindowBar Colorful
 Set Theme "tokyonight-storm"
-Set Margin 20
-Set BorderRadius 10
-Set Width 900
+Set Margin 0
+Set BorderRadius 0
+Set Width 800
 Set Height 400
 Set Padding 20
 Set FontSize 18
