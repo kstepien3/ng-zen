@@ -50,7 +50,6 @@
         }
       }
     ],
-    ["@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" }],
     ["@semantic-release/npm", { "npmPublish": false, "pkgRoot": "." }],
     ["@semantic-release/exec", { "prepareCmd": "pnpm run build" }],
     ["@semantic-release/npm", { "pkgRoot": "./dist/@ng-zen/cli/", "npmPublish": true }],
