@@ -8,13 +8,13 @@ import { ZenDialogService } from './dialog.service';
 @Component({
   template: `
     <dialog
+      zen-dialog
       [backdrop]="backdrop()"
       [closeOnEscape]="closeOnEscape()"
       [header]="header()"
       [id]="id()"
       [size]="size()"
       [(open)]="isOpen"
-      zen-dialog
     >
       <p>Dialog content</p>
     </dialog>
@@ -34,8 +34,8 @@ class DialogTestComponent {
 @Component({
   template: `
     <p>{{ message() }}</p>
-    <button (click)="onConfirm()">Confirm</button>
-    <button (click)="onCancel()">Cancel</button>
+    <button type="button" (click)="onConfirm()">Confirm</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
   `,
   standalone: true,
 })
@@ -58,7 +58,7 @@ function getDialogEl(fixture: ComponentFixture<unknown>): HTMLDialogElement | nu
 }
 
 function getDialogElFromBody(): HTMLDialogElement | null {
-  return document.body.querySelector('dialog[zen-dialog]') as HTMLDialogElement | null;
+  return document.body.querySelector('dialog[zen-dialog]');
 }
 
 describe('ZenDialog', () => {
@@ -212,7 +212,7 @@ describe('ZenDialogService', () => {
     const service = TestBed.inject(ZenDialogService);
 
     const ref = service.open(TestDialogContent, {
-      inputs: { message: 'Hello from service' } as Record<string, unknown>,
+      inputs: { message: 'Hello from service' },
     });
 
     expect(ref.componentInstance.message()).toBe('Hello from service');
@@ -230,7 +230,7 @@ describe('ZenDialogService', () => {
       },
     });
 
-    const confirmBtn = document.body.querySelector('button') as HTMLButtonElement;
+    const confirmBtn = document.body.querySelector('button')!;
     confirmBtn?.click();
 
     expect(confirmHandler).toHaveBeenCalledWith('confirmed');

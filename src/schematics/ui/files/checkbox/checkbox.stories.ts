@@ -81,7 +81,7 @@ export const WithSignalForm: Story = {
   template: `
     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
       <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-checkbox [formField]="form.agree" id="agree" />
+        <zen-checkbox id="agree" [formField]="form.agree" />
         <label for="agree">I agree to the terms</label>
       </div>
       @if (form.agree().invalid()) {

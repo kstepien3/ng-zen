@@ -40,6 +40,8 @@ import { ZenRadioRegistry } from './radio.registry';
   selector: 'zen-radio',
   template: `
     <input
+      #inputElement
+      type="radio"
       [attr.aria-checked]="checked()"
       [attr.aria-disabled]="disabled()"
       [attr.aria-invalid]="invalid() || null"
@@ -48,8 +50,6 @@ import { ZenRadioRegistry } from './radio.registry';
       [name]="name()"
       [value]="option()"
       (change)="onRadioChange()"
-      #inputElement
-      type="radio"
     />
     @if (checked()) {
       <span class="radio-dot"></span>
@@ -78,7 +78,7 @@ export class ZenRadio extends ZenFormControl<string | null> {
   /**
    * Determines if this radio button is checked based on the group value.
    */
-  protected checked = computed<boolean>(() => this.value() === this.option());
+  protected readonly checked = computed<boolean>(() => this.value() === this.option());
   /**
    * Handles radio button selection using native change event.
    */

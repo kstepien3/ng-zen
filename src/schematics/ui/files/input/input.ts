@@ -37,6 +37,7 @@ import { ZenFormControl } from '../form-control';
   selector: 'zen-input',
   template: `
     <input
+      #inputRef
       [aria-invalid]="invalid() || null"
       [disabled]="disabled()"
       [placeholder]="placeholder()"
@@ -44,7 +45,6 @@ import { ZenFormControl } from '../form-control';
       [type]="type()"
       [value]="value()"
       (input)="onInput(inputRef.value)"
-      #inputRef
     />
   `,
   styleUrls: ['./input.scss'],

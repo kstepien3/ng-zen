@@ -67,8 +67,8 @@ See [GitHub](https://github.com/kstepien3/ng-zen), [MDN Dialog Element](https://
   template: `
     <p>{{ message() }}</p>
     <div style="display: flex; gap: 0.5rem; margin-top: 1rem; justify-content: end">
-      <button (click)="cancel()" color="danger" variant="filled" zen-btn>Cancel</button>
-      <button (click)="confirmClick.emit('confirmed!')" zen-btn>Confirm</button>
+      <button color="danger" variant="filled" zen-btn (click)="cancel()">Cancel</button>
+      <button zen-btn (click)="confirmClick.emit('confirmed!')">Confirm</button>
     </div>
   `,
   standalone: true,
@@ -90,7 +90,7 @@ class DemoDialogContent {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-service-demo',
   template: `
-    <button (click)="openDialog()" zen-btn>Open via Service</button>
+    <button zen-btn (click)="openDialog()">Open via Service</button>
   `,
   standalone: true,
   imports: [ZenButton],

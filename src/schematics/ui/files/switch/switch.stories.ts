@@ -67,7 +67,7 @@ export const WithSignalForm: Story = {
   standalone: true,
   template: `
     <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <zen-switch [formField]="form.notifications" id="notifications" />
+      <zen-switch id="notifications" [formField]="form.notifications" />
       <label for="notifications">
         {{ form.notifications().value() ? 'Notifications on' : 'Notifications off' }}
       </label>

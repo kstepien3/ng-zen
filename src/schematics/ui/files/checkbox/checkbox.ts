@@ -39,13 +39,13 @@ import { ZenFormControl } from '../form-control';
   selector: 'zen-checkbox',
   template: `
     <input
+      #inputElement
+      type="checkbox"
       [attr.aria-disabled]="disabled()"
       [attr.aria-invalid]="invalid() || null"
       [checked]="value()"
       [disabled]="disabled()"
       (change)="onInput(inputElement.checked)"
-      #inputElement
-      type="checkbox"
     />
     @if (inputElement.indeterminate) {
       ─
