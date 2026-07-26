@@ -12,15 +12,13 @@
     "lint:fix": "ng lint --fix",
     "prepare": "husky",
     "storybook": "ng run cli:storybook",
-    "storybook:build": "ng run cli:build-storybook",
+    "storybook:build": "ng run cli:build-storybook && node scripts/generate-sitemap.mjs",
     "storybook:doc": "compodoc -e json -p tsconfig.json -t --disablePrivate --disableProtected",
     "storybook:doc:watch": "npx nodemon --watch src --ext ts,md --exec \"pnpm run storybook:doc\"",
     "verdaccio": "verdaccio",
     "prepublish:verdaccio": "pnpm unpublish @ng-zen/cli --registry http://localhost:4873 --force && pnpm run build",
     "publish:verdaccio": "cd dist/@ng-zen/cli && npm publish --registry http://localhost:4873/",
-    "semantic-release": "semantic-release",
-    "mock:changelog": "echo 'Development mode - changelog will be generated during build.' > CHANGELOG.md",
-    "postinstall": "pnpm run mock:changelog"
+    "semantic-release": "semantic-release"
   },
   "license": "BSD-2-Clause",
   "private": false,
