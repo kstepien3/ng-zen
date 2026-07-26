@@ -89,7 +89,7 @@ export const WithFormRoot: Story = {
   standalone: true,
   template: `
     <div style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
-      <zen-input [formField]="form.name" placeholder="Type something" />
+      <zen-input placeholder="Type something" [formField]="form.name" />
       @if (form.name().invalid()) {
         <p style="color: red; margin: 0; font-size: 0.875rem;">
           {{ form.name().errors()![0].message }}
@@ -108,9 +108,9 @@ class InputSignalFormComponent {
 @Component({
   standalone: true,
   template: `
-    <form [formRoot]="loginForm" style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
-      <zen-input [formField]="loginForm.email" placeholder="Email" />
-      <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+    <form style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;" [formRoot]="loginForm">
+      <zen-input placeholder="Email" [formField]="loginForm.email" />
+      <zen-input placeholder="Password" type="password" [formField]="loginForm.password" />
       <button type="submit">Sign in</button>
     </form>
   `,

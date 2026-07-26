@@ -29,17 +29,17 @@ export type IconSvgObject = readonly (readonly [string, Record<string, string | 
   selector: 'zen-icon',
   template: `
     <svg
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
       [attr.height]="size()"
       [attr.stroke-width]="calculatedStrokeWidth()"
       [attr.viewBox]="'0 0 ' + BASE_SIZE + ' ' + BASE_SIZE"
       [attr.width]="size()"
       [innerHTML]="safeSvgContent()"
       [style.color]="color()"
-      fill="none"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      xmlns="http://www.w3.org/2000/svg"
     ></svg>
   `,
   styles: [':host { display: inline-flex; }'],

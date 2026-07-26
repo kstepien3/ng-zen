@@ -8,6 +8,11 @@
     "installIconLibrary": {
       "type": "boolean",
       "x-prompt": "Would you like to install @hugeicons/core-free-icons? This package provides the icon set for zen-icon component. You can also install it manually later."
+    },
+    "updateEslint": {
+      "type": "boolean",
+      "x-prompt": "ESLint config detected. Update it for ng-zen UI components? This adds zen prefix rules and relaxes rules for stories/spec files.",
+      "default": true
     }
   }
 }

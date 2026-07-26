@@ -1,5 +1,6 @@
-import { Rule } from '@angular-devkit/schematics';
+import { chain, Rule } from '@angular-devkit/schematics';
 
+import { logEslintManualInstructions, updateEslintConfig } from './eslint-config';
 import { installIconLibrary, logIconLibraryManualInstructions } from './icon-library';
 import { Schema } from './schema';
 
@@ -7,10 +8,20 @@ export function ngAdd(options: Schema): Rule {
   return (tree, context) => {
     context.logger.info('🔧 Setting up ng-zen...');
 
+    const rules: Rule[] = [];
+
     if (options.installIconLibrary) {
-      return installIconLibrary()(tree, context);
+      rules.push(installIconLibrary());
+    } else {
+      rules.push(logIconLibraryManualInstructions());
     }
 
-    return logIconLibraryManualInstructions()(tree, context);
+    if (options.updateEslint) {
+      rules.push(updateEslintConfig());
+    } else {
+      rules.push(logEslintManualInstructions());
+    }
+
+    return chain(rules)(tree, context);
   };
 }
