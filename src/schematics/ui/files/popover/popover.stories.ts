@@ -69,7 +69,7 @@ export const WithTemplate: Story = {
   render: ({ placement, content }) => ({
     template: `
       <ng-template #popoverContent>
-        <i>${content}</i>
+        <i>${content as string}</i>
       </ng-template>
       <button zen-btn [zenPopover]="popoverContent" [zenPopoverPlacement]="'${placement}'">
         Template

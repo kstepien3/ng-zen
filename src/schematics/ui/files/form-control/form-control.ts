@@ -40,9 +40,6 @@ import { FormValueControl } from '@angular/forms/signals';
   },
 })
 export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
-  /** The underlying value of the control. Subclasses must provide their own implementation using `model()`. */
-  abstract readonly value: ModelSignal<Value>;
-
   /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
   readonly errors = input<readonly ValidationError.WithOptionalFieldTree[]>([]);
   /** Whether the control is disabled. Auto-bound by the Signal Forms directive. */
@@ -68,12 +65,15 @@ export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
   /** Emitted when the field is blurred. The {@link FormField} directive listens to this output to mark the field as touched. */
   readonly touch = output<void>();
 
+  /** The underlying value of the control. Subclasses must provide their own implementation using `model()`. */
+  abstract readonly value: ModelSignal<Value>;
+
   // @ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+
   focus(_options?: FocusOptions): void {}
 
   // @ignore
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   reset(): void {}
 
   /** Should be called by the subclass when the control's value changes as a result of user interaction. */

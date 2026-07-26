@@ -19,7 +19,8 @@ export function installIconLibrary(): Rule {
 
 export function logIconLibraryManualInstructions(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    context.logger.info('To use <zen-icon>, install an SVG icon library (one-time setup):');
+    context.logger.info('');
+    context.logger.info('⚠️ To use <zen-icon>, install an SVG icon library (one-time setup):');
     context.logger.info('  - Recommended: @hugeicons/core-free-icons');
     context.logger.info('  - Or use any other SVG icon library and pass icons via the [icon] input.');
 

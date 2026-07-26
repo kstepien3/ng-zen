@@ -1,0 +1,78 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Manual Configuration" />
+
+# Manual Configuration
+
+The recommended way to set up ng-zen is via `ng add @ng-zen/cli` followed by `ng generate @ng-zen/cli:ui`. This page covers manual configuration for case you skipped those prompts.
+
+If you skipped `ng add` or declined the prompts during setup, here's how to install and configure everything manually.
+
+```bash
+npm install -D @ng-zen/cli
+```
+
+The sections below cover post-install setup for ESLint and icon library.
+
+## ESLint
+
+Import and spread the config in your `eslint.config.*`:
+
+```ts
+import ngZen from '@ng-zen/cli/eslint-config';
+
+export default defineConfig([
+  ...otherConfigs,
+  ...ngZen,
+]);
+```
+
+**Custom path** — use `createNgZenConfig` or compose from named exports:
+
+```ts
+import ngZen from '@ng-zen/cli/eslint-config';
+
+// Option A: factory for a custom glob
+export default defineConfig([
+  ngZen.createNgZenConfig({ uiFiles: 'src/app/shared/components' }),
+  ...ngZen.generatedFiles,
+]);
+
+// Option B: spread rules directly (e.g. to override prefix)
+export default defineConfig([
+  {
+    files: ['libs/my-ui/**/*.ts'],
+    rules: {
+      ...ngZen.uiComponent.rules,
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix: ['app', 'zen'], style: 'kebab-case' },
+      ],
+    },
+  },
+  ...ngZen.generatedFiles,
+]);
+```
+
+## Icon Library
+
+Install any SVG icon library:
+
+```bash
+npm install @hugeicons/core-free-icons
+```
+
+Then import icons and pass them to the component:
+
+```typescript
+import { CheckmarkIcon } from '@hugeicons/core-free-icons';
+import { ZenIcon } from '@ng-zen/cli';
+
+@Component({
+  imports: [ZenIcon],
+  template: `
+    <zen-icon [icon]="CheckmarkIcon" />
+  `,
+})
+export class MyComponent {}
+```

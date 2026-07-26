@@ -40,7 +40,7 @@ import { Component, input } from '@angular/core';
   imports: [NgOptimizedImage],
   template: `
     @if (src()) {
-      <img [alt]="alt()" [ngSrc]="src()" fill />
+      <img fill [alt]="alt()" [ngSrc]="src()" />
     } @else {
       <ng-content />
     }
