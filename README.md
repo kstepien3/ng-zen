@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://kstepien3.github.io/ng-zen/">
-    <img src="https://raw.githubusercontent.com/kstepien3/ng-zen/master/assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
+    <img src="assets/logo.png" alt="@ng-zen/cli Logo" width="256" />
   </a>
 
   <h1>@ng-zen/cli</h1>
@@ -38,7 +38,9 @@
   </p>
 </div>
 
-<!-- TODO: Insert terminal recording GIF/WebM here showing the CLI in action -->
+<p align="center">
+  <img src="assets/demo.gif" alt="CLI demo" width="800" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);">
+</p>
 
 ---
 

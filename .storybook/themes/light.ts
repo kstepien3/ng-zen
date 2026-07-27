@@ -7,7 +7,7 @@ export default create({
 
   // Brand configuration
   ...brand,
-  brandImage: './logo_storybook.png',
+  brandImage: './assets/logo_storybook.png',
 
   // Color palette based on zen design system
   colorPrimary: 'hsl(200 100% 50%)', // Focus/accent color from design system

@@ -9,7 +9,7 @@ const config: StorybookConfig = {
       base: '/ng-zen/',
     },
   },
-  staticDirs: ['../assets/'],
+  staticDirs: [{ from: '../assets', to: '/assets' }, './public'],
   docs: {
     defaultName: 'Docs',
   },
