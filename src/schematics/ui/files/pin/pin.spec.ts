@@ -26,7 +26,7 @@ import type { PinPosition } from './pin.types';
 class HostComponent {
   readonly content = viewChild.required<TemplateRef<unknown>>('content');
   readonly position = signal<PinPosition>('top right');
-  readonly offset = signal('0');
+  readonly offset = signal<string | number>('0');
 }
 
 function getWrapperEl(fixture: ComponentFixture<unknown>): HTMLElement | null {
@@ -102,6 +102,29 @@ describe('ZenPin', () => {
     fixture.detectChanges();
 
     expect(getWrapperEl(fixture)!.style.getPropertyValue('translate')).toBe('10px -5px');
+  });
+
+  it.each([
+    ['top right', '-50% 50%'],
+    ['top left', '50% 50%'],
+    ['top center', '0 50%'],
+    ['bottom right', '-50% -50%'],
+    ['bottom left', '50% -50%'],
+    ['bottom center', '0 -50%'],
+    ['center left', '50% 0'],
+    ['center right', '-50% 0'],
+    ['center', '0 0'],
+    ['top', '0 50%'],
+    ['bottom', '0 -50%'],
+    ['left', '50% 0'],
+    ['right', '-50% 0'],
+  ] as const)('computes center-directed translate for position %s', (position, expected) => {
+    const fixture = createFixture();
+    fixture.componentInstance.position.set(position);
+    fixture.componentInstance.offset.set(50);
+    fixture.detectChanges();
+
+    expect(getWrapperEl(fixture)!.style.getPropertyValue('translate')).toBe(expected);
   });
 
   it('removes wrapper on destroy', () => {

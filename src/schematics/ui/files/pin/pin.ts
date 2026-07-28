@@ -65,10 +65,13 @@ export class ZenPin {
   readonly position = input<PinPosition>('top right', { alias: 'zenPinPosition' });
 
   /**
-   * Optional CSS `translate` offset to shift the pin from its anchor-centered position
-   * (e.g. `'0.5rem'`, `'10px -5px'`). Defaults to no offset.
+   * Offset to shift the pin from its anchor-centered position.
+   * - `string`: raw CSS `translate` value (e.g. `'0.5rem'`, `'10px -5px'`).
+   * - `number`: percentage of the pin's own size, automatically directed toward
+   *   the anchor center based on `zenPinPosition` (e.g. `50` → `'-50% 50%'` for `'top right'`).
+   * Defaults to no offset.
    */
-  readonly offset = input<string>('0', { alias: 'zenPinOffset' });
+  readonly offset = input<string | number>('-50% 50%', { alias: 'zenPinOffset' });
 
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
@@ -133,11 +136,26 @@ export class ZenPin {
     this.renderer.setStyle(this.wrapper, 'position-area', this.position());
 
     const o = this.offset();
-    if (o) {
+    if (typeof o === 'number') {
+      this.renderer.setStyle(this.wrapper, 'translate', this.computeCenterOffset(o));
+    } else if (o) {
       this.renderer.setStyle(this.wrapper, 'translate', o);
     } else {
       this.renderer.removeStyle(this.wrapper, 'translate');
     }
+  }
+
+  private computeCenterOffset(pct: number): string {
+    const pos = this.position();
+    const parts = pos.split(' ') as [string] | [string, string];
+    const verticals = new Set(['top', 'bottom', 'center']);
+    const [v, h] = parts.length === 2 ? parts : verticals.has(parts[0]) ? [parts[0], 'center'] : ['center', parts[0]];
+
+    const hFactor = h === 'right' ? -1 : h === 'left' ? 1 : 0;
+    const vFactor = v === 'top' ? 1 : v === 'bottom' ? -1 : 0;
+    const x = hFactor * pct;
+    const y = vFactor * pct;
+    return `${x ? x + '%' : '0'} ${y ? y + '%' : '0'}`;
   }
 
   private cleanup(): void {

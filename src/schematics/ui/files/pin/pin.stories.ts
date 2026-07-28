@@ -78,30 +78,41 @@ export const WithBadge: StoryObj<WithBadgeArgs> = {
   },
   args: {
     position: 'top right',
-    offsetX: 0,
-    offsetY: 0,
+    offsetX: -50,
+    offsetY: -50,
   },
-  render: args => ({
-    props: {
-      position: args.position,
-      offsetValue: `${args.offsetX}% ${args.offsetY}%`,
-    },
-    template: `
-      <div style="margin: 4rem;">
-        <button
-          zen-button
-          [zenPin]="pin"
-          [zenPinPosition]="position"
-          [zenPinOffset]="offsetValue"
-        >
-          Notifications
-        </button>
-        <ng-template #pin>
-          <zen-badge color="danger" variant="solid">3</zen-badge>
-        </ng-template>
-      </div>
-    `,
-  }),
+  render: args => {
+    const parts = args.position.split(' ') as [string] | [string, string];
+    const verticals = new Set(['top', 'bottom', 'center']);
+    const [v, h] = parts.length === 2 ? parts : verticals.has(parts[0]) ? [parts[0], 'center'] : ['center', parts[0]];
+
+    const hFactor = h === 'right' ? -1 : h === 'left' ? 1 : 0;
+    const vFactor = v === 'top' ? 1 : v === 'bottom' ? -1 : 0;
+    const tx = -hFactor * args.offsetX;
+    const ty = -vFactor * args.offsetY;
+
+    return {
+      props: {
+        position: args.position,
+        offsetValue: `${tx ? tx + '%' : '0'} ${ty ? ty + '%' : '0'}`,
+      },
+      template: `
+        <div style="margin: 4rem;">
+          <button
+            zen-button
+            [zenPin]="pin"
+            [zenPinPosition]="position"
+            [zenPinOffset]="offsetValue"
+          >
+            Notifications
+          </button>
+          <ng-template #pin>
+            <zen-badge color="danger" variant="solid">3</zen-badge>
+          </ng-template>
+        </div>
+      `,
+    };
+  },
 };
 
 export const WithIcon: Story = {
