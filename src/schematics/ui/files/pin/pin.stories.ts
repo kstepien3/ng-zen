@@ -1,4 +1,4 @@
-import { ChatIcon, RotateLeft02Icon } from '@hugeicons/core-free-icons';
+import { BellIcon, ChatIcon, RotateLeft02Icon } from '@hugeicons/core-free-icons';
 import { Args, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenAvatar } from '../avatar';
@@ -7,27 +7,45 @@ import { ZenButton } from '../button';
 import { ZenIcon } from '../icon';
 import { ZenPin } from './pin';
 import type { PinPosition } from './pin.types';
+import { ZenPinItem } from './pin-item';
 
 interface WithBadgeArgs extends Args {
   position: PinPosition;
   offsetX: number;
   offsetY: number;
+  overlap: boolean;
 }
 
 type Story = StoryObj<ZenPin>;
 
-const meta = {
+// Formater
+const html = String.raw;
+
+const meta: Meta = {
   title: 'Ui/Pin',
   component: ZenPin,
   decorators: [
     moduleMetadata({
-      imports: [ZenPin, ZenBadge, ZenButton, ZenIcon, ZenAvatar],
+      imports: [ZenPin, ZenPinItem, ZenBadge, ZenButton, ZenIcon, ZenAvatar],
     }),
   ],
+};
+
+export default meta;
+
+export const WithBadge: StoryObj<WithBadgeArgs> = {
   argTypes: {
-    template: {
-      name: 'zenPin',
-      table: { disable: true },
+    offsetX: {
+      name: 'offsetX (px)',
+      control: { type: 'range', min: -50, max: 50, step: 1 },
+    },
+    offsetY: {
+      name: 'offsetY (px)',
+      control: { type: 'range', min: -50, max: 50, step: 1 },
+    },
+    overlap: {
+      name: 'overlap',
+      control: { type: 'boolean' },
     },
     position: {
       name: 'zenPinPosition',
@@ -53,94 +71,87 @@ const meta = {
         defaultValue: { summary: 'top right' },
       },
     },
-    offset: {
-      name: 'zenPinOffset',
-      table: { disable: true },
-    },
   },
   args: {
     position: 'top right',
-  },
-} satisfies Meta<ZenPin>;
-
-export default meta;
-
-export const WithBadge: StoryObj<WithBadgeArgs> = {
-  argTypes: {
-    offsetX: {
-      name: 'offsetX',
-      control: { type: 'range', min: -100, max: 100, step: 1 },
-    },
-    offsetY: {
-      name: 'offsetY',
-      control: { type: 'range', min: -100, max: 100, step: 1 },
-    },
-  },
-  args: {
-    position: 'top right',
-    offsetX: -50,
-    offsetY: -50,
+    offsetX: 0,
+    offsetY: 0,
+    overlap: true,
   },
   render: args => {
-    const parts = args.position.split(' ') as [string] | [string, string];
-    const verticals = new Set(['top', 'bottom', 'center']);
-    const [v, h] = parts.length === 2 ? parts : verticals.has(parts[0]) ? [parts[0], 'center'] : ['center', parts[0]];
-
-    const hFactor = h === 'right' ? -1 : h === 'left' ? 1 : 0;
-    const vFactor = v === 'top' ? 1 : v === 'bottom' ? -1 : 0;
-    const tx = -hFactor * args.offsetX;
-    const ty = -vFactor * args.offsetY;
-
     return {
       props: {
         position: args.position,
-        offsetValue: `${tx ? tx + '%' : '0'} ${ty ? ty + '%' : '0'}`,
+        overlap: args.overlap,
+        offsetValue: `${args.offsetY}px ${args.offsetX}px`,
       },
-      template: `
+      template: html`
         <div style="margin: 4rem;">
-          <button
-            zen-button
-            [zenPin]="pin"
-            [zenPinPosition]="position"
-            [zenPinOffset]="offsetValue"
-          >
+          <button zen-button zenPin>
             Notifications
+            <zen-badge
+              zenPinItem
+              color="danger"
+              variant="solid"
+              [zenPinPosition]="position"
+              [zenPinOffset]="offsetValue"
+              [zenPinOverlap]="overlap"
+            >
+              3
+            </zen-badge>
           </button>
-          <ng-template #pin>
-            <zen-badge color="danger" variant="solid">3</zen-badge>
-          </ng-template>
         </div>
       `,
     };
   },
 };
 
-export const WithIcon: Story = {
+export const WithImage: Story = {
   render: () => ({
-    props: { RotateLeft02Icon, ChatIcon },
-    template: `
-      <div style="margin: 4rem; display: flex; gap: 1rem">
-        <zen-avatar
-          src="https://github.com/kstepien3.png"
-          [zenPin]="icon"
-        />
-        <ng-template #icon>
-          <zen-icon [icon]="ChatIcon" [strokeWidth]="2" [size]="18" />
-        </ng-template>
-
-        <zen-avatar
-          src="https://github.com/kstepien3.png"
-          [zenPin]="iconTemplate"
-          zenPinPosition="bottom right"
-          zenPinOffset="-5px -10px"
-        />
-        <ng-template #iconTemplate>
-          <zen-icon [icon]="RotateLeft02Icon" [strokeWidth]="2" [size]="24" />
-        </ng-template>
+    template: html`
+      <div style="margin: 4rem; display: flex; justify-content: center;">
+        <div zenPin style="display: inline-block; position: relative;">
+          <img src="https://picsum.photos/64/64" alt="avatar" style="border-radius: 0.5rem;" />
+          <zen-badge zenPinItem color="danger" variant="solid" zenPinPosition="top right" zenPinOverlap>3</zen-badge>
+        </div>
       </div>
     `,
   }),
-  args: {
-    position: 'bottom center',
-  },
+};
+
+export const WithIcons: Story = {
+  render: () => ({
+    props: { BellIcon, ChatIcon, RotateLeft02Icon },
+    template: html`
+      <div style="margin: 4rem; display: flex; gap: 1rem">
+        <zen-avatar zenPin src="https://github.com/kstepien3.png">
+          <zen-icon zenPinItem [icon]="ChatIcon" [strokeWidth]="2" [size]="18" zenPinOverlap />
+        </zen-avatar>
+
+        <zen-avatar src="https://github.com/kstepien3.png" zenPin>
+          <zen-icon
+            zenPinItem
+            zenPinPosition="bottom right"
+            zenPinOffset="5px"
+            [icon]="RotateLeft02Icon"
+            [strokeWidth]="2"
+            [size]="24"
+          />
+        </zen-avatar>
+
+        <button zen-button zenPin>
+          Notifications
+          <zen-badge zenPinItem color="danger" variant="solid" zenPinPosition="top right" zenPinOverlap>3</zen-badge>
+          <zen-icon
+            zenPinItem
+            zenPinPosition="bottom right"
+            zenPinOverlap
+            [icon]="BellIcon"
+            [strokeWidth]="2"
+            [size]="16"
+          />
+        </button>
+      </div>
+    `,
+  }),
 };
