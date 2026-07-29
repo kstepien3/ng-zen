@@ -167,6 +167,7 @@ ng generate @ng-zen/cli:ui --ui button input --stories
 | ----------- | ---------------------------- | ------------------------------------------------------------------------- |
 | **Button**  | Interactive buttons          | Primary/secondary variants, loading states, icons                         |
 | **Dialog**  | Native modal dialogs         | Native dialog element, service API, size variants, backdrop config        |
+| **Pin**     | Anchor-positioned overlay    | CSS Anchor Positioning, TemplateRef content, position and offset controls |
 | **Popover** | Native Popover API directive | Template/string content, placements, click toggle, CSS anchor positioning |
 
 ## 🎨 Customization

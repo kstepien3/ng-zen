@@ -19,6 +19,7 @@ export type UiType =
   | 'form-control'
   | 'icon'
   | 'input'
+  | 'pin'
   | 'popover'
   | 'radio'
   | 'skeleton'
