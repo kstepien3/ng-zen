@@ -14,7 +14,7 @@ import type { PinPosition } from './pin.types';
  * <button zen-button zenPin>
  *   Notifications
  *   <zen-badge zenPinItem zenPinPosition="top right" [zenPinOffset]="5px">3</zen-badge>
- *   <zen-icon zenPinItem zenPinPosition="bottom right" zenPinOverlap />
+ *   <zen-icon zenPinItem zenPinPosition="bottom right" />
  * </button>
  * ```
  *
@@ -33,8 +33,8 @@ export class ZenPinItem {
   /** Fine-tune the margin to offset the pin from the position-area edge. Accepts CSS value or number (px). */
   readonly zenPinOffset = input<string | number>('0');
 
-  /** Whether the pin should auto-overlap the anchor edge via position-aware translate. */
-  readonly zenPinOverlap = input<boolean, unknown>(false, { transform: booleanAttribute });
+  /** Whether the pin sits flush at the edge without overlapping the anchor. */
+  readonly zenPinFlush = input<boolean, unknown>(false, { transform: booleanAttribute });
 
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
@@ -61,7 +61,6 @@ export class ZenPinItem {
     this.renderer.setStyle(wrapper, 'position-anchor', this.zenPin.anchorName);
     this.renderer.setStyle(wrapper, 'align-self', 'anchor-center');
     this.renderer.setStyle(wrapper, 'justify-self', 'anchor-center');
-    this.renderer.setStyle(wrapper, 'z-index', '10');
 
     const itemEl = this.el.nativeElement;
     const parent = this.renderer.parentNode(itemEl);
@@ -76,18 +75,18 @@ export class ZenPinItem {
 
   private updatePosition(): void {
     if (!this.wrapper) return;
+
     this.renderer.setStyle(this.wrapper, 'position-area', this.zenPinPosition());
 
-    if (this.zenPinOverlap()) {
-      this.renderer.setStyle(this.wrapper, 'translate', this.computeCenterOffset(this.zenPinPosition(), 50));
-    } else {
+    if (this.zenPinFlush()) {
       this.renderer.removeStyle(this.wrapper, 'translate');
+    } else {
+      this.renderer.setStyle(this.wrapper, 'translate', this.computeCenterOffset(this.zenPinPosition(), 50));
     }
 
     const o = this.zenPinOffset();
     if (o !== '0' && o !== 0) {
-      const marginValue = typeof o === 'number' ? `${o}px` : o;
-      this.renderer.setStyle(this.wrapper, 'margin', marginValue);
+      this.renderer.setStyle(this.wrapper, 'margin', typeof o === 'number' ? `${o}px` : o);
     } else {
       this.renderer.removeStyle(this.wrapper, 'margin');
     }

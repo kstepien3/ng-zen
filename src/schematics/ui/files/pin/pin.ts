@@ -30,9 +30,13 @@ import { Directive, ElementRef, inject, Renderer2 } from '@angular/core';
   selector: '[zenPin]',
 })
 export class ZenPin {
+  /** @ignore Counter used to generate unique anchor names. */
   static pinId = 0;
 
+  /** @ignore The native host element used as the CSS anchor. */
   readonly hostEl: HTMLElement;
+
+  /** @ignore Generated CSS anchor name referenced by ZenPinItem. */
   readonly anchorName: string;
 
   constructor() {

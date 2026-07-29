@@ -11,7 +11,7 @@ import { ZenPinItem } from './pin-item';
   template: `
     <button #trigger id="trigger" type="button" zen-button zenPin>
       Trigger
-      <span zenPinItem [zenPinOffset]="offset()" [zenPinOverlap]="overlap()" [zenPinPosition]="position()">
+      <span zenPinItem [zenPinFlush]="flushed()" [zenPinOffset]="offset()" [zenPinPosition]="position()">
         Pinned content
       </span>
     </button>
@@ -21,7 +21,7 @@ import { ZenPinItem } from './pin-item';
 class HostComponent {
   readonly position = signal<PinPosition>('top right');
   readonly offset = signal<string | number>('0');
-  readonly overlap = signal<boolean>(false);
+  readonly flushed = signal<boolean>(false);
 }
 
 @Component({
@@ -105,11 +105,10 @@ describe('ZenPin', () => {
     fixture.componentInstance.offset.set('10px');
     fixture.detectChanges();
 
-    const wrapper = getWrapper(fixture)!;
-    expect(wrapper.style.getPropertyValue('margin')).toBe('10px');
+    expect(getWrapper(fixture)!.style.getPropertyValue('margin')).toBe('10px');
   });
 
-  it('updates margin when offset changes (number)', () => {
+  it('sets margin from zenPinOffset number input', () => {
     const fixture = createFixture();
     fixture.componentInstance.offset.set(15);
     fixture.detectChanges();
@@ -121,23 +120,17 @@ describe('ZenPin', () => {
     ['top right', '-50% 50%'],
     ['top left', '50% 50%'],
     ['bottom right', '-50% -50%'],
-  ] as const)('computes center-directed translate for position %s when overlap is true', (position, expected) => {
+  ] as const)('computes center-directed translate for position %s when not flush', (position, expected) => {
     const fixture = createFixture();
     fixture.componentInstance.position.set(position);
-    fixture.componentInstance.overlap.set(true);
     fixture.detectChanges();
 
     expect(getWrapper(fixture)!.style.getPropertyValue('translate')).toBe(expected);
   });
 
-  it('removes translate when overlap is false', () => {
+  it('removes translate when flush is true', () => {
     const fixture = createFixture();
-    fixture.componentInstance.overlap.set(true);
-    fixture.detectChanges();
-
-    expect(getWrapper(fixture)!.style.getPropertyValue('translate')).not.toBe('');
-
-    fixture.componentInstance.overlap.set(false);
+    fixture.componentInstance.flushed.set(true);
     fixture.detectChanges();
 
     expect(getWrapper(fixture)!.style.getPropertyValue('translate')).toBe('');
