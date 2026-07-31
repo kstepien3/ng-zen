@@ -92,6 +92,7 @@ jobs:
         if: github.ref_name == 'master'
         run: |
           git fetch origin master next
+          git branch -f next origin/next
           git rebase origin/master next
           git push origin next --force-with-lease
 
@@ -101,5 +102,6 @@ jobs:
         if: github.ref_name == 'next'
         run: |
           git fetch origin develop next
+          git branch -f develop origin/develop
           git rebase origin/next develop
           git push origin develop --force-with-lease
