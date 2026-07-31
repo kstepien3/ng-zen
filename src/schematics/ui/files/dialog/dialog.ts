@@ -44,7 +44,7 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
       <header class="zen-dialog-header">
         <h2>{{ header() }}</h2>
         @if (closable()) {
-          <button (click)="onClose()" aria-label="Close dialog" class="zen-dialog-close" type="button">
+          <button aria-label="Close dialog" class="zen-dialog-close" type="button" (click)="onClose()">
             <zen-icon [icon]="closeIcon" [size]="20" />
           </button>
         }

@@ -1,25 +1,28 @@
-import { Component, provideZonelessChangeDetection, TemplateRef, ViewChild } from '@angular/core';
+import { Component, provideZonelessChangeDetection, TemplateRef, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ZenButton } from '../button';
 import { ZenPopover } from './popover';
 
 @Component({
   template: `
-    <button [zenPopover]="content" id="trigger-btn" zenPopoverPlacement="bottom">Trigger</button>
+    <button id="trigger-btn" type="button" zen-button zenPopoverPlacement="bottom" [zenPopover]="content">
+      Trigger
+    </button>
 
     <ng-template #content>Popover content</ng-template>
   `,
   standalone: true,
-  imports: [ZenPopover],
+  imports: [ZenPopover, ZenButton],
 })
 class TemplateBottomComponent {
-  @ViewChild('content', { static: true }) content!: TemplateRef<unknown>;
+  readonly content = viewChild.required<TemplateRef<unknown>>('content');
 }
 
 @Component({
   template: `
-    <button [zenPopover]="content" id="trigger-btn" zenPopoverPlacement="left">Trigger</button>
+    <button id="trigger-btn" type="button" zenPopoverPlacement="left" [zenPopover]="content">Trigger</button>
 
     <ng-template #content>Popover content</ng-template>
   `,
@@ -27,12 +30,12 @@ class TemplateBottomComponent {
   imports: [ZenPopover],
 })
 class TemplateLeftComponent {
-  @ViewChild('content', { static: true }) content!: TemplateRef<unknown>;
+  readonly content = viewChild.required<TemplateRef<unknown>>('content');
 }
 
 @Component({
   template: `
-    <button [zenPopover]="'String content'" id="trigger-btn">Trigger</button>
+    <button id="trigger-btn" type="button" [zenPopover]="'String content'">Trigger</button>
   `,
   standalone: true,
   imports: [ZenPopover],

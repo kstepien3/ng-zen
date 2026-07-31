@@ -85,18 +85,21 @@ jobs:
           git config user.email "github-actions@github.com"
           git fetch origin --prune --tags
 
+      # Rebase next onto master so release commits are added on top of the stable release.
+      # Rebase (not force-mirror) preserves any commits that landed on next in the meantime.
+      # --force-with-lease prevents overwriting remote changes we haven't seen.
       - name: Sync next ← master
         if: github.ref_name == 'master'
-        env:
-          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          gh pr create --base next --head master --title "chore: sync next with master" --body "Automated post-release sync." 2>/dev/null || true
-          gh pr merge master --auto --merge --subject "chore: sync next with master" || true
+          git fetch origin master next
+          git rebase origin/master next
+          git push origin next --force-with-lease
 
+      # Rebase develop onto next so the release commits (version bump, changelog)
+      # land back on develop without a merge PR. Same rebase safety as above.
       - name: Sync develop ← next
         if: github.ref_name == 'next'
-        env:
-          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          gh pr create --base develop --head next --title "chore: sync develop with next" --body "Automated post-release sync." 2>/dev/null || true
-          gh pr merge next --auto --merge --subject "chore: sync develop with next" || true
+          git fetch origin develop next
+          git rebase origin/next develop
+          git push origin develop --force-with-lease

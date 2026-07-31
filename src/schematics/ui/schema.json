@@ -47,6 +47,7 @@
           "divider",
           "icon",
           "input",
+          "pin",
           "popover",
           "radio",
           "skeleton",

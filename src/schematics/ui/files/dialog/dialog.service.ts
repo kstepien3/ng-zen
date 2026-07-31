@@ -62,7 +62,7 @@ interface DialogConfig<T, TInputs = ComponentInputs<T>, TOutputs = ComponentOutp
 
 /** Reference to an opened dialog. Provides `close()` and `componentInstance`. */
 class DialogRef<T> {
-  public componentInstance!: T;
+  componentInstance!: T;
 
   constructor(private readonly closeFn: () => void) {}
 
@@ -130,7 +130,7 @@ class ZenDialogService {
 
     this.dialogRef.instance.open.set(true);
 
-    const { inputs, outputs, ...inputMappings } = config || {};
+    const { inputs, outputs, ...inputMappings } = config ?? {};
 
     for (const [key, value] of Object.entries(inputMappings)) {
       if (value !== undefined) {

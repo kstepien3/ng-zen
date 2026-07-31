@@ -29,16 +29,14 @@ function resolveFormControlDependency(
 export function uiGenerator({ ui: selected, project, ...options }: UiOptions): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     const workspace = await getWorkspace(tree);
-    const projectName = project || (workspace.extensions['defaultProject'] as string);
+    const projectName = project ?? (workspace.extensions['defaultProject'] as string);
     const projectObj = workspace.projects.get(projectName);
 
     if (!projectObj) {
       throw new Error(`Project "${projectName}" not found in workspace.`);
     }
 
-    if (options.path === undefined) {
-      options.path = (buildDefaultPath(projectObj) + '/' + DEFAULT_GENERATION_PATH) as Path;
-    }
+    options.path ??= (buildDefaultPath(projectObj) + '/' + DEFAULT_GENERATION_PATH) as Path;
 
     const workingDirectory = normalize(join(options.currentDirectory, options.path));
     const ui = [...selected];

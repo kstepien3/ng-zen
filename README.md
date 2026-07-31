@@ -81,9 +81,10 @@ export class MyComponent {}
 3. [CLI Usage & Options](#-cli-usage--options)
 4. [Available UIs](#-available-uis)
 5. [Customization](#-customization)
-6. [Philosophy & Architecture](#-philosophy--architecture)
-7. [Community & Contributions](#-community--contributions)
-8. [Documentation & Links](#-documentation--links)
+6. [ESLint Configuration](#-eslint-configuration)
+7. [Philosophy & Architecture](#-philosophy--architecture)
+8. [Community & Contributions](#-community--contributions)
+9. [Documentation & Links](#-documentation--links)
 
 ## ✨ Features
 
@@ -166,6 +167,7 @@ ng generate @ng-zen/cli:ui --ui button input --stories
 | ----------- | ---------------------------- | ------------------------------------------------------------------------- |
 | **Button**  | Interactive buttons          | Primary/secondary variants, loading states, icons                         |
 | **Dialog**  | Native modal dialogs         | Native dialog element, service API, size variants, backdrop config        |
+| **Pin**     | Anchor-positioned overlay    | CSS Anchor Positioning, TemplateRef content, position and offset controls |
 | **Popover** | Native Popover API directive | Template/string content, placements, click toggle, CSS anchor positioning |
 
 ## 🎨 Customization
@@ -187,6 +189,38 @@ Every generated component utilizes CSS variables for immediate theming without t
 ```
 
 For structural changes (e.g., modifying the default `0.625rem` border radius or internal padding), simply edit the generated `.scss` files in your `./ui` directory.
+
+## 🔧 ESLint Configuration
+
+ng-zen provides a flat ESLint config for UI components and generated files.
+
+**Auto-setup** during `ng add`:
+
+```bash
+ng add @ng-zen/cli
+# → Prompt: "ESLint config detected. Update it for ng-zen UI components?"
+```
+
+It adds `@ng-zen/cli/eslint-config` to your `eslint.config.*` and spreads it into the `defineConfig` array. This enforces the `zen` prefix on component selectors and relaxes rules for `.stories.ts` / `.spec.ts` files generated inside `ui/` directories.
+
+**Manual setup** (if you declined the prompt):
+
+```ts
+import ngZen from '@ng-zen/cli/eslint-config';
+
+export default defineConfig([...otherConfigs, ...ngZen]);
+```
+
+**Custom path or rules** — use the named exports for fine-grained control:
+
+```ts
+import ngZen from '@ng-zen/cli/eslint-config';
+
+export default defineConfig([
+  ngZen.createNgZenConfig({ uiFiles: 'src/app/shared/components' }),
+  ...ngZen.generatedFiles,
+]);
+```
 
 ## 🏛️ Philosophy & Architecture
 

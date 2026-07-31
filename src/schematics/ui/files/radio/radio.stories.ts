@@ -95,17 +95,17 @@ export const WithSignalForm: Story = {
       <div style="display: flex; flex-direction: column; gap: 0.5rem">
         <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
         <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio [formField]="form.color" option="red" />
+          <zen-radio option="red" [formField]="form.color" />
           Red
         </label>
         <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
         <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio [formField]="form.color" option="green" />
+          <zen-radio option="green" [formField]="form.color" />
           Green
         </label>
         <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
         <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio [formField]="form.color" option="blue" />
+          <zen-radio option="blue" [formField]="form.color" />
           Blue
         </label>
       </div>
