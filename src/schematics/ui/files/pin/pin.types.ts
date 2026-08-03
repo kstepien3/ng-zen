@@ -10,6 +10,4 @@ export type PinHorizontalPosition = 'left' | 'right' | 'center';
  * Uses CSS `position-area` under the hood.
  */
 export type PinPosition =
-  | `${PinVerticalPosition} ${PinHorizontalPosition}`
-  | PinVerticalPosition
-  | PinHorizontalPosition;
+  `${PinVerticalPosition} ${PinHorizontalPosition}` | PinVerticalPosition | PinHorizontalPosition;

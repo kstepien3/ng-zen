@@ -34,7 +34,7 @@ import { Component, input } from '@angular/core';
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: ':is(button, a):is([zen-button], [zen-btn])',
+  selector: 'button[zen-button], button[zen-btn], a[zen-button], a[zen-btn]',
   template: `
     <ng-content />
   `,
