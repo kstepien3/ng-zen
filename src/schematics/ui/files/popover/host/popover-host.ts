@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 
-import { PopoverPlacement } from '../popover-positions.type';
+import { PopoverPosition } from '../popover-positions.type';
 
 /**
  * ZenPopoverHost is a minimal host component created dynamically by the `ZenPopover` directive.
@@ -28,10 +28,12 @@ import { PopoverPlacement } from '../popover-positions.type';
   host: {
     popover: 'auto',
     '[attr.id]': 'id()',
-    '[attr.data-placement]': 'placement()',
+    '[style.position-area]': 'placement()',
+    '[style.position-anchor]': 'anchorName()',
   },
 })
 export class ZenPopoverHost {
   readonly id = input.required<string>();
-  readonly placement = input<PopoverPlacement>('top');
+  readonly anchorName = input.required<string>();
+  readonly placement = input<PopoverPosition>('top');
 }
