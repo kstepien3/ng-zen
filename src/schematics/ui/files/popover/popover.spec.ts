@@ -99,14 +99,14 @@ describe('ZenPopover', () => {
       expect(getPopoverHostEl(fixture)!.textContent).toContain('Popover content');
     });
 
-    it('passes placement to host as data-placement (bottom)', () => {
+    it('passes placement to host as position-area (bottom)', () => {
       const fixture = TestBed.createComponent(TemplateBottomComponent);
       fixture.detectChanges();
 
       fixture.nativeElement.querySelector('#trigger-btn').click();
       fixture.detectChanges();
 
-      expect(getPopoverHostEl(fixture)!.getAttribute('data-placement')).toBe('bottom');
+      expect(getPopoverHostEl(fixture)!.style.getPropertyValue('position-area')).toBe('bottom');
     });
 
     it('sets anchor styles on trigger and host', () => {
@@ -142,7 +142,7 @@ describe('ZenPopover', () => {
     });
   });
 
-  it('reflects placement as data-placement (left)', async () => {
+  it('reflects placement as position-area (left)', async () => {
     await TestBed.configureTestingModule({
       imports: [TemplateLeftComponent],
       providers: [provideZonelessChangeDetection()],
@@ -154,7 +154,7 @@ describe('ZenPopover', () => {
     fixture.nativeElement.querySelector('#trigger-btn').click();
     fixture.detectChanges();
 
-    expect(getPopoverHostEl(fixture)!.getAttribute('data-placement')).toBe('left');
+    expect(getPopoverHostEl(fixture)!.style.getPropertyValue('position-area')).toBe('left');
   });
 
   it('renders string content as text node in host', async () => {
