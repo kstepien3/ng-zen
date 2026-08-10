@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 import { ZenPopoverHost } from './host/popover-host';
-import { PopoverPlacement } from './popover-positions.type';
+import { PopoverPosition } from './popover-positions.type';
 
 type HostProperties = keyof ZenPopoverHost;
 
@@ -70,7 +70,6 @@ type HostProperties = keyof ZenPopoverHost;
  */
 @Directive({
   selector: '[zenPopover]',
-  standalone: true,
   host: {
     '(click)': 'togglePopover()',
   },
@@ -81,7 +80,7 @@ export class ZenPopover {
   /** Content to display inside the popover. Can be a `string` or a `TemplateRef`.*/
   readonly content = input.required<TemplateRef<unknown> | string>({ alias: 'zenPopover' });
   /** Placement of the popover relative to the trigger element. Defaults to `top`.*/
-  readonly placement = input<PopoverPlacement>('top', { alias: 'zenPopoverPlacement' });
+  readonly placement = input<PopoverPosition>('top', { alias: 'zenPopoverPlacement' });
   /** The HTML id attribute is used to specify a unique id for an HTML element.*/
   readonly id = input<string>(`zen-popover-${ZenPopover.uniqueId++}`);
 
@@ -125,12 +124,10 @@ export class ZenPopover {
 
     this.hostRef = this.vcr.createComponent(ZenPopoverHost);
     this.hostRef.setInput('id' satisfies HostProperties, this.id());
+    this.hostRef.setInput('anchorName' satisfies HostProperties, this.anchorName);
     this.hostRef.setInput('placement' satisfies HostProperties, this.placement());
 
-    const popoverEl = this.hostRef.location.nativeElement as HTMLElement;
-    this.renderer.setStyle(popoverEl, 'position-anchor', this.anchorName);
-
-    return popoverEl;
+    return this.hostRef.location.nativeElement as HTMLElement;
   }
 
   private renderContent(popoverEl: HTMLElement) {

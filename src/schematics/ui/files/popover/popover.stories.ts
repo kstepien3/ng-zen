@@ -2,7 +2,7 @@ import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angul
 
 import { ZenButton } from '../button';
 import { ZenPopover } from './popover';
-import type { PopoverPlacement } from './popover-positions.type';
+import type { PopoverPosition } from './popover-positions.type';
 
 type Story = StoryObj<ZenPopover>;
 
@@ -20,25 +20,26 @@ const meta = {
       control: 'select',
       options: [
         'top',
-        'top-start',
-        'top-end',
         'bottom',
-        'bottom-start',
-        'bottom-end',
+        'center',
         'left',
-        'left-start',
-        'left-end',
         'right',
-        'right-start',
-        'right-end',
-      ] satisfies PopoverPlacement[],
+        'top left',
+        'top right',
+        'top center',
+        'bottom left',
+        'bottom right',
+        'bottom center',
+        'center left',
+        'center right',
+      ] satisfies PopoverPosition[],
       table: {
         category: 'inputs',
         type: {
-          summary: 'string',
+          summary: 'PopoverPosition',
         },
         defaultValue: {
-          summary: 'top' satisfies PopoverPlacement,
+          summary: 'top' satisfies PopoverPosition,
         },
       },
     },
