@@ -98,6 +98,8 @@ $default-vertical-max-height: calc(100dvh - 6rem);
 
   &[open][data-swiping] {
     transition-duration: 0ms;
+    user-select: none;
+    user-select: none;
   }
 
   &[data-side='right'] {
@@ -190,6 +192,8 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   padding: 0.5rem 0;
   flex-shrink: 0;
   touch-action: none;
+  user-select: none;
+  user-select: none;
 
   &::after {
     content: '';
