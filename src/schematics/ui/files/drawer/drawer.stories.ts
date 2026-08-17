@@ -39,7 +39,6 @@ const meta = {
         defaultValue: { summary: 'md' satisfies DrawerSize },
       },
     },
-    backdrop: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     closeOnEscape: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     swipeHandle: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     handleOnly: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
@@ -49,7 +48,6 @@ const meta = {
   args: {
     side: 'right',
     size: 'md',
-    backdrop: true,
     closeOnEscape: true,
     swipeHandle: true,
     handleOnly: false,

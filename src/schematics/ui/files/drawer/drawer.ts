@@ -49,7 +49,6 @@ export class ZenDrawer {
   readonly open = model<boolean>(false);
   readonly side = input<DrawerSide>('right');
   readonly size = input<DrawerSize>('md');
-  readonly backdrop = input(true);
   readonly closeOnEscape = input(true);
   readonly swipeHandle = input(true);
   readonly handleOnly = input(false);
@@ -101,13 +100,6 @@ export class ZenDrawer {
         }
       });
     });
-  }
-
-  protected handleDialogClick(event: MouseEvent): void {
-    if (!this.backdrop()) return;
-    if ((event.target as HTMLElement).tagName === 'DIALOG') {
-      this.close();
-    }
   }
 
   protected cancel(event: Event): void {

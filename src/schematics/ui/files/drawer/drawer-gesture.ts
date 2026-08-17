@@ -31,7 +31,6 @@ class DrawerGesture {
   private lastMoveY = 0;
   private baseHeight = 0;
   private restDimension = 0;
-  private overscrollCarry = 0;
   private currentSnapHeight = 0;
   private sortedSnapPixels: number[] = [];
 
@@ -59,7 +58,6 @@ class DrawerGesture {
     this.dragCandidate = true;
     this.dragLocked = false;
     this.offset = 0;
-    this.overscrollCarry = 0;
     this.lastMoveTime = Date.now();
     this.lastMoveX = event.clientX;
     this.lastMoveY = event.clientY;
@@ -167,23 +165,13 @@ class DrawerGesture {
 
     if (closeDist < 0) {
       const ext = this.dampOverscroll(-closeDist);
-      this.overscrollCarry = ext;
       this.offset = 0;
       cb.removeDragStyle('--zen-drawer-drag');
       cb.setOverscrollStyle(this.restDimension + ext);
     } else {
-      const carry = Math.max(0, this.overscrollCarry - closeDist);
       this.offset = closeDist;
-      const visualWidth = this.restDimension + carry;
-
-      if (carry > 0) {
-        cb.setOverscrollStyle(visualWidth);
-      } else {
-        cb.removeOverscrollStyle();
-      }
-
-      const pct = (this.offset / visualWidth) * 100;
-      cb.setDragStyle('--zen-drawer-drag', `${pct}%`);
+      cb.removeOverscrollStyle();
+      cb.setDragStyle('--zen-drawer-drag', `${(closeDist / this.restDimension) * 100}%`);
     }
   }
 
@@ -193,12 +181,10 @@ class DrawerGesture {
 
     if (newHeight > this.maxSnap) {
       const ext = this.dampOverscroll(newHeight - this.maxSnap);
-      this.overscrollCarry = ext;
       this.currentSnapHeight = this.maxSnap;
       cb.setOverscrollStyle(this.maxSnap + ext);
       cb.removeDragStyle('--zen-drawer-drag');
     } else {
-      this.overscrollCarry = 0;
       this.currentSnapHeight = Math.max(0, newHeight);
       cb.removeOverscrollStyle();
       cb.setDragStyle('--zen-drawer-height', `${this.currentSnapHeight}px`);
@@ -245,7 +231,6 @@ class DrawerGesture {
     this.dragLocked = false;
     this.offset = 0;
     this.baseHeight = 0;
-    this.overscrollCarry = 0;
     this.restDimension = 0;
   }
 

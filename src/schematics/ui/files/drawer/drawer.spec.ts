@@ -8,7 +8,6 @@ import { ZenDrawer } from './drawer';
 @Component({
   template: `
     <zen-drawer
-      [backdrop]="backdrop()"
       [closeOnEscape]="closeOnEscape()"
       [handleOnly]="handleOnly()"
       [scaleBackground]="scaleBackground()"
@@ -30,7 +29,6 @@ class DrawerTestComponent {
   readonly isOpen = signal(false);
   readonly side = signal<'left' | 'right' | 'top' | 'bottom'>('right');
   readonly size = signal<'sm' | 'md' | 'lg' | 'xl' | 'full'>('md');
-  readonly backdrop = signal(true);
   readonly closeOnEscape = signal(true);
   readonly swipeHandle = signal(true);
   readonly handleOnly = signal(false);
@@ -173,21 +171,6 @@ describe('ZenDrawer', () => {
       fixture.detectChanges();
 
       expect(fixture.componentInstance.isOpen()).toBe(false);
-    });
-
-    it('should not close when backdrop is clicked and backdrop is false', async () => {
-      const fixture = TestBed.createComponent(DrawerTestComponent);
-      fixture.componentInstance.isOpen.set(true);
-      fixture.componentInstance.backdrop.set(false);
-      fixture.detectChanges();
-      await fixture.whenStable();
-
-      const drawerEl = getDrawerEl(fixture)!;
-      Object.defineProperty(drawerEl, 'tagName', { value: 'DIALOG' });
-      drawerEl.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-      fixture.detectChanges();
-
-      expect(fixture.componentInstance.isOpen()).toBe(true);
     });
 
     it('should not close on escape when closeOnEscape is false', async () => {
