@@ -26,6 +26,7 @@ class DrawerGesture {
   private dragCandidate = false;
   private dragLocked = false;
   private offset = 0;
+  private startTime = 0;
   private lastMoveTime = 0;
   private lastMoveX = 0;
   private lastMoveY = 0;
@@ -58,7 +59,8 @@ class DrawerGesture {
     this.dragCandidate = true;
     this.dragLocked = false;
     this.offset = 0;
-    this.lastMoveTime = Date.now();
+    this.startTime = Date.now();
+    this.lastMoveTime = this.startTime;
     this.lastMoveX = event.clientX;
     this.lastMoveY = event.clientY;
     this.restDimension = cb.getDimension();
@@ -208,23 +210,27 @@ class DrawerGesture {
     cb.removeOverscrollStyle();
 
     const hasSnaps = isVertical && this.sortedSnapPixels.length > 0;
-    const flingInCloseDirection = this.isFlingInCloseDirection(side, velocity);
 
     if (!hasSnaps) {
       const dimension = cb.getDimension();
       const threshold = Math.max(CLOSE_THRESHOLD_MIN, dimension * CLOSE_THRESHOLD_RATIO);
+      const flingInCloseDirection = this.isFlingInCloseDirection(side, velocity);
 
       if (this.offset >= threshold || flingInCloseDirection) {
         cb.onOpenChange(false);
       } else {
         cb.removeDragStyle('--zen-drawer-drag');
       }
-    } else if (flingInCloseDirection) {
-      cb.onOpenChange(false);
     } else {
-      const targetSnap = this.findNearestSnap(this.currentSnapHeight);
-      this.currentSnapHeight = targetSnap;
-      cb.setDragStyle('--zen-drawer-height', `${targetSnap}px`);
+      const lowestSnap = this.sortedSnapPixels[0];
+
+      if (this.currentSnapHeight < lowestSnap) {
+        cb.onOpenChange(false);
+      } else {
+        const targetSnap = this.findNearestSnap(this.currentSnapHeight);
+        this.currentSnapHeight = targetSnap;
+        cb.setDragStyle('--zen-drawer-height', `${targetSnap}px`);
+      }
     }
 
     this.dragCandidate = false;
@@ -235,8 +241,8 @@ class DrawerGesture {
   }
 
   private computeVelocity(): { x: number; y: number } {
-    const dt = Date.now() - this.lastMoveTime;
-    if (dt === 0) return { x: 0, y: 0 };
+    const dt = this.lastMoveTime - this.startTime;
+    if (dt <= 0) return { x: 0, y: 0 };
     return {
       x: (this.lastMoveX - this.startX) / dt,
       y: (this.lastMoveY - this.startY) / dt,

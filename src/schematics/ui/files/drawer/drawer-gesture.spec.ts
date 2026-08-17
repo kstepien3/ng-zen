@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DrawerGesture, GestureCallbacks } from './drawer-gesture';
 
@@ -39,6 +39,18 @@ function move(g: DrawerGesture, x: number, cb: GestureCallbacks): void {
 
 function up(g: DrawerGesture, cb: GestureCallbacks): void {
   g.pointerUp(1, 'right', false, cb);
+}
+
+function downBottom(g: DrawerGesture, y: number, cb: GestureCallbacks): void {
+  g.pointerDown({ clientX: 300, clientY: y, pointerId: 1, button: 0 } as PointerEvent, 'bottom', true, cb);
+}
+
+function moveBottom(g: DrawerGesture, y: number, cb: GestureCallbacks): void {
+  g.pointerMove({ clientX: 300, clientY: y } as PointerEvent, 'bottom', true, cb);
+}
+
+function upBottom(g: DrawerGesture, cb: GestureCallbacks): void {
+  g.pointerUp(1, 'bottom', true, cb);
 }
 
 describe('DrawerGesture', () => {
@@ -99,6 +111,97 @@ describe('DrawerGesture', () => {
       expect(cb.onOpenChange).not.toHaveBeenCalled();
       expect(cb.el.style['width']).toBeUndefined();
       expect(cb.el.style['--zen-drawer-drag']).toBeUndefined();
+    });
+  });
+
+  describe('snap dragging', () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+      vi.setSystemTime(0);
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('slow drag down snaps to nearest instead of closing', () => {
+      const g = new DrawerGesture();
+      const cb = mockCb();
+
+      g.resolveSnapPoints(['300', '600', '900']);
+      g.initSnapHeight(); // 900
+
+      downBottom(g, 0, cb);
+
+      for (let i = 1; i <= 10; i++) {
+        vi.advanceTimersByTime(100);
+        moveBottom(g, i * 30, cb);
+      }
+      vi.advanceTimersByTime(100);
+      upBottom(g, cb);
+
+      expect(cb.onOpenChange).not.toHaveBeenCalled();
+      expect(cb.el.style['--zen-drawer-height']).toBe('600px');
+    });
+
+    it('fast fling down snaps to nearest instead of closing', () => {
+      const g = new DrawerGesture();
+      const cb = mockCb();
+
+      g.resolveSnapPoints(['300', '600', '900']);
+      g.initSnapHeight();
+
+      downBottom(g, 0, cb);
+
+      for (let i = 1; i <= 5; i++) {
+        vi.advanceTimersByTime(5);
+        moveBottom(g, i * 100, cb);
+      }
+      vi.advanceTimersByTime(5);
+      upBottom(g, cb);
+
+      expect(cb.onOpenChange).not.toHaveBeenCalled();
+      expect(cb.el.style['--zen-drawer-height']).toBe('300px');
+    });
+
+    it('release below lowest snap closes', () => {
+      const g = new DrawerGesture();
+      const cb = mockCb();
+
+      g.resolveSnapPoints(['300', '600', '900']);
+      g.initSnapHeight();
+
+      downBottom(g, 0, cb);
+
+      for (let i = 1; i <= 8; i++) {
+        vi.advanceTimersByTime(100);
+        moveBottom(g, i * 100, cb);
+      }
+      vi.advanceTimersByTime(100);
+      upBottom(g, cb);
+
+      expect(cb.onOpenChange).toHaveBeenCalledWith(false);
+      expect(cb.el.style['--zen-drawer-height']).toBeUndefined();
+    });
+
+    it('release at lowest snap snaps without closing', () => {
+      const g = new DrawerGesture();
+      const cb = mockCb();
+
+      g.resolveSnapPoints(['300', '600', '900']);
+      g.initSnapHeight();
+
+      downBottom(g, 0, cb);
+
+      for (let i = 1; i <= 6; i++) {
+        vi.advanceTimersByTime(100);
+        moveBottom(g, i * 100, cb);
+      }
+      vi.advanceTimersByTime(100);
+      upBottom(g, cb);
+
+      expect(cb.onOpenChange).not.toHaveBeenCalled();
+      expect(cb.el.style['--zen-drawer-height']).toBe('300px');
     });
   });
 });

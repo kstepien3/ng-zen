@@ -99,7 +99,6 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   &[open][data-swiping] {
     transition-duration: 0ms;
     user-select: none;
-    user-select: none;
   }
 
   &[data-side='right'] {
@@ -151,9 +150,16 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   @each $name, $size in $vertical-sizes {
     &[data-side='top'][data-size='#{$name}'],
     &[data-side='bottom'][data-size='#{$name}'] {
-      height: $size;
-      max-height: 100vh;
+      &:not([data-snap-points]) {
+        height: $size;
+        max-height: 100vh;
+      }
     }
+  }
+
+  &[data-side='top'][data-snap-points],
+  &[data-side='bottom'][data-snap-points] {
+    max-height: 100dvh;
   }
 
   &[data-side='right'][data-size='full'],
@@ -161,8 +167,8 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     width: calc(100% - var(--zen-drawer-inset) * 2);
   }
 
-  &[data-side='top'][data-size='full'],
-  &[data-side='bottom'][data-size='full'] {
+  &[data-side='top'][data-size='full']:not([data-snap-points]),
+  &[data-side='bottom'][data-size='full']:not([data-snap-points]) {
     height: calc(100% - var(--zen-drawer-inset) * 2);
   }
 
@@ -192,7 +198,6 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   padding: 0.5rem 0;
   flex-shrink: 0;
   touch-action: none;
-  user-select: none;
   user-select: none;
 
   &::after {
