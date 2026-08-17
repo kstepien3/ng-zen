@@ -72,7 +72,7 @@ export const Default: Story = {
         <h2 drawer-header>Drawer Title</h2>
         <p>This is the drawer content. You can put any content here.</p>
         <div drawer-footer>
-          <button zen-btn (click)="drawer.onClose()" variant="filled" color="danger">Close</button>
+          <button zen-btn (click)="drawer.close()" variant="filled" color="danger">Close</button>
         </div>
       </zen-drawer>
     `,
@@ -212,14 +212,12 @@ export const ScaleBackground: Story = {
       openScale: signal(false),
     },
     template: `
+      <style>body.zen-drawer-open { transform: scale(0.98); transition: transform 0.3s ease; }</style>
       <button zen-btn (click)="openScale.set(true)">Scale Background</button>
 
       <zen-drawer [(open)]="openScale" side="bottom" [scaleBackground]="true">
         <h2 drawer-header>Scale Drawer</h2>
         <p>The page behind scales down slightly while this drawer is open.</p>
-        <p style="margin-top: 0.5rem; color: hsl(0deg 0% 60%);">
-          Add to your global styles: <code>body.zen-drawer-open { transform: scale(0.98); }</code>
-        </p>
       </zen-drawer>
     `,
   }),

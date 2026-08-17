@@ -6,15 +6,19 @@ interface GestureCallbacks {
   readonly removeDragStyle: (cssVar: string) => void;
   readonly getDimension: () => number;
   readonly setPointerCapture: (pointerId: number) => void;
-  readonly releasePointerCapture: (pointerId: number) => void;
   readonly setAttribute: (name: string, value: string) => void;
   readonly removeAttribute: (name: string) => void;
+  readonly setOverscrollStyle: (sizePx: number) => void;
+  readonly removeOverscrollStyle: () => void;
 }
 
 const FLING_VELOCITY_THRESHOLD = 0.5;
 const CLOSE_THRESHOLD_RATIO = 0.3;
 const CLOSE_THRESHOLD_MIN = 80;
 const LOCK_THRESHOLD = 5;
+
+const OVERSCROLL_DAMP_RATE = 0.003;
+const OVERSCROLL_MAX_CAP = 120;
 
 class DrawerGesture {
   private startX = 0;
@@ -26,6 +30,8 @@ class DrawerGesture {
   private lastMoveX = 0;
   private lastMoveY = 0;
   private baseHeight = 0;
+  private restDimension = 0;
+  private overscrollCarry = 0;
   private currentSnapHeight = 0;
   private sortedSnapPixels: number[] = [];
 
@@ -46,27 +52,25 @@ class DrawerGesture {
     return this.sortedSnapPixels[this.sortedSnapPixels.length - 1];
   }
 
-  onPointerDown(event: PointerEvent, side: DrawerSide, isVertical: boolean): void {
+  pointerDown(event: PointerEvent, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+    cb.setPointerCapture(event.pointerId);
     this.startX = event.clientX;
     this.startY = event.clientY;
     this.dragCandidate = true;
     this.dragLocked = false;
     this.offset = 0;
+    this.overscrollCarry = 0;
     this.lastMoveTime = Date.now();
     this.lastMoveX = event.clientX;
     this.lastMoveY = event.clientY;
+    this.restDimension = cb.getDimension();
 
     if (isVertical && this.sortedSnapPixels.length > 0) {
       this.baseHeight = this.currentSnapHeight;
     }
   }
 
-  onPointerMove(
-    event: PointerEvent,
-    side: DrawerSide,
-    isVertical: boolean,
-    cb: GestureCallbacks
-  ): { handled: boolean } {
+  pointerMove(event: PointerEvent, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): { handled: boolean } {
     if (!this.dragCandidate) return { handled: false };
 
     const dx = event.clientX - this.startX;
@@ -95,30 +99,30 @@ class DrawerGesture {
     this.lastMoveY = event.clientY;
 
     if (isVertical && this.sortedSnapPixels.length > 0) {
-      this.handleVerticalSnapDrag(dy, side, cb);
+      this.verticalSnapDrag(dy, side, cb);
     } else {
-      this.handleTransformDrag(dx, dy, side, cb);
+      this.transformDrag(dx, dy, side, cb);
     }
 
     return { handled: true };
   }
 
-  onPointerUp(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+  pointerUp(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
     if (!this.dragLocked) {
       this.dragCandidate = false;
       return;
     }
 
     const velocity = this.computeVelocity();
-    this.finishDrag(pointerId, side, isVertical, velocity, cb);
+    this.finishDrag(side, isVertical, velocity, cb);
   }
 
-  onPointerCancel(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+  pointerCancel(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
     if (!this.dragLocked) {
       this.dragCandidate = false;
       return;
     }
-    this.finishDrag(pointerId, side, isVertical, { x: 0, y: 0 }, cb);
+    this.finishDrag(side, isVertical, { x: 0, y: 0 }, cb);
   }
 
   resolveSnapPoints(snapPoints: (number | string)[]): number[] {
@@ -143,38 +147,79 @@ class DrawerGesture {
     return maxSnap;
   }
 
-  private handleTransformDrag(dx: number, dy: number, side: DrawerSide, cb: GestureCallbacks): void {
-    if (side === 'right') this.offset = Math.max(0, dx);
-    else if (side === 'left') this.offset = Math.max(0, -dx);
-    else if (side === 'bottom') this.offset = Math.max(0, dy);
-    else if (side === 'top') this.offset = Math.max(0, -dy);
+  private transformDrag(dx: number, dy: number, side: DrawerSide, cb: GestureCallbacks): void {
+    let closeDist: number;
 
-    const dimension = cb.getDimension();
-    this.offset = Math.min(this.offset, dimension);
+    switch (side) {
+      case 'right':
+        closeDist = dx;
+        break;
+      case 'left':
+        closeDist = -dx;
+        break;
+      case 'bottom':
+        closeDist = dy;
+        break;
+      case 'top':
+        closeDist = -dy;
+        break;
+    }
 
-    const pct = (this.offset / dimension) * 100;
-    cb.setDragStyle('--zen-drawer-drag', `${pct}%`);
+    if (closeDist < 0) {
+      const ext = this.dampOverscroll(-closeDist);
+      this.overscrollCarry = ext;
+      this.offset = 0;
+      cb.removeDragStyle('--zen-drawer-drag');
+      cb.setOverscrollStyle(this.restDimension + ext);
+    } else {
+      const carry = Math.max(0, this.overscrollCarry - closeDist);
+      this.offset = closeDist;
+      const visualWidth = this.restDimension + carry;
+
+      if (carry > 0) {
+        cb.setOverscrollStyle(visualWidth);
+      } else {
+        cb.removeOverscrollStyle();
+      }
+
+      const pct = (this.offset / visualWidth) * 100;
+      cb.setDragStyle('--zen-drawer-drag', `${pct}%`);
+    }
   }
 
-  private handleVerticalSnapDrag(dy: number, side: DrawerSide, cb: GestureCallbacks): void {
+  private verticalSnapDrag(dy: number, side: DrawerSide, cb: GestureCallbacks): void {
     const closeDelta = side === 'bottom' ? dy : -dy;
-    const newHeight = Math.max(0, this.baseHeight - closeDelta);
-    const maxHeight = this.maxSnapHeight();
+    const newHeight = this.baseHeight - closeDelta;
 
-    this.currentSnapHeight = Math.min(newHeight, maxHeight);
-    cb.setDragStyle('--zen-drawer-height', `${this.currentSnapHeight}px`);
+    if (newHeight > this.maxSnap) {
+      const ext = this.dampOverscroll(newHeight - this.maxSnap);
+      this.overscrollCarry = ext;
+      this.currentSnapHeight = this.maxSnap;
+      cb.setOverscrollStyle(this.maxSnap + ext);
+      cb.removeDragStyle('--zen-drawer-drag');
+    } else {
+      this.overscrollCarry = 0;
+      this.currentSnapHeight = Math.max(0, newHeight);
+      cb.removeOverscrollStyle();
+      cb.setDragStyle('--zen-drawer-height', `${this.currentSnapHeight}px`);
+    }
+
     this.offset = Math.abs(closeDelta);
   }
 
+  private dampOverscroll(dist: number): number {
+    const maxOverscroll = Math.min(OVERSCROLL_MAX_CAP, this.restDimension * 0.25);
+    return maxOverscroll * (1 - Math.exp(-dist * OVERSCROLL_DAMP_RATE));
+  }
+
   private finishDrag(
-    pointerId: number,
     side: DrawerSide,
     isVertical: boolean,
     velocity: { x: number; y: number },
     cb: GestureCallbacks
   ): void {
     cb.removeAttribute('data-swiping');
-    cb.releasePointerCapture(pointerId);
+    cb.removeOverscrollStyle();
 
     const hasSnaps = isVertical && this.sortedSnapPixels.length > 0;
     const flingInCloseDirection = this.isFlingInCloseDirection(side, velocity);
@@ -200,6 +245,8 @@ class DrawerGesture {
     this.dragLocked = false;
     this.offset = 0;
     this.baseHeight = 0;
+    this.overscrollCarry = 0;
+    this.restDimension = 0;
   }
 
   private computeVelocity(): { x: number; y: number } {

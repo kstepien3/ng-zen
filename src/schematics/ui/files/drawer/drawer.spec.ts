@@ -162,14 +162,14 @@ describe('ZenDrawer', () => {
       expect(drawerEl.getAttribute('data-snap-points')).toBe('true');
     });
 
-    it('should close when onClose is called', async () => {
+    it('should close when close is called', async () => {
       const fixture = TestBed.createComponent(DrawerTestComponent);
       fixture.componentInstance.isOpen.set(true);
       fixture.detectChanges();
       await fixture.whenStable();
 
       const drawer = fixture.debugElement.query(By.directive(ZenDrawer)).componentInstance;
-      drawer.onClose();
+      drawer.close();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.isOpen()).toBe(false);

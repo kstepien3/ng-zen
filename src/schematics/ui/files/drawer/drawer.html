@@ -1,0 +1,29 @@
+<!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- native dialog is focusable when open -->
+<dialog
+  #drawerDialog
+  class="zen-drawer"
+  [attr.data-expanded]="isExpanded() || null"
+  [attr.data-side]="side()"
+  [attr.data-size]="size()"
+  [attr.data-snap-points]="hasSnapPoints() || null"
+  [attr.data-swipe-axis]="sideAxis()"
+  [attr.data-swipe-direction]="sideToSwipeDirection()"
+  (cancel)="cancel($event)"
+  (click)="handleDialogClick($event)"
+  (close)="close()"
+  (pointercancel)="pointerCancel($event)"
+  (pointerdown)="pointerDown($event)"
+  (pointermove)="pointerMove($event)"
+  (pointerup)="pointerUp($event)"
+>
+  @if (swipeHandle()) {
+    <div class="zen-drawer-swipe-handle"></div>
+  }
+  <ng-content select="[drawer-header]" />
+  <div class="zen-drawer-content">
+    <ng-content />
+  </div>
+  <div class="zen-drawer-footer">
+    <ng-content select="[drawer-footer]" />
+  </div>
+</dialog>

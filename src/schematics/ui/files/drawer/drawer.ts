@@ -14,7 +14,7 @@ type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
  * <zen-drawer #drawer [(open)]="isOpen" side="right" size="md">
  *   <h2 drawer-header>Drawer Title</h2>
  *   <p>Drawer content</p>
- *   <button (click)="drawer.onClose()">Close</button>
+ *   <button (click)="drawer.close()">Close</button>
  * </zen-drawer>
  * ```
  *
@@ -42,38 +42,7 @@ type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
  */
 @Component({
   selector: 'zen-drawer',
-  template: `
-    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- native dialog is focusable when open -->
-    <dialog
-      #drawerDialog
-      class="zen-drawer"
-      [attr.data-expanded]="isExpanded() || null"
-      [attr.data-side]="side()"
-      [attr.data-size]="size()"
-      [attr.data-snap-points]="hasSnapPoints() || null"
-      [attr.data-swipe-axis]="sideAxis()"
-      [attr.data-swipe-direction]="sideToSwipeDirection()"
-      [attr.data-swiping]="isSwiping()"
-      (cancel)="onCancel($event)"
-      (click)="onDialogClick($event)"
-      (close)="onClose()"
-      (pointercancel)="onPointerCancel($event)"
-      (pointerdown)="onPointerDown($event)"
-      (pointermove)="onPointerMove($event)"
-      (pointerup)="onPointerUp($event)"
-    >
-      @if (swipeHandle()) {
-        <div class="zen-drawer-swipe-handle"></div>
-      }
-      <ng-content select="[drawer-header]" />
-      <div class="zen-drawer-content">
-        <ng-content />
-      </div>
-      <div class="zen-drawer-footer">
-        <ng-content select="[drawer-footer]" />
-      </div>
-    </dialog>
-  `,
+  templateUrl: './drawer.html',
   styleUrl: './drawer.scss',
 })
 export class ZenDrawer {
@@ -92,7 +61,6 @@ export class ZenDrawer {
 
   protected readonly sideToSwipeDirection = (): string => this.side();
   protected readonly sideAxis = (): string => (this.side() === 'left' || this.side() === 'right' ? 'x' : 'y');
-  protected readonly isSwiping = (): 'true' | null => (this.gesture.isLocked ? 'true' : null);
   protected readonly isExpanded = (): 'true' | null => {
     return this.gesture.hasSnaps && this.gesture.snapHeight >= this.gesture.maxSnap ? 'true' : null;
   };
@@ -135,41 +103,41 @@ export class ZenDrawer {
     });
   }
 
-  protected onDialogClick(event: MouseEvent): void {
+  protected handleDialogClick(event: MouseEvent): void {
     if (!this.backdrop()) return;
     if ((event.target as HTMLElement).tagName === 'DIALOG') {
-      this.onClose();
+      this.close();
     }
   }
 
-  protected onCancel(event: Event): void {
+  protected cancel(event: Event): void {
     if (!this.closeOnEscape()) {
       event.preventDefault();
     }
   }
 
-  onClose(): void {
+  close(): void {
     this.open.set(false);
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  protected pointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
     if (this.handleOnly() && !(event.target as HTMLElement).closest('.zen-drawer-swipe-handle')) {
       return;
     }
-    this.gesture.onPointerDown(event, this.side(), this.isVertical());
+    this.gesture.pointerDown(event, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
-  protected onPointerMove(event: PointerEvent): void {
-    this.gesture.onPointerMove(event, this.side(), this.isVertical(), this.gestureCallbacks());
+  protected pointerMove(event: PointerEvent): void {
+    this.gesture.pointerMove(event, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
-  protected onPointerUp(event: PointerEvent): void {
-    this.gesture.onPointerUp(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
+  protected pointerUp(event: PointerEvent): void {
+    this.gesture.pointerUp(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
-  protected onPointerCancel(event: PointerEvent): void {
-    this.gesture.onPointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
+  protected pointerCancel(event: PointerEvent): void {
+    this.gesture.pointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
   private isVertical(): boolean {
@@ -178,6 +146,7 @@ export class ZenDrawer {
 
   private gestureCallbacks(): GestureCallbacks {
     const el: HTMLDialogElement = this.dialogRef()!.nativeElement;
+    const vertical = this.isVertical();
     return {
       onOpenChange: (open: boolean): void => {
         this.open.set(open);
@@ -188,18 +157,23 @@ export class ZenDrawer {
       removeDragStyle: (cssVar: string): void => {
         el.style.removeProperty(cssVar);
       },
-      getDimension: (): number => (this.isVertical() ? el.offsetHeight : el.offsetWidth),
+      getDimension: (): number => (vertical ? el.offsetHeight : el.offsetWidth),
       setPointerCapture: (id: number): void => {
         el.setPointerCapture(id);
-      },
-      releasePointerCapture: (id: number): void => {
-        el.releasePointerCapture(id);
       },
       setAttribute: (name: string, value: string): void => {
         el.setAttribute(name, value);
       },
       removeAttribute: (name: string): void => {
         el.removeAttribute(name);
+      },
+      setOverscrollStyle: (sizePx: number): void => {
+        const prop = vertical ? 'height' : 'width';
+        el.style.setProperty(prop, `${sizePx}px`);
+      },
+      removeOverscrollStyle: (): void => {
+        el.style.removeProperty('width');
+        el.style.removeProperty('height');
       },
     };
   }
