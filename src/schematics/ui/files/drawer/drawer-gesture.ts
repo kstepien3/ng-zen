@@ -140,11 +140,19 @@ class DrawerGesture {
     return this.sortedSnapPixels;
   }
 
-  initSnapHeight(): number {
+  initSnapHeight(initial?: number | string): number {
     if (this.sortedSnapPixels.length === 0) return 0;
     const maxSnap = this.sortedSnapPixels[this.sortedSnapPixels.length - 1];
-    this.currentSnapHeight = maxSnap;
-    return maxSnap;
+    let target = maxSnap;
+
+    if (initial !== undefined) {
+      const vh = window.innerHeight;
+      const px = typeof initial === 'string' ? parseFloat(initial) : initial <= 1 ? initial * vh : initial;
+      target = this.findNearestSnap(px);
+    }
+
+    this.currentSnapHeight = target;
+    return target;
   }
 
   private transformDrag(dx: number, dy: number, side: DrawerSide, cb: GestureCallbacks): void {

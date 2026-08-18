@@ -171,9 +171,9 @@ export const SnapPoints: Story = {
     template: `
       <button zen-btn (click)="openSnap.set(true)">Open Snap Points</button>
 
-      <zen-drawer [(open)]="openSnap" side="bottom" [snapPoints]="[0.25, 0.5, 1]">
+      <zen-drawer [(open)]="openSnap" side="bottom" [snapPoints]="[0.25, 0.5, 1]" [initialSnap]="0.5">
         <h2 drawer-header>Snap Drawer</h2>
-        <p>Drag up/down to snap between 25%, 50%, and 100% of viewport.</p>
+        <p>Opens at 50%. Drag up/down to snap between 25%, 50%, and 100% of viewport.</p>
         <div style="height: 300px; background: hsl(200deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
           <p>Scrollable content area</p>
         </div>

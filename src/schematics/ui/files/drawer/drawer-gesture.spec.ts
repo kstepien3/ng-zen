@@ -204,4 +204,38 @@ describe('DrawerGesture', () => {
       expect(cb.el.style['--zen-drawer-height']).toBe('300px');
     });
   });
+
+  describe('initSnapHeight', () => {
+    it('defaults to max snap when no initial provided', () => {
+      const g = new DrawerGesture();
+      g.resolveSnapPoints(['300', '600', '900']);
+      expect(g.initSnapHeight()).toBe(900);
+      expect(g.snapHeight).toBe(900);
+    });
+
+    it('opens at exact snap when initial matches', () => {
+      const g = new DrawerGesture();
+      g.resolveSnapPoints(['300', '600', '900']);
+      expect(g.initSnapHeight('600')).toBe(600);
+      expect(g.snapHeight).toBe(600);
+    });
+
+    it('snaps to nearest when initial is between snaps', () => {
+      const g = new DrawerGesture();
+      g.resolveSnapPoints(['300', '600', '900']);
+      expect(g.initSnapHeight('250')).toBe(300);
+    });
+
+    it('snaps to highest when initial exceeds max snap', () => {
+      const g = new DrawerGesture();
+      g.resolveSnapPoints(['300', '600', '900']);
+      expect(g.initSnapHeight('950')).toBe(900);
+    });
+
+    it('opens at lowest snap when initial is below min', () => {
+      const g = new DrawerGesture();
+      g.resolveSnapPoints(['300', '600', '900']);
+      expect(g.initSnapHeight('50')).toBe(300);
+    });
+  });
 });

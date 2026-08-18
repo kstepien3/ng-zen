@@ -54,6 +54,7 @@ export class ZenDrawer {
   readonly handleOnly = input(false);
   readonly scaleBackground = input(false);
   readonly snapPoints = input<(number | string)[]>([]);
+  readonly initialSnap = input<number | string | undefined>(undefined);
 
   private readonly dialogRef = viewChild<ElementRef<HTMLDialogElement>>('drawerDialog');
   private readonly gesture = new DrawerGesture();
@@ -88,8 +89,8 @@ export class ZenDrawer {
           if (this.isVertical()) {
             const snaps = this.gesture.resolveSnapPoints(this.snapPoints());
             if (snaps.length > 0) {
-              const maxSnap = this.gesture.initSnapHeight();
-              element.style.setProperty('--zen-drawer-height', `${maxSnap}px`);
+              const openSnap = this.gesture.initSnapHeight(this.initialSnap());
+              element.style.setProperty('--zen-drawer-height', `${openSnap}px`);
             }
           }
         } else if (element.open) {

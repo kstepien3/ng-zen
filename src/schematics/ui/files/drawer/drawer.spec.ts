@@ -10,6 +10,7 @@ import { ZenDrawer } from './drawer';
     <zen-drawer
       [closeOnEscape]="closeOnEscape()"
       [handleOnly]="handleOnly()"
+      [initialSnap]="initialSnap()"
       [scaleBackground]="scaleBackground()"
       [side]="side()"
       [size]="size()"
@@ -34,6 +35,7 @@ class DrawerTestComponent {
   readonly handleOnly = signal(false);
   readonly scaleBackground = signal(false);
   readonly snapPoints = signal<(number | string)[]>([]);
+  readonly initialSnap = signal<number | string | undefined>(undefined);
 }
 
 function getDrawerEl(fixture: ComponentFixture<unknown>): HTMLDialogElement | null {
