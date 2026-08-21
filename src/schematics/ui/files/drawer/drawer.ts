@@ -45,6 +45,8 @@ export class ZenDrawer {
 
   private backdropMouseDown = false;
   private wasDragging = false;
+  private isClosing = false;
+  private closeTimeout: ReturnType<typeof setTimeout> | null = null;
 
   protected readonly isVertical = computed(() => this.side() === 'top' || this.side() === 'bottom');
   protected readonly sideAxis = computed(() => (this.isVertical() ? 'y' : 'x'));
@@ -65,6 +67,8 @@ export class ZenDrawer {
         const element = dialog.nativeElement;
 
         if (isOpen) {
+          this.cancelClosing(element);
+
           if (!element.open) {
             element.showModal();
           }
@@ -82,11 +86,8 @@ export class ZenDrawer {
               element.style.setProperty('--zen-drawer-height', `${openSnap}px`);
             }
           }
-        } else if (element.open) {
-          element.close();
-          if (shouldScale) {
-            document.body.classList.remove('zen-drawer-open');
-          }
+        } else if (element.open && !this.isClosing) {
+          this.animateAndClose(element, shouldScale);
         }
       });
     });
@@ -97,8 +98,9 @@ export class ZenDrawer {
   }
 
   protected cancel(event: Event): void {
-    if (!this.closeOnEscape()) {
-      event.preventDefault();
+    event.preventDefault();
+    if (this.closeOnEscape()) {
+      this.close();
     }
   }
 
@@ -156,6 +158,53 @@ export class ZenDrawer {
     this.wasDragging = false;
     this.backdropMouseDown = false;
     this.gesture.pointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
+  }
+
+  private animateAndClose(element: HTMLDialogElement, shouldScale: boolean): void {
+    this.isClosing = true;
+
+    if (shouldScale) {
+      document.body.classList.remove('zen-drawer-open');
+    }
+
+    element.removeAttribute('data-swiping');
+    element.setAttribute('data-closing', 'true');
+    element.style.removeProperty('--zen-drawer-drag');
+
+    const handleTransitionEnd = (event: TransitionEvent): void => {
+      if (event.target === element && (event.propertyName === 'transform' || event.propertyName === 'opacity')) {
+        element.removeEventListener('transitionend', handleTransitionEnd);
+        this.finalizeClose(element);
+      }
+    };
+
+    element.addEventListener('transitionend', handleTransitionEnd);
+
+    this.closeTimeout = setTimeout(() => {
+      element.removeEventListener('transitionend', handleTransitionEnd);
+      this.finalizeClose(element);
+    }, 350);
+  }
+
+  private finalizeClose(element: HTMLDialogElement): void {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+    element.removeAttribute('data-closing');
+    if (element.open) {
+      element.close();
+    }
+    this.isClosing = false;
+  }
+
+  private cancelClosing(element: HTMLDialogElement): void {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+    this.isClosing = false;
+    element.removeAttribute('data-closing');
   }
 
   private isClickOutside(dialog: HTMLDialogElement, event: MouseEvent): boolean {
