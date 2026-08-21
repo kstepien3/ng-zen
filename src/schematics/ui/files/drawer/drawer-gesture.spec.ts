@@ -124,18 +124,19 @@ describe('DrawerGesture', () => {
       vi.useRealTimers();
     });
 
-    it('slow drag down snaps to nearest instead of closing', () => {
+    it('slow drag up from first snap snaps to nearest higher snap', () => {
       const g = new DrawerGesture();
       const cb = mockCb();
 
       g.resolveSnapPoints(['300', '600', '900']);
-      g.initSnapHeight(); // 900
+      g.initSnapHeight(); // 300 (first snap)
 
-      downBottom(g, 0, cb);
+      downBottom(g, 300, cb);
 
+      // Drag up: move to lower Y values → increases height
       for (let i = 1; i <= 10; i++) {
         vi.advanceTimersByTime(100);
-        moveBottom(g, i * 30, cb);
+        moveBottom(g, 300 - i * 20, cb);
       }
       vi.advanceTimersByTime(100);
       upBottom(g, cb);
@@ -144,59 +145,75 @@ describe('DrawerGesture', () => {
       expect(cb.el.style['--zen-drawer-height']).toBe('600px');
     });
 
-    it('fast fling down snaps to nearest instead of closing', () => {
+    it('fast fling up from first snap snaps to nearest higher snap', () => {
       const g = new DrawerGesture();
       const cb = mockCb();
 
       g.resolveSnapPoints(['300', '600', '900']);
-      g.initSnapHeight();
+      g.initSnapHeight(); // 300
 
-      downBottom(g, 0, cb);
+      downBottom(g, 300, cb);
 
       for (let i = 1; i <= 5; i++) {
         vi.advanceTimersByTime(5);
-        moveBottom(g, i * 100, cb);
+        moveBottom(g, 300 - i * 100, cb);
       }
       vi.advanceTimersByTime(5);
       upBottom(g, cb);
 
       expect(cb.onOpenChange).not.toHaveBeenCalled();
-      expect(cb.el.style['--zen-drawer-height']).toBe('300px');
+      expect(cb.el.style['--zen-drawer-height']).toBe('900px');
     });
 
-    it('release below lowest snap closes', () => {
+    it('drag down below lowest snap closes', () => {
       const g = new DrawerGesture();
       const cb = mockCb();
 
       g.resolveSnapPoints(['300', '600', '900']);
-      g.initSnapHeight();
+      g.initSnapHeight(); // 300
 
-      downBottom(g, 0, cb);
+      downBottom(g, 300, cb);
 
       for (let i = 1; i <= 8; i++) {
         vi.advanceTimersByTime(100);
-        moveBottom(g, i * 100, cb);
+        moveBottom(g, 300 + i * 100, cb);
       }
       vi.advanceTimersByTime(100);
       upBottom(g, cb);
 
       expect(cb.onOpenChange).toHaveBeenCalledWith(false);
-      expect(cb.el.style['--zen-drawer-height']).toBeUndefined();
     });
 
-    it('release at lowest snap snaps without closing', () => {
+    it('drag down partially then release snaps back', () => {
       const g = new DrawerGesture();
       const cb = mockCb();
 
       g.resolveSnapPoints(['300', '600', '900']);
-      g.initSnapHeight();
+      g.initSnapHeight(); // 300
 
-      downBottom(g, 0, cb);
+      downBottom(g, 300, cb);
 
-      for (let i = 1; i <= 6; i++) {
-        vi.advanceTimersByTime(100);
-        moveBottom(g, i * 100, cb);
-      }
+      // Drag down 50px → height = 250, below lowest snap (300) → closes
+      moveBottom(g, 350, cb);
+      vi.advanceTimersByTime(100);
+      upBottom(g, cb);
+
+      expect(cb.onOpenChange).toHaveBeenCalledWith(false);
+    });
+
+    it('drag up from lowest then down snaps back to lowest', () => {
+      const g = new DrawerGesture();
+      const cb = mockCb();
+
+      g.resolveSnapPoints(['300', '600', '900']);
+      g.initSnapHeight(); // 300
+
+      downBottom(g, 300, cb);
+
+      // Drag up 100px → height = 400
+      moveBottom(g, 200, cb);
+      // Drag back to where height is between snaps → snaps to nearest (300)
+      moveBottom(g, 260, cb); // dy=-40, newHeight=340, nearest snap=300
       vi.advanceTimersByTime(100);
       upBottom(g, cb);
 
@@ -206,36 +223,22 @@ describe('DrawerGesture', () => {
   });
 
   describe('initSnapHeight', () => {
-    it('defaults to max snap when no initial provided', () => {
+    it('defaults to first snap when no initial provided', () => {
       const g = new DrawerGesture();
       g.resolveSnapPoints(['300', '600', '900']);
-      expect(g.initSnapHeight()).toBe(900);
-      expect(g.snapHeight).toBe(900);
+      expect(g.initSnapHeight()).toBe(300);
+      expect(g.snapHeight).toBe(300);
     });
 
-    it('opens at exact snap when initial matches', () => {
+    it('opens at first snap with mixed values', () => {
       const g = new DrawerGesture();
-      g.resolveSnapPoints(['300', '600', '900']);
-      expect(g.initSnapHeight('600')).toBe(600);
-      expect(g.snapHeight).toBe(600);
+      g.resolveSnapPoints(['600', '900']);
+      expect(g.initSnapHeight()).toBe(600);
     });
 
-    it('snaps to nearest when initial is between snaps', () => {
+    it('returns 0 when no snaps defined', () => {
       const g = new DrawerGesture();
-      g.resolveSnapPoints(['300', '600', '900']);
-      expect(g.initSnapHeight('250')).toBe(300);
-    });
-
-    it('snaps to highest when initial exceeds max snap', () => {
-      const g = new DrawerGesture();
-      g.resolveSnapPoints(['300', '600', '900']);
-      expect(g.initSnapHeight('950')).toBe(900);
-    });
-
-    it('opens at lowest snap when initial is below min', () => {
-      const g = new DrawerGesture();
-      g.resolveSnapPoints(['300', '600', '900']);
-      expect(g.initSnapHeight('50')).toBe(300);
+      expect(g.initSnapHeight()).toBe(0);
     });
   });
 });

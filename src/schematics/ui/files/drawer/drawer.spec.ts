@@ -8,9 +8,9 @@ import { ZenDrawer } from './drawer';
 @Component({
   template: `
     <zen-drawer
+      [backdrop]="backdrop()"
       [closeOnEscape]="closeOnEscape()"
       [handleOnly]="handleOnly()"
-      [initialSnap]="initialSnap()"
       [scaleBackground]="scaleBackground()"
       [side]="side()"
       [size]="size()"
@@ -35,7 +35,7 @@ class DrawerTestComponent {
   readonly handleOnly = signal(false);
   readonly scaleBackground = signal(false);
   readonly snapPoints = signal<(number | string)[]>([]);
-  readonly initialSnap = signal<number | string | undefined>(undefined);
+  readonly backdrop = signal(true);
 }
 
 function getDrawerEl(fixture: ComponentFixture<unknown>): HTMLDialogElement | null {
@@ -234,6 +234,52 @@ describe('ZenDrawer', () => {
       await fixture.whenStable();
 
       expect(document.body.classList.contains('zen-drawer-open')).toBe(false);
+    });
+
+    it('should close on backdrop click when backdrop is true', async () => {
+      const fixture = TestBed.createComponent(DrawerTestComponent);
+      fixture.componentInstance.isOpen.set(true);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const drawerEl = getDrawerEl(fixture)!;
+      const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+      Object.defineProperty(clickEvent, 'target', { value: drawerEl });
+      drawerEl.dispatchEvent(clickEvent);
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.isOpen()).toBe(false);
+    });
+
+    it('should not close on backdrop click when backdrop is false', async () => {
+      const fixture = TestBed.createComponent(DrawerTestComponent);
+      fixture.componentInstance.isOpen.set(true);
+      fixture.componentInstance.backdrop.set(false);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const drawerEl = getDrawerEl(fixture)!;
+      const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+      Object.defineProperty(clickEvent, 'target', { value: drawerEl });
+      drawerEl.dispatchEvent(clickEvent);
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.isOpen()).toBe(true);
+    });
+
+    it('should not close when clicking inside drawer content', async () => {
+      const fixture = TestBed.createComponent(DrawerTestComponent);
+      fixture.componentInstance.isOpen.set(true);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const contentEl = fixture.nativeElement.querySelector('.zen-drawer-content');
+      const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+      Object.defineProperty(clickEvent, 'target', { value: contentEl });
+      contentEl.dispatchEvent(clickEvent);
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.isOpen()).toBe(true);
     });
   });
 });

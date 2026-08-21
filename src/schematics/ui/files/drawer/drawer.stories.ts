@@ -40,6 +40,7 @@ const meta = {
       },
     },
     closeOnEscape: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
+    backdrop: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     swipeHandle: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     handleOnly: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
     scaleBackground: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
@@ -49,6 +50,7 @@ const meta = {
     side: 'right',
     size: 'md',
     closeOnEscape: true,
+    backdrop: true,
     swipeHandle: true,
     handleOnly: false,
     scaleBackground: false,
@@ -171,14 +173,33 @@ export const SnapPoints: Story = {
     template: `
       <button zen-btn (click)="openSnap.set(true)">Open Snap Points</button>
 
-      <zen-drawer [(open)]="openSnap" side="bottom" [snapPoints]="[0.25, 0.5, 1]" [initialSnap]="0.5">
+      <zen-drawer [(open)]="openSnap" side="bottom" [snapPoints]="[0.25, 0.5, 1]">
         <h2 drawer-header>Snap Drawer</h2>
-        <p>Opens at 50%. Drag up/down to snap between 25%, 50%, and 100% of viewport.</p>
+        <p>Opens at 25% (first snap). Drag up/down to snap between 25%, 50%, and 100% of viewport.</p>
         <div style="height: 300px; background: hsl(200deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
           <p>Scrollable content area</p>
         </div>
         <div style="height: 300px; background: hsl(200deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
           <p>More content</p>
+        </div>
+      </zen-drawer>
+    `,
+  }),
+};
+
+export const SnapPointsWithSizeNames: Story = {
+  render: () => ({
+    props: {
+      openSnapSize: signal(false),
+    },
+    template: `
+      <button zen-btn (click)="openSnapSize.set(true)">Open with Size Names</button>
+
+      <zen-drawer [(open)]="openSnapSize" side="bottom" [snapPoints]="['sm', 'md', 'full']">
+        <h2 drawer-header>Snap with Size Names</h2>
+        <p>Snap points use size presets: sm, md, full. Opens at sm (first snap).</p>
+        <div style="height: 200px; background: hsl(120deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
+          <p>Content</p>
         </div>
       </zen-drawer>
     `,

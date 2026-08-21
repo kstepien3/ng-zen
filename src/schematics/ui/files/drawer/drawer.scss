@@ -71,6 +71,15 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     }
   }
 
+  @each $side, $transform in $side-closed {
+    &[open][data-side='#{$side}'] {
+      @starting-style {
+        opacity: 0;
+        transform: $transform;
+      }
+    }
+  }
+
   &[open][data-side='right'] {
     transform: translateX(var(--zen-drawer-drag));
   }
@@ -87,56 +96,47 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     transform: translateY(var(--zen-drawer-drag));
   }
 
-  @each $side, $transform in $side-closed {
-    &[open][data-side='#{$side}'] {
-      @starting-style {
-        opacity: 0;
-        transform: $transform;
-      }
-    }
-  }
-
   &[open][data-swiping] {
     transition-duration: 0ms;
     user-select: none;
   }
 
-  &[data-side='right'] {
-    inset: var(--zen-drawer-inset) var(--zen-drawer-inset) var(--zen-drawer-inset) auto;
+  &[data-side='right'],
+  &[data-side='left'] {
+    inset: var(--zen-drawer-inset);
     margin: 0;
     height: 100%;
     max-height: 100%;
-    border-radius: var(--zen-drawer-leading-border-radius) 0 0 var(--zen-drawer-leading-border-radius);
     width: $default-side-width;
+  }
+
+  &[data-side='right'] {
+    inset: var(--zen-drawer-inset) var(--zen-drawer-inset) var(--zen-drawer-inset) auto;
+    border-radius: var(--zen-drawer-leading-border-radius) 0 0 var(--zen-drawer-leading-border-radius);
   }
 
   &[data-side='left'] {
     inset: var(--zen-drawer-inset) auto var(--zen-drawer-inset) var(--zen-drawer-inset);
-    margin: 0;
-    height: 100%;
-    max-height: 100%;
     border-radius: 0 var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius) 0;
-    width: $default-side-width;
+  }
+
+  &[data-side='top'],
+  &[data-side='bottom'] {
+    margin: 0;
+    width: auto;
+    height: var(--zen-drawer-height, auto);
+    max-height: $default-vertical-max-height;
+    max-width: 100vw;
   }
 
   &[data-side='top'] {
     inset: var(--zen-drawer-inset) var(--zen-drawer-inset) auto var(--zen-drawer-inset);
-    margin: 0;
-    width: auto;
     border-radius: 0 0 var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius);
-    height: var(--zen-drawer-height, auto);
-    max-height: $default-vertical-max-height;
-    max-width: 100vw;
   }
 
   &[data-side='bottom'] {
     inset: auto var(--zen-drawer-inset) var(--zen-drawer-inset) var(--zen-drawer-inset);
-    margin: 0;
-    width: auto;
     border-radius: var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius) 0 0;
-    height: var(--zen-drawer-height, auto);
-    max-height: $default-vertical-max-height;
-    max-width: 100vw;
   }
 
   @each $name, $size in $sizes {
@@ -157,11 +157,6 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     }
   }
 
-  &[data-side='top'][data-snap-points],
-  &[data-side='bottom'][data-snap-points] {
-    max-height: 100dvh;
-  }
-
   &[data-side='right'][data-size='full'],
   &[data-side='left'][data-size='full'] {
     width: calc(100% - var(--zen-drawer-inset) * 2);
@@ -170,6 +165,11 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   &[data-side='top'][data-size='full']:not([data-snap-points]),
   &[data-side='bottom'][data-size='full']:not([data-snap-points]) {
     height: calc(100% - var(--zen-drawer-inset) * 2);
+  }
+
+  &[data-side='top'][data-snap-points],
+  &[data-side='bottom'][data-snap-points] {
+    max-height: 100dvh;
   }
 
   &::backdrop {

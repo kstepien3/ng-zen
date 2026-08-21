@@ -53,7 +53,6 @@ class DrawerGesture {
   }
 
   pointerDown(event: PointerEvent, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
-    cb.setPointerCapture(event.pointerId);
     this.startX = event.clientX;
     this.startY = event.clientY;
     this.dragCandidate = true;
@@ -91,6 +90,7 @@ class DrawerGesture {
       }
 
       this.dragLocked = true;
+      cb.setPointerCapture(event.pointerId);
       cb.setAttribute('data-swiping', '');
     }
 
@@ -140,19 +140,11 @@ class DrawerGesture {
     return this.sortedSnapPixels;
   }
 
-  initSnapHeight(initial?: number | string): number {
+  initSnapHeight(): number {
     if (this.sortedSnapPixels.length === 0) return 0;
-    const maxSnap = this.sortedSnapPixels[this.sortedSnapPixels.length - 1];
-    let target = maxSnap;
-
-    if (initial !== undefined) {
-      const vh = window.innerHeight;
-      const px = typeof initial === 'string' ? parseFloat(initial) : initial <= 1 ? initial * vh : initial;
-      target = this.findNearestSnap(px);
-    }
-
-    this.currentSnapHeight = target;
-    return target;
+    const firstSnap = this.sortedSnapPixels[0];
+    this.currentSnapHeight = firstSnap;
+    return firstSnap;
   }
 
   private transformDrag(dx: number, dy: number, side: DrawerSide, cb: GestureCallbacks): void {
@@ -264,12 +256,6 @@ class DrawerGesture {
     if (side === 'bottom') return velocity.y > v;
     if (side === 'top') return velocity.y < -v;
     return false;
-  }
-
-  private maxSnapHeight(): number {
-    return this.sortedSnapPixels.length > 0
-      ? this.sortedSnapPixels[this.sortedSnapPixels.length - 1]
-      : window.innerHeight * 0.9;
   }
 
   private findNearestSnap(currentHeight: number): number {

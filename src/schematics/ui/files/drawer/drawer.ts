@@ -5,59 +5,46 @@ import { DrawerGesture, GestureCallbacks } from './drawer-gesture';
 type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
 type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
-/**
- * ZenDrawer is a reusable side-sheet / bottom-sheet component built on the native HTML `<dialog>` element.
- * It slides in from any edge with swipe-to-dismiss gesture support, snap points, and background scaling.
- *
- * @example
- * ```html
- * <zen-drawer #drawer [(open)]="isOpen" side="right" size="md">
- *   <h2 drawer-header>Drawer Title</h2>
- *   <p>Drawer content</p>
- *   <button (click)="drawer.close()">Close</button>
- * </zen-drawer>
- * ```
- *
- * ### CSS Custom Properties
- *
- * You can customize the component using CSS custom properties:
- * ```css
- * :root {
- *   --zen-drawer-padding: 1rem;
- *   --zen-drawer-bg: white;
- *   --zen-drawer-leading-border-radius: 12px;
- *   --zen-drawer-shadow: 0 4px 24px rgb(0 0 0 / 20%);
- *   --zen-drawer-inset: 0px;
- *   --zen-drawer-backdrop-bg: rgba(0, 0, 0, 0.5);
- *   --zen-drawer-overlay-min-opacity: 0;
- *   --zen-drawer-bleed-background: #fff;
- * }
- * ```
- *
- * @author Konrad Stępień
- * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
- * @see [GitHub](https://github.com/kstepien3/ng-zen)
- * @see [MDN Dialog Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
- * @see [Vaul](https://vaul.emilkowal.ski/)
- */
+const SIZE_FRACTIONS: Record<DrawerSize, number> = {
+  sm: 0.25,
+  md: 0.4,
+  lg: 0.55,
+  xl: 0.7,
+  full: 1,
+};
+
+const VERTICAL_SIZE_FRACTIONS: Record<DrawerSize, number> = {
+  sm: 0.3,
+  md: 0.45,
+  lg: 0.6,
+  xl: 0.75,
+  full: 1,
+};
+
 @Component({
   selector: 'zen-drawer',
   templateUrl: './drawer.html',
   styleUrl: './drawer.scss',
+  host: {
+    '(click)': 'onBackdropClick($event)',
+  },
 })
 export class ZenDrawer {
   readonly open = model<boolean>(false);
   readonly side = input<DrawerSide>('right');
   readonly size = input<DrawerSize>('md');
+  readonly snapPoints = input<(number | string)[]>([]);
   readonly closeOnEscape = input(true);
+  readonly backdrop = input(true);
   readonly swipeHandle = input(true);
   readonly handleOnly = input(false);
   readonly scaleBackground = input(false);
-  readonly snapPoints = input<(number | string)[]>([]);
-  readonly initialSnap = input<number | string | undefined>(undefined);
 
   private readonly dialogRef = viewChild<ElementRef<HTMLDialogElement>>('drawerDialog');
   private readonly gesture = new DrawerGesture();
+
+  private backdropMouseDown = false;
+  private wasDragging = false;
 
   protected readonly sideToSwipeDirection = (): string => this.side();
   protected readonly sideAxis = (): string => (this.side() === 'left' || this.side() === 'right' ? 'x' : 'y');
@@ -78,7 +65,9 @@ export class ZenDrawer {
         const element = dialog.nativeElement;
 
         if (isOpen) {
-          element.showModal();
+          if (!element.open) {
+            element.showModal();
+          }
           element.style.removeProperty('--zen-drawer-drag');
           element.style.removeProperty('--zen-drawer-height');
 
@@ -87,9 +76,9 @@ export class ZenDrawer {
           }
 
           if (this.isVertical()) {
-            const snaps = this.gesture.resolveSnapPoints(this.snapPoints());
-            if (snaps.length > 0) {
-              const openSnap = this.gesture.initSnapHeight(this.initialSnap());
+            const resolved = this.resolveSnapPoints(this.snapPoints());
+            if (resolved.length > 0) {
+              const openSnap = this.gesture.initSnapHeight();
               element.style.setProperty('--zen-drawer-height', `${openSnap}px`);
             }
           }
@@ -109,12 +98,61 @@ export class ZenDrawer {
     }
   }
 
+  protected onBackdropClick(event: MouseEvent): void {
+    if (!this.backdrop()) return;
+
+    if (this.wasDragging) {
+      this.wasDragging = false;
+      this.backdropMouseDown = false;
+      return;
+    }
+
+    if (!this.backdropMouseDown) {
+      return;
+    }
+
+    this.backdropMouseDown = false;
+
+    const dialog = this.dialogRef()?.nativeElement;
+    if (!dialog || event.target !== dialog) return;
+
+    const rect = dialog.getBoundingClientRect();
+    const isOutside =
+      rect.width > 0 && rect.height > 0
+        ? event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        : true;
+
+    if (isOutside) {
+      this.open.set(false);
+    }
+  }
+
   close(): void {
     this.open.set(false);
   }
 
   protected pointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
+
+    this.wasDragging = false;
+
+    const dialog = this.dialogRef()?.nativeElement;
+    if (dialog && event.target === dialog) {
+      const rect = dialog.getBoundingClientRect();
+      this.backdropMouseDown =
+        rect.width > 0 && rect.height > 0
+          ? event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom
+          : true;
+    } else {
+      this.backdropMouseDown = false;
+    }
+
     if (this.handleOnly() && !(event.target as HTMLElement).closest('.zen-drawer-swipe-handle')) {
       return;
     }
@@ -123,6 +161,9 @@ export class ZenDrawer {
 
   protected pointerMove(event: PointerEvent): void {
     this.gesture.pointerMove(event, this.side(), this.isVertical(), this.gestureCallbacks());
+    if (this.gesture.isLocked) {
+      this.wasDragging = true;
+    }
   }
 
   protected pointerUp(event: PointerEvent): void {
@@ -130,11 +171,24 @@ export class ZenDrawer {
   }
 
   protected pointerCancel(event: PointerEvent): void {
+    this.wasDragging = false;
+    this.backdropMouseDown = false;
     this.gesture.pointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
   private isVertical(): boolean {
     return this.side() === 'top' || this.side() === 'bottom';
+  }
+
+  private resolveSnapPoints(snapPoints: (number | string)[]): number[] {
+    const fractions = this.isVertical() ? VERTICAL_SIZE_FRACTIONS : SIZE_FRACTIONS;
+    const resolved = snapPoints.map(snap => {
+      if (typeof snap === 'string' && snap in fractions) {
+        return fractions[snap as DrawerSize];
+      }
+      return snap;
+    });
+    return this.gesture.resolveSnapPoints(resolved);
   }
 
   private gestureCallbacks(): GestureCallbacks {
