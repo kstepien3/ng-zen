@@ -244,6 +244,7 @@ $default-vertical-max-height: calc(100dvh - 6rem);
 }
 
 .zen-drawer[data-side='top'] .zen-drawer-swipe-handle {
+  order: 99; // Przesuwa handler na sam dół flex-kontenera
   padding: 0.25rem 0 0.75rem;
 }
 
