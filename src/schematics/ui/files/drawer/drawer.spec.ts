@@ -1,7 +1,7 @@
 import { Component, provideZonelessChangeDetection, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ZenDrawer } from './drawer';
 
@@ -56,6 +56,10 @@ describe('ZenDrawer', () => {
       }).compileComponents();
     });
 
+    afterEach(() => {
+      document.body.classList.remove('zen-drawer-open');
+    });
+
     it('should create', () => {
       const fixture = TestBed.createComponent(DrawerTestComponent);
       fixture.detectChanges();
@@ -88,6 +92,7 @@ describe('ZenDrawer', () => {
       fixture.componentInstance.isOpen.set(false);
       fixture.detectChanges();
       await fixture.whenStable();
+      await new Promise(r => setTimeout(r, 400));
 
       expect(drawerEl.close).toHaveBeenCalled();
     });
@@ -218,6 +223,8 @@ describe('ZenDrawer', () => {
 
       expect(document.body.classList.contains('zen-drawer-open')).toBe(true);
 
+      const drawerEl = getDrawerEl(fixture)!;
+      Object.defineProperty(drawerEl, 'open', { value: true, writable: true });
       fixture.componentInstance.isOpen.set(false);
       fixture.detectChanges();
 
@@ -243,6 +250,10 @@ describe('ZenDrawer', () => {
       await fixture.whenStable();
 
       const drawerEl = getDrawerEl(fixture)!;
+      const pdEvent = new PointerEvent('pointerdown', { bubbles: true, cancelable: true, button: 0 });
+      Object.defineProperty(pdEvent, 'target', { value: drawerEl });
+      drawerEl.dispatchEvent(pdEvent);
+
       const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
       Object.defineProperty(clickEvent, 'target', { value: drawerEl });
       drawerEl.dispatchEvent(clickEvent);

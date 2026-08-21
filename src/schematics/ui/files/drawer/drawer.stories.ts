@@ -206,6 +206,45 @@ export const SnapPointsWithSizeNames: Story = {
   }),
 };
 
+export const SnapPointsAllSides: Story = {
+  render: () => ({
+    props: {
+      openLeft: signal(false),
+      openRight: signal(false),
+      openTop: signal(false),
+      openBottom: signal(false),
+    },
+    template: `
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button zen-btn (click)="openLeft.set(true)">Left</button>
+        <button zen-btn (click)="openRight.set(true)">Right</button>
+        <button zen-btn (click)="openTop.set(true)">Top</button>
+        <button zen-btn (click)="openBottom.set(true)">Bottom</button>
+      </div>
+
+      <zen-drawer [(open)]="openLeft" side="left" [snapPoints]="['sm', 'md', 'full']">
+        <h2 drawer-header>Left Snap</h2>
+        <p>Snap points on the left side (opens at first snap).</p>
+      </zen-drawer>
+
+      <zen-drawer [(open)]="openRight" side="right" [snapPoints]="['sm', 'md', 'full']">
+        <h2 drawer-header>Right Snap</h2>
+        <p>Snap points on the right side (opens at first snap).</p>
+      </zen-drawer>
+
+      <zen-drawer [(open)]="openTop" side="top" [snapPoints]="['sm', 'md', 'full']">
+        <h2 drawer-header>Top Snap</h2>
+        <p>Snap points on the top side. Drag up/down to snap between sizes.</p>
+      </zen-drawer>
+
+      <zen-drawer [(open)]="openBottom" side="bottom" [snapPoints]="['sm', 'md', 'full']">
+        <h2 drawer-header>Bottom Snap</h2>
+        <p>Snap points on the bottom side. Drag up/down to snap between sizes.</p>
+      </zen-drawer>
+    `,
+  }),
+};
+
 export const HandleOnly: Story = {
   render: () => ({
     props: {
