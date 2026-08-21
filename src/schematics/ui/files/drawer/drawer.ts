@@ -74,17 +74,17 @@ export class ZenDrawer {
           }
           element.style.removeProperty('--zen-drawer-drag');
           element.style.removeProperty('--zen-drawer-height');
+          element.style.removeProperty('--zen-drawer-width');
 
           if (shouldScale) {
             document.body.classList.add('zen-drawer-open');
           }
 
-          if (this.isVertical()) {
-            const resolved = this.resolveSnapPoints(this.snapPoints());
-            if (resolved.length > 0) {
-              const openSnap = this.gesture.initSnapHeight();
-              element.style.setProperty('--zen-drawer-height', `${openSnap}px`);
-            }
+          const resolved = this.resolveSnapPoints(this.snapPoints());
+          if (resolved.length > 0) {
+            const openSnap = this.gesture.initSnapHeight();
+            const cssVar = this.isVertical() ? '--zen-drawer-height' : '--zen-drawer-width';
+            element.style.setProperty(cssVar, `${openSnap}px`);
           }
         } else if (element.open && !this.isClosing) {
           this.animateAndClose(element, shouldScale);
@@ -225,7 +225,7 @@ export class ZenDrawer {
       }
       return snap;
     });
-    return this.gesture.resolveSnapPoints(resolved);
+    return this.gesture.resolveSnapPoints(resolved, this.isVertical());
   }
 
   private gestureCallbacks(): GestureCallbacks {

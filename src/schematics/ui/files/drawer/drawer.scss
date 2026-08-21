@@ -117,7 +117,7 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     margin: 0;
     height: 100%;
     max-height: 100%;
-    width: $default-side-width;
+    width: var(--zen-drawer-width, $default-side-width);
   }
 
   &[data-side='right'] {
@@ -152,8 +152,10 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   @each $name, $size in $sizes {
     &[data-side='right'][data-size='#{$name}'],
     &[data-side='left'][data-size='#{$name}'] {
-      width: $size;
-      max-width: 100vw;
+      &:not([data-snap-points]) {
+        width: $size;
+        max-width: 100vw;
+      }
     }
   }
 
@@ -167,14 +169,19 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     }
   }
 
-  &[data-side='right'][data-size='full'],
-  &[data-side='left'][data-size='full'] {
+  &[data-side='right'][data-size='full']:not([data-snap-points]),
+  &[data-side='left'][data-size='full']:not([data-snap-points]) {
     width: calc(100% - var(--zen-drawer-inset) * 2);
   }
 
   &[data-side='top'][data-size='full']:not([data-snap-points]),
   &[data-side='bottom'][data-size='full']:not([data-snap-points]) {
     height: calc(100% - var(--zen-drawer-inset) * 2);
+  }
+
+  &[data-side='right'][data-snap-points],
+  &[data-side='left'][data-snap-points] {
+    max-width: 100vw;
   }
 
   &[data-side='top'][data-snap-points],
