@@ -1,9 +1,9 @@
-import { Component, effect, ElementRef, input, model, untracked, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, model, untracked, viewChild } from '@angular/core';
 
 import { DrawerGesture, GestureCallbacks } from './drawer-gesture';
 
-type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
-type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
+export type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 const SIZE_FRACTIONS: Record<DrawerSize, number> = {
   sm: 0.25,
@@ -46,12 +46,12 @@ export class ZenDrawer {
   private backdropMouseDown = false;
   private wasDragging = false;
 
-  protected readonly sideToSwipeDirection = (): string => this.side();
-  protected readonly sideAxis = (): string => (this.side() === 'left' || this.side() === 'right' ? 'x' : 'y');
-  protected readonly isExpanded = (): 'true' | null => {
+  protected readonly isVertical = computed(() => this.side() === 'top' || this.side() === 'bottom');
+  protected readonly sideAxis = computed(() => (this.isVertical() ? 'y' : 'x'));
+  protected readonly hasSnapPoints = computed(() => (this.snapPoints().length > 0 ? 'true' : null));
+  protected readonly isExpanded = computed(() => {
     return this.gesture.hasSnaps && this.gesture.snapHeight >= this.gesture.maxSnap ? 'true' : null;
-  };
-  protected readonly hasSnapPoints = (): 'true' | null => (this.snapPoints().length > 0 ? 'true' : null);
+  });
 
   constructor() {
     effect(() => {
@@ -92,6 +92,10 @@ export class ZenDrawer {
     });
   }
 
+  close(): void {
+    this.open.set(false);
+  }
+
   protected cancel(event: Event): void {
     if (!this.closeOnEscape()) {
       event.preventDefault();
@@ -107,48 +111,25 @@ export class ZenDrawer {
       return;
     }
 
-    if (!this.backdropMouseDown) {
-      return;
-    }
-
+    if (!this.backdropMouseDown) return;
     this.backdropMouseDown = false;
 
     const dialog = this.dialogRef()?.nativeElement;
     if (!dialog || event.target !== dialog) return;
 
-    const rect = dialog.getBoundingClientRect();
-    const isOutside =
-      rect.width > 0 && rect.height > 0
-        ? event.clientX < rect.left ||
-          event.clientX > rect.right ||
-          event.clientY < rect.top ||
-          event.clientY > rect.bottom
-        : true;
-
-    if (isOutside) {
-      this.open.set(false);
+    if (this.isClickOutside(dialog, event)) {
+      this.close();
     }
-  }
-
-  close(): void {
-    this.open.set(false);
   }
 
   protected pointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
 
     this.wasDragging = false;
-
     const dialog = this.dialogRef()?.nativeElement;
+
     if (dialog && event.target === dialog) {
-      const rect = dialog.getBoundingClientRect();
-      this.backdropMouseDown =
-        rect.width > 0 && rect.height > 0
-          ? event.clientX < rect.left ||
-            event.clientX > rect.right ||
-            event.clientY < rect.top ||
-            event.clientY > rect.bottom
-          : true;
+      this.backdropMouseDown = this.isClickOutside(dialog, event);
     } else {
       this.backdropMouseDown = false;
     }
@@ -156,6 +137,7 @@ export class ZenDrawer {
     if (this.handleOnly() && !(event.target as HTMLElement).closest('.zen-drawer-swipe-handle')) {
       return;
     }
+
     this.gesture.pointerDown(event, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
@@ -176,8 +158,14 @@ export class ZenDrawer {
     this.gesture.pointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
   }
 
-  private isVertical(): boolean {
-    return this.side() === 'top' || this.side() === 'bottom';
+  private isClickOutside(dialog: HTMLDialogElement, event: MouseEvent): boolean {
+    const rect = dialog.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0
+      ? event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+      : true;
   }
 
   private resolveSnapPoints(snapPoints: (number | string)[]): number[] {
@@ -192,33 +180,22 @@ export class ZenDrawer {
   }
 
   private gestureCallbacks(): GestureCallbacks {
-    const el: HTMLDialogElement = this.dialogRef()!.nativeElement;
+    const el = this.dialogRef()!.nativeElement;
     const vertical = this.isVertical();
+
     return {
-      onOpenChange: (open: boolean): void => {
-        this.open.set(open);
-      },
-      setDragStyle: (cssVar: string, value: string): void => {
-        el.style.setProperty(cssVar, value);
-      },
-      removeDragStyle: (cssVar: string): void => {
-        el.style.removeProperty(cssVar);
-      },
-      getDimension: (): number => (vertical ? el.offsetHeight : el.offsetWidth),
-      setPointerCapture: (id: number): void => {
-        el.setPointerCapture(id);
-      },
-      setAttribute: (name: string, value: string): void => {
-        el.setAttribute(name, value);
-      },
-      removeAttribute: (name: string): void => {
-        el.removeAttribute(name);
-      },
-      setOverscrollStyle: (sizePx: number): void => {
+      onOpenChange: (open: boolean) => this.open.set(open),
+      setDragStyle: (cssVar: string, value: string) => el.style.setProperty(cssVar, value),
+      removeDragStyle: (cssVar: string) => el.style.removeProperty(cssVar),
+      getDimension: () => (vertical ? el.offsetHeight : el.offsetWidth),
+      setPointerCapture: (id: number) => el.setPointerCapture(id),
+      setAttribute: (name: string, value: string) => el.setAttribute(name, value),
+      removeAttribute: (name: string) => el.removeAttribute(name),
+      setOverscrollStyle: (sizePx: number) => {
         const prop = vertical ? 'height' : 'width';
         el.style.setProperty(prop, `${sizePx}px`);
       },
-      removeOverscrollStyle: (): void => {
+      removeOverscrollStyle: () => {
         el.style.removeProperty('width');
         el.style.removeProperty('height');
       },

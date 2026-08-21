@@ -27,12 +27,11 @@ $default-vertical-max-height: calc(100dvh - 6rem);
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 .zen-drawer {
   --zen-drawer-padding: 1rem;
-  --zen-drawer-bg: white;
+  --zen-drawer-bg: #fff;
   --zen-drawer-leading-border-radius: 12px;
   --zen-drawer-shadow: 0 4px 24px rgb(0 0 0 / 20%);
   --zen-drawer-backdrop-bg: rgb(0 0 0 / 50%);
   --zen-drawer-overlay-min-opacity: 0;
-  --zen-drawer-bleed-background: var(--zen-drawer-bg, #fff);
   --zen-drawer-inset: 0px;
   --zen-drawer-drag: 0%;
   --zen-drawer-height: auto;
@@ -40,14 +39,15 @@ $default-vertical-max-height: calc(100dvh - 6rem);
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 .zen-drawer {
-  display: flex;
-  flex-direction: column;
+  display: none;
   position: fixed;
+  box-sizing: border-box;
   padding: var(--zen-drawer-padding);
   background: var(--zen-drawer-bg);
   border: none;
   box-shadow: var(--zen-drawer-shadow);
   overflow: hidden;
+  opacity: 0;
   transition:
     transform $transition-duration ease,
     opacity $transition-duration ease,
@@ -55,7 +55,6 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     height $transition-duration ease,
     overlay $transition-duration allow-discrete,
     display $transition-duration allow-discrete;
-  opacity: 0;
 
   @each $side, $transform in $side-closed {
     &[data-side='#{$side}'] {
@@ -64,6 +63,8 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   }
 
   &[open] {
+    display: flex;
+    flex-direction: column;
     opacity: 1;
 
     @starting-style {
@@ -191,61 +192,61 @@ $default-vertical-max-height: calc(100dvh - 6rem);
 }
 
 .zen-drawer-swipe-handle {
+  position: absolute;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 0.5rem 0;
-  flex-shrink: 0;
   touch-action: none;
   user-select: none;
 
   &::after {
     content: '';
     display: block;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-    background: hsl(0deg 0% 75%);
+    background: hsl(0deg 0% 70%);
+    border-radius: 3px;
   }
-}
-
-.zen-drawer[data-side='right'] .zen-drawer-swipe-handle,
-.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 1.5rem;
-  height: 3rem;
-  padding: 0;
-  transform: translate(0, -50%);
-
-  &::after {
-    width: 4px;
-    height: 2rem;
-  }
-}
-
-.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
-  left: auto;
-  right: 0;
 }
 
 .zen-drawer[data-side='bottom'] .zen-drawer-swipe-handle,
 .zen-drawer[data-side='top'] .zen-drawer-swipe-handle {
-  padding: 0.75rem 0 0.25rem;
+  left: 0;
+  right: 0;
+  height: 1.5rem;
+  width: 100%;
 
   &::after {
     width: 48px;
     height: 5px;
-    border-radius: 3px;
-    background: hsl(0deg 0% 70%);
   }
 }
 
+.zen-drawer[data-side='bottom'] .zen-drawer-swipe-handle {
+  top: 0;
+}
+
 .zen-drawer[data-side='top'] .zen-drawer-swipe-handle {
-  order: 99; // Przesuwa handler na sam dół flex-kontenera
-  padding: 0.25rem 0 0.75rem;
+  bottom: 0;
+}
+
+.zen-drawer[data-side='right'] .zen-drawer-swipe-handle,
+.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+
+  &::after {
+    width: 5px;
+    height: 48px;
+  }
+}
+
+.zen-drawer[data-side='right'] .zen-drawer-swipe-handle {
+  left: 0;
+}
+
+.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
+  right: 0;
 }
 
 .zen-drawer-footer {
