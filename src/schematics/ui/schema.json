@@ -45,6 +45,7 @@
           "checkbox",
           "dialog",
           "divider",
+          "drawer",
           "icon",
           "input",
           "pin",

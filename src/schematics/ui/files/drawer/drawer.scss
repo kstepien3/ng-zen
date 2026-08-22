@@ -1,0 +1,253 @@
+@use 'sass:map';
+
+$transition-duration: var(--zen-transition-duration, 0.3s);
+$transition-timing: cubic-bezier(0.32, 0.72, 0, 1);
+$sides: (
+  right: (
+    closed: translateX(100%),
+    open: translateX(var(--zen-drawer-drag, 0px)),
+  ),
+  left: (
+    closed: translateX(-100%),
+    open: translateX(calc(-1 * var(--zen-drawer-drag, 0px))),
+  ),
+  top: (
+    closed: translateY(-100%),
+    open: translateY(calc(-1 * var(--zen-drawer-drag, 0px))),
+  ),
+  bottom: (
+    closed: translateY(100%),
+    open: translateY(var(--zen-drawer-drag, 0px)),
+  ),
+);
+$default-side-width: min(24rem, 75vw);
+$default-vertical-max-height: calc(100dvh - 6rem);
+
+.zen-drawer {
+  --zen-drawer-padding: 1rem;
+  --zen-drawer-bg: #fff;
+  --zen-drawer-leading-border-radius: 12px;
+  --zen-drawer-shadow: 0 4px 24px rgb(0 0 0 / 20%);
+  --zen-drawer-backdrop-bg: rgb(0 0 0 / 50%);
+  --zen-drawer-overlay-min-opacity: 0;
+  --zen-drawer-inset: 0px;
+  --zen-drawer-drag: 0px;
+  --zen-drawer-height: auto;
+  --zen-size-inline-sm: clamp(16rem, 25vw, 24rem);
+  --zen-size-inline-md: clamp(22rem, 40vw, 34rem);
+  --zen-size-inline-lg: clamp(30rem, 55vw, 46rem);
+  --zen-size-inline-xl: clamp(38rem, 70vw, 58rem);
+  --zen-size-inline-full: calc(100% - var(--zen-drawer-inset) * 2);
+  --zen-size-block-sm: clamp(14rem, 30dvh, 22rem);
+  --zen-size-block-md: clamp(18rem, 45dvh, 30rem);
+  --zen-size-block-lg: clamp(24rem, 60dvh, 38rem);
+  --zen-size-block-xl: clamp(30rem, 75dvh, 46rem);
+  --zen-size-block-full: calc(100% - var(--zen-drawer-inset) * 2);
+}
+
+:host {
+  display: contents;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+.zen-drawer {
+  display: none;
+  position: fixed;
+  box-sizing: border-box;
+  padding: var(--zen-drawer-padding);
+  background: var(--zen-drawer-bg);
+  border: none;
+  box-shadow: var(--zen-drawer-shadow);
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    transform $transition-duration $transition-timing,
+    opacity $transition-duration ease,
+    width $transition-duration ease,
+    height $transition-duration ease;
+
+  @each $side, $transforms in $sides {
+    $closed: map.get($transforms, closed);
+    $open: map.get($transforms, open);
+
+    &[data-side='#{$side}'] {
+      transform: $closed;
+    }
+
+    &[open][data-side='#{$side}'] {
+      transform: $open;
+
+      @starting-style {
+        opacity: 0;
+        transform: $closed;
+      }
+    }
+
+    &[open][data-closing][data-side='#{$side}'] {
+      opacity: 0;
+      transform: $closed !important;
+    }
+  }
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  &[open][data-swiping] {
+    cursor: grabbing;
+    transition: none !important;
+    user-select: none;
+
+    .zen-drawer-swipe-handle {
+      cursor: grabbing;
+    }
+  }
+
+  &[data-side='right'],
+  &[data-side='left'] {
+    inset: var(--zen-drawer-inset);
+    margin: 0;
+    height: 100%;
+    max-height: 100%;
+    width: var(--zen-drawer-width, $default-side-width);
+  }
+
+  &[data-side='right'] {
+    inset: var(--zen-drawer-inset) var(--zen-drawer-inset) var(--zen-drawer-inset) auto;
+    border-radius: var(--zen-drawer-leading-border-radius) 0 0 var(--zen-drawer-leading-border-radius);
+  }
+
+  &[data-side='left'] {
+    inset: var(--zen-drawer-inset) auto var(--zen-drawer-inset) var(--zen-drawer-inset);
+    border-radius: 0 var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius) 0;
+  }
+
+  &[data-side='top'],
+  &[data-side='bottom'] {
+    margin: 0;
+    width: auto;
+    height: var(--zen-drawer-height, auto);
+    max-height: $default-vertical-max-height;
+    max-width: 100vw;
+  }
+
+  &[data-side='top'] {
+    inset: var(--zen-drawer-inset) var(--zen-drawer-inset) auto var(--zen-drawer-inset);
+    border-radius: 0 0 var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius);
+  }
+
+  &[data-side='bottom'] {
+    inset: auto var(--zen-drawer-inset) var(--zen-drawer-inset) var(--zen-drawer-inset);
+    border-radius: var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius) 0 0;
+  }
+
+  @each $name in (sm, md, lg, xl, full) {
+    &[data-side='right'][data-size='#{$name}'],
+    &[data-side='left'][data-size='#{$name}'] {
+      width: var(--zen-size-inline-#{$name});
+      max-width: 100vw;
+    }
+
+    &[data-side='top'][data-size='#{$name}'],
+    &[data-side='bottom'][data-size='#{$name}'] {
+      height: var(--zen-size-block-#{$name});
+      max-height: 100dvh;
+    }
+  }
+
+  &::backdrop {
+    background: var(--zen-drawer-backdrop-bg);
+    transition: opacity $transition-duration ease;
+    opacity: var(--zen-drawer-overlay-min-opacity);
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+
+    @starting-style {
+      opacity: var(--zen-drawer-overlay-min-opacity);
+    }
+  }
+
+  &[open][data-closing]::backdrop {
+    opacity: 0;
+  }
+}
+
+.zen-drawer-swipe-handle {
+  cursor: grab;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+
+  &::after {
+    content: '';
+    display: block;
+    background: hsl(0deg 0% 70%);
+    border-radius: 3px;
+  }
+}
+
+.zen-drawer[data-side='bottom'] .zen-drawer-swipe-handle,
+.zen-drawer[data-side='top'] .zen-drawer-swipe-handle {
+  left: 0;
+  right: 0;
+  height: 1.5rem;
+  width: 100%;
+
+  &::after {
+    width: 48px;
+    height: 5px;
+  }
+}
+
+.zen-drawer[data-side='bottom'] .zen-drawer-swipe-handle {
+  top: 0;
+}
+
+.zen-drawer[data-side='top'] .zen-drawer-swipe-handle {
+  bottom: 0;
+}
+
+.zen-drawer[data-side='right'] .zen-drawer-swipe-handle,
+.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+
+  &::after {
+    width: 5px;
+    height: 48px;
+  }
+}
+
+.zen-drawer[data-side='right'] .zen-drawer-swipe-handle {
+  left: 0;
+}
+
+.zen-drawer[data-side='left'] .zen-drawer-swipe-handle {
+  right: 0;
+}
+
+.zen-drawer-footer {
+  &:not(:empty) {
+    flex-shrink: 0;
+    padding-top: var(--zen-drawer-padding);
+    border-top: 1px solid hsl(0deg 0% 90%);
+  }
+}
+
+.zen-drawer-content {
+  overflow: auto;
+  flex: 1;
+}
