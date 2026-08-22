@@ -24,7 +24,7 @@ export class DrawerGesture {
     return this.dragLocked;
   }
 
-  pointerDown(event: PointerEvent, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+  pointerDown(event: PointerEvent, side: DrawerSide, cb: GestureCallbacks): void {
     this.startX = event.clientX;
     this.startY = event.clientY;
     this.dragCandidate = true;
@@ -37,8 +37,8 @@ export class DrawerGesture {
     this.restDimension = cb.getDimension();
   }
 
-  pointerMove(event: PointerEvent, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): { handled: boolean } {
-    if (!this.dragCandidate) return { handled: false };
+  pointerMove(event: PointerEvent, side: DrawerSide, cb: GestureCallbacks): void {
+    if (!this.dragCandidate) return;
 
     const dx = event.clientX - this.startX;
     const dy = event.clientY - this.startY;
@@ -46,7 +46,7 @@ export class DrawerGesture {
     const absDy = Math.abs(dy);
 
     if (!this.dragLocked) {
-      if (absDx < LOCK_THRESHOLD && absDy < LOCK_THRESHOLD) return { handled: false };
+      if (absDx < LOCK_THRESHOLD && absDy < LOCK_THRESHOLD) return;
 
       const isHorizontal = absDx > absDy;
       const sideAxis = side === 'left' || side === 'right' ? 'x' : 'y';
@@ -54,7 +54,7 @@ export class DrawerGesture {
 
       if (sideAxis !== movementAxis) {
         this.dragCandidate = false;
-        return { handled: false };
+        return;
       }
 
       this.dragLocked = true;
@@ -67,11 +67,9 @@ export class DrawerGesture {
     this.lastMoveY = event.clientY;
 
     this.transformDrag(dx, dy, side, cb);
-
-    return { handled: true };
   }
 
-  pointerUp(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+  pointerUp(pointerId: number, side: DrawerSide, cb: GestureCallbacks): void {
     if (!this.dragLocked) {
       this.dragCandidate = false;
       return;
@@ -81,7 +79,7 @@ export class DrawerGesture {
     this.finishDrag(side, velocity, cb);
   }
 
-  pointerCancel(pointerId: number, side: DrawerSide, isVertical: boolean, cb: GestureCallbacks): void {
+  pointerCancel(pointerId: number, side: DrawerSide, cb: GestureCallbacks): void {
     if (!this.dragLocked) {
       this.dragCandidate = false;
       return;

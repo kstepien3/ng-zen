@@ -31,15 +31,15 @@ function mockCb(): GestureCallbacks & { el: { style: Record<string, string> } } 
 }
 
 function down(g: DrawerGesture, x: number, cb: GestureCallbacks): void {
-  g.pointerDown({ clientX: x, clientY: 200, pointerId: 1, button: 0 } as PointerEvent, 'right', false, cb);
+  g.pointerDown({ clientX: x, clientY: 200, pointerId: 1, button: 0 } as PointerEvent, 'right', cb);
 }
 
 function move(g: DrawerGesture, x: number, cb: GestureCallbacks): void {
-  g.pointerMove({ clientX: x, clientY: 200 } as PointerEvent, 'right', false, cb);
+  g.pointerMove({ clientX: x, clientY: 200 } as PointerEvent, 'right', cb);
 }
 
 function up(g: DrawerGesture, cb: GestureCallbacks): void {
-  g.pointerUp(1, 'right', false, cb);
+  g.pointerUp(1, 'right', cb);
 }
 
 describe('DrawerGesture', () => {

@@ -3,9 +3,7 @@ import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angul
 
 import { ZenButton } from '../button';
 import { ZenDrawer } from './drawer';
-
-type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
-type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+import { DrawerSide, DrawerSize } from './drawer.types';
 
 type Story = StoryObj<ZenDrawer>;
 
@@ -41,7 +39,7 @@ const meta = {
     },
     closeOnEscape: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
     backdrop: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
-    swipeHandle: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'true' } } },
+    swipeHandle: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
     handleOnly: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
     scaleBackground: { control: 'boolean', table: { category: 'inputs', defaultValue: { summary: 'false' } } },
     open: { control: 'boolean', table: { readonly: false, category: 'models' } },

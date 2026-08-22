@@ -1,4 +1,15 @@
-import { Component, computed, effect, ElementRef, input, model, OnDestroy, untracked, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  model,
+  untracked,
+  viewChild,
+} from '@angular/core';
 
 import { DrawerSide, DrawerSize, GestureCallbacks } from './drawer.types';
 import { DrawerGesture } from './drawer-gesture';
@@ -12,7 +23,7 @@ import { DrawerGesture } from './drawer-gesture';
     '(click)': 'onBackdropClick($event)',
   },
 })
-export class ZenDrawer implements OnDestroy {
+export class ZenDrawer {
   readonly open = model<boolean>(false);
   readonly side = input<DrawerSide>('right');
   readonly size = input<DrawerSize>('md');
@@ -24,6 +35,7 @@ export class ZenDrawer implements OnDestroy {
 
   private readonly dialogRef = viewChild<ElementRef<HTMLDialogElement>>('drawerDialog');
   private readonly gesture = new DrawerGesture();
+  private readonly destroyRef = inject(DestroyRef);
 
   private backdropMouseDown = false;
   private wasDragging = false;
@@ -34,6 +46,16 @@ export class ZenDrawer implements OnDestroy {
   protected readonly sideAxis = computed(() => (this.isVertical() ? 'y' : 'x'));
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.closeTimeout) {
+        clearTimeout(this.closeTimeout);
+        this.closeTimeout = null;
+      }
+      if (this.scaleBackground()) {
+        document.body.classList.remove('zen-drawer-open');
+      }
+    });
+
     effect(() => {
       const isOpen = this.open();
       const dialog = this.dialogRef();
@@ -51,7 +73,6 @@ export class ZenDrawer implements OnDestroy {
             element.showModal();
           }
           element.style.removeProperty('--zen-drawer-drag');
-          element.style.removeProperty('--zen-drawer-height');
           element.style.removeProperty('--zen-drawer-width');
 
           if (shouldScale) {
@@ -62,16 +83,6 @@ export class ZenDrawer implements OnDestroy {
         }
       });
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.closeTimeout) {
-      clearTimeout(this.closeTimeout);
-      this.closeTimeout = null;
-    }
-    if (this.scaleBackground()) {
-      document.body.classList.remove('zen-drawer-open');
-    }
   }
 
   close(): void {
@@ -121,24 +132,24 @@ export class ZenDrawer implements OnDestroy {
       return;
     }
 
-    this.gesture.pointerDown(event, this.side(), this.isVertical(), this.gestureCallbacks());
+    this.gesture.pointerDown(event, this.side(), this.gestureCallbacks());
   }
 
   protected pointerMove(event: PointerEvent): void {
-    this.gesture.pointerMove(event, this.side(), this.isVertical(), this.gestureCallbacks());
+    this.gesture.pointerMove(event, this.side(), this.gestureCallbacks());
     if (this.gesture.isLocked) {
       this.wasDragging = true;
     }
   }
 
   protected pointerUp(event: PointerEvent): void {
-    this.gesture.pointerUp(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
+    this.gesture.pointerUp(event.pointerId, this.side(), this.gestureCallbacks());
   }
 
   protected pointerCancel(event: PointerEvent): void {
     this.wasDragging = false;
     this.backdropMouseDown = false;
-    this.gesture.pointerCancel(event.pointerId, this.side(), this.isVertical(), this.gestureCallbacks());
+    this.gesture.pointerCancel(event.pointerId, this.side(), this.gestureCallbacks());
   }
 
   private animateAndClose(element: HTMLDialogElement, shouldScale: boolean): void {
