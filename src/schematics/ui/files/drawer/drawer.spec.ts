@@ -138,24 +138,6 @@ describe('ZenDrawer', () => {
       expect(drawerEl.getAttribute('data-swipe-direction')).toBe('bottom');
     });
 
-    it('should apply data-swipe-axis for side drawer', () => {
-      const fixture = TestBed.createComponent(DrawerTestComponent);
-      fixture.componentInstance.side.set('right');
-      fixture.detectChanges();
-
-      const drawerEl = getDrawerEl(fixture)!;
-      expect(drawerEl.getAttribute('data-swipe-axis')).toBe('x');
-    });
-
-    it('should apply data-swipe-axis for vertical drawer', () => {
-      const fixture = TestBed.createComponent(DrawerTestComponent);
-      fixture.componentInstance.side.set('top');
-      fixture.detectChanges();
-
-      const drawerEl = getDrawerEl(fixture)!;
-      expect(drawerEl.getAttribute('data-swipe-axis')).toBe('y');
-    });
-
     it('should close when close is called', async () => {
       const fixture = TestBed.createComponent(DrawerTestComponent);
       fixture.componentInstance.isOpen.set(true);

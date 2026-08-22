@@ -14,6 +14,57 @@ import {
 import { DrawerSide, DrawerSize, GestureCallbacks } from './drawer.types';
 import { DrawerGesture } from './drawer-gesture';
 
+/**
+ * ZenDrawer is a reusable drawer component built on the native HTML `<dialog>` element.
+ * It slides in from one of the four sides (`left`, `right`, `top`, `bottom`) and can be
+ * dismissed by clicking the backdrop, pressing Escape, or dragging/swiping the panel.
+ *
+ * @example
+ * ```html
+ * <button zen-btn (click)="isOpen.set(true)">Open Drawer</button>
+ *
+ * <zen-drawer [(open)]="isOpen" side="right" size="md">
+ *   <h2 drawer-header>Drawer Title</h2>
+ *   <p>Drawer content</p>
+ *   <div drawer-footer>
+ *     <button zen-btn (click)="isOpen.set(false)" variant="filled" color="danger">Close</button>
+ *   </div>
+ * </zen-drawer>
+ * ```
+ *
+ * ### CSS Custom Properties
+ *
+ * You can customize the component using CSS custom properties:
+ * ```css
+ * :root {
+ *   --zen-drawer-padding: 1rem;
+ *   --zen-drawer-bg: #fff;
+ *   --zen-drawer-leading-border-radius: 12px;
+ *   --zen-drawer-shadow: 0 4px 24px rgb(0 0 0 / 20%);
+ *   --zen-drawer-backdrop-bg: rgb(0 0 0 / 50%);
+ *   --zen-drawer-overlay-min-opacity: 0;
+ *   --zen-drawer-inset: 0px;
+ *   --zen-drawer-drag: 0px;
+ *   --zen-drawer-height: auto;
+ *   --zen-size-inline-sm: clamp(16rem, 25vw, 24rem);
+ *   --zen-size-inline-md: clamp(22rem, 40vw, 34rem);
+ *   --zen-size-inline-lg: clamp(30rem, 55vw, 46rem);
+ *   --zen-size-inline-xl: clamp(38rem, 70vw, 58rem);
+ *   --zen-size-inline-full: calc(100% - var(--zen-drawer-inset) * 2);
+ *   --zen-size-block-sm: clamp(14rem, 30dvh, 22rem);
+ *   --zen-size-block-md: clamp(18rem, 45dvh, 30rem);
+ *   --zen-size-block-lg: clamp(24rem, 60dvh, 38rem);
+ *   --zen-size-block-xl: clamp(30rem, 75dvh, 46rem);
+ *   --zen-size-block-full: calc(100% - var(--zen-drawer-inset) * 2);
+ *   --zen-transition-duration: 0.3s;
+ * }
+ * ```
+ *
+ * @author Konrad Stępień
+ * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
+ * @see [GitHub](https://github.com/kstepien3/ng-zen)
+ * @see [MDN Dialog Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
+ */
 @Component({
   selector: 'zen-drawer',
   standalone: true,
@@ -24,13 +75,21 @@ import { DrawerGesture } from './drawer-gesture';
   },
 })
 export class ZenDrawer {
+  /** Controls the open state of the drawer. Supports two-way binding via `[(open)]`. When `true`, calls `showModal()`; when `false`, animates out and calls `close()` on the native dialog. */
   readonly open = model<boolean>(false);
+  /** Side from which the drawer slides in. Sets the slide direction, drag axis, and which dimension `size` controls (`width` for `left`/`right`, `height` for `top`/`bottom`). */
   readonly side = input<DrawerSide>('right');
+  /** Size variant of the drawer. For `left`/`right` sets `width`; for `top`/`bottom` sets `height` via the `data-size` attribute. */
   readonly size = input<DrawerSize>('md');
+  /** Whether pressing Escape closes the drawer (bound to the native dialog `cancel` event). */
   readonly closeOnEscape = input(true);
+  /** Whether clicking the backdrop closes the drawer. When `false`, backdrop clicks are ignored. */
   readonly backdrop = input(true);
+  /** Whether to render a grab handle at the leading edge of the drawer. Also the drag affordance when `handleOnly` is enabled. */
   readonly swipeHandle = input(false);
+  /** When `true`, only the swipe handle can initiate a drag-to-dismiss gesture; clicks and drags on the content are ignored. */
   readonly handleOnly = input(false);
+  /** When `true`, scales the page behind the drawer down while open (requires styling `body.zen-drawer-open` in the host app). */
   readonly scaleBackground = input(false);
 
   private readonly dialogRef = viewChild<ElementRef<HTMLDialogElement>>('drawerDialog');
@@ -43,7 +102,6 @@ export class ZenDrawer {
   private closeTimeout: ReturnType<typeof setTimeout> | null = null;
 
   protected readonly isVertical = computed(() => this.side() === 'top' || this.side() === 'bottom');
-  protected readonly sideAxis = computed(() => (this.isVertical() ? 'y' : 'x'));
 
   constructor() {
     this.destroyRef.onDestroy(() => {
@@ -85,10 +143,12 @@ export class ZenDrawer {
     });
   }
 
+  /** Programmatically close the drawer (sets `open` to `false`). */
   close(): void {
     this.open.set(false);
   }
 
+  /** Handles the native `cancel` event (Escape). Always prevents the default close; closes only when `closeOnEscape` is `true`. */
   protected cancel(event: Event): void {
     event.preventDefault();
     if (this.closeOnEscape()) {
@@ -96,6 +156,7 @@ export class ZenDrawer {
     }
   }
 
+  /** Closes on backdrop click unless a drag just ended or `backdrop` is disabled. */
   protected onBackdropClick(event: MouseEvent): void {
     if (!this.backdrop()) return;
 
@@ -116,6 +177,7 @@ export class ZenDrawer {
     }
   }
 
+  /** Registers a pointer as a potential drag source and records whether the press started on the backdrop. */
   protected pointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
 
@@ -135,6 +197,7 @@ export class ZenDrawer {
     this.gesture.pointerDown(event, this.side(), this.gestureCallbacks());
   }
 
+  /** Routes pointer movement to the gesture engine; marks a completed drag so the trailing click is swallowed. */
   protected pointerMove(event: PointerEvent): void {
     this.gesture.pointerMove(event, this.side(), this.gestureCallbacks());
     if (this.gesture.isLocked) {
@@ -142,10 +205,12 @@ export class ZenDrawer {
     }
   }
 
+  /** Ends the drag gesture and lets the engine decide whether to close or snap back. */
   protected pointerUp(event: PointerEvent): void {
     this.gesture.pointerUp(event.pointerId, this.side(), this.gestureCallbacks());
   }
 
+  /** Cancels an in-progress drag gesture (e.g. lost pointer) and resets drag state. */
   protected pointerCancel(event: PointerEvent): void {
     this.wasDragging = false;
     this.backdropMouseDown = false;
