@@ -23,10 +23,6 @@ $sides: (
 $default-side-width: min(24rem, 75vw);
 $default-vertical-max-height: calc(100dvh - 6rem);
 
-:host {
-  display: contents;
-}
-
 .zen-drawer {
   --zen-drawer-padding: 1rem;
   --zen-drawer-bg: #fff;
@@ -47,7 +43,14 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   --zen-size-block-lg: clamp(24rem, 60dvh, 38rem);
   --zen-size-block-xl: clamp(30rem, 75dvh, 46rem);
   --zen-size-block-full: calc(100% - var(--zen-drawer-inset) * 2);
+}
 
+:host {
+  display: contents;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+.zen-drawer {
   display: none;
   position: fixed;
   box-sizing: border-box;
