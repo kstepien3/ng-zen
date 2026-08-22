@@ -1,10 +1,8 @@
 <dialog
   #drawerDialog
   class="zen-drawer"
-  [attr.data-expanded]="isExpanded()"
   [attr.data-side]="side()"
   [attr.data-size]="size()"
-  [attr.data-snap-points]="hasSnapPoints()"
   [attr.data-swipe-axis]="sideAxis()"
   [attr.data-swipe-direction]="side()"
   (cancel)="cancel($event)"

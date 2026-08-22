@@ -165,86 +165,6 @@ export const Sizes: Story = {
   }),
 };
 
-export const SnapPoints: Story = {
-  render: () => ({
-    props: {
-      openSnap: signal(false),
-    },
-    template: `
-      <button zen-btn (click)="openSnap.set(true)">Open Snap Points</button>
-
-      <zen-drawer [(open)]="openSnap" side="bottom" [snapPoints]="[0.25, 0.5, 1]">
-        <h2 drawer-header>Snap Drawer</h2>
-        <p>Opens at 25% (first snap). Drag up/down to snap between 25%, 50%, and 100% of viewport.</p>
-        <div style="height: 300px; background: hsl(200deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
-          <p>Scrollable content area</p>
-        </div>
-        <div style="height: 300px; background: hsl(200deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
-          <p>More content</p>
-        </div>
-      </zen-drawer>
-    `,
-  }),
-};
-
-export const SnapPointsWithSizeNames: Story = {
-  render: () => ({
-    props: {
-      openSnapSize: signal(false),
-    },
-    template: `
-      <button zen-btn (click)="openSnapSize.set(true)">Open with Size Names</button>
-
-      <zen-drawer [(open)]="openSnapSize" side="bottom" [snapPoints]="['sm', 'md', 'full']">
-        <h2 drawer-header>Snap with Size Names</h2>
-        <p>Snap points use size presets: sm, md, full. Opens at sm (first snap).</p>
-        <div style="height: 200px; background: hsl(120deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
-          <p>Content</p>
-        </div>
-      </zen-drawer>
-    `,
-  }),
-};
-
-export const SnapPointsAllSides: Story = {
-  render: () => ({
-    props: {
-      openLeft: signal(false),
-      openRight: signal(false),
-      openTop: signal(false),
-      openBottom: signal(false),
-    },
-    template: `
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <button zen-btn (click)="openLeft.set(true)">Left</button>
-        <button zen-btn (click)="openRight.set(true)">Right</button>
-        <button zen-btn (click)="openTop.set(true)">Top</button>
-        <button zen-btn (click)="openBottom.set(true)">Bottom</button>
-      </div>
-
-      <zen-drawer [(open)]="openLeft" side="left" [snapPoints]="['sm', 'md', 'full']">
-        <h2 drawer-header>Left Snap</h2>
-        <p>Snap points on the left side (opens at first snap).</p>
-      </zen-drawer>
-
-      <zen-drawer [(open)]="openRight" side="right" [snapPoints]="['sm', 'md', 'full']">
-        <h2 drawer-header>Right Snap</h2>
-        <p>Snap points on the right side (opens at first snap).</p>
-      </zen-drawer>
-
-      <zen-drawer [(open)]="openTop" side="top" [snapPoints]="['sm', 'md', 'full']">
-        <h2 drawer-header>Top Snap</h2>
-        <p>Snap points on the top side. Drag up/down to snap between sizes.</p>
-      </zen-drawer>
-
-      <zen-drawer [(open)]="openBottom" side="bottom" [snapPoints]="['sm', 'md', 'full']">
-        <h2 drawer-header>Bottom Snap</h2>
-        <p>Snap points on the bottom side. Drag up/down to snap between sizes.</p>
-      </zen-drawer>
-    `,
-  }),
-};
-
 export const HandleOnly: Story = {
   render: () => ({
     props: {
@@ -253,7 +173,7 @@ export const HandleOnly: Story = {
     template: `
       <button zen-btn (click)="openHandle.set(true)">Handle Only</button>
 
-      <zen-drawer [(open)]="openHandle" side="bottom" [handleOnly]="true">
+      <zen-drawer [swipeHandle]="true" [(open)]="openHandle" side="bottom" [handleOnly]="true">
         <h2 drawer-header>Handle Only Drawer</h2>
         <p>Only the grab handle can drag this drawer. Click or drag anywhere else on the content.</p>
         <div style="height: 200px; background: hsl(120deg 80% 95%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 1rem;">

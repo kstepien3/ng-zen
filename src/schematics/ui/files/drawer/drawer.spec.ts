@@ -14,7 +14,6 @@ import { ZenDrawer } from './drawer';
       [scaleBackground]="scaleBackground()"
       [side]="side()"
       [size]="size()"
-      [snapPoints]="snapPoints()"
       [swipeHandle]="swipeHandle()"
       [(open)]="isOpen"
     >
@@ -34,7 +33,6 @@ class DrawerTestComponent {
   readonly swipeHandle = signal(true);
   readonly handleOnly = signal(false);
   readonly scaleBackground = signal(false);
-  readonly snapPoints = signal<(number | string)[]>([]);
   readonly backdrop = signal(true);
 }
 
@@ -156,15 +154,6 @@ describe('ZenDrawer', () => {
 
       const drawerEl = getDrawerEl(fixture)!;
       expect(drawerEl.getAttribute('data-swipe-axis')).toBe('y');
-    });
-
-    it('should apply data-snap-points when snapPoints provided', () => {
-      const fixture = TestBed.createComponent(DrawerTestComponent);
-      fixture.componentInstance.snapPoints.set([0.5, 1]);
-      fixture.detectChanges();
-
-      const drawerEl = getDrawerEl(fixture)!;
-      expect(drawerEl.getAttribute('data-snap-points')).toBe('true');
     });
 
     it('should close when close is called', async () => {

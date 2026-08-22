@@ -1,42 +1,24 @@
-import { Component, computed, effect, ElementRef, input, model, untracked, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, model, OnDestroy, untracked, viewChild } from '@angular/core';
 
-import { DrawerGesture, GestureCallbacks } from './drawer-gesture';
-
-export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
-export type DrawerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
-
-const SIZE_FRACTIONS: Record<DrawerSize, number> = {
-  sm: 0.25,
-  md: 0.4,
-  lg: 0.55,
-  xl: 0.7,
-  full: 1,
-};
-
-const VERTICAL_SIZE_FRACTIONS: Record<DrawerSize, number> = {
-  sm: 0.3,
-  md: 0.45,
-  lg: 0.6,
-  xl: 0.75,
-  full: 1,
-};
+import { DrawerSide, DrawerSize, GestureCallbacks } from './drawer.types';
+import { DrawerGesture } from './drawer-gesture';
 
 @Component({
   selector: 'zen-drawer',
+  standalone: true,
   templateUrl: './drawer.html',
   styleUrl: './drawer.scss',
   host: {
     '(click)': 'onBackdropClick($event)',
   },
 })
-export class ZenDrawer {
+export class ZenDrawer implements OnDestroy {
   readonly open = model<boolean>(false);
   readonly side = input<DrawerSide>('right');
   readonly size = input<DrawerSize>('md');
-  readonly snapPoints = input<(number | string)[]>([]);
   readonly closeOnEscape = input(true);
   readonly backdrop = input(true);
-  readonly swipeHandle = input(true);
+  readonly swipeHandle = input(false);
   readonly handleOnly = input(false);
   readonly scaleBackground = input(false);
 
@@ -50,10 +32,6 @@ export class ZenDrawer {
 
   protected readonly isVertical = computed(() => this.side() === 'top' || this.side() === 'bottom');
   protected readonly sideAxis = computed(() => (this.isVertical() ? 'y' : 'x'));
-  protected readonly hasSnapPoints = computed(() => (this.snapPoints().length > 0 ? 'true' : null));
-  protected readonly isExpanded = computed(() => {
-    return this.gesture.hasSnaps && this.gesture.snapHeight >= this.gesture.maxSnap ? 'true' : null;
-  });
 
   constructor() {
     effect(() => {
@@ -79,18 +57,21 @@ export class ZenDrawer {
           if (shouldScale) {
             document.body.classList.add('zen-drawer-open');
           }
-
-          const resolved = this.resolveSnapPoints(this.snapPoints());
-          if (resolved.length > 0) {
-            const openSnap = this.gesture.initSnapHeight();
-            const cssVar = this.isVertical() ? '--zen-drawer-height' : '--zen-drawer-width';
-            element.style.setProperty(cssVar, `${openSnap}px`);
-          }
         } else if (element.open && !this.isClosing) {
           this.animateAndClose(element, shouldScale);
         }
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+    if (this.scaleBackground()) {
+      document.body.classList.remove('zen-drawer-open');
+    }
   }
 
   close(): void {
@@ -215,17 +196,6 @@ export class ZenDrawer {
           event.clientY < rect.top ||
           event.clientY > rect.bottom
       : true;
-  }
-
-  private resolveSnapPoints(snapPoints: (number | string)[]): number[] {
-    const fractions = this.isVertical() ? VERTICAL_SIZE_FRACTIONS : SIZE_FRACTIONS;
-    const resolved = snapPoints.map(snap => {
-      if (typeof snap === 'string' && snap in fractions) {
-        return fractions[snap as DrawerSize];
-      }
-      return snap;
-    });
-    return this.gesture.resolveSnapPoints(resolved, this.isVertical());
   }
 
   private gestureCallbacks(): GestureCallbacks {

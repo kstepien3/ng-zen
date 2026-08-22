@@ -20,18 +20,6 @@ $sides: (
     open: translateY(var(--zen-drawer-drag, 0px)),
   ),
 );
-$sizes: (
-  sm: clamp(16rem, 25vw, 24rem),
-  md: clamp(22rem, 40vw, 34rem),
-  lg: clamp(30rem, 55vw, 46rem),
-  xl: clamp(38rem, 70vw, 58rem),
-);
-$vertical-sizes: (
-  sm: clamp(14rem, 30dvh, 22rem),
-  md: clamp(18rem, 45dvh, 30rem),
-  lg: clamp(24rem, 60dvh, 38rem),
-  xl: clamp(30rem, 75dvh, 46rem),
-);
 $default-side-width: min(24rem, 75vw);
 $default-vertical-max-height: calc(100dvh - 6rem);
 
@@ -49,10 +37,20 @@ $default-vertical-max-height: calc(100dvh - 6rem);
   --zen-drawer-inset: 0px;
   --zen-drawer-drag: 0px;
   --zen-drawer-height: auto;
-}
+  --zen-size-sm: clamp(16rem, 25vw, 24rem);
+  --zen-size-md: clamp(22rem, 40vw, 34rem);
+  --zen-size-lg: clamp(30rem, 55vw, 46rem);
+  --zen-size-xl: clamp(38rem, 70vw, 58rem);
+  --zen-size-full: calc(100% - var(--zen-drawer-inset) * 2);
 
-/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
-.zen-drawer {
+  &[data-swipe-axis='y'] {
+    --zen-size-sm: clamp(14rem, 30dvh, 22rem);
+    --zen-size-md: clamp(18rem, 45dvh, 30rem);
+    --zen-size-lg: clamp(24rem, 60dvh, 38rem);
+    --zen-size-xl: clamp(30rem, 75dvh, 46rem);
+    --zen-size-full: calc(100% - var(--zen-drawer-inset) * 2);
+  }
+
   display: none;
   position: fixed;
   box-sizing: border-box;
@@ -149,44 +147,18 @@ $default-vertical-max-height: calc(100dvh - 6rem);
     border-radius: var(--zen-drawer-leading-border-radius) var(--zen-drawer-leading-border-radius) 0 0;
   }
 
-  @each $name, $size in $sizes {
+  @each $name in (sm, md, lg, xl, full) {
     &[data-side='right'][data-size='#{$name}'],
     &[data-side='left'][data-size='#{$name}'] {
-      &:not([data-snap-points]) {
-        width: $size;
-        max-width: 100vw;
-      }
+      width: var(--zen-size-#{$name});
+      max-width: 100vw;
     }
-  }
 
-  @each $name, $size in $vertical-sizes {
     &[data-side='top'][data-size='#{$name}'],
     &[data-side='bottom'][data-size='#{$name}'] {
-      &:not([data-snap-points]) {
-        height: $size;
-        max-height: 100vh;
-      }
+      height: var(--zen-size-#{$name});
+      max-height: 100dvh;
     }
-  }
-
-  &[data-side='right'][data-size='full']:not([data-snap-points]),
-  &[data-side='left'][data-size='full']:not([data-snap-points]) {
-    width: calc(100% - var(--zen-drawer-inset) * 2);
-  }
-
-  &[data-side='top'][data-size='full']:not([data-snap-points]),
-  &[data-side='bottom'][data-size='full']:not([data-snap-points]) {
-    height: calc(100% - var(--zen-drawer-inset) * 2);
-  }
-
-  &[data-side='right'][data-snap-points],
-  &[data-side='left'][data-snap-points] {
-    max-width: 100vw;
-  }
-
-  &[data-side='top'][data-snap-points],
-  &[data-side='bottom'][data-snap-points] {
-    max-height: 100dvh;
   }
 
   &::backdrop {
