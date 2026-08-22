@@ -1,0 +1,24 @@
+<dialog
+  #drawerDialog
+  class="zen-drawer"
+  [attr.data-side]="side()"
+  [attr.data-size]="size()"
+  [attr.data-swipe-direction]="side()"
+  (cancel)="cancel($event)"
+  (close)="close()"
+  (pointercancel)="pointerCancel($event)"
+  (pointerdown)="pointerDown($event)"
+  (pointermove)="pointerMove($event)"
+  (pointerup)="pointerUp($event)"
+>
+  @if (swipeHandle()) {
+    <div class="zen-drawer-swipe-handle"></div>
+  }
+  <ng-content select="[drawer-header]" />
+  <div class="zen-drawer-content">
+    <ng-content />
+  </div>
+  <div class="zen-drawer-footer">
+    <ng-content select="[drawer-footer]" />
+  </div>
+</dialog>
