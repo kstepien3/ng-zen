@@ -16,6 +16,7 @@ export type UiType =
   | 'checkbox'
   | 'dialog'
   | 'divider'
+  | 'drawer'
   | 'form-control'
   | 'icon'
   | 'input'
