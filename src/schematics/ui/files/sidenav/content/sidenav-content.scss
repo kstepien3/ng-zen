@@ -11,10 +11,8 @@
   scrollbar-color: var(--zen-sidenav-border) transparent;
   container-type: inline-size;
   container-name: sidenav-nav;
-}
 
-@media (width <= 48rem) {
-  :host {
+  @media (width <= 48rem) {
     flex-direction: row;
     align-items: stretch;
     gap: 0.25rem;
@@ -23,9 +21,9 @@
     scroll-snap-type: x proximity;
     overscroll-behavior-inline: contain;
     -webkit-overflow-scrolling: touch;
-  }
 
-  :host::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

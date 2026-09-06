@@ -23,6 +23,16 @@
   transition: inline-size 180ms ease;
   z-index: 1000;
   position: relative;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  // In-flow bottom bar: part of the layout, never above content
+  @media (width <= 48rem) {
+    inline-size: 100%;
+    block-size: auto;
+  }
 }
 
 .sidenav-container {
@@ -36,6 +46,19 @@
   overflow: hidden;
   background: var(--zen-sidenav-background);
   border-inline-end: 1px solid var(--zen-sidenav-border);
+
+  @media (width <= 48rem) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'content footer';
+    align-items: stretch;
+    block-size: auto;
+    padding-block: 0.25rem max(0.25rem, env(safe-area-inset-bottom));
+    padding-inline: 0.25rem;
+    border-block-start: 1px solid var(--zen-sidenav-border);
+    border-inline-end: 0;
+    overflow: hidden;
+  }
 }
 
 :host([data-collapsed='true']) {
@@ -52,56 +75,29 @@
   min-block-size: var(--zen-sidenav-item-height);
   margin-block-end: var(--zen-sidenav-gap);
   overflow: hidden;
+
+  @media (width <= 48rem) {
+    display: none;
+  }
 }
 
 .sidenav-content {
   min-block-size: 0;
   overflow: hidden;
+
+  @media (width <= 48rem) {
+    grid-area: content;
+    min-inline-size: 0;
+    overflow: hidden;
+  }
 }
 
 .sidenav-footer {
   margin-block-start: auto;
   padding-block-start: 0.75rem;
   overflow: hidden;
-}
 
-@media (prefers-reduced-motion: reduce) {
-  :host {
-    transition: none;
-  }
-}
-
-// In-flow bottom bar: part of the layout, never above content
-@media (width <= 48rem) {
-  :host {
-    inline-size: 100%;
-    block-size: auto;
-  }
-
-  .sidenav-container {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: 'content footer';
-    align-items: stretch;
-    block-size: auto;
-    padding-block: 0.25rem max(0.25rem, env(safe-area-inset-bottom));
-    padding-inline: 0.25rem;
-    border-block-start: 1px solid var(--zen-sidenav-border);
-    border-inline-end: 0;
-    overflow: hidden;
-  }
-
-  .sidenav-header {
-    display: none;
-  }
-
-  .sidenav-content {
-    grid-area: content;
-    min-inline-size: 0;
-    overflow: hidden;
-  }
-
-  .sidenav-footer {
+  @media (width <= 48rem) {
     grid-area: footer;
     margin-block-start: 0;
     padding-block-start: 0;
