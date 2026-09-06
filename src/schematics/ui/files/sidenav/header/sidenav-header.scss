@@ -1,0 +1,8 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-block-size: var(--zen-sidenav-item-height);
+  min-inline-size: 0;
+}

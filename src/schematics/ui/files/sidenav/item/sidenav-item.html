@@ -1,0 +1,9 @@
+<a
+  routerLinkActive="active"
+  [attr.aria-label]="ariaLabel() || label()"
+  [attr.title]="ariaLabel() || label()"
+  [routerLink]="routerLink()"
+>
+  <zen-icon [icon]="icon()" [size]="size()" />
+  <span class="sidenav-label">{{ label() }}</span>
+</a>
