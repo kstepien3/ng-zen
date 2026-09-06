@@ -1,0 +1,15 @@
+<aside class="sidenav-container">
+  <header class="sidenav-header">
+    <ng-content select="[zenSidenavHeader]" />
+  </header>
+
+  <div class="sidenav-content">
+    <ng-content select="[zenSidenavContent]" />
+  </div>
+
+  <footer class="sidenav-footer">
+    <ng-content select="[zenSidenavFooter]" />
+  </footer>
+</aside>
+
+<ng-content select="zen-sidenav-toggle" />
