@@ -8,6 +8,26 @@ import { Schema as UiOptions, UiType } from './schema';
 const DEFAULT_GENERATION_PATH = 'ui'; // src/app/ui
 
 const FORM_CONTROL_DEPS: ReadonlySet<UiType> = new Set(['input', 'checkbox', 'switch', 'radio']);
+const SIDENAV_DEPS: ReadonlySet<UiType> = new Set(['button', 'icon']);
+
+function resolveSidenavDependencies(
+  tree: Tree,
+  logger: SchematicContext['logger'],
+  ui: UiType[],
+  workingDirectory: Path
+): void {
+  if (!ui.includes('sidenav')) return;
+
+  for (const dep of SIDENAV_DEPS) {
+    const depPath = normalize(`${workingDirectory}/${dep}/${dep}.ts`);
+    if (tree.exists(depPath)) {
+      logger.info(`ℹ ${dep} skipped — already exists`);
+    } else if (!ui.includes(dep)) {
+      ui.push(dep);
+      logger.info(`✔ ${dep} included (auto-included for sidenav)`);
+    }
+  }
+}
 
 function resolveFormControlDependency(
   tree: Tree,
@@ -42,6 +62,7 @@ export function uiGenerator({ ui: selected, project, ...options }: UiOptions): R
     const ui = [...selected];
 
     resolveFormControlDependency(tree, context.logger, ui, workingDirectory);
+    resolveSidenavDependencies(tree, context.logger, ui, workingDirectory);
 
     return chain([...applyFileTemplateUtil(ui, { ...options, path: workingDirectory })]);
   };

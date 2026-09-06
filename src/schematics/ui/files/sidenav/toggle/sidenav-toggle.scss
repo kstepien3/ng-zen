@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  // Floating edge affordance against the nearest positioned ancestor (zen-sidenav host)
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: -0.75rem;
+  z-index: 1;
+}
+
+:host button {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  min-inline-size: 1.5rem;
+  padding: 0;
+  border-radius: 999px;
+  background: var(--zen-sidenav-background);
+  border: 1px solid var(--zen-sidenav-border);
+}
+
+@media (width <= 48rem) {
+  :host {
+    display: none;
+  }
+}

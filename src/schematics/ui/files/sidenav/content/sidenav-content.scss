@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zen-sidenav-gap);
+  min-block-size: 0;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--zen-sidenav-border) transparent;
+  container-type: inline-size;
+  container-name: sidenav-nav;
+}
+
+@media (width <= 48rem) {
+  :host {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.25rem;
+    overflow: auto hidden;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  :host::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,87 @@
+:host {
+  display: block;
+  min-inline-size: 0;
+}
+
+a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: var(--zen-sidenav-item-radius);
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+
+  &:hover {
+    background: color-mix(in oklch, var(--zen-sidenav-hover-background) 80%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--zen-sidenav-focus-color);
+    outline-offset: 2px;
+  }
+
+  &.active {
+    background: var(--zen-sidenav-active-background);
+    font-weight: 600;
+  }
+}
+
+.sidenav-label {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  transition:
+    opacity 150ms ease,
+    width 150ms ease,
+    margin 150ms ease;
+  overflow: hidden;
+}
+
+/* Desktop collapsed: hide label, show only icon with tooltip via title/aria-label */
+:host-context([data-collapsed='true']) .sidenav-label {
+  width: 0;
+  opacity: 0;
+  margin-inline: 0;
+  pointer-events: none;
+}
+
+/* Mobile bottom bar: icon-first column, small label with ellipsis */
+@media (width <= 48rem) {
+  :host {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  a {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    min-inline-size: 4rem;
+    padding-block: 0.25rem;
+    padding-inline: 0.5rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .sidenav-label {
+    font-size: 0.625rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-inline-size: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a,
+  .sidenav-label {
+    transition: none;
+  }
+}

@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media (width <= 48rem) {
+  :host {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
