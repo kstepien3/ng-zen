@@ -137,7 +137,7 @@
     "@storybook/addon-docs": "^10.5.6",
     "@storybook/addon-links": "^10.5.6",
     "@storybook/angular": "^10.5.6",
-    "@types/node": "^25.9.5",
+    "@types/node": "^26.4.1",
     "angular-eslint": "22.0.0",
     "conventional-changelog-conventionalcommits": "^9.3.1",
     "eslint": "^10.8.0",
