@@ -171,6 +171,12 @@ ng generate @ng-zen/cli:ui --ui button input --stories
 | **Pin**     | Anchor-positioned overlay    | CSS Anchor Positioning, TemplateRef content, position and offset controls |
 | **Popover** | Native Popover API directive | Template/string content, placements, click toggle, CSS anchor positioning |
 
+### Navigation
+
+| Component   | Description                 | Features                                                         |
+| ----------- | --------------------------- | ---------------------------------------------------------------- |
+| **Sidenav** | Responsive navigation shell | Collapsible rail, mobile bottom bar, header/content/footer slots |
+
 ## 🎨 Customization
 
 Every generated component utilizes CSS variables for immediate theming without touching the core logic. Overwrite them globally or locally:

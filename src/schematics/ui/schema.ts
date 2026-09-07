@@ -23,6 +23,7 @@ export type UiType =
   | 'pin'
   | 'popover'
   | 'radio'
+  | 'sidenav'
   | 'skeleton'
   | 'switch'
   | 'textarea';
