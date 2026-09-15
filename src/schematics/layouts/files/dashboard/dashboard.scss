@@ -1,0 +1,34 @@
+:host {
+  --zen-dashboard-content-padding: 1.5rem;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: flex;
+  height: 100dvh;
+}
+
+.dashboard-nav {
+  display: block;
+  flex: 0 0 auto;
+  min-inline-size: 0;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-inline-size: 0;
+  overflow-y: auto;
+  padding: var(--zen-dashboard-content-padding);
+}
+
+/* Mobile: content scrolls above an in-flow bottom nav (no overlay) */
+@media (width <= 48rem) {
+  :host {
+    flex-direction: column;
+  }
+
+  .dashboard-main {
+    min-block-size: 0;
+    order: -1;
+  }
+}
