@@ -11,6 +11,12 @@
       "factory": "./ui/index#uiGenerator",
       "schema": "./ui/schema.json",
       "aliases": ["c", "component", "components"]
+    },
+    "layouts": {
+      "description": "This schematic generates layouts",
+      "factory": "./layouts/index#layoutsGenerator",
+      "schema": "./layouts/schema.json",
+      "aliases": ["layout", "l"]
     }
   }
 }

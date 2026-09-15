@@ -60,7 +60,13 @@ ng add @ng-zen/cli
 ng generate @ng-zen/cli:ui
 ```
 
-**3. Use the generated standalone component:**
+**3. Generate layouts (interactive mode):**
+
+```bash
+ng generate @ng-zen/cli:layouts
+```
+
+**4. Use the generated standalone component:**
 
 ```typescript
 import { ZenButton } from './ui/button';
@@ -80,11 +86,12 @@ export class MyComponent {}
 2. [Features](#-features)
 3. [CLI Usage & Options](#-cli-usage--options)
 4. [Available UIs](#-available-uis)
-5. [Customization](#-customization)
-6. [ESLint Configuration](#-eslint-configuration)
-7. [Philosophy & Architecture](#-philosophy--architecture)
-8. [Community & Contributions](#-community--contributions)
-9. [Documentation & Links](#-documentation--links)
+5. [Available Layouts](#-available-layouts)
+6. [Customization](#-customization)
+7. [ESLint Configuration](#-eslint-configuration)
+8. [Philosophy & Architecture](#-philosophy--architecture)
+9. [Community & Contributions](#-community--contributions)
+10. [Documentation & Links](#-documentation--links)
 
 ## ✨ Features
 
@@ -130,6 +137,29 @@ ng generate @ng-zen/cli:ui ./src/app/shared/components --ui avatar badge card
 ```bash
 ng generate @ng-zen/cli:ui --ui button input --stories
 ```
+
+### Layouts
+
+Generate app-shell layouts (page-level components composed with UI components) into `src/app/layouts` by default.
+
+```bash
+ng generate @ng-zen/cli:layouts [path] --layouts <elements...> --stories
+```
+
+| Property        | Status     | Default           | Description                                                                                               |
+| :-------------- | :--------- | :---------------- | :-------------------------------------------------------------------------------------------------------- |
+| **`[path]`**    | _Optional_ | `src/app/layouts` | The directory where layouts will be generated (e.g., `./src/app/shared/layouts`).                         |
+| **`--layouts`** | _Required_ | -                 | A space-separated list of layouts to generate (e.g., `dashboard`). Interactive prompt appears if omitted. |
+| **`--stories`** | _Optional_ | `false`           | Generates `.stories.ts` files alongside the layout, instantly ready for your Storybook integration.       |
+| **`--project`** | _Optional_ | auto-detected     | Specify the target project name in a multi-project workspace.                                             |
+
+**Generate the dashboard layout with Storybook files:**
+
+```bash
+ng generate @ng-zen/cli:layouts --layouts dashboard --stories
+```
+
+> Layout stories compose generated UI components (dashboard stories use `sidenav`, `button` and `icon`). Generate those UI components at their default paths first so the story imports resolve.
 
 ## 🧩 Available UIs
 
@@ -177,6 +207,12 @@ ng generate @ng-zen/cli:ui --ui button input --stories
 | ----------- | --------------------------- | ---------------------------------------------------------------- |
 | **Sidenav** | Responsive navigation shell | Collapsible rail, mobile bottom bar, header/content/footer slots |
 
+## 🧭 Available Layouts
+
+| Layout        | Description                         | Features                                                                    |
+| ------------- | ----------------------------------- | --------------------------------------------------------------------------- |
+| **Dashboard** | Responsive app shell: nav + content | Nav slot + scrollable main, in-flow mobile bottom bar, pairs with `sidenav` |
+
 ## 🎨 Customization
 
 Every generated component utilizes CSS variables for immediate theming without touching the core logic. Overwrite them globally or locally:
@@ -208,7 +244,7 @@ ng add @ng-zen/cli
 # → Prompt: "ESLint config detected. Update it for ng-zen UI components?"
 ```
 
-It adds `@ng-zen/cli/eslint-config` to your `eslint.config.*` and spreads it into the `defineConfig` array. This enforces the `zen` prefix on component selectors and relaxes rules for `.stories.ts` / `.spec.ts` files generated inside `ui/` directories.
+It adds `@ng-zen/cli/eslint-config` to your `eslint.config.*` and spreads it into the `defineConfig` array. This enforces the `zen` prefix on component selectors and relaxes rules for `.stories.ts` / `.spec.ts` files generated inside `ui/` and `layouts/` directories.
 
 **Manual setup** (if you declined the prompt):
 
@@ -218,7 +254,7 @@ import ngZen from '@ng-zen/cli/eslint-config';
 export default defineConfig([...otherConfigs, ...ngZen]);
 ```
 
-**Custom path or rules** — use the named exports for fine-grained control:
+**Custom path or rules** — use the named exports for fine-grained control (use `layoutsFiles` the same way for generated layouts):
 
 ```ts
 import ngZen from '@ng-zen/cli/eslint-config';
