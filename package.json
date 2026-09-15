@@ -66,6 +66,8 @@
     "theming",
     "angular schematics generator",
     "ui components cli",
+    "layouts",
+    "dashboard",
     "alert",
     "avatar",
     "badge",

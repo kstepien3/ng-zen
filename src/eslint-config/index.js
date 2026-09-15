@@ -2,7 +2,7 @@
 const { defineConfig } = require('eslint/config');
 
 /**
- * Config block for UI components inside a `ui/` directory.
+ * Config block for UI components and layouts inside `ui/` / `layouts/` directories.
  *
  * Enforces:
  * - `zen` prefix for component selectors (`element`, `kebab-case`)
@@ -12,7 +12,7 @@ const { defineConfig } = require('eslint/config');
  * @type {import('eslint').Linter.Config}
  */
 const uiComponent = {
-  files: ['**/ui/**/*.ts'],
+  files: ['**/ui/**/*.ts', '**/layouts/**/*.ts'],
   rules: {
     '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'zen', style: 'camelCase' }],
     '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'zen', style: 'kebab-case' }],
@@ -30,7 +30,14 @@ const uiComponent = {
  * @type {import('eslint').Linter.Config}
  */
 const generatedFiles = {
-  files: ['**/ui/**/*.spec.ts', '**/ui/**/*.test.ts', '**/ui/**/*.stories.ts'],
+  files: [
+    '**/ui/**/*.spec.ts',
+    '**/ui/**/*.test.ts',
+    '**/ui/**/*.stories.ts',
+    '**/layouts/**/*.spec.ts',
+    '**/layouts/**/*.test.ts',
+    '**/layouts/**/*.stories.ts',
+  ],
   rules: {
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
@@ -46,13 +53,15 @@ const generatedFiles = {
 };
 
 /**
- * Creates a custom UI component config block with a custom file glob.
+ * Creates a custom ng-zen config block with a custom file glob.
  *
  * @param {Object} [options]
  * @param {string | string[]} [options.uiFiles] - Glob pattern(s) for UI component files.
  *   Uses the same format as the `files` property in flat config.
+ * @param {string | string[]} [options.layoutsFiles] - Glob pattern(s) for layout files.
+ *   Uses the same format as the `files` property in flat config.
  * @returns {import('eslint').Linter.Config} A config block with the same rules as
- *   uiComponent but scoped to the provided file pattern.
+ *   uiComponent but scoped to the provided file patterns.
  *
  * @example
  * ```ts
@@ -60,8 +69,8 @@ const generatedFiles = {
  * ```
  */
 function createNgZenConfig(options = {}) {
-  const { uiFiles = ['**/ui/**/*.ts'] } = options;
-  return { ...uiComponent, files: [uiFiles].flat() };
+  const { uiFiles = ['**/ui/**/*.ts'], layoutsFiles = ['**/layouts/**/*.ts'] } = options;
+  return { ...uiComponent, files: [uiFiles, layoutsFiles].flat() };
 }
 
 /**
@@ -81,19 +90,20 @@ function createNgZenConfig(options = {}) {
  * |---|---|---|
  * | `.uiComponent` | `Config` | Rules for UI component files. Override `files` / `rules` via spread. |
  * | `.generatedFiles` | `Config` | Rules for generated files (stories, spec, test). |
- * | `.createNgZenConfig(opts)` | `Config` | Helper — same rules as uiComponent with a custom file glob. |
+ * | `.createNgZenConfig(opts)` | `Config` | Helper — same rules as uiComponent with custom file globs (`uiFiles`, `layoutsFiles`). |
  *
  * ## Custom path
  *
- * By default, UI component files are detected via a glob pattern targeting any `ui` directory
- * (glob: `**` + `/ui/` + `**` + `/*`). If your components live in a different location, choose one of the
+ * By default, UI component and layout files are detected via glob patterns targeting any `ui`
+ * or `layouts` directory
+ * (globs: `**` + `/ui/` + `**` + `/*` and `**` + `/layouts/` + `**` + `/*`). If your files live in different locations, choose one of the
  * approaches below instead of the default `...ngZen` spread.
  *
  * @example <caption>Custom UI path</caption>
  * ```ts
  * import ngZen from '@ng-zen/cli/eslint-config';
  * export default defineConfig([
- *   ngZen.createNgZenConfig({ uiFiles: 'src/app/shared/ui' }),
+ *   ngZen.createNgZenConfig({ uiFiles: 'src/app/shared/ui', layoutsFiles: 'src/app/shared/layouts' }),
  *   ...ngZen.generatedFiles,
  * ]);
  * ```
@@ -117,7 +127,7 @@ function createNgZenConfig(options = {}) {
  *   {
  *     uiComponent: import('eslint').Linter.Config,
  *     generatedFiles: import('eslint').Linter.Config,
- *     createNgZenConfig: (options?: { uiFiles?: string | string[] }) => import('eslint').Linter.Config
+ *     createNgZenConfig: (options?: { uiFiles?: string | string[]; layoutsFiles?: string | string[] }) => import('eslint').Linter.Config
  *   }
  * }
  */

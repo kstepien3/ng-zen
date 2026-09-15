@@ -1,7 +1,7 @@
 import { normalize, strings } from '@angular-devkit/core';
 import { apply, applyTemplates, chain, filter, mergeWith, move, Rule, Source, url } from '@angular-devkit/schematics';
 
-import { GeneratorSchemaBase, UiType } from '../schematics/ui/schema';
+import { GeneratorSchemaBase } from '../schematics/ui/schema';
 import { selectedElements } from '../services/selected-elements';
 
 const createTemplateRules = (folder: string, path: string): Rule[] => [
@@ -16,7 +16,7 @@ const createTemplateRules = (folder: string, path: string): Rule[] => [
 const getTemplates = (rules: Rule[]): Source => apply(url(`./templates`), rules);
 const includeStories = (include: boolean): Rule => filter(filePath => include || !filePath.endsWith('.stories.ts'));
 
-export function applyFileTemplateUtil(folders: UiType[], config: GeneratorSchemaBase): Rule[] {
+export function applyFileTemplateUtil(folders: string[], config: GeneratorSchemaBase): Rule[] {
   selectedElements.push(...folders);
   return folders.map(folder => {
     const RULES = createTemplateRules(folder, config.path as string);

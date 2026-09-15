@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "NgZenCliLayouts",
+  "title": "Schema to create Zen layouts",
+  "type": "object",
+  "description": "Adds Zen layout 📐",
+  "properties": {
+    "currentDirectory": {
+      "description": "Base path from working directory",
+      "type": "string",
+      "format": "path",
+      "hidden": true,
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "readOnly": true
+    },
+    "path": {
+      "description": "The path at which to create the layout file, relative to the current workspace. If not provided, layouts will be generated in the 'layouts' folder within the project's source directory (e.g., src/app/layouts).",
+      "type": "string",
+      "format": "path",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "description": "The name of the project",
+      "type": "string",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "layouts": {
+      "description": "Select elements to generate",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["dashboard"]
+      },
+      "multiselect": true,
+      "minItems": 1,
+      "x-prompt": "Which layouts should be generated?"
+    },
+    "stories": {
+      "description": "Include stories for better documentation and testing",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["layouts"]
+}

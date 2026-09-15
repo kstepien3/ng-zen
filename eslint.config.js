@@ -111,7 +111,7 @@ module.exports = defineConfig([
   },
   ...ngZenConfig,
   {
-    files: ['src/schematics/ui/files/**/*.ts'],
+    files: ['src/schematics/ui/files/**/*.ts', 'src/schematics/layouts/files/**/*.ts'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/member-ordering': 'off',
