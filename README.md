@@ -209,9 +209,10 @@ ng generate @ng-zen/cli:layouts --layouts dashboard --stories
 
 ## 🧭 Available Layouts
 
-| Layout        | Description                         | Features                                                                    |
-| ------------- | ----------------------------------- | --------------------------------------------------------------------------- |
-| **Dashboard** | Responsive app shell: nav + content | Nav slot + scrollable main, in-flow mobile bottom bar, pairs with `sidenav` |
+| Layout        | Description                                   | Features                                                                       |
+| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Dashboard** | Responsive app shell: nav + content           | Nav slot + scrollable main, in-flow mobile bottom bar, pairs with `sidenav`    |
+| **Focus**     | Centered shell for screens outside app chrome | Pure centered slot, safe overflow scroll, max-width container, auth/onboarding |
 
 ## 🎨 Customization
 

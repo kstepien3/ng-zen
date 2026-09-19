@@ -68,6 +68,7 @@
     "ui components cli",
     "layouts",
     "dashboard",
+    "focus",
     "alert",
     "avatar",
     "badge",
