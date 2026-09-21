@@ -36,7 +36,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["dashboard"]
+        "enum": ["dashboard", "focus"]
       },
       "multiselect": true,
       "minItems": 1,

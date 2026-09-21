@@ -1,0 +1,13 @@
+:host {
+  --zen-focus-padding: 1.5rem;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100dvh;
+  padding: var(--zen-focus-padding);
+}
