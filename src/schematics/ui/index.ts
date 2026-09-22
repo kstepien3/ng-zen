@@ -7,7 +7,7 @@ import { Schema as UiOptions, UiType } from './schema';
 
 const DEFAULT_GENERATION_PATH = 'ui'; // src/app/ui
 
-const FORM_CONTROL_DEPS: ReadonlySet<UiType> = new Set(['input', 'checkbox', 'switch', 'radio']);
+const FORM_CONTROL_DEPS: ReadonlySet<UiType> = new Set(['input', 'checkbox', 'switch', 'radio', 'select']);
 
 function resolveFormControlDependency(
   tree: Tree,
