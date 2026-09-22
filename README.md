@@ -165,14 +165,15 @@ ng generate @ng-zen/cli:layouts --layouts dashboard --stories
 
 ### Forms & Inputs
 
-| Component        | Description           | Features                                                         |
-| ---------------- | --------------------- | ---------------------------------------------------------------- |
-| **Checkbox**     | Form checkboxes       | Indeterminate state, custom styling, validation                  |
-| **Form Control** | Form field wrapper    | Labels, validation messages, required indicators                 |
-| **Input**        | Text input fields     | Validation states, prefixes/suffixes, types                      |
-| **Radio**        | Form radio buttons    | Group selection, two-way binding, custom styling, disabled state |
-| **Switch**       | Toggle controls       | On/off states, disabled state, custom labels                     |
-| **Textarea**     | Multi-line text input | Auto-resize, character counts, validation                        |
+| Component         | Description            | Features                                                         |
+| ----------------- | ---------------------- | ---------------------------------------------------------------- |
+| **Checkbox**      | Form checkboxes        | Indeterminate state, custom styling, validation                  |
+| **Form Control**  | Form field wrapper     | Labels, validation messages, required indicators                 |
+| **Input**         | Text input fields      | Validation states, prefixes/suffixes, types                      |
+| **Native Select** | Native dropdown select | Hybrid options/ng-content, validation, label, hint               |
+| **Radio**         | Form radio buttons     | Group selection, two-way binding, custom styling, disabled state |
+| **Switch**        | Toggle controls        | On/off states, disabled state, custom labels                     |
+| **Textarea**      | Multi-line text input  | Auto-resize, character counts, validation                        |
 
 ### Data Display
 
