@@ -51,6 +51,7 @@
           "pin",
           "popover",
           "radio",
+          "select",
           "sidenav",
           "skeleton",
           "switch",
