@@ -9,6 +9,12 @@ const DEFAULT_GENERATION_PATH = 'ui'; // src/app/ui
 
 const FORM_CONTROL_DEPS: ReadonlySet<UiType> = new Set(['input', 'checkbox', 'switch', 'radio']);
 
+const FORM_HELPER_COMPONENTS: readonly { name: UiType; file: string }[] = [
+  { name: 'form-control', file: 'form-control/form-control.ts' },
+  { name: 'hint', file: 'hint/hint.ts' },
+  { name: 'label', file: 'label/label.ts' },
+];
+
 function resolveFormControlDependency(
   tree: Tree,
   logger: SchematicContext['logger'],
@@ -17,12 +23,16 @@ function resolveFormControlDependency(
 ): void {
   if (!ui.some(u => FORM_CONTROL_DEPS.has(u))) return;
 
-  const fcPath = normalize(`${workingDirectory}/form-control/form-control.ts`);
-  if (tree.exists(fcPath)) {
-    logger.info('ℹ form-control skipped — already exists');
-  } else {
-    ui.push('form-control');
-    logger.info('✔ form-control included (auto-included for form components)');
+  for (const { name, file } of FORM_HELPER_COMPONENTS) {
+    if (ui.includes(name)) continue;
+
+    const targetPath = normalize(`${workingDirectory}/${file}`);
+    if (tree.exists(targetPath)) {
+      logger.info(`ℹ ${name} skipped — already exists`);
+    } else {
+      ui.push(name);
+      logger.info(`✔ ${name} included (auto-included for form components)`);
+    }
   }
 }
 
@@ -43,6 +53,8 @@ export function uiGenerator({ ui: selected, project, ...options }: UiOptions): R
 
     resolveFormControlDependency(tree, context.logger, ui, workingDirectory);
 
-    return chain([...applyFileTemplateUtil(ui, { ...options, path: workingDirectory })]);
+    const deduplicatedUi = Array.from(new Set(ui));
+
+    return chain([...applyFileTemplateUtil(deduplicatedUi, { ...options, path: workingDirectory })]);
   };
 }

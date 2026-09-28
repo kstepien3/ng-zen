@@ -1,0 +1,36 @@
+<input
+  #inputElement
+  type="checkbox"
+  [attr.aria-disabled]="disabled()"
+  [attr.aria-invalid]="invalid() || null"
+  [checked]="value()"
+  [disabled]="disabled()"
+  [id]="id()"
+  (change)="onInput(inputElement.checked)"
+/>
+<span aria-hidden="true" class="symbol">
+  @if (value() === null) {
+    ─
+  } @else if (value()) {
+    ✓
+  }
+  <!-- @else { ✕ } -->
+</span>
+@if (label()) {
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+}
+@if (shouldShowError()) {
+  @for (error of errors(); track $index) {
+    <zen-hint severity="error">
+      @if (errorTemplate()) {
+        <ng-container *ngTemplateOutlet="errorTemplate()!; context: { $implicit: error }" />
+      } @else {
+        {{ error.message }}
+      }
+    </zen-hint>
+  }
+} @else if (warn()) {
+  <zen-hint severity="warning">{{ warn() }}</zen-hint>
+} @else if (hint()) {
+  <zen-hint>{{ hint() }}</zen-hint>
+}

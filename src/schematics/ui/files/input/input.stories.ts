@@ -41,13 +41,25 @@ type Story = StoryObj<Options>;
 export const Default: Story = {};
 
 export const WithLabel: Story = {
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column">
-        <label for="label-example"> With label </label>
-        <zen-input id="label-example"/>
-      </div>
-  `,
+  args: {
+    label: 'Username',
+    placeholder: 'Enter username',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-input [label]="label" [placeholder]="placeholder" />',
+  }),
+};
+
+export const WithHintAndWarn: Story = {
+  args: {
+    label: 'Password',
+    hint: 'Must be at least 8 characters',
+    placeholder: 'Enter password',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-input [label]="label" [hint]="hint" [placeholder]="placeholder" type="password" />',
   }),
 };
 
@@ -60,7 +72,7 @@ export const WithSignalForm: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<zen-input [formField]="form.name" />`,
+        code: `<zen-input label="Full Name" [formField]="form.name" />`,
       },
     },
   },
@@ -76,8 +88,8 @@ export const WithFormRoot: Story = {
     docs: {
       source: {
         code: `<form [formRoot]="loginForm">
-  <zen-input [formField]="loginForm.email" placeholder="Email" />
-  <zen-input [formField]="loginForm.password" placeholder="Password" type="password" />
+  <zen-input label="Email" [formField]="loginForm.email" placeholder="Email" />
+  <zen-input label="Password" [formField]="loginForm.password" placeholder="Password" type="password" />
   <button type="submit">Sign in</button>
 </form>`,
       },
@@ -89,12 +101,7 @@ export const WithFormRoot: Story = {
   standalone: true,
   template: `
     <div style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 300px;">
-      <zen-input placeholder="Type something" [formField]="form.name" />
-      @if (form.name().invalid()) {
-        <p style="color: red; margin: 0; font-size: 0.875rem;">
-          {{ form.name().errors()![0].message }}
-        </p>
-      }
+      <zen-input label="Full Name" placeholder="Type something" [formField]="form.name" />
     </div>
   `,
   imports: [FormField, ZenInput],

@@ -40,13 +40,12 @@ type Story = StoryObj<Options>;
 export const Default: Story = {};
 
 export const WithLabel: Story = {
-  render: () => ({
-    template: `
-      <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-checkbox id="label-example"/>
-        <label for="label-example"> With label </label>
-      </div>
-  `,
+  args: {
+    label: 'I agree to the terms and conditions',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-checkbox [label]="label" />',
   }),
 };
 
@@ -59,18 +58,7 @@ export const WithSignalForm: Story = {
   parameters: {
     docs: {
       source: {
-        code: `
-    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-      <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-checkbox id="agree" [formField]="form.agree" />
-        <label for="agree">I agree to the terms</label>
-      </div>
-      @if (form.agree().invalid()) {
-        <p style="color: red; margin: 0; font-size: 0.875rem;">
-          {{ form.agree().errors()![0].message }}
-        </p>
-      }
-    </div>`,
+        code: `<zen-checkbox label="I agree to the terms" [formField]="form.agree" />`,
       },
     },
   },
@@ -80,15 +68,7 @@ export const WithSignalForm: Story = {
   standalone: true,
   template: `
     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-      <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-checkbox id="agree" [formField]="form.agree" />
-        <label for="agree">I agree to the terms</label>
-      </div>
-      @if (form.agree().invalid()) {
-        <p style="color: red; margin: 0; font-size: 0.875rem;">
-          {{ form.agree().errors()![0].message }}
-        </p>
-      }
+      <zen-checkbox label="I agree to the terms" [formField]="form.agree" />
     </div>
   `,
   imports: [FormField, ZenCheckbox],

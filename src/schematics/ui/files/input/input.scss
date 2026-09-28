@@ -13,7 +13,8 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
-  display: contents;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 input {
