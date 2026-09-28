@@ -1,5 +1,5 @@
 @if (label()) {
-  <zen-label size="sm" [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
 }
 <input
   #inputRef

@@ -102,7 +102,7 @@ describe('ZenSwitch', () => {
     fixture.detectChanges();
 
     let hintEl = fixture.debugElement.query(By.css('zen-hint')).nativeElement;
-    expect(hintEl.getAttribute('data-severity')).toBe('info');
+    expect(hintEl.getAttribute('data-severity')).toBe('neutral');
 
     fixture.componentInstance.warn.set('Warning text');
     fixture.detectChanges();

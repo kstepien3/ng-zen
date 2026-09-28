@@ -6,7 +6,7 @@
   [attr.data-disabled]="disabled()"
   [disabled]="disabled()"
   [id]="id()"
-  (click)="onInput(!this.value())"
+  (click)="onInput(!value())"
   (keydown)="onKeyDown($event)"
 >
   <span class="thumb"></span>
@@ -27,5 +27,5 @@
 } @else if (warn()) {
   <zen-hint severity="warning">{{ warn() }}</zen-hint>
 } @else if (hint()) {
-  <zen-hint severity="info">{{ hint() }}</zen-hint>
+  <zen-hint>{{ hint() }}</zen-hint>
 }

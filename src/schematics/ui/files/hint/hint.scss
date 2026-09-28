@@ -5,7 +5,7 @@
   --zen-hint-warning: var(--zen-warning, hsl(36deg 72% 46%));
   --zen-hint-danger: var(--zen-danger, hsl(348deg 52% 42%));
   --zen-hint-info: var(--zen-info, hsl(214deg 34% 46%));
-  --zen-hint-font-size: 0.625rem;
+  --zen-hint-font-size: 0.75rem;
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
@@ -13,24 +13,28 @@
   display: block;
   font-size: var(--zen-hint-font-size);
   line-height: 1.4;
-  color: var(--zen-hint-info);
+  color: var(--zen-hint-neutral);
   opacity: 0.8;
 
   &[data-severity='info'] {
     color: var(--zen-hint-info);
+    opacity: 1;
   }
 
   &[data-severity='warning'] {
     color: var(--zen-hint-warning);
+    opacity: 1;
   }
 
   &[data-severity='error'],
   &[data-severity='danger'] {
     color: var(--zen-hint-danger);
+    opacity: 1;
   }
 
   &[data-severity='success'] {
     color: var(--zen-hint-success);
+    opacity: 1;
   }
 
   &[data-severity='neutral'] {
@@ -39,5 +43,6 @@
 
   &[data-severity='primary'] {
     color: var(--zen-hint-primary);
+    opacity: 1;
   }
 }

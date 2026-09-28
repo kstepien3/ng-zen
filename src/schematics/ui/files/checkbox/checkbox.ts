@@ -55,7 +55,7 @@ export class ZenCheckbox extends ZenFormControl<boolean | null> {
     super();
 
     effect(() => {
-      if (this.value() === null) this.inputElement().nativeElement.indeterminate = true;
+      this.inputElement().nativeElement.indeterminate = this.value() === null;
     });
   }
 }

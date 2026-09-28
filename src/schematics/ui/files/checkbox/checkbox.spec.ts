@@ -75,6 +75,19 @@ describe('ZenCheckbox', () => {
     expect(symbolEl?.textContent?.trim()).toBe('─');
   });
 
+  it('should reset indeterminate state when value changes to boolean', () => {
+    const fixture = TestBed.createComponent(ZenCheckbox);
+    fixture.componentRef.setInput('value', null);
+    fixture.detectChanges();
+
+    const inputEl = fixture.nativeElement.querySelector('input') as HTMLInputElement;
+    expect(inputEl.indeterminate).toBe(true);
+
+    fixture.componentRef.setInput('value', true);
+    fixture.detectChanges();
+    expect(inputEl.indeterminate).toBe(false);
+  });
+
   it('should display checkmark symbol when checked', () => {
     const fixture = TestBed.createComponent(ZenCheckbox);
     fixture.componentRef.setInput('value', true);

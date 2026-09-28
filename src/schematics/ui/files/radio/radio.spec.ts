@@ -68,7 +68,7 @@ describe('ZenRadio', () => {
     fixture.componentRef.setInput('hint', 'Choose one option');
     fixture.detectChanges();
     let hintEl = fixture.debugElement.query(By.css('zen-hint')).nativeElement;
-    expect(hintEl.getAttribute('data-severity')).toBe('info');
+    expect(hintEl.getAttribute('data-severity')).toBe('neutral');
     expect(hintEl.textContent?.trim()).toBe('Choose one option');
 
     fixture.componentRef.setInput('warn', 'Selection cannot be changed');

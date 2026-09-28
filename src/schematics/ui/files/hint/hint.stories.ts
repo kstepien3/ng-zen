@@ -14,11 +14,11 @@ export default {
     },
   },
   args: {
-    severity: 'info',
+    severity: 'neutral',
   },
   render: args => ({
     props: args,
-    template: `<zen-hint [severity]="severity">This is a ${args.severity ?? 'info'} message.</zen-hint>`,
+    template: `<zen-hint [severity]="severity">This is a ${args.severity ?? 'neutral'} message.</zen-hint>`,
   }),
 } satisfies Meta<Options>;
 

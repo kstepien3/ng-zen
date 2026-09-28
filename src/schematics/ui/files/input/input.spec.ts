@@ -76,7 +76,7 @@ describe('ZenInput', () => {
 
     const hintEl = fixture.nativeElement.querySelector('zen-hint');
     expect(hintEl).toBeTruthy();
-    expect(hintEl.getAttribute('data-severity')).toBe('info');
+    expect(hintEl.getAttribute('data-severity')).toBe('neutral');
     expect(hintEl.textContent?.trim()).toBe('Informational hint');
   });
 

@@ -18,11 +18,11 @@ describe('ZenHint', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set default severity to info and role to status', () => {
+  it('should set default severity to neutral and role to status', () => {
     const fixture = TestBed.createComponent(ZenHint);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.getAttribute('data-severity')).toBe('info');
+    expect(el.getAttribute('data-severity')).toBe('neutral');
     expect(el.getAttribute('role')).toBe('status');
   });
 
@@ -41,9 +41,9 @@ describe('ZenHint', () => {
     expect(el.getAttribute('role')).toBe('alert');
   });
 
-  it('should set role to status for warning, success, neutral, and primary', () => {
+  it('should set role to status for info, warning, success, and primary', () => {
     const fixture = TestBed.createComponent(ZenHint);
-    for (const severity of ['warning', 'success', 'neutral', 'primary'] as const) {
+    for (const severity of ['info', 'warning', 'success', 'primary'] as const) {
       fixture.componentRef.setInput('severity', severity);
       fixture.detectChanges();
       const el = fixture.nativeElement as HTMLElement;

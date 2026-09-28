@@ -9,9 +9,9 @@
   (change)="onInput(inputElement.checked)"
 />
 <span aria-hidden="true" class="symbol">
-  @if (inputElement.indeterminate) {
+  @if (value() === null) {
     ─
-  } @else if (inputElement.checked) {
+  } @else if (value()) {
     ✓
   }
   <!-- @else { ✕ } -->
@@ -32,5 +32,5 @@
 } @else if (warn()) {
   <zen-hint severity="warning">{{ warn() }}</zen-hint>
 } @else if (hint()) {
-  <zen-hint severity="info">{{ hint() }}</zen-hint>
+  <zen-hint>{{ hint() }}</zen-hint>
 }
