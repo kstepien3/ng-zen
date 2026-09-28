@@ -12,58 +12,81 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
   --zen-checkbox-border: 1px solid hsl(0deg 0% 80%);
 }
 
-input {
-  position: absolute;
-  cursor: pointer;
-  opacity: 0;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-}
-
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  display: inline-grid;
+  grid-template-columns: var(--zen-checkbox-size) 1fr;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+
+  &:has(input[type='checkbox']:disabled) {
+    opacity: $disabled-opacity;
+
+    &,
+    input,
+    label {
+      cursor: not-allowed;
+    }
+  }
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  grid-column: 1;
+  grid-row: 1;
   border: var(--zen-checkbox-border);
   border-radius: var(--zen-checkbox-border-radius);
   height: var(--zen-checkbox-size);
   width: var(--zen-checkbox-size);
   background-color: white;
   cursor: pointer;
-  position: relative;
+  margin: 0;
+  padding: 0;
   transition:
     background-color ease,
     border-color ease;
   transition-duration: $transition-duration;
-  user-select: none;
-  justify-content: center;
-  display: grid;
-  place-items: center;
-  font-size: small;
 
-  &:has(input:checked) {
-    color: white;
+  &:checked,
+  &:indeterminate {
     background-color: var(--zen-checkbox-appearance);
     border-color: var(--zen-checkbox-appearance);
   }
 
-  &:has(input[type='checkbox']:disabled) {
-    opacity: $disabled-opacity;
-
-    &,
-    input {
-      cursor: not-allowed;
-    }
-  }
-
-  &:has(input:focus-visible) {
+  &:focus-visible {
     outline: $outline;
     box-shadow: $focus-shadow;
   }
 
-  &:has(input:user-invalid) {
+  &:user-invalid {
     border-color: $error;
   }
+}
+
+zen-label {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+zen-hint {
+  grid-column: 1 / -1;
+}
+
+.symbol {
+  grid-column: 1;
+  grid-row: 1;
+  place-self: center center;
+  pointer-events: none;
+  font-size: small;
+  line-height: 1;
+  color: white;
+  user-select: none;
+
+  &:empty {
+    display: none;
+  }
+}
+
+input[type='checkbox']:not(:checked, :indeterminate) ~ .symbol {
+  color: var(--zen-checkbox-appearance);
 }

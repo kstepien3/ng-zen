@@ -1,6 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { afterNextRender, Component, computed, DestroyRef, inject, input, model } from '@angular/core';
 
 import { ZenFormControl } from '../form-control';
+import { ZenHint } from '../hint';
+import { ZenLabel } from '../label';
 import { ZenRadioRegistry } from './radio.registry';
 
 /**
@@ -13,8 +16,8 @@ import { ZenRadioRegistry } from './radio.registry';
  * Use together with a shared `[formField]` binding:
  *
  * ```html
- * <zen-radio [formField]="form.color" name="color" option="red" />
- * <zen-radio [formField]="form.color" name="color" option="green" />
+ * <zen-radio [formField]="form.color" name="color" option="red" label="Red" />
+ * <zen-radio [formField]="form.color" name="color" option="green" label="Green" />
  * ```
  *
  * ### CSS Custom Properties
@@ -38,24 +41,9 @@ import { ZenRadioRegistry } from './radio.registry';
  */
 @Component({
   selector: 'zen-radio',
-  template: `
-    <input
-      #inputElement
-      type="radio"
-      [attr.aria-checked]="checked()"
-      [attr.aria-disabled]="disabled()"
-      [attr.aria-invalid]="invalid() || null"
-      [checked]="checked()"
-      [disabled]="disabled()"
-      [name]="name()"
-      [value]="option()"
-      (change)="onRadioChange()"
-    />
-    @if (checked()) {
-      <span class="radio-dot"></span>
-    }
-  `,
-  styleUrls: ['./radio.scss'],
+  imports: [NgTemplateOutlet, ZenHint, ZenLabel],
+  templateUrl: './radio.html',
+  styleUrl: './radio.scss',
 })
 export class ZenRadio extends ZenFormControl<string | null> {
   /**

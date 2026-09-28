@@ -1,0 +1,52 @@
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
+
+:host {
+  --zen-label-font-size: 0.875rem;
+  --zen-label-font-weight: 500;
+  --zen-label-color: hsl(0deg 0% 15%);
+  --zen-label-required-color: var(--zen-danger, hsl(348deg 52% 42%));
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--zen-label-font-size);
+  font-weight: var(--zen-label-font-weight);
+  color: var(--zen-label-color);
+  line-height: 1.4;
+  user-select: none;
+
+  &[data-size='sm'] {
+    --zen-label-font-size: 0.75rem;
+  }
+
+  &[data-size='md'] {
+    --zen-label-font-size: 0.875rem;
+  }
+
+  &[data-size='lg'] {
+    --zen-label-font-size: 1rem;
+  }
+
+  &[data-disabled] {
+    opacity: $disabled-opacity;
+    cursor: not-allowed;
+
+    label {
+      cursor: not-allowed;
+    }
+  }
+}
+
+label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.required {
+  color: var(--zen-label-required-color);
+  margin-inline-start: 0.25rem;
+  font-weight: 600;
+}

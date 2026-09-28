@@ -56,13 +56,12 @@ type Story = StoryObj<Options>;
 export const Default: Story = {};
 
 export const WithLabel: Story = {
-  render: () => ({
-    template: `
-      <div style="display: flex; align-items: center; gap: 0.25rem">
-        <zen-radio name="label-example" option="option1" />
-        <label for="label-example"> With label </label>
-      </div>
-  `,
+  args: {
+    label: 'Option 1',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-radio name="label-example" option="option1" [label]="label" />',
   }),
 };
 
@@ -75,9 +74,9 @@ export const WithSignalForm: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<zen-radio [formField]="form.color" option="red" />
-<zen-radio [formField]="form.color" option="green" />
-<zen-radio [formField]="form.color" option="blue" />`,
+        code: `<zen-radio [formField]="form.color" option="red" label="Red" />
+<zen-radio [formField]="form.color" option="green" label="Green" />
+<zen-radio [formField]="form.color" option="blue" label="Blue" />`,
       },
     },
   },
@@ -93,21 +92,9 @@ export const WithSignalForm: Story = {
         {{ form.color().value() }}
       </div>
       <div style="display: flex; flex-direction: column; gap: 0.5rem">
-        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
-        <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio option="red" [formField]="form.color" />
-          Red
-        </label>
-        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
-        <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio option="green" [formField]="form.color" />
-          Green
-        </label>
-        <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
-        <label style="display: flex; align-items: center; gap: 0.25rem">
-          <zen-radio option="blue" [formField]="form.color" />
-          Blue
-        </label>
+        <zen-radio label="Red" option="red" [formField]="form.color" />
+        <zen-radio label="Green" option="green" [formField]="form.color" />
+        <zen-radio label="Blue" option="blue" [formField]="form.color" />
       </div>
     </div>
   `,

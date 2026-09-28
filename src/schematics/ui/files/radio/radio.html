@@ -1,0 +1,34 @@
+<input
+  #inputElement
+  type="radio"
+  [attr.aria-checked]="checked()"
+  [attr.aria-disabled]="disabled()"
+  [attr.aria-invalid]="invalid() || null"
+  [checked]="checked()"
+  [disabled]="disabled()"
+  [id]="id()"
+  [name]="name()"
+  [value]="option()"
+  (change)="onRadioChange()"
+/>
+@if (checked()) {
+  <span class="radio-dot"></span>
+}
+@if (label()) {
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+}
+@if (shouldShowError()) {
+  @for (error of errors(); track $index) {
+    <zen-hint severity="error">
+      @if (errorTemplate()) {
+        <ng-container *ngTemplateOutlet="errorTemplate()!; context: { $implicit: error }" />
+      } @else {
+        {{ error.message }}
+      }
+    </zen-hint>
+  }
+} @else if (warn()) {
+  <zen-hint severity="warning">{{ warn() }}</zen-hint>
+} @else if (hint()) {
+  <zen-hint severity="info">{{ hint() }}</zen-hint>
+}

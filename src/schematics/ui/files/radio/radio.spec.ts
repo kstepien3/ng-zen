@@ -45,6 +45,46 @@ describe('ZenRadio', () => {
     expect(inputElement.checked).toBe(false);
   });
 
+  it('should render label linked to radio input id and handle required state', () => {
+    fixture.componentRef.setInput('label', 'Option Label');
+    fixture.detectChanges();
+
+    const labelEl = fixture.debugElement.query(By.css('label')).nativeElement as HTMLLabelElement;
+    const inputEl = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
+
+    expect(labelEl).toBeTruthy();
+    expect(labelEl.textContent?.trim()).toBe('Option Label');
+    expect(labelEl.getAttribute('for')).toBe(inputEl.id);
+
+    fixture.componentRef.setInput('required', true);
+    fixture.detectChanges();
+
+    const requiredSpan = fixture.debugElement.query(By.css('zen-label .required'))?.nativeElement;
+    expect(requiredSpan).toBeTruthy();
+    expect(requiredSpan.textContent).toBe('*');
+  });
+
+  it('should render hint, warn, and errors on radio', () => {
+    fixture.componentRef.setInput('hint', 'Choose one option');
+    fixture.detectChanges();
+    let hintEl = fixture.debugElement.query(By.css('zen-hint')).nativeElement;
+    expect(hintEl.getAttribute('data-severity')).toBe('info');
+    expect(hintEl.textContent?.trim()).toBe('Choose one option');
+
+    fixture.componentRef.setInput('warn', 'Selection cannot be changed');
+    fixture.detectChanges();
+    hintEl = fixture.debugElement.query(By.css('zen-hint')).nativeElement;
+    expect(hintEl.getAttribute('data-severity')).toBe('warning');
+
+    fixture.componentRef.setInput('invalid', true);
+    fixture.componentRef.setInput('touched', true);
+    fixture.componentRef.setInput('errors', [{ message: 'Please select an option' }]);
+    fixture.detectChanges();
+    hintEl = fixture.debugElement.query(By.css('zen-hint')).nativeElement;
+    expect(hintEl.getAttribute('data-severity')).toBe('error');
+    expect(hintEl.textContent?.trim()).toBe('Please select an option');
+  });
+
   it('should show radio dot when checked', () => {
     component.value.set('test-value');
     fixture.detectChanges();

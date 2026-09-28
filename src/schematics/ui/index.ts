@@ -24,6 +24,22 @@ function resolveFormControlDependency(
     ui.push('form-control');
     logger.info('✔ form-control included (auto-included for form components)');
   }
+
+  const hintPath = normalize(`${workingDirectory}/hint/hint.ts`);
+  if (tree.exists(hintPath)) {
+    logger.info('ℹ hint skipped — already exists');
+  } else {
+    ui.push('hint');
+    logger.info('✔ hint included (auto-included for form components)');
+  }
+
+  const labelPath = normalize(`${workingDirectory}/label/label.ts`);
+  if (tree.exists(labelPath)) {
+    logger.info('ℹ label skipped — already exists');
+  } else {
+    ui.push('label');
+    logger.info('✔ label included (auto-included for form components)');
+  }
 }
 
 export function uiGenerator({ ui: selected, project, ...options }: UiOptions): Rule {

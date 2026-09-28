@@ -1,0 +1,43 @@
+:host {
+  --zen-hint-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
+  --zen-hint-primary: var(--zen-primary, hsl(193deg 58% 34%));
+  --zen-hint-success: var(--zen-success, hsl(142deg 38% 36%));
+  --zen-hint-warning: var(--zen-warning, hsl(36deg 72% 46%));
+  --zen-hint-danger: var(--zen-danger, hsl(348deg 52% 42%));
+  --zen-hint-info: var(--zen-info, hsl(214deg 34% 46%));
+  --zen-hint-font-size: 0.625rem;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: block;
+  font-size: var(--zen-hint-font-size);
+  line-height: 1.4;
+  color: var(--zen-hint-info);
+  opacity: 0.8;
+
+  &[data-severity='info'] {
+    color: var(--zen-hint-info);
+  }
+
+  &[data-severity='warning'] {
+    color: var(--zen-hint-warning);
+  }
+
+  &[data-severity='error'],
+  &[data-severity='danger'] {
+    color: var(--zen-hint-danger);
+  }
+
+  &[data-severity='success'] {
+    color: var(--zen-hint-success);
+  }
+
+  &[data-severity='neutral'] {
+    color: var(--zen-hint-neutral);
+  }
+
+  &[data-severity='primary'] {
+    color: var(--zen-hint-primary);
+  }
+}
