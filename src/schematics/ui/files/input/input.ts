@@ -1,6 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, input, model } from '@angular/core';
 
 import { ZenFormControl } from '../form-control';
+import { ZenHint } from '../hint';
+import { ZenLabel } from '../label';
 
 /**
  * ZenInput is a single-line text input component backed by Signal Forms.
@@ -8,7 +11,7 @@ import { ZenFormControl } from '../form-control';
  * Connect it to a Signal Forms field with `[formField]`:
  *
  * ```html
- * <zen-input [formField]="myForm.name" placeholder="Enter name" />
+ * <zen-input [formField]="myForm.name" placeholder="Enter name" label="Name" />
  * ```
  *
  * The `[formField]` directive automatically synchronises value, disabled
@@ -35,19 +38,9 @@ import { ZenFormControl } from '../form-control';
  */
 @Component({
   selector: 'zen-input',
-  template: `
-    <input
-      #inputRef
-      [aria-invalid]="invalid() || null"
-      [disabled]="disabled()"
-      [placeholder]="placeholder()"
-      [required]="required()"
-      [type]="type()"
-      [value]="value()"
-      (input)="onInput(inputRef.value)"
-    />
-  `,
-  styleUrls: ['./input.scss'],
+  imports: [NgTemplateOutlet, ZenHint, ZenLabel],
+  templateUrl: './input.html',
+  styleUrl: './input.scss',
 })
 export class ZenInput extends ZenFormControl<string> {
   /** The current input value with two-way binding support. */

@@ -1,6 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, effect, ElementRef, model, viewChild } from '@angular/core';
 
 import { ZenFormControl } from '../form-control';
+import { ZenHint } from '../hint';
+import { ZenLabel } from '../label';
 
 /**
  * ZenCheckbox is a checkbox component supporting checked (`true`),
@@ -9,8 +12,7 @@ import { ZenFormControl } from '../form-control';
  * Connect it to a Signal Forms field with `[formField]`:
  *
  * ```html
- * <zen-checkbox [formField]="myForm.agree" />
- * <label for="agree">I agree to the terms</label>
+ * <zen-checkbox [formField]="myForm.agree" label="I agree to the terms" />
  * ```
  *
  * When `value` is `null` the native checkbox is set to indeterminate via
@@ -37,24 +39,9 @@ import { ZenFormControl } from '../form-control';
  */
 @Component({
   selector: 'zen-checkbox',
-  template: `
-    <input
-      #inputElement
-      type="checkbox"
-      [attr.aria-disabled]="disabled()"
-      [attr.aria-invalid]="invalid() || null"
-      [checked]="value()"
-      [disabled]="disabled()"
-      (change)="onInput(inputElement.checked)"
-    />
-    @if (inputElement.indeterminate) {
-      ─
-    } @else if (inputElement.checked) {
-      ✓
-    }
-    <!-- @else { ✕ } -->
-  `,
-  styleUrls: ['./checkbox.scss'],
+  imports: [NgTemplateOutlet, ZenHint, ZenLabel],
+  templateUrl: './checkbox.html',
+  styleUrl: './checkbox.scss',
 })
 export class ZenCheckbox extends ZenFormControl<boolean | null> {
   /**
@@ -68,7 +55,7 @@ export class ZenCheckbox extends ZenFormControl<boolean | null> {
     super();
 
     effect(() => {
-      if (this.value() === null) this.inputElement().nativeElement.indeterminate = true;
+      this.inputElement().nativeElement.indeterminate = this.value() === null;
     });
   }
 }

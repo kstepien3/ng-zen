@@ -1,6 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, model } from '@angular/core';
 
 import { ZenFormControl } from '../form-control';
+import { ZenHint } from '../hint';
+import { ZenLabel } from '../label';
 
 /**
  * ZenSwitch is a toggle switch component for boolean values backed by
@@ -9,7 +12,7 @@ import { ZenFormControl } from '../form-control';
  * Connect it to a Signal Forms field with `[formField]`:
  *
  * ```html
- * <zen-switch [formField]="myForm.notifications" />
+ * <zen-switch [formField]="myForm.notifications" label="Notifications" />
  * ```
  *
  * Supports keyboard interaction: `Enter`, `Space`, `ArrowRight`, and
@@ -30,28 +33,15 @@ import { ZenFormControl } from '../form-control';
  *
  * @extends {ZenFormControl<boolean>}
  *
- * @author Konrad Stepień
+ * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
   selector: 'zen-switch',
-  template: `
-    <span class="thumb">
-      <!-- @if (value()) { ✓ } -->
-      <!-- @if (!value()) { ─ } -->
-    </span>
-  `,
+  imports: [NgTemplateOutlet, ZenHint, ZenLabel],
+  templateUrl: './switch.html',
   styleUrl: './switch.scss',
-
-  host: {
-    tabindex: '0',
-    role: 'switch',
-    '[attr.data-disabled]': 'disabled()',
-    '[attr.data-checked]': 'value()',
-    '(click)': 'onInput(!this.value())',
-    '(keydown)': 'onKeyDown($event)',
-  },
 })
 export class ZenSwitch extends ZenFormControl<boolean> {
   /** Holds the current switch value. */

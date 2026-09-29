@@ -12,60 +12,64 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
   --zen-radio-border: 1px solid hsl(0deg 0% 80%);
 }
 
-input {
-  position: absolute;
-  cursor: pointer;
-  opacity: 0;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-}
-
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  display: inline-grid;
+  grid-template-columns: var(--zen-radio-size) 1fr;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+
+  &:has(input[type='radio']:disabled) {
+    opacity: $disabled-opacity;
+
+    &,
+    input,
+    label {
+      cursor: not-allowed;
+    }
+  }
+}
+
+input[type='radio'] {
+  appearance: none;
+  grid-column: 1;
+  grid-row: 1;
   border: var(--zen-radio-border);
   border-radius: var(--zen-radio-border-radius);
   height: var(--zen-radio-size);
   width: var(--zen-radio-size);
   background-color: white;
   cursor: pointer;
-  position: relative;
+  margin: 0;
+  padding: 0;
   transition:
     background-color ease,
     border-color ease;
   transition-duration: $transition-duration;
-  user-select: none;
-  justify-content: center;
-  display: grid;
-  place-items: center;
 
-  &:has(input:checked) {
+  &:checked {
     border-color: var(--zen-radio-appearance);
   }
 
-  &:has(input[type='radio']:disabled) {
-    opacity: $disabled-opacity;
-
-    &,
-    input {
-      cursor: not-allowed;
-    }
+  &:disabled {
+    cursor: not-allowed;
   }
 
-  &:has(input:focus-visible) {
+  &:focus-visible {
     outline: $outline;
     box-shadow: $focus-shadow;
   }
 
-  &:has(input:user-invalid) {
+  &:user-invalid {
     border-color: $error;
   }
 }
 
 .radio-dot {
+  grid-column: 1;
+  grid-row: 1;
+  place-self: center center;
+  pointer-events: none;
   width: calc(var(--zen-radio-size) * 0.4);
   height: calc(var(--zen-radio-size) * 0.4);
   background-color: var(--zen-radio-appearance);
@@ -83,4 +87,13 @@ input {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+zen-label {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+zen-hint {
+  grid-column: 1 / -1;
 }

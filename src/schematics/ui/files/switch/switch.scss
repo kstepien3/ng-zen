@@ -16,17 +16,39 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  display: inline-grid;
+  grid-template-columns: var(--zen-switch-width) 1fr;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+
+  &:has(button:disabled) {
+    opacity: $disabled-opacity;
+
+    &,
+    button,
+    label {
+      cursor: not-allowed;
+    }
+  }
+}
+
+button[role='switch'] {
   $thumb-x-center-position: calc(var(--zen-switch-height) / 2 - var(--zen-switch-thumb-size) / 2);
 
+  grid-column: 1;
+  grid-row: 1;
   background: var(--zen-switch-background);
   height: var(--zen-switch-height);
   width: var(--zen-switch-width);
   cursor: pointer;
+  border: none;
   border-radius: 9999px;
   position: relative;
   display: flex;
   place-items: center;
   user-select: none;
+  padding: 0;
+  margin: 0;
 
   // Animation
   transition-property: background-color, border-color;
@@ -72,12 +94,22 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
     }
   }
 
-  &[data-disabled='true'] {
+  &[data-disabled='true'],
+  &:disabled {
     cursor: not-allowed;
     opacity: $disabled-opacity;
   }
 
-  &:active:not([data-disabled='true']) .thumb {
+  &:active:not(:disabled) .thumb {
     width: calc(var(--zen-switch-thumb-size) + 2px);
   }
+}
+
+zen-label {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+zen-hint {
+  grid-column: 1 / -1;
 }

@@ -1,0 +1,6 @@
+<label [attr.for]="targetId()">
+  <ng-content />
+  @if (required()) {
+    <span aria-hidden="true" class="required">*</span>
+  }
+</label>
