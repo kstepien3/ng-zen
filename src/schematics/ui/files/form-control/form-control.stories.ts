@@ -53,13 +53,25 @@ export default {
       control: 'text' as const,
       table: { category: 'models', type: { summary: 'string' } },
     },
+    label: {
+      control: 'text' as const,
+      table: { category: 'inputs', type: { summary: 'string' } },
+    },
+    hint: {
+      control: 'text' as const,
+      table: { category: 'inputs', type: { summary: 'string' } },
+    },
+    warn: {
+      control: 'text' as const,
+      table: { category: 'inputs', type: { summary: 'string' } },
+    },
+    id: {
+      control: 'text' as const,
+      table: { category: 'inputs', type: { summary: 'string' } },
+    },
     errors: {
       control: false as const,
       table: { category: 'models', type: { summary: 'ValidationError[]' }, readonly: true },
-    },
-    disabledReasons: {
-      control: false as const,
-      table: { category: 'models', type: { summary: 'DisabledReason[]' }, readonly: true },
     },
     value: {
       control: false as const,
@@ -87,6 +99,9 @@ export default {
     readonly: false,
     name: '',
     value: '',
+    label: '',
+    hint: '',
+    warn: '',
   },
   parameters: {
     docs: {

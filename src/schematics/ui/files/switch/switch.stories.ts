@@ -42,6 +42,16 @@ type Story = StoryObj<Options>;
 
 export const Default: Story = {};
 
+export const WithLabel: Story = {
+  args: {
+    label: 'Enable email notifications',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-switch [label]="label" />',
+  }),
+};
+
 export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
@@ -51,13 +61,7 @@ export const WithSignalForm: Story = {
   parameters: {
     docs: {
       source: {
-        code: `
-    <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <zen-switch id="notifications" [formField]="form.notifications" />
-      <label for="notifications">
-        {{ form.notifications().value() ? 'Notifications on' : 'Notifications off' }}
-      </label>
-    </div>`,
+        code: `<zen-switch label="Notifications" [formField]="form.notifications" />`,
       },
     },
   },
@@ -66,12 +70,7 @@ export const WithSignalForm: Story = {
 @Component({
   standalone: true,
   template: `
-    <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <zen-switch id="notifications" [formField]="form.notifications" />
-      <label for="notifications">
-        {{ form.notifications().value() ? 'Notifications on' : 'Notifications off' }}
-      </label>
-    </div>
+    <zen-switch label="Notifications" [formField]="form.notifications" />
   `,
   imports: [FormField, ZenSwitch],
 })

@@ -1,0 +1,31 @@
+<button
+  role="switch"
+  type="button"
+  [attr.aria-checked]="value()"
+  [attr.data-checked]="value()"
+  [attr.data-disabled]="disabled()"
+  [disabled]="disabled()"
+  [id]="id()"
+  (click)="onInput(!value())"
+  (keydown)="onKeyDown($event)"
+>
+  <span class="thumb"></span>
+</button>
+@if (label()) {
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+}
+@if (shouldShowError()) {
+  @for (error of errors(); track $index) {
+    <zen-hint severity="error">
+      @if (errorTemplate()) {
+        <ng-container *ngTemplateOutlet="errorTemplate()!; context: { $implicit: error }" />
+      } @else {
+        {{ error.message }}
+      }
+    </zen-hint>
+  }
+} @else if (warn()) {
+  <zen-hint severity="warning">{{ warn() }}</zen-hint>
+} @else if (hint()) {
+  <zen-hint>{{ hint() }}</zen-hint>
+}

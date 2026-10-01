@@ -1,5 +1,14 @@
-import { booleanAttribute, Directive, input, ModelSignal, output } from '@angular/core';
-import type { DisabledReason, ValidationError, WithOptionalFieldTree } from '@angular/forms/signals';
+import {
+  booleanAttribute,
+  computed,
+  contentChild,
+  Directive,
+  input,
+  ModelSignal,
+  output,
+  TemplateRef,
+} from '@angular/core';
+import type { ValidationError } from '@angular/forms/signals';
 import { FormValueControl } from '@angular/forms/signals';
 
 /**
@@ -40,12 +49,29 @@ import { FormValueControl } from '@angular/forms/signals';
   },
 })
 export abstract class ZenFormControl<Value> implements FormValueControl<Value> {
+  private static uniqueId = 0;
+
+  /** HTML id attribute for the control and its label. Defaults to an auto-generated unique id. */
+  readonly id = input<string>(`zen-control-${ZenFormControl.uniqueId++}`);
+  /** Label text displayed for the form control. */
+  readonly label = input<string>('');
+  /** Informational hint message displayed when there are no errors. */
+  readonly hint = input<string>('');
+  /** Warning message displayed when there are no errors. */
+  readonly warn = input<string>('');
+
+  /** Custom template to render validation errors: `<ng-template #error let-error>` */
+  readonly errorTemplate = contentChild<TemplateRef<{ $implicit: ValidationError.WithOptionalFieldTree }>>('error');
+
+  /** Whether validation errors should be displayed (invalid + touched/dirty). */
+  readonly shouldShowError = computed(() => {
+    return this.invalid() && (this.touched() || this.dirty()) && this.errors().length > 0;
+  });
+
   /** Validation errors for the field. Auto-bound by the Signal Forms directive. */
   readonly errors = input<readonly ValidationError.WithOptionalFieldTree[]>([]);
   /** Whether the control is disabled. Auto-bound by the Signal Forms directive. */
   readonly disabled = input(false);
-  /** Reasons why the field is disabled. Auto-bound by the Signal Forms directive. */
-  readonly disabledReasons = input<readonly WithOptionalFieldTree<DisabledReason>[]>([]);
   /** Whether the field is read-only. Auto-bound by the Signal Forms directive. */
   readonly readonly = input<boolean>(false);
   /** Whether the field is hidden from view. Auto-bound by the Signal Forms directive. */

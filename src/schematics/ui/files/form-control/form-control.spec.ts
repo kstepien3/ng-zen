@@ -38,6 +38,23 @@ describe('FormControl', () => {
     expect(component.readonly()).toBe(false);
     expect(component.name()).toBe('');
     expect(component.errors()).toEqual([]);
-    expect(component.disabledReasons()).toEqual([]);
+    expect(component.label()).toBe('');
+    expect(component.hint()).toBe('');
+    expect(component.warn()).toBe('');
+    expect(component.id()).toMatch(/^zen-control-\d+$/);
+  });
+
+  it('should compute shouldShowError based on invalid, touched/dirty, and errors', () => {
+    const fixture = TestBed.createComponent(TestFormControl);
+    const component = fixture.componentInstance;
+    expect(component.shouldShowError()).toBe(false);
+
+    fixture.componentRef.setInput('invalid', true);
+    fixture.componentRef.setInput('touched', true);
+    fixture.componentRef.setInput('errors', [{ message: 'Required' }]);
+    expect(component.shouldShowError()).toBe(true);
+
+    fixture.componentRef.setInput('errors', []);
+    expect(component.shouldShowError()).toBe(false);
   });
 });

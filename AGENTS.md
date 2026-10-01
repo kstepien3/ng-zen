@@ -41,5 +41,5 @@ src/schematics/ui/files
 - **Angular**: `zen-` prefix, camelCase directives, kebab-case components
 - **SCSS**: stylelint-config-standard-scss
 - **Naming**: PascalCase classes, camelCase methods/properties
-- **Change Detection**: OnPush strategy
-- **Templates**: Self-closing tags preferred
+- **Change Detection**: OnPush strategy (default in angular.json / signals)
+- **Templates**: Self-closing tags preferred for Angular components (e.g. `<zen-hint />`) and void HTML elements. Non-void elements like `<span>` must have closing tags
