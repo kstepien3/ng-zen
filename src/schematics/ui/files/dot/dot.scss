@@ -1,0 +1,176 @@
+// Globals
+$transition-duration: var(--zen-transition-duration, 0.2s);
+$disabled-opacity: var(--zen-disabled-opacity, 0.6);
+
+:host {
+  --zen-dot-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
+  --zen-dot-primary: var(--zen-primary, hsl(193deg 58% 34%));
+  --zen-dot-success: var(--zen-success, hsl(142deg 38% 36%));
+  --zen-dot-warning: var(--zen-warning, hsl(36deg 72% 46%));
+  --zen-dot-danger: var(--zen-danger, hsl(348deg 52% 42%));
+  --zen-dot-info: var(--zen-info, hsl(214deg 34% 46%));
+  --zen-dot-border-width: 2px;
+  --zen-dot-border-color: var(--zen-dot-ring-bg, hsl(0deg 0% 100%));
+  --zen-dot-symbol-color: hsl(0deg 0% 100%);
+}
+
+$sizes: (
+  xs: 0.375rem,
+  sm: 0.5rem,
+  md: 0.625rem,
+  lg: 0.75rem,
+);
+$colors: (
+  primary: var(--zen-dot-primary),
+  success: var(--zen-dot-success),
+  warning: var(--zen-dot-warning),
+  danger: var(--zen-dot-danger),
+  error: var(--zen-dot-danger),
+  info: var(--zen-dot-info),
+);
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  --_size: var(--zen-dot-custom-size, 0.625rem);
+  --_bg: var(--zen-dot-neutral);
+  --_bg-color: var(--zen-dot-custom-color, var(--zen-dot-color, var(--_bg)));
+  --_pill-width: calc(var(--zen-dot-size, var(--_size)) * 2.5);
+
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--zen-dot-size, var(--_size));
+  height: var(--zen-dot-size, var(--_size));
+  border-radius: 9999px;
+  background-color: var(--_bg-color);
+  vertical-align: middle;
+  line-height: 1;
+  transition:
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color $transition-duration ease,
+    border-color $transition-duration ease,
+    opacity $transition-duration ease,
+    transform $transition-duration ease;
+}
+
+:host > ::ng-deep svg {
+  pointer-events: none;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+// --- SIZES ---
+@each $name, $size in $sizes {
+  :host([data-size='#{$name}']) {
+    --_size: #{$size};
+  }
+}
+
+// --- COLORS ---
+@each $name, $color in $colors {
+  :host([data-severity='#{$name}']) {
+    --_bg: #{$color};
+  }
+}
+
+// --- STATES ---
+:host([data-disabled]) {
+  opacity: $disabled-opacity;
+  filter: grayscale(0.8);
+  pointer-events: none;
+}
+
+:host([data-bordered]),
+:host([data-variant='ring']) {
+  box-shadow: 0 0 0 var(--zen-dot-border-width, 2px) var(--zen-dot-border-color);
+}
+
+// --- VARIANTS ---
+:host([data-variant='outline']) {
+  background-color: transparent;
+  border: max(1.5px, calc(var(--zen-dot-size, var(--_size)) * 0.18)) solid var(--_bg-color);
+}
+
+:host([data-variant='dnd'])::after {
+  content: '';
+  position: absolute;
+  width: 55%;
+  height: max(1.5px, calc(var(--zen-dot-size, var(--_size)) * 0.16));
+  background-color: var(--zen-dot-symbol-color);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+:host([data-variant='pill']) {
+  width: var(--zen-dot-active-size, var(--_pill-width));
+}
+
+// --- ANIMATIONS ---
+:host([data-animation='wave'])::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: var(--_bg-color);
+  animation: zen-dot-wave 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+:host([data-animation='pulse']) {
+  animation: zen-dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:host([data-animation='glow']) {
+  animation: zen-dot-glow 2s ease-in-out infinite;
+}
+
+@keyframes zen-dot-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes zen-dot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+}
+
+@keyframes zen-dot-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--_bg-color) 60%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 8px 3px color-mix(in oklch, var(--_bg-color) 40%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host([data-animation]) {
+    animation: none;
+
+    &::before {
+      animation: none;
+    }
+  }
+}
