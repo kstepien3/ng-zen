@@ -148,4 +148,33 @@ describe('ZenPinItem', () => {
     fixture.destroy();
     expect(getWrapper(fixture)).toBeNull();
   });
+
+  it('keeps pinned element inside wrapper when rendered within projected content', () => {
+    @Component({
+      selector: 'zen-projected-anchor',
+      template: `
+        <div><ng-content /></div>
+      `,
+    })
+    class ProjectedAnchorComponent {}
+
+    @Component({
+      template: `
+        <div>
+          <zen-projected-anchor zenPin>
+            <span zenPinItem zenPinPosition="bottom right">Pinned</span>
+          </zen-projected-anchor>
+        </div>
+      `,
+      imports: [ProjectedAnchorComponent, ZenPin, ZenPinItem],
+    })
+    class TestProjectedHostComponent {}
+
+    const fixture = TestBed.createComponent(TestProjectedHostComponent);
+    fixture.detectChanges();
+    const wrapper = fixture.nativeElement.querySelector('.zen-pin-wrapper');
+    const span = fixture.nativeElement.querySelector('span');
+    expect(wrapper).toBeTruthy();
+    expect(span?.parentElement).toBe(wrapper);
+  });
 });
