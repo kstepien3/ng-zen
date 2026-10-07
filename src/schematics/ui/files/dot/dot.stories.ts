@@ -10,16 +10,14 @@ import { ZenPin, ZenPinItem } from '../pin';
 import { ZenDot } from './dot';
 import { ZenDotAnimation, ZenDotSeverity, ZenDotSize, ZenDotVariant } from './dot.types';
 
-interface StoryParams {
+type Options = ZenDot & {
   severity: ZenDotSeverity;
   size: ZenDotSize;
   variant: ZenDotVariant;
   animation: ZenDotAnimation;
   bordered: boolean;
   disabled: boolean;
-}
-
-type Options = ZenDot & StoryParams;
+};
 
 @Component({
   selector: 'zen-carousel-pagination-demo',
@@ -51,13 +49,8 @@ class CarouselPaginationDemo {
   readonly items = [0, 1, 2, 3];
   readonly activeStep = signal(0);
 
-  next(): void {
-    this.activeStep.update(i => (i + 1) % this.items.length);
-  }
-
-  prev(): void {
-    this.activeStep.update(i => (i - 1 + this.items.length) % this.items.length);
-  }
+  next = (): void => this.activeStep.update(i => (i + 1) % this.items.length);
+  prev = (): void => this.activeStep.update(i => (i - 1 + this.items.length) % this.items.length);
 }
 
 export default {
@@ -346,26 +339,46 @@ export const AvatarStatus: Story = {
   decorators: [moduleMetadata({ imports: [ZenAvatar, ZenPin, ZenPinItem] })],
   render: () => ({
     template: `
-      <div style="display: flex; gap: 2rem; align-items: center;">
-        <zen-avatar zenPin>
-          KS
-          <zen-dot bordered severity="success" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
-        </zen-avatar>
+      <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <zen-avatar zenPin>
+            AL
+            <zen-dot bordered severity="success" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
+          </zen-avatar>
+          <span style="font-size: 0.75rem; color: #64748b;">Online</span>
+        </div>
 
-        <zen-avatar zenPin>
-          JD
-          <zen-dot bordered severity="danger" size="sm" variant="dnd" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
-        </zen-avatar>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <zen-avatar zenPin>
+            JD
+            <zen-dot bordered severity="danger" size="sm" variant="dnd" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
+          </zen-avatar>
+          <span style="font-size: 0.75rem; color: #64748b;">Do Not Disturb</span>
+        </div>
 
-        <zen-avatar zenPin>
-          KS
-          <zen-dot animation="wave" bordered severity="danger" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
-        </zen-avatar>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <zen-avatar zenPin>
+            MR
+            <zen-dot bordered severity="warning" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
+          </zen-avatar>
+          <span style="font-size: 0.75rem; color: #64748b;">Away</span>
+        </div>
 
-        <zen-avatar zenPin>
-          JD
-          <zen-dot bordered severity="warning" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
-        </zen-avatar>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <zen-avatar zenPin>
+            KS
+            <zen-dot animation="wave" bordered severity="danger" size="sm" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
+          </zen-avatar>
+          <span style="font-size: 0.75rem; color: #64748b;">In a Call</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <zen-avatar zenPin>
+            EW
+            <zen-dot bordered severity="neutral" size="sm" variant="outline" zenPinItem zenPinOffset="-2px" zenPinPosition="bottom right" />
+          </zen-avatar>
+          <span style="font-size: 0.75rem; color: #64748b;">Offline</span>
+        </div>
       </div>
     `,
   }),
