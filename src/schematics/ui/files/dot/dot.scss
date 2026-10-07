@@ -3,13 +3,15 @@ $transition-duration: var(--zen-transition-duration, 0.2s);
 $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 :host {
+  $border-width: 2px;
+
   --zen-dot-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
   --zen-dot-primary: var(--zen-primary, hsl(193deg 58% 34%));
   --zen-dot-success: var(--zen-success, hsl(142deg 38% 36%));
   --zen-dot-warning: var(--zen-warning, hsl(36deg 72% 46%));
   --zen-dot-danger: var(--zen-danger, hsl(348deg 52% 42%));
   --zen-dot-info: var(--zen-info, hsl(214deg 34% 46%));
-  --zen-dot-border-width: 2px;
+  --zen-dot-border-width: #{$border-width};
   --zen-dot-border-color: var(--zen-dot-ring-bg, hsl(0deg 0% 100%));
   --zen-dot-symbol-color: hsl(0deg 0% 100%);
 }
@@ -31,10 +33,12 @@ $colors: (
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  $pill-width-ratio: 2.5;
+
   --_size: var(--zen-dot-custom-size, 0.625rem);
   --_bg: var(--zen-dot-neutral);
   --_bg-color: var(--zen-dot-custom-color, var(--zen-dot-color, var(--_bg)));
-  --_pill-width: calc(var(--zen-dot-size, var(--_size)) * 2.5);
+  --_pill-width: calc(var(--zen-dot-size, var(--_size)) * #{$pill-width-ratio});
 
   box-sizing: border-box;
   position: relative;
@@ -57,9 +61,11 @@ $colors: (
 }
 
 :host > ::ng-deep svg {
+  $icon-max-size: 70%;
+
   pointer-events: none;
-  max-width: 70%;
-  max-height: 70%;
+  max-width: $icon-max-size;
+  max-height: $icon-max-size;
 }
 
 // --- SIZES ---
@@ -85,20 +91,29 @@ $colors: (
 
 :host([data-bordered]),
 :host([data-variant='ring']) {
-  box-shadow: 0 0 0 var(--zen-dot-border-width, 2px) var(--zen-dot-border-color);
+  $border-width: 2px;
+
+  box-shadow: 0 0 0 var(--zen-dot-border-width, $border-width) var(--zen-dot-border-color);
 }
 
 // --- VARIANTS ---
 :host([data-variant='outline']) {
+  $min-border: 1.5px;
+  $border-ratio: 0.18;
+
   background-color: transparent;
-  border: max(1.5px, calc(var(--zen-dot-size, var(--_size)) * 0.18)) solid var(--_bg-color);
+  border: max($min-border, calc(var(--zen-dot-size, var(--_size)) * #{$border-ratio})) solid var(--_bg-color);
 }
 
 :host([data-variant='dnd'])::after {
+  $dnd-width: 55%;
+  $min-height: 1.5px;
+  $height-ratio: 0.16;
+
   content: '';
   position: absolute;
-  width: 55%;
-  height: max(1.5px, calc(var(--zen-dot-size, var(--_size)) * 0.16));
+  width: $dnd-width;
+  height: max($min-height, calc(var(--zen-dot-size, var(--_size)) * #{$height-ratio}));
   background-color: var(--zen-dot-symbol-color);
   border-radius: 9999px;
   pointer-events: none;
@@ -129,6 +144,8 @@ $colors: (
 }
 
 @keyframes zen-dot-wave {
+  $wave-scale: 2.4;
+
   0% {
     transform: scale(1);
     opacity: 0.8;
@@ -136,12 +153,14 @@ $colors: (
 
   75%,
   100% {
-    transform: scale(2.4);
+    transform: scale($wave-scale);
     opacity: 0;
   }
 }
 
 @keyframes zen-dot-pulse {
+  $pulse-scale: 0.8;
+
   0%,
   100% {
     transform: scale(1);
@@ -149,7 +168,7 @@ $colors: (
   }
 
   50% {
-    transform: scale(0.8);
+    transform: scale($pulse-scale);
     opacity: 0.5;
   }
 }
