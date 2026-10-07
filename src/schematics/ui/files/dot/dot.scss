@@ -3,15 +3,13 @@ $transition-duration: var(--zen-transition-duration, 0.2s);
 $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 :host {
-  $border-width: 2px;
-
   --zen-dot-neutral: var(--zen-neutral, hsl(30deg 5% 10%));
   --zen-dot-primary: var(--zen-primary, hsl(193deg 58% 34%));
   --zen-dot-success: var(--zen-success, hsl(142deg 38% 36%));
   --zen-dot-warning: var(--zen-warning, hsl(36deg 72% 46%));
   --zen-dot-danger: var(--zen-danger, hsl(348deg 52% 42%));
   --zen-dot-info: var(--zen-info, hsl(214deg 34% 46%));
-  --zen-dot-border-width: #{$border-width};
+  --zen-dot-border-width: 2px;
   --zen-dot-border-color: var(--zen-dot-ring-bg, hsl(0deg 0% 100%));
   --zen-dot-symbol-color: hsl(0deg 0% 100%);
 }
@@ -91,9 +89,7 @@ $colors: (
 
 :host([data-bordered]),
 :host([data-variant='ring']) {
-  $border-width: 2px;
-
-  box-shadow: 0 0 0 var(--zen-dot-border-width, $border-width) var(--zen-dot-border-color);
+  box-shadow: 0 0 0 var(--zen-dot-border-width, 2px) var(--zen-dot-border-color);
 }
 
 // --- VARIANTS ---
