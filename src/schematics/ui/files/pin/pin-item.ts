@@ -1,4 +1,14 @@
-import { booleanAttribute, DestroyRef, Directive, effect, ElementRef, inject, input, Renderer2 } from '@angular/core';
+import {
+  afterNextRender,
+  booleanAttribute,
+  DestroyRef,
+  Directive,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  Renderer2,
+} from '@angular/core';
 
 import { ZenPin } from './pin';
 import type { PinPosition } from './pin.types';
@@ -49,6 +59,12 @@ export class ZenPinItem {
         this.createWrapper();
       }
       this.updatePosition();
+    });
+
+    afterNextRender(() => {
+      if (this.wrapper && this.el.nativeElement.parentElement !== this.wrapper) {
+        this.renderer.appendChild(this.wrapper, this.el.nativeElement);
+      }
     });
 
     this.destroyRef.onDestroy(() => this.cleanup());
