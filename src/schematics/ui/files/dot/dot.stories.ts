@@ -313,24 +313,29 @@ export const InsideBadge: Story = {
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+        <zen-badge color="success" variant="outline">
+          <zen-dot animation="wave" severity="success" size="xs" />
+          Live
+        </zen-badge>
+
         <zen-badge color="primary" variant="filled">
-          <zen-dot severity="primary" size="xs" />
-          Active Now
+          <zen-dot animation="pulse" severity="primary" size="xs" />
+          In Progress
         </zen-badge>
 
-        <zen-badge variant="outline">
-          <zen-dot severity="success" size="xs" />
-          Claimed
-        </zen-badge>
-
-        <zen-badge variant="outline">
+        <zen-badge color="warning" variant="filled">
           <zen-dot severity="warning" size="xs" />
-          Dormant
+          Degraded
         </zen-badge>
 
         <zen-badge color="danger" variant="filled">
           <zen-dot animation="wave" severity="danger" size="xs" />
-          Live
+          Critical
+        </zen-badge>
+
+        <zen-badge color="neutral" variant="ghost">
+          <zen-dot severity="neutral" size="xs" />
+          Offline
         </zen-badge>
       </div>
     `,
