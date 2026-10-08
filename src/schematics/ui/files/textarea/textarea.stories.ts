@@ -1,77 +1,44 @@
+import { NgComponentOutlet } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Meta, StoryObj } from '@storybook/angular';
 
+import FormControlStories from '../form-control/form-control.stories';
 import { ZenTextarea } from './textarea';
 
-interface StoryParams {
-  content: string;
-  placeholder: string;
-  required: boolean;
-  autoresize: boolean;
-  disabled: boolean;
-}
-type Options = ZenTextarea & StoryParams;
+type Options = ZenTextarea;
 
 export default {
   title: 'Ui/Textarea',
   component: ZenTextarea,
-  args: {
-    content: '',
-    autoresize: false,
-    placeholder: 'ZenTextareaComponent',
-    required: false,
-    disabled: false,
-  },
   argTypes: {
-    content: {
-      control: 'text',
+    ...FormControlStories.argTypes,
+    value: {
+      control: 'text' as const,
       table: {
-        category: 'story parameters',
-        type: {
-          summary: 'ng-content',
-        },
+        category: 'models',
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
       },
     },
-    placeholder: {
-      control: 'text',
+    placeholder: { control: 'text' as const, table: { type: { summary: 'string' } } },
+    rows: { control: 'number' as const, table: { type: { summary: 'number' } } },
+    cols: { control: 'number' as const, table: { type: { summary: 'number' } } },
+    autoresize: { control: 'boolean' as const, table: { type: { summary: 'boolean' } } },
+    onInput: {
       table: {
-        category: 'attributes',
-        type: {
-          summary: 'string',
-        },
-      },
-    },
-    required: {
-      control: 'boolean',
-      table: {
-        category: 'attributes',
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    disabled: {
-      control: 'boolean',
-      table: {
-        category: 'attributes',
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    autoresize: {
-      table: {
-        category: 'attributes',
+        readonly: true,
+        type: { summary: '(value: string) => void' },
       },
     },
   },
-  render: ({ content, ...args }) => ({
-    props: args,
-    template: `
-      <textarea zen-textarea placeholder="${args.placeholder}" ${args.required ? 'required' : ''} ${args.autoresize ? 'autoresize' : ''} ${args.disabled ? 'disabled' : ''}>${content}</textarea>`.replace(
-      /\s+/g,
-      ' '
-    ),
-  }),
+  args: {
+    ...FormControlStories.args,
+    value: '',
+    placeholder: '',
+    rows: 3,
+    autoresize: false,
+  },
 } satisfies Meta<Options>;
 
 type Story = StoryObj<Options>;
@@ -79,21 +46,102 @@ type Story = StoryObj<Options>;
 export const Default: Story = {};
 
 export const WithLabel: Story = {
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column">
-        <label for="label-example"> With label </label>
-        <textarea zen-textarea id="label-example"></textarea>
-      </div>
-  `,
+  args: {
+    label: 'Biography',
+    placeholder: 'Tell us about yourself...',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-textarea [label]="label" [placeholder]="placeholder" />',
+  }),
+};
+
+export const WithHintAndWarn: Story = {
+  args: {
+    label: 'Feedback',
+    hint: 'Maximum 500 characters',
+    placeholder: 'Your feedback...',
+  },
+  render: args => ({
+    props: args,
+    template: '<zen-textarea [label]="label" [hint]="hint" [placeholder]="placeholder" />',
   }),
 };
 
 export const Autoresize: Story = {
+  args: {
+    label: 'Auto-resizing note',
+    autoresize: true,
+    placeholder: 'Start typing...',
+  },
   render: args => ({
-    props: { ...args },
-    template: `
-<textarea zen-textarea autoresize style="max-width: 300px">Start typing...</textarea>
-`,
+    props: args,
+    template:
+      '<zen-textarea [label]="label" [autoresize]="autoresize" [placeholder]="placeholder" style="max-width: 400px;" />',
   }),
 };
+
+export const WithSignalForm: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: TextareaSignalFormComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<zen-textarea label="Description" [formField]="form.description" />`,
+      },
+    },
+  },
+};
+
+export const WithFormRoot: Story = {
+  render: () => ({
+    moduleMetadata: { imports: [NgComponentOutlet] },
+    props: { component: TextareaFormRootComponent },
+    template: '<ng-container *ngComponentOutlet="component" />',
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: `<form [formRoot]="feedbackForm">
+  <zen-textarea label="Comments" [formField]="feedbackForm.comments" placeholder="Leave a comment" />
+  <button type="submit">Submit</button>
+</form>`,
+      },
+    },
+  },
+};
+
+@Component({
+  standalone: true,
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px;">
+      <zen-textarea label="Description" placeholder="Type something" [formField]="form.description" />
+    </div>
+  `,
+  imports: [FormField, ZenTextarea],
+})
+class TextareaSignalFormComponent {
+  readonly form = form(signal({ description: '' }), s => {
+    required(s.description, { message: 'Description is required' });
+  });
+}
+
+@Component({
+  standalone: true,
+  template: `
+    <form style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px;" [formRoot]="feedbackForm">
+      <zen-textarea label="Comments" placeholder="Leave a comment" [formField]="feedbackForm.comments" />
+      <button type="submit">Submit</button>
+    </form>
+  `,
+  imports: [FormRoot, FormField, ZenTextarea],
+})
+class TextareaFormRootComponent {
+  readonly feedbackModel = signal({ comments: '' });
+  readonly feedbackForm = form(this.feedbackModel, s => {
+    required(s.comments, { message: 'Comments are required' });
+  });
+}

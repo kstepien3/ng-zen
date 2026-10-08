@@ -13,6 +13,11 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+textarea {
   border: var(--zen-textarea-border);
   border-radius: var(--zen-textarea-border-radius);
   padding: var(--zen-textarea-padding);
