@@ -10,6 +10,8 @@ import { ZenLabel } from '../label';
  *
  * Connect it to a Signal Forms field with `[formField]`:
  *
+ * @example
+ *
  * ```html
  * <zen-textarea [formField]="myForm.bio" placeholder="Enter bio" label="Bio" />
  * ```
