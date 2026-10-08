@@ -24,7 +24,6 @@ import { ZenLabel } from '../label';
  *   --zen-textarea-border: var(--zen-input-border, 1px solid hsl(0deg 0% 80%));
  *   --zen-textarea-border-radius: var(--zen-input-border-radius, 8px);
  *   --zen-textarea-padding: var(--zen-input-padding, 0.5rem 1rem);
- *   --zen-textarea-focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
  *   --zen-textarea-placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
  * }
  * ```
