@@ -23,6 +23,7 @@ export type UiType =
   | 'icon'
   | 'input'
   | 'label'
+  | 'native-select'
   | 'pin'
   | 'popover'
   | 'radio'

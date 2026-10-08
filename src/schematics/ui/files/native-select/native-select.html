@@ -1,0 +1,55 @@
+@if (label()) {
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+}
+<div class="zen-native-select-wrapper" [class.is-disabled]="disabled()" [class.is-invalid]="invalid()">
+  <select
+    #selectRef
+    [aria-invalid]="invalid() || null"
+    [disabled]="disabled()"
+    [id]="id()"
+    [required]="required()"
+    [value]="value()"
+    (change)="onInput(selectRef.value)"
+  >
+    @if (placeholder()) {
+      <option disabled value="" [selected]="!value()">{{ placeholder() }}</option>
+    }
+    @if (options().length > 0) {
+      @for (option of options(); track option.value) {
+        <option [disabled]="option.disabled" [value]="option.value">{{ option.label }}</option>
+      }
+    } @else {
+      <ng-content />
+    }
+  </select>
+  <span aria-hidden="true" class="zen-native-select-arrow">
+    <svg
+      fill="none"
+      height="14"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="14"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </span>
+</div>
+@if (shouldShowError()) {
+  @for (error of errors(); track $index) {
+    <zen-hint severity="error">
+      @if (errorTemplate()) {
+        <ng-container *ngTemplateOutlet="errorTemplate()!; context: { $implicit: error }" />
+      } @else {
+        {{ error.message }}
+      }
+    </zen-hint>
+  }
+} @else if (warn()) {
+  <zen-hint severity="warning">{{ warn() }}</zen-hint>
+} @else if (hint()) {
+  <zen-hint>{{ hint() }}</zen-hint>
+}
