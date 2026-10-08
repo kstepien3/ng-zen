@@ -57,6 +57,7 @@
           "sidenav",
           "skeleton",
           "switch",
+          "tabs",
           "textarea"
         ]
       },

@@ -203,9 +203,10 @@ ng generate @ng-zen/cli:layouts --layouts dashboard --stories
 
 ### Navigation
 
-| Component   | Description                 | Features                                                         |
-| ----------- | --------------------------- | ---------------------------------------------------------------- |
-| **Sidenav** | Responsive navigation shell | Collapsible rail, mobile bottom bar, header/content/footer slots |
+| Component   | Description                 | Features                                                                                   |
+| ----------- | --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Sidenav** | Responsive navigation shell | Collapsible rail, mobile bottom bar, header/content/footer slots                           |
+| **Tabs**    | Accessible compound tabs    | WAI-ARIA APG pattern, automatic index pairing, controlled model, pills/line variants, lazy |
 
 ## 🧭 Available Layouts
 
