@@ -25,12 +25,6 @@ export default {
     rows: { control: 'number' as const, table: { type: { summary: 'number' } } },
     cols: { control: 'number' as const, table: { type: { summary: 'number' } } },
     autoresize: { control: 'boolean' as const, table: { type: { summary: 'boolean' } } },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: string) => void' },
-      },
-    },
   },
   args: {
     ...FormControlStories.args,
@@ -85,7 +79,7 @@ export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: TextareaSignalFormComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {
@@ -100,7 +94,7 @@ export const WithFormRoot: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: TextareaFormRootComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {

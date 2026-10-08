@@ -7,7 +7,98 @@ import { ZenFormControl } from './form-control';
 
 type Options = ZenFormControl<unknown>;
 
-export default {
+export const formControlArgTypes = {
+  disabled: {
+    control: 'boolean' as const,
+    table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+  },
+  required: {
+    control: 'boolean' as const,
+    table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+  },
+  label: {
+    control: 'text' as const,
+    table: { category: 'inputs', type: { summary: 'string' } },
+  },
+  hint: {
+    control: 'text' as const,
+    table: { category: 'inputs', type: { summary: 'string' } },
+  },
+  warn: {
+    control: 'text' as const,
+    table: { category: 'inputs', type: { summary: 'string' } },
+  },
+  id: {
+    control: false as const,
+    table: { disable: true },
+  },
+  name: {
+    control: false as const,
+    table: { disable: true },
+  },
+  readonly: {
+    control: false as const,
+    table: { disable: true },
+  },
+  hidden: {
+    control: false as const,
+    table: { disable: true },
+  },
+  dirty: {
+    control: false as const,
+    table: { disable: true },
+  },
+  invalid: {
+    control: false as const,
+    table: { disable: true },
+  },
+  pending: {
+    control: false as const,
+    table: { disable: true },
+  },
+  touched: {
+    control: false as const,
+    table: { disable: true },
+  },
+  errors: {
+    control: false as const,
+    table: { disable: true },
+  },
+  errorTemplate: {
+    control: false as const,
+    table: { disable: true },
+  },
+  shouldShowError: {
+    control: false as const,
+    table: { disable: true },
+  },
+  touch: {
+    control: false as const,
+    table: { disable: true },
+  },
+  onInput: {
+    control: false as const,
+    table: { disable: true },
+  },
+  focus: {
+    control: false as const,
+    table: { disable: true },
+  },
+  reset: {
+    control: false as const,
+    table: { disable: true },
+  },
+};
+
+export const formControlArgs = {
+  disabled: false,
+  required: false,
+  label: '',
+  hint: '',
+  warn: '',
+};
+
+const meta: Meta<Options> = {
   title: 'Ui/FormControl',
   component: ZenFormControl,
   decorators: [
@@ -17,62 +108,7 @@ export default {
     ),
   ],
   argTypes: {
-    disabled: {
-      control: 'boolean' as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    required: {
-      control: 'boolean' as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    touched: {
-      control: false as const,
-      table: { category: 'models', type: { summary: 'boolean' }, readonly: true },
-    },
-    dirty: {
-      control: false as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
-    },
-    invalid: {
-      control: false as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
-    },
-    pending: {
-      control: false as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, readonly: true },
-    },
-    hidden: {
-      control: 'boolean' as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    readonly: {
-      control: 'boolean' as const,
-      table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    name: {
-      control: 'text' as const,
-      table: { category: 'models', type: { summary: 'string' } },
-    },
-    label: {
-      control: 'text' as const,
-      table: { category: 'inputs', type: { summary: 'string' } },
-    },
-    hint: {
-      control: 'text' as const,
-      table: { category: 'inputs', type: { summary: 'string' } },
-    },
-    warn: {
-      control: 'text' as const,
-      table: { category: 'inputs', type: { summary: 'string' } },
-    },
-    id: {
-      control: 'text' as const,
-      table: { category: 'inputs', type: { summary: 'string' } },
-    },
-    errors: {
-      control: false as const,
-      table: { category: 'models', type: { summary: 'ValidationError[]' }, readonly: true },
-    },
+    ...formControlArgTypes,
     value: {
       control: false as const,
       table: {
@@ -81,27 +117,10 @@ export default {
         type: { summary: 'T' },
       },
     },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: T) => void' },
-      },
-    },
   },
   args: {
-    disabled: false,
-    required: false,
-    touched: false,
-    dirty: false,
-    invalid: false,
-    pending: false,
-    hidden: false,
-    readonly: false,
-    name: '',
+    ...formControlArgs,
     value: '',
-    label: '',
-    hint: '',
-    warn: '',
   },
   parameters: {
     docs: {
@@ -118,7 +137,9 @@ export default {
       <zen-switch />
     `,
   }),
-} satisfies Meta<Options>;
+};
+
+export default meta;
 
 type Story = StoryObj<Options>;
 
