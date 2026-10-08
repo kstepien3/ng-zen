@@ -1,5 +1,4 @@
 // Globals
-$focus-shadow: var(--zen-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $error: var(--zen-error, hsl(0deg 70% 50%));
 $disabled-opacity: var(--zen-disabled-opacity, 0.6);
@@ -8,11 +7,17 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
   --zen-textarea-border: var(--zen-input-border, 1px solid hsl(0deg 0% 80%));
   --zen-textarea-border-radius: var(--zen-input-border-radius, 8px);
   --zen-textarea-padding: var(--zen-input-padding, 0.5rem 1rem);
+  --zen-textarea-focus-shadow: var(--zen-input-focus-shadow, 0 1px 4px hsl(0deg 0% 60% / 20%) inset);
   --zen-textarea-placeholder-color: var(--zen-input-placeholder-color, hsl(0deg 0% 60%));
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+textarea {
   border: var(--zen-textarea-border);
   border-radius: var(--zen-textarea-border-radius);
   padding: var(--zen-textarea-padding);
@@ -28,7 +33,7 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
 
   &:focus-visible {
     outline: $outline;
-    box-shadow: $focus-shadow;
+    box-shadow: var(--zen-textarea-focus-shadow);
   }
 
   &:user-invalid {
