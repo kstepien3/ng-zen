@@ -20,15 +20,10 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: boolean) => void' },
-      },
-    },
     onKeyDown: {
+      control: false as const,
       table: {
-        readonly: true,
+        disable: true,
       },
     },
   },
@@ -56,7 +51,7 @@ export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: SwitchSignalFormComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {

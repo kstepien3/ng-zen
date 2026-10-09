@@ -22,12 +22,6 @@ export default {
       },
     },
     placeholder: { control: 'text' as const, table: { type: { summary: 'string' } } },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: string) => void' },
-      },
-    },
   },
   args: {
     ...FormControlStories.args,
@@ -67,7 +61,7 @@ export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: InputSignalFormComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {
@@ -82,7 +76,7 @@ export const WithFormRoot: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: InputFormRootComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {

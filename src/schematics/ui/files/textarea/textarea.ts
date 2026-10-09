@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, input, model } from '@angular/core';
+
+import { ZenFormControl } from '../form-control';
+import { ZenHint } from '../hint';
+import { ZenLabel } from '../label';
 
 /**
- * ZenTextarea is a reusable textarea component designed to provide
- * a consistent and customizable textarea style across the application.
- * It supports Angular forms integration and provides two-way data binding.
+ * ZenTextarea is a multi-line text input component backed by Signal Forms.
+ *
+ * Connect it to a Signal Forms field with `[formField]`:
  *
  * @example
- * <textarea zen-textarea></textarea>
+ *
+ * ```html
+ * <zen-textarea [formField]="myForm.bio" placeholder="Enter bio" label="Bio" />
+ * ```
+ *
+ * The `[formField]` directive automatically synchronises value, disabled
+ * state, validation errors, and touched/dirty status.
  *
  * ### CSS Custom Properties
- * You can customize the component using CSS custom properties:
  *
  * ```css
  * :root {
@@ -20,16 +30,31 @@ import { Component } from '@angular/core';
  * }
  * ```
  *
+ * @extends {ZenFormControl<string>}
+ *
  * @author Konrad Stępień
  * @license {@link https://github.com/kstepien3/ng-zen/blob/master/LICENSE|BSD-2-Clause}
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'textarea[zen-textarea], textarea[zen-textarea][autoresize]',
-  template: `
-    <ng-content />
-  `,
-  styleUrls: ['./textarea.scss'],
+  selector: 'zen-textarea',
+  imports: [NgTemplateOutlet, ZenHint, ZenLabel],
+  templateUrl: './textarea.html',
+  styleUrl: './textarea.scss',
 })
-export class ZenTextarea {}
+export class ZenTextarea extends ZenFormControl<string> {
+  /** The current textarea value with two-way binding support. */
+  readonly value = model('');
+
+  /** The placeholder text for the form control. */
+  readonly placeholder = input<string>('');
+
+  /** Number of visible text lines. */
+  readonly rows = input<number>(3);
+
+  /** Visible width of the text area in average character widths. */
+  readonly cols = input<number | undefined>(undefined);
+
+  /** Whether the textarea should automatically resize to fit its content. */
+  readonly autoresize = input(false, { transform: booleanAttribute });
+}

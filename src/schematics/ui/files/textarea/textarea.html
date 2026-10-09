@@ -1,0 +1,32 @@
+@if (label()) {
+  <zen-label [disabled]="disabled()" [for]="id()" [required]="required()">{{ label() }}</zen-label>
+}
+<textarea
+  #textareaRef
+  [aria-invalid]="invalid() || null"
+  [attr.autoresize]="autoresize() ? '' : null"
+  [cols]="cols()"
+  [disabled]="disabled()"
+  [id]="id()"
+  [placeholder]="placeholder()"
+  [readonly]="readonly()"
+  [required]="required()"
+  [rows]="rows()"
+  [value]="value()"
+  (input)="onInput(textareaRef.value)"
+></textarea>
+@if (shouldShowError()) {
+  @for (error of errors(); track $index) {
+    <zen-hint severity="error">
+      @if (errorTemplate()) {
+        <ng-container *ngTemplateOutlet="errorTemplate()!; context: { $implicit: error }" />
+      } @else {
+        {{ error.message }}
+      }
+    </zen-hint>
+  }
+} @else if (warn()) {
+  <zen-hint severity="warning">{{ warn() }}</zen-hint>
+} @else if (hint()) {
+  <zen-hint>{{ hint() }}</zen-hint>
+}

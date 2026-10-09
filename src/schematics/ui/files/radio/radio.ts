@@ -40,7 +40,7 @@ import { ZenRadioRegistry } from './radio.registry';
  * @see [GitHub](https://github.com/kstepien3/ng-zen)
  */
 @Component({
-  selector: 'zen-radio',
+  selector: 'zen-radio[name], zen-radio[formField]',
   imports: [NgTemplateOutlet, ZenHint, ZenLabel],
   templateUrl: './radio.html',
   styleUrl: './radio.scss',
@@ -55,8 +55,9 @@ export class ZenRadio extends ZenFormControl<string | null> {
   /**
    * The name attribute for the radio button group.
    * Radio buttons with the same name will be grouped together.
+   * Auto-bound when used with `[formField]`.
    */
-  override readonly name = input.required<string>();
+  override readonly name = input('');
 
   /**
    * The value for this specific radio button.

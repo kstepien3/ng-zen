@@ -36,12 +36,6 @@ export default {
       },
       control: 'text' as const,
     },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: string | null) => void' },
-      },
-    },
   },
   args: {
     ...FormControlStories.args,
@@ -69,7 +63,7 @@ export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: RadioSignalFormComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {

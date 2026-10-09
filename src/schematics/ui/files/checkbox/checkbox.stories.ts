@@ -22,12 +22,6 @@ export default {
       control: 'radio' as const,
       options: [true, false, null],
     },
-    onInput: {
-      table: {
-        readonly: true,
-        type: { summary: '(value: boolean | null) => void' },
-      },
-    },
   },
   args: {
     ...FormControlStories.args,
@@ -53,7 +47,7 @@ export const WithSignalForm: Story = {
   render: () => ({
     moduleMetadata: { imports: [NgComponentOutlet] },
     props: { component: CheckboxSignalFormComponent },
-    template: '<ng-container *ngComponentOutlet="component" />',
+    template: '<ng-container [ngComponentOutlet]="component"></ng-container>',
   }),
   parameters: {
     docs: {
