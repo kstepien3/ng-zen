@@ -1,0 +1,182 @@
+:host {
+  --zen-tabs-bg: hsl(0deg 0% 95%);
+  --zen-tabs-radius: 0.5rem;
+  --zen-tabs-border-color: hsl(0deg 0% 88%);
+  --zen-tab-padding-sm: 0.25rem 0.5rem;
+  --zen-tab-padding-md: 0.375rem 0.75rem;
+  --zen-tab-padding-lg: 0.5rem 1rem;
+  --zen-tab-font-size-sm: 0.75rem;
+  --zen-tab-font-size-md: 0.875rem;
+  --zen-tab-font-size-lg: 1rem;
+  --zen-tab-gap: 0.25rem;
+  --zen-tab-color: hsl(0deg 0% 40%);
+  --zen-tab-active-bg: hsl(0deg 0% 100%);
+  --zen-tab-active-color: hsl(0deg 0% 10%);
+  --zen-tab-active-shadow: 0 1px 3px hsl(0deg 0% 0% / 10%);
+  --zen-tab-hover-color: hsl(0deg 0% 15%);
+  --zen-tab-hover-bg: hsl(0deg 0% 90% / 50%);
+  --zen-tab-focus-ring: 2px solid hsl(210deg 100% 50%);
+  --zen-tab-line-color: hsl(210deg 100% 50%);
+  --zen-tab-line-thickness: 2px;
+  --zen-tab-panel-padding: 1rem 0;
+  --zen-tab-transition: 150ms ease-in-out;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
+:host {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+
+  &[data-orientation='vertical'] {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+:host ::ng-deep {
+  zen-tab-list {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-inline-size: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &[data-orientation='vertical'] zen-tab-list {
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible auto;
+    min-inline-size: 10rem;
+    flex-shrink: 0;
+  }
+
+  &[data-variant='pills'] zen-tab-list {
+    padding: 0.25rem;
+    background-color: var(--zen-tabs-bg);
+    border-radius: var(--zen-tabs-radius);
+    gap: var(--zen-tab-gap);
+  }
+
+  &[data-variant='line'] zen-tab-list {
+    border-bottom: 1px solid var(--zen-tabs-border-color);
+    gap: 1rem;
+    background-color: transparent;
+  }
+
+  &[data-variant='line'][data-orientation='vertical'] zen-tab-list {
+    border-bottom: none;
+    border-right: 1px solid var(--zen-tabs-border-color);
+  }
+
+  [zen-tab] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--zen-tab-color);
+    text-decoration: none;
+    outline: none;
+    user-select: none;
+    transition:
+      background-color var(--zen-tab-transition),
+      color var(--zen-tab-transition),
+      box-shadow var(--zen-tab-transition);
+
+    &:hover:not([data-disabled]) {
+      color: var(--zen-tab-hover-color);
+    }
+
+    &:focus-visible {
+      outline: var(--zen-tab-focus-ring);
+      outline-offset: 2px;
+      z-index: 1;
+    }
+
+    &[data-disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &[data-size='sm'] [zen-tab] {
+    padding: var(--zen-tab-padding-sm);
+    font-size: var(--zen-tab-font-size-sm);
+  }
+
+  &[data-size='md'] [zen-tab] {
+    padding: var(--zen-tab-padding-md);
+    font-size: var(--zen-tab-font-size-md);
+  }
+
+  &[data-size='lg'] [zen-tab] {
+    padding: var(--zen-tab-padding-lg);
+    font-size: var(--zen-tab-font-size-lg);
+  }
+
+  &[data-variant='pills'] [zen-tab] {
+    border-radius: calc(var(--zen-tabs-radius) - 2px);
+
+    &:hover:not([data-disabled], [data-state='active']) {
+      background-color: var(--zen-tab-hover-bg);
+    }
+
+    &[data-state='active'] {
+      background-color: var(--zen-tab-active-bg);
+      color: var(--zen-tab-active-color);
+      box-shadow: var(--zen-tab-active-shadow);
+      font-weight: 600;
+    }
+  }
+
+  &[data-variant='line'] [zen-tab] {
+    border-bottom: var(--zen-tab-line-thickness) solid transparent;
+    margin-bottom: -1px;
+    border-radius: 0;
+
+    &[data-state='active'] {
+      color: var(--zen-tab-line-color);
+      border-bottom-color: var(--zen-tab-line-color);
+      font-weight: 600;
+    }
+  }
+
+  &[data-variant='line'][data-orientation='vertical'] [zen-tab] {
+    border-bottom: none;
+    border-right: var(--zen-tab-line-thickness) solid transparent;
+    margin-bottom: 0;
+    margin-right: -1px;
+
+    &[data-state='active'] {
+      border-right-color: var(--zen-tab-line-color);
+    }
+  }
+
+  zen-tab-panel {
+    display: block;
+    padding: var(--zen-tab-panel-padding);
+    flex: 1 1 auto;
+    outline: none;
+
+    &[hidden] {
+      display: none !important;
+    }
+
+    &:focus-visible {
+      outline: var(--zen-tab-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+}

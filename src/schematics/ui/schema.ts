@@ -29,6 +29,7 @@ export type UiType =
   | 'sidenav'
   | 'skeleton'
   | 'switch'
+  | 'tabs'
   | 'textarea';
 
 export interface Schema extends GeneratorSchemaBase {

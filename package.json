@@ -90,6 +90,7 @@
     "sidenav",
     "skeleton",
     "switch",
+    "tabs",
     "textarea"
   ],
   "ng-add": {
