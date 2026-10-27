@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { ZenBadge } from './badge';
+import { ZenBadge, type ZenBadgeSize } from './badge';
 
 describe('ZenBadge', () => {
   beforeEach(async () => {
@@ -48,6 +48,25 @@ describe('ZenBadge', () => {
     const badge = fixture.nativeElement as HTMLElement;
     expect(badge.getAttribute('data-variant')).toBe('solid');
   });
+
+  it('should have default size md', () => {
+    const fixture = TestBed.createComponent(ZenBadge);
+    fixture.detectChanges();
+    const badge = fixture.nativeElement as HTMLElement;
+    expect(badge.getAttribute('data-size')).toBe('md');
+  });
+
+  const sizes: ZenBadgeSize[] = ['sm', 'md', 'lg'];
+
+  for (const size of sizes) {
+    it(`should apply size ${size}`, () => {
+      const fixture = TestBed.createComponent(ZenBadge);
+      fixture.componentRef.setInput('size', size);
+      fixture.detectChanges();
+      const badge = fixture.nativeElement as HTMLElement;
+      expect(badge.getAttribute('data-size')).toBe(size);
+    });
+  }
 
   const colors = ['neutral', 'primary', 'success', 'warning', 'danger', 'info'] as const;
 

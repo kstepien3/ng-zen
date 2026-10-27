@@ -2,11 +2,12 @@ import { FavouriteIcon } from '@hugeicons/core-free-icons';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ZenIcon } from '../icon';
-import { ZenBadge } from './badge';
+import { ZenBadge, ZenBadgeSize } from './badge';
 
 interface StoryParams {
   color: 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
   variant: 'solid' | 'filled' | 'outline' | 'ghost';
+  size: ZenBadgeSize;
   disabled: boolean;
   label: string;
 }
@@ -20,6 +21,7 @@ export default {
     label: 'Badge',
     color: 'neutral',
     variant: 'solid',
+    size: 'md',
     disabled: false,
   },
   argTypes: {
@@ -31,6 +33,10 @@ export default {
           summary: 'ng-content',
         },
       },
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
     },
     color: {
       control: 'select',
@@ -60,19 +66,35 @@ type Story = StoryObj<Options>;
 
 export const Default: Story = {};
 
+export const AllSizes: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; gap: 0.5rem; align-items: center">
+        <zen-badge size="sm">Small</zen-badge>
+        <zen-badge size="md">Medium</zen-badge>
+        <zen-badge size="lg">Large</zen-badge>
+      </div>
+    `,
+  }),
+};
+
 export const WithIcon: Story = {
   decorators: [moduleMetadata({ imports: [ZenIcon] })],
   render: () => ({
     props: { FavouriteIcon },
     template: `
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
-        <zen-badge color="primary">
-          <zen-icon [icon]="FavouriteIcon" [size]="12" [strokeWidth]="3" />
-          With Icon
+      <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap">
+        <zen-badge size="sm" color="primary">
+          <zen-icon [icon]="FavouriteIcon" [size]="10" [strokeWidth]="3" />
+          Small
         </zen-badge>
-        <zen-badge variant="outline" color="primary">
+        <zen-badge size="md" color="primary">
           <zen-icon [icon]="FavouriteIcon" [size]="12" [strokeWidth]="3" />
-          Outline
+          Medium
+        </zen-badge>
+        <zen-badge size="lg" color="primary">
+          <zen-icon [icon]="FavouriteIcon" [size]="14" [strokeWidth]="3" />
+          Large
         </zen-badge>
       </div>
     `,

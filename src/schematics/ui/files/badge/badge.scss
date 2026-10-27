@@ -1,5 +1,4 @@
-@use 'sass:map';
-
+// Globals
 $transition-duration: var(--zen-transition-duration, 0.2s);
 $outline: var(--zen-outline, 2px solid hsl(200deg 100% 50% / 50%));
 $disabled-opacity: var(--zen-disabled-opacity, 0.6);
@@ -11,8 +10,16 @@ $disabled-opacity: var(--zen-disabled-opacity, 0.6);
   --zen-badge-warning: var(--zen-warning, hsl(36deg 72% 46%));
   --zen-badge-danger: var(--zen-danger, hsl(348deg 52% 42%));
   --zen-badge-info: var(--zen-info, hsl(214deg 34% 46%));
+  --zen-badge-font-size: 0.75rem;
+  --zen-badge-padding: 0.2em 0.6em;
+  --zen-badge-gap: 0.25em;
 }
 
+$sizes: (
+  sm: 0.625rem,
+  md: 0.75rem,
+  lg: 0.875rem,
+);
 $colors: (
   primary: var(--zen-badge-primary),
   success: var(--zen-badge-success),
@@ -27,20 +34,20 @@ $ghost-active-opacity: 20%;
 
 /* stylelint-disable-next-line no-duplicate-selectors -- separate variables and styles */
 :host {
-  --zen-badge-bg-color: var(--zen-badge-neutral);
+  --_font-size: var(--zen-badge-font-size);
+  --_bg: var(--zen-badge-neutral);
 
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 1rem;
   width: fit-content;
   flex-shrink: 0;
-  gap: 0.25rem;
-  overflow: hidden;
-  border-radius: 625rem;
+  gap: var(--zen-badge-gap);
+  border-radius: var(--radius-full, 9999px);
   border: 1px solid transparent;
-  padding: 0.0625rem 0.5rem;
-  font-size: 0.75rem;
+  padding: var(--zen-badge-padding);
+  font-size: var(--_font-size);
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
@@ -49,8 +56,8 @@ $ghost-active-opacity: 20%;
     color $transition-duration ease,
     border-color $transition-duration ease;
   user-select: none;
-  background-color: var(--zen-badge-bg-color);
-  color: var(--zen-badge-color, contrast-color(var(--zen-badge-bg-color)));
+  background-color: var(--_bg);
+  color: var(--zen-badge-color, contrast-color(var(--_bg)));
 }
 
 :host:focus-visible {
@@ -58,21 +65,22 @@ $ghost-active-opacity: 20%;
   outline-offset: 2px;
 }
 
-:host > ::ng-deep svg {
-  pointer-events: none;
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
 :host([data-disabled]) {
   opacity: $disabled-opacity;
   pointer-events: none;
 }
 
+// --- SIZES ---
+@each $name, $size in $sizes {
+  :host([data-size='#{$name}']) {
+    --_font-size: #{$size};
+  }
+}
+
 // --- COLORS ---
 @each $name, $bg-color in $colors {
   :host([data-color='#{$name}']) {
-    --zen-badge-bg-color: #{$bg-color};
+    --_bg: #{$bg-color};
   }
 }
 
@@ -81,27 +89,27 @@ $ghost-active-opacity: 20%;
 /* Outline variant */
 :host([data-variant='outline']) {
   background-color: transparent;
-  color: var(--zen-badge-bg-color);
-  border-color: var(--zen-badge-bg-color);
+  color: var(--_bg);
+  border-color: var(--_bg);
 }
 
 /* Filled variant */
 :host([data-variant='filled']) {
-  background-color: color-mix(in oklch, var(--zen-badge-bg-color) 8%, transparent);
-  color: var(--zen-badge-bg-color);
+  background-color: color-mix(in oklch, var(--_bg) 8%, transparent);
+  color: var(--_bg);
 }
 
 /* Ghost variant */
 :host([data-variant='ghost']) {
   background-color: transparent;
-  color: var(--zen-badge-bg-color);
+  color: var(--_bg);
   box-shadow: none;
 
   &:hover {
-    background-color: color-mix(in oklch, var(--zen-badge-bg-color) $ghost-hover-opacity, transparent);
+    background-color: color-mix(in oklch, var(--_bg) $ghost-hover-opacity, transparent);
   }
 
   &:active {
-    background-color: color-mix(in oklch, var(--zen-badge-bg-color) $ghost-active-opacity, transparent);
+    background-color: color-mix(in oklch, var(--_bg) $ghost-active-opacity, transparent);
   }
 }
